@@ -1,3 +1,3 @@
 export default function MagazinePage() {
-    return <></>
+    return <div>Magazine</div>
 }
