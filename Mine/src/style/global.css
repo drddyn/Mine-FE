@@ -1,1 +1,58 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import './typo.css';
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Poltawski';
+    src: url('/fonts/poltawski-nowy-v5-latin-600.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@theme {
+    --font-pretendard: 'Pretendard';
+    --font-poltawski: 'Poltawski';
+
+    --color-main-default: #6898bb;
+    --color-main-emphasis: #46576d;
+    --color-main-lightlight: #f4f7fa;
+
+    --color-white: #ffffff;
+
+    --color-black-image: #808080;
+    --color-black-icon: #a9a9a9;
+    --color-black-whiteBoxOutline: #d9d9d9;
+    --color-black-textInTheBox: #79747e;
+    --color-black-textMain: #505050;
+    --color-black-textBigTitle: #111111;
+    --color-black-textSmallTitle: #545156;
+}
+html,
+body {
+    font-family: Pretendard, Poltawski;
+}
