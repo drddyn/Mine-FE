@@ -20,4 +20,7 @@
     .font-regular16 {
         @apply text-[16px] leading-[187%] tracking-[-2.5px] font-normal;
     }
+    .font-semibold36 {
+        @apply text-[36px] leading-[130%] tracking-[-2.5%] font-semibold;
+    }
 }

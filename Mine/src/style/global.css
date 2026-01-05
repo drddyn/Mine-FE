@@ -27,8 +27,16 @@
     font-weight: 600;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Poltawski';
+    src: url('/fonts/poltawski-nowy-v5-latin-600.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
 @theme {
     --font-pretendard: 'Pretendard';
+    --font-poltawski: 'Poltawski';
 
     --color-main-default: #6898bb;
     --color-main-emphasis: #46576d;
@@ -46,5 +54,5 @@
 }
 html,
 body {
-    font-family: Pretendard;
+    font-family: Pretendard, Poltawski;
 }
