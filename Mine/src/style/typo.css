@@ -1,26 +1,26 @@
 @layer components {
     .font-semibold16 {
-        @apply text-[16px] leading-[118%] tracking-[-2.5px] font-semibold;
+        @apply text-[16px] leading-[118%] tracking-[-0.025em] font-semibold;
     }
     .font-medium16 {
-        @apply text-[16px] leading-[118%] tracking-[-2.5px] font-medium;
+        @apply text-[16px] leading-[118%] tracking-[-0.025em] font-medium;
     }
     .font-light14 {
-        @apply text-[14px] leading-[121%] tracking-[-2.5px] font-light;
+        @apply text-[14px] leading-[121%] tracking-[-0.025em] font-light;
     }
     .font-semibold20 {
-        @apply text-[20px] leading-[120%] tracking-[-2.5px] font-semibold;
+        @apply text-[20px] leading-[120%] tracking-[-0.025em] font-semibold;
     }
     .font-semibold24 {
-        @apply text-[24px] leading-[120%] tracking-[-2.5px] font-semibold;
+        @apply text-[24px] leading-[120%] tracking-[-0.025em] font-semibold;
     }
     .font-bold32 {
-        @apply text-[32px] leading-[118%] tracking-[-2.5px] font-bold;
+        @apply text-[32px] leading-[118%] tracking-[-0.025em] font-bold;
     }
     .font-regular16 {
-        @apply text-[16px] leading-[187%] tracking-[-2.5px] font-normal;
+        @apply text-[16px] leading-[187%] tracking-[-0.025em] font-normal;
     }
     .font-semibold36 {
-        @apply text-[36px] leading-[130%] tracking-[-2.5%] font-semibold;
+        @apply text-[36px] leading-[130%] tracking-[-0.025em] font-semibold;
     }
 }
