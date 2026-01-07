@@ -15,7 +15,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         setIsToggleOpen((prev) => !prev)
     }
     return (
-        <div className="w-66.5 h-screen bg-main-lightlight rounded-r-[25px]">
+        <div className="h-screen w-66.5 bg-main-lightlight rounded-r-[25px] z-50 transition-transform duration-30">
             <div className="flex flex-col h-full ml-6.5 gap-10">
                 <div className="flex gap-2 mt-12 items-center">
                     <MineLogo />

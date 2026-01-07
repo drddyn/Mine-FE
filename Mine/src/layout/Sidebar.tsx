@@ -10,10 +10,15 @@ export default function Sidebar() {
     }
 
     return (
-        <>
-            {!isSidebarOpen && <MineLogo className="ml-6.5 mt-12" onClick={toggleSidebar} />}
+        <div className="fixed top-0 left-0 ">
+            {!isSidebarOpen && <MineLogo className="ml-6.5 mt-12 cursor-pointer" onClick={toggleSidebar} />}
 
-            {isSidebarOpen && <SidebarOpen onclick={toggleSidebar} />}
-        </>
+            {isSidebarOpen && (
+                <>
+                    <div className=" inset-0 z-40 pointer-events-none" onClick={toggleSidebar} />
+                    <SidebarOpen onclick={toggleSidebar} />
+                </>
+            )}
+        </div>
     )
 }

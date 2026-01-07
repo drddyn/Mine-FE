@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom'
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 
 export default function RootLayout() {
     return (
-        <div>
+        <div className="relative">
             <Sidebar />
             <Outlet />
         </div>
