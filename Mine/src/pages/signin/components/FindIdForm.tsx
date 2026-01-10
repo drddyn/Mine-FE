@@ -15,6 +15,7 @@ export default function FindIdForm() {
         <EmailInputBox
           id="email"
           title="이메일"
+          placeholder="ex) abc123"
           description="회원가입 시 등록한 이메일을 입력해주세요."
 />
 
