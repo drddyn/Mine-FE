@@ -1,6 +1,7 @@
 import Minelogo from '../../icon/minelogo.svg?react'
 import Back from '../../icon/Back.svg?react'
-
+import User from '../../icon/user.svg?react'
+import Lock from '../../icon/lock.svg?react'
 import InputBox from '../../components/InputBox'
 import InputBoxWithPassword from '../../components/InputBoxWithPassword'
 
@@ -19,8 +20,8 @@ export default function LoginPage() {
                 </div>
 
                 <div className="flex flex-col w-full">
-                    <InputBox id="id" placeholder="아이디" />
-                    <InputBoxWithPassword id="password" placeholder="비밀번호" />
+                    <InputBox id="id" placeholder="아이디" children={<User />} />
+                    <InputBoxWithPassword id="password" placeholder="비밀번호" children={<Lock />} />
                 </div>
 
                 <div className="w-full flex justify-end mb-8">

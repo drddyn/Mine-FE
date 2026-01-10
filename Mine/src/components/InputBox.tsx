@@ -18,7 +18,7 @@ export default function InputBox({ id, placeholder, title, description, children
                 <input
                     id={id}
                     placeholder={placeholder}
-                    className="font-medium16 text-black-textSmallTitle w-66 outline-none "
+                    className="font-medium16 text-black-textSmallTitle w-66 outline-none"
                 />
             </div>
             <div className="text-black-textSmallTitle font-light14 pl-2.5">{description}</div>
