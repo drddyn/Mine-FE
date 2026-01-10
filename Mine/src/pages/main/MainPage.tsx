@@ -1,3 +1,3 @@
 export default function MainPage() {
-    return <div className="text-black">MainPage</div>
+    return <div className="text-black"></div>
 }
