@@ -1,5 +1,5 @@
 import Minelogo from '../../icon/minelogo.svg?react'
-import Back from '../../icon/Back.svg?react'
+import Back from '../../icon/back.svg?react'
 import User from '../../icon/user.svg?react'
 import Lock from '../../icon/lock.svg?react'
 import InputBox from '../../components/InputBox'
