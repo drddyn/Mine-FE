@@ -11,9 +11,9 @@ interface InputBoxProps {
 
 export default function InputBox({ id, placeholder, title, description, children }: InputBoxProps) {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
             <div className="text-black-textSmallTitle font-semibold20">{title}</div>
-            <div className="flex items-center h-12 rounded-2xl py-2.5 px-4 gap-2 border-2 border-black-whiteBoxOutline shadow-sm">
+            <div className="flex items-center h-12 rounded-2xl py-2.5 px-4 gap-2 border-2 border-black-whiteBoxOutline focus-within:shadow-sm">
                 {children}
                 <input
                     id={id}

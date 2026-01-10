@@ -14,7 +14,7 @@ export default function InputBoxWithPassword({ id, title, placeholder, descripti
         <>
             <div className="flex flex-col gap-2 select-none">
                 <div className="text-black-textSmallTitle font-semibold20">{title}</div>
-                <div className="flex items-center h-12 rounded-2xl py-2.5 px-4 gap-2 border-2 border-black-whiteBoxOutline shadow-sm">
+                <div className="flex items-center h-12 rounded-2xl py-2.5 px-4 gap-2 border-2 border-black-whiteBoxOutline focus-within:shadow-sm">
                     {children}
                     <input
                         id={id}
@@ -25,7 +25,6 @@ export default function InputBoxWithPassword({ id, title, placeholder, descripti
                     />
                     <Visablity className="self-end" />
                 </div>
-
                 <div className="text-black-textSmallTitle font-light14 pl-2.5">{description}</div>
             </div>
         </>
