@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import MineLogo from '../../icon/minelogo.svg?react'
-import SidebarButton from '../../icon/SidebarButton.svg?react'
-import ToggleDown from '../../icon/Toggle_down.svg?react'
-import ToggleUp from '../../icon/Toggle_up.svg?react'
-import Hamburger from '../../icon/Hamburger.svg?react'
+import SidebarButton from '../../icon/sidebarButton.svg?react'
+import ToggleDown from '../../icon/toggle_down.svg?react'
+import ToggleUp from '../../icon/toggle_up.svg?react'
+import Hamburger from '../../icon/hamburger.svg?react'
 
 interface SidebarProps {
     onclick: () => void
