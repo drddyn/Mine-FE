@@ -7,7 +7,7 @@ export default function SigninForms({ onNext }: NextbuttonProps) {
     return (
         <div className="flex flex-col items-center gap-10 w-246">
             <ProgressBar_first />
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 pl-24 w-full">
                 <div className="grid grid-cols-2 gap-x-9.25 gap-y-12">
                     <InputBox
                         title="닉네임"

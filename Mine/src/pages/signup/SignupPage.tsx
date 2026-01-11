@@ -2,7 +2,7 @@ import { useState } from 'react'
 import MineLogo from '../../icon/minelogo.svg?react'
 import SigninChecks from './components/SigninChecks'
 import SigninForms from './components/SigninForms'
-export default function SigninPage() {
+export default function SignupPage() {
     const [step, setStep] = useState(1)
 
     const goNext = () => setStep((s) => Math.min(2, s + 1))
