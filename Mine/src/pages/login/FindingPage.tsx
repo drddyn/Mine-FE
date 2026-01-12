@@ -12,28 +12,13 @@ export default function FindingPage() {
                     <div className="flex w-115 px-6">
                         <button
                             onClick={() => setTab('id')}
-                            className={`
-                w-57.5
-                text-center
-                text-4
-                font-normal
-                uppercase
-                transition-colors
-                ${tab === 'id' ? 'text-[#6898BB]' : 'text-black-icon'}`}
+                            className={`w-57.5 text-center text-4 font-normal uppercase transition-colors${tab === 'id' ? 'text-[#6898BB]' : 'text-black-icon'}`}
                         >
                             아이디 찾기
                         </button>
-
                         <button
                             onClick={() => setTab('password')}
-                            className={`
-                w-57.5
-                text-center
-                text-4
-                font-normal
-                uppercase
-                transition-colors
-                ${tab === 'password' ? 'text-[#6898BB]' : 'text-black-icon'}`}
+                            className={`w-57.5 text-center text-4 font-normal uppercase transition-colors ${tab === 'password' ? 'text-[#6898BB]' : 'text-black-icon'}`}
                         >
                             비밀번호 찾기
                         </button>
@@ -41,14 +26,7 @@ export default function FindingPage() {
 
                     <div className="relative w-115 h-1 bg-[#A9A9A9] rounded-[15px]">
                         <div
-                            className={`
-                absolute top-0 left-0
-                h-1 w-57.5
-                bg-[#6898BB]
-                rounded-[15px]
-                transition-transform duration-300
-                ${tab === 'id' ? 'translate-x-0' : 'translate-x-57.5'}
-              `}
+                            className={`absolute top-0 left-0 h-1 w-57.5 bg-[#6898BB] rounded-[15px] transition-transform duration-300 ${tab === 'id' ? 'translate-x-0' : 'translate-x-57.5'}`}
                         />
                     </div>
                 </div>
