@@ -12,13 +12,13 @@ export default function FindingPage() {
                     <div className="flex w-115 px-6">
                         <button
                             onClick={() => setTab('id')}
-                            className={`w-57.5 text-center text-4 font-normal uppercase transition-colors${tab === 'id' ? 'text-[#6898BB]' : 'text-black-icon'}`}
+                            className={`w-57.5 text-center text-4 font-normal uppercase transition-colors cursor-pointer ${tab === 'id' ? 'text-[#6898BB]' : 'text-black-icon'}`}
                         >
                             아이디 찾기
                         </button>
                         <button
                             onClick={() => setTab('password')}
-                            className={`w-57.5 text-center text-4 font-normal uppercase transition-colors ${tab === 'password' ? 'text-[#6898BB]' : 'text-black-icon'}`}
+                            className={`w-57.5 text-center text-4 font-normal uppercase transition-colors cursor-pointer ${tab === 'password' ? 'text-[#6898BB]' : 'text-black-icon'}`}
                         >
                             비밀번호 찾기
                         </button>
