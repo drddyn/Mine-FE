@@ -1,7 +1,7 @@
 ---
 name: 🤚 Issue template
 about: 개발해야 하는 기능에 대하여 작성합니다.
-title: "[FEAT]"
+title: "[DEV]"
 labels: ""
 assignees: ""
 ---
