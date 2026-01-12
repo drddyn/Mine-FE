@@ -1,14 +1,20 @@
+import Delete from '../../../icon/delete.svg?react'
+
 interface SectionPartProps {
-    hint?: string
+    sectionDir?: string
+    titleDir?: string
     size?: string
 }
 
-export default function SectionPart({ hint, size }: SectionPartProps) {
+export default function SectionPart({ sectionDir, titleDir, size }: SectionPartProps) {
     return (
-        <section className="group flex w-full h-69.5 items-start gap-10" dir={hint}>
+        <section className="group flex w-full h-69.5 items-start gap-10" dir={sectionDir}>
             <div className={`w-57.5 h-full bg-black-image rounded-lg ${size}`}></div>
             <div className="flex flex-col ltr:ml-2.5 rtl:mr-2.5 h-full items-start gap-6 flex-1">
-                <div className="font-semibold36 text-black-textBigTitle">본문 제목</div>
+                <div className="flex w-full justify-between items-center " dir={titleDir}>
+                    <div className="font-semibold36 font-maruburi text-black-textBigTitle">본문 제목</div>
+                    <Delete className="hover:text-black-icon text-transparent" />
+                </div>
                 <div className="w-full font-regular16 text-black-textMain break-all overflow-hidden" dir="ltr">
                     1줄 본문 내용은 width = fill, height = hug 본문 내용은 width = fill, height = hug 본문 내용은 width
                     = fill, 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하
