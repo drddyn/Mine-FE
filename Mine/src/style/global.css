@@ -47,7 +47,10 @@
 
     --color-main-default: #6898bb;
     --color-main-emphasis: #46576d;
-    --color-main-lightlight: #f4f7fa;
+    --color-main-opacity50: #b3cbdd;
+    --color-main-opacity20: #d8e4ed;
+    --color-main-light: #f4f7fa;
+    --color-main-heart: #f95c40;
 
     --color-white: #ffffff;
 
