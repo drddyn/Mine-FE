@@ -17,27 +17,24 @@ export default function EmailInputBox({
 }: EmailInputBoxProps) {
   return (
     <div className="flex flex-col gap-2">
-      {/* 제목 */}
       {title && (
         <div className="text-black-textSmallTitle font-semibold20">
           {title}
         </div>
       )}
 
-      {/* 이메일 입력 영역 */}
       <div
         className="
           relative
           w-full h-12
-          rounded-2xl
-          border-2 border-black-whiteBoxOutline
-          shadow-sm
+          rounded-[15px]
+          border border-black-whiteBoxOutline
           bg-white
           flex items-center
           px-4
         "
       >
-        {/* 아이디 입력 */}
+
         <input
           id={id}
           type="text"
@@ -47,25 +44,23 @@ export default function EmailInputBox({
             pr-12
             outline-none
             font-medium16
-            placeholder-black-textInTheBox
+            placeholder-black-whiteBoxOutline
           "
         />
 
-        {/* @ 중앙 고정 */}
         <span
           className="
             absolute
             left-1/2
             -translate-x-1/2
             font-medium16
-            text-gray-500
+            text-black-icon
             select-none
           "
         >
           @
         </span>
 
-        {/* 도메인 선택 버튼 */}
         <div className="flex items-center gap-10">
           <select
             className="
@@ -73,7 +68,7 @@ export default function EmailInputBox({
               bg-transparent
               outline-none
               font-medium16
-              text-gray-500
+              text-black-whiteBoxOutline
               cursor-pointer
               pr-5
             "
@@ -85,14 +80,12 @@ export default function EmailInputBox({
             ))}
           </select>
 
-          {/* SVG 화살표 */}
-          <Vector className="w-3 h-3 text-gray-400 pointer-events-none" />
+          <Vector className="w-3 h-3 text-black-icon pointer-events-none" />
         </div>
       </div>
 
-      {/* 설명 */}
       {description && (
-        <div className="text-black-textSmallTitle font-light14 pl-2.5">
+        <div className="text-black-textInTheBox font-light14 pl-2.5">
           {description}
         </div>
       )}
