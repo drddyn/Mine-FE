@@ -1,3 +1,4 @@
+import ButtonwithText from '../../../components/ButtonwithText'
 import ProgressBar_Second from '../../../icon/progressbar_second.svg?react'
 import type { NextbuttonProps } from '../../../types/signinTypes'
 import Chip from './Chips'
@@ -70,18 +71,8 @@ export default function SigninChecks({ onPrev, onNext }: NextbuttonProps) {
                     </div>
                 </div>
                 <div className="w-full flex flex-col mt-12.25 items-end gap-4 ">
-                    <button
-                        className="w-80 h-12.5 rounded-2xl border border-[#6998BB] bg-white shadow-[0_1px_4px_0_rgba(0, 0, 0, 0.25)] text-[#6998BB]"
-                        onClick={onPrev}
-                    >
-                        이전으로
-                    </button>
-                    <button
-                        className="w-80 h-12.5 rounded-2xl bg-[#6998BB] shadow-[0_1px_4px_0_rgba(0, 0, 0, 0.25)] text-white"
-                        onClick={onNext}
-                    >
-                        MINE 시작하기
-                    </button>
+                    <ButtonwithText title="이전으로" variant="white" onclick={onPrev} />
+                    <ButtonwithText title="MINE 시작하기" onclick={onNext} />
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+import ButtonwithText from '../../../components/ButtonwithText'
 import InputBox from '../../../components/InputBox'
 import InputBoxWithPassword from '../../../components/InputBoxWithPassword'
 import ProgressBar_first from '../../../icon/progressbar_first.svg?react'
@@ -41,15 +42,8 @@ export default function SigninForms({ onNext }: NextbuttonProps) {
                     />
                 </div>
                 <div className="w-full flex flex-col items-end gap-4">
-                    <button className="w-80 h-12.5 rounded-2xl border border-[#6998BB] bg-white shadow-[0_1px_4px_0_rgba(0, 0, 0, 0.25)] text-[#6998BB]">
-                        이전으로
-                    </button>
-                    <button
-                        className="w-80 h-12.5 rounded-2xl bg-[#6998BB] shadow-[0_1px_4px_0_rgba(0, 0, 0, 0.25)] text-white"
-                        onClick={onNext}
-                    >
-                        다음으로
-                    </button>
+                    <ButtonwithText title="이전으로" variant="white" />
+                    <ButtonwithText title="다음으로" onclick={onNext} />
                 </div>
             </div>
         </div>
