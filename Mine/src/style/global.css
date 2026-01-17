@@ -33,10 +33,17 @@
     font-weight: 600;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Maruburi';
+    src: url('/fonts/MaruBuri-Regular.otf');
+    font-weight: 600;
+    font-style: normal;
+}
 
 @theme {
     --font-pretendard: 'Pretendard';
     --font-poltawski: 'Poltawski';
+    --font-maruburi: 'Maruburi';
 
     --color-main-default: #6898bb;
     --color-main-emphasis: #46576d;
@@ -57,5 +64,5 @@
 }
 html,
 body {
-    font-family: Pretendard, Poltawski;
+    font-family: Pretendard, Poltawski, Maruburi;
 }

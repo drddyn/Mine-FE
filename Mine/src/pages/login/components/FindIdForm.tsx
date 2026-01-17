@@ -1,5 +1,6 @@
 import InputBox from '../../../components/InputBox'
 import EmailInputBox from '../../../components/EmailInputBox'
+import ButtonwithText from '../../../components/ButtonwithText'
 
 export default function FindIdForm() {
     return (
@@ -19,13 +20,8 @@ export default function FindIdForm() {
                 </div>
 
                 <div className="flex flex-col gap-4 mt-10">
-                    <button className="w-full h-12 rounded-2xl bg-main-default hover:bg-main-emphasis text-white font-regular16">
-                        아이디 찾기
-                    </button>
-
-                    <button className="w-full h-12 rounded-2xl border border-main-default text-main-default hover:bg-main-opacity50 font-regular16">
-                        이전으로
-                    </button>
+                    <ButtonwithText title="아이디 찾기" size="w-full h-12" />
+                    <ButtonwithText title="이전으로" variant="white" size="w-full h-12" />
                 </div>
             </div>
         </div>
