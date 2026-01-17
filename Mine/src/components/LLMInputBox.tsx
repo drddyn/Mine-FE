@@ -13,6 +13,7 @@ const LLMInputBox: React.FC<LLMInputBoxProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
