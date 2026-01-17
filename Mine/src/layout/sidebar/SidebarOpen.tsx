@@ -24,10 +24,10 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                     <SidebarButton onClick={onclick} />
                 </div>
                 <div className="flex flex-col">
-                    <SidebarBlock icon={<Sidebar_main />} title="메인" />
-                    <SidebarBlock icon={<Sidebar_new />} title="새 매거진" />
-                    <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" />
-                    <SidebarBlock icon={<Sidebar_others />} title="둘러보기" />
+                    <SidebarBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
+                    <SidebarBlock icon={<Sidebar_new />} title="새 매거진" to="" />
+                    <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" to="" />
+                    <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="" />
                 </div>
                 <div className="flex flex-col mt-6">
                     <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />
