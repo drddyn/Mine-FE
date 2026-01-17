@@ -2,6 +2,9 @@
     .font-semibold16 {
         @apply text-[16px] leading-[118%] tracking-[-0.025em] font-semibold;
     }
+    .font-semibold14 {
+        @apply text-[14px] leading-[122%] tracking-[-0.025em] font-semibold;
+    }
     .font-medium16 {
         @apply text-[16px] leading-[118%] tracking-[-0.025em] font-medium;
     }
@@ -19,6 +22,9 @@
     }
     .font-regular16 {
         @apply text-[16px] leading-[187%] tracking-[-0.025em] font-normal;
+    }
+    .font-regular14 {
+        @apply text-[14px] leading-[122%] tracking-[-0.025em] font-normal;
     }
     .font-semibold36 {
         @apply text-[36px] leading-[130%] tracking-[-0.025em] font-semibold;
