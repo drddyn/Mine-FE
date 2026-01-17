@@ -2,10 +2,13 @@
     .font-semibold16 {
         @apply text-[16px] leading-[118%] tracking-[-0.025em] font-semibold;
     }
+    .font-semibold14 {
+        @apply text-[14px] leading-[122%] tracking-[-0.025em] font-semibold;
+    }
     .font-medium16 {
         @apply text-[16px] leading-[118%] tracking-[-0.025em] font-medium;
     }
-    .font-light14 { 
+    .font-light14 {
         @apply text-[14px] leading-[121%] tracking-[-0.025em] font-light;
     }
     .font-semibold20 {
@@ -20,13 +23,16 @@
     .font-regular16 {
         @apply text-[16px] leading-[187%] tracking-[-0.025em] font-normal;
     }
+    .font-regular14 {
+        @apply text-[14px] leading-[122%] tracking-[-0.025em] font-normal;
+    }
     .font-semibold36 {
         @apply text-[36px] leading-[130%] tracking-[-0.025em] font-semibold;
     }
-    .font-regular12{
+    .font-regular12 {
         @apply text-[12px] leading-[130%] tracking-[-0.025em] font-regular;
     }
-    .font-semibold14{
-        @apply text-[14px] leading-[130%] tracking-[-0.025em] font-semibold;
+    .font-regular32 {
+        @apply text-[32px] leading-[133%] tracking-[-0.025em] font-normal;
     }
 }
