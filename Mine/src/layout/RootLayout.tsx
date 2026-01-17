@@ -8,9 +8,11 @@ export default function RootLayout() {
     const shouldHideSidebar = hideSidebarRoutes.includes(location.pathname)
 
     return (
-        <div className="relative">
+        <div className="relative min-h-screen">
             {!shouldHideSidebar && <Sidebar />}
-            <Outlet />
+            <div className={!shouldHideSidebar ? 'pl-20.5' : ''}>
+                <Outlet />
+            </div>
         </div>
     )
 }

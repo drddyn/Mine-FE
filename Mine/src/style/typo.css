@@ -29,4 +29,7 @@
     .font-semibold36 {
         @apply text-[36px] leading-[130%] tracking-[-0.025em] font-semibold;
     }
+    .font-regular32 {
+        @apply text-[32px] leading-[133%] tracking-[-0.025em] font-normal;
+    }
 }
