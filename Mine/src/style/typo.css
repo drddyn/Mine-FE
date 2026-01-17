@@ -5,7 +5,7 @@
     .font-medium16 {
         @apply text-[16px] leading-[118%] tracking-[-0.025em] font-medium;
     }
-    .font-light14 {
+    .font-light14 { 
         @apply text-[14px] leading-[121%] tracking-[-0.025em] font-light;
     }
     .font-semibold20 {
@@ -22,5 +22,11 @@
     }
     .font-semibold36 {
         @apply text-[36px] leading-[130%] tracking-[-0.025em] font-semibold;
+    }
+    .font-regular12{
+        @apply text-[12px] leading-[130%] tracking-[-0.025em] font-regular;
+    }
+    .font-semibold14{
+        @apply text-[14px] leading-[130%] tracking-[-0.025em] font-semibold;
     }
 }
