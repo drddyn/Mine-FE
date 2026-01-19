@@ -61,6 +61,10 @@
     --color-black-textMain: #505050;
     --color-black-textBigTitle: #111111;
     --color-black-textSmallTitle: #545156;
+
+    --color-lightborder: #B3CBDD;
+    --color-boldborder: #6898BB;
+    --color-buttonbackgd: #F4F7FA;
 }
 html,
 body {
