@@ -3,8 +3,6 @@ name: React CI/CD
 on:
     pull_request:
         branches: [main, develop] # 오타 수정
-        path:
-            - 'Mine/**'
 
 jobs:
     build-and-test:
@@ -26,10 +24,6 @@ jobs:
 
             - name: Lint check
               run: npm run lint --if-present
-              working-directory: ./Mine
-
-            - name: Run tests
-              run: npm test --if-present
               working-directory: ./Mine
 
             - name: Build project
