@@ -3,6 +3,8 @@ name: React CI/CD
 on:
     pull_request:
         branches: [main, develop] # 오타 수정
+        path:
+            - 'Mine/**'
 
 jobs:
     build-and-test:
