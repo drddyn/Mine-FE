@@ -1,4 +1,4 @@
-import Vector from '../icon/Vector.svg?react'
+import Vector from '../icon/vector.svg?react'
 
 interface EmailInputBoxProps {
     id: string
