@@ -1,5 +1,5 @@
 import type { AuthorizationDto, ResponseAuthorization } from '../types/user'
-import { axiosInstance } from './aios'
+import { axiosInstance } from './axios'
 
 export const postAuthorization = async ({ username, password }: AuthorizationDto): Promise<ResponseAuthorization> => {
     const body = {

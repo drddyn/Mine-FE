@@ -1,16 +1,16 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import type { AuthorizationDto, ResponseAuthorization } from '../types/user'
 import { useNavigate } from 'react-router-dom'
 import { postAuthorization } from '../api/auth'
 
 export default function usePostAuthorization() {
-    // const queryClient = useQueryClient()
     const navigate = useNavigate()
     return useMutation({
         mutationFn: (loginData: AuthorizationDto) => postAuthorization(loginData),
         onSuccess: (data: ResponseAuthorization) => {
             console.log('로그인 성공!', data)
             localStorage.setItem('accessToken', data.accessToken)
+            localStorage.setItem('refreshToken', data.refreshToken)
             navigate('/')
         },
         onError: (error) => {
