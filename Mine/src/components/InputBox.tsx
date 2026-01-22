@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { ChangeEvent, ReactNode } from 'react'
 
 interface InputBoxProps {
     id: string
@@ -6,9 +6,11 @@ interface InputBoxProps {
     placeholder?: string
     description?: string
     children?: ReactNode
+    value?: string
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function InputBox({ id, placeholder, title, description, children }: InputBoxProps) {
+export default function InputBox({ id, placeholder, title, description, children, value, onChange }: InputBoxProps) {
     return (
         <div className="flex flex-col gap-2">
             {title && <div className="text-black-textSmallTitle font-semibold20">{title}</div>}
@@ -18,8 +20,10 @@ export default function InputBox({ id, placeholder, title, description, children
                 {children}
                 <input
                     id={id}
+                    value={value}
                     placeholder={placeholder}
                     className="flex-1 outline-none placeholder-black-whiteBoxOutline font-medium16 text-black-textSmallTitle bg-transparent"
+                    onChange={onChange}
                 />
             </div>
 

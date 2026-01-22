@@ -5,13 +5,19 @@ import ScreenSettings from './ScreenSettings'
 import X from '../../icon/X.svg?react'
 import Logout from '../../icon/logout.svg?react'
 import Edit from '../../icon/edit.svg?react'
+import usePostLogout from '../../hooks/usePostLogout'
 
-interface Props {
+interface SettingsProps {
     onClose: () => void
 }
 
-export default function SettingsModal({ onClose }: Props) {
+export default function SettingsModal({ onClose }: SettingsProps) {
     const [activeTab, setActiveTab] = useState<'profile' | 'screen'>('profile')
+    const { mutate: logout, isPending } = usePostLogout()
+    const handleLogout = () => {
+        if (isPending) return
+        logout()
+    }
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
@@ -57,7 +63,10 @@ export default function SettingsModal({ onClose }: Props) {
 
                 {activeTab === 'profile' && (
                     <>
-                        <button className="absolute left-12 bottom-8 flex gap-1 font-semibold14 text-black-icon transition duration-150 hover:brightness-75 hover:contrast-125 cursor-pointer hover:text-main-default">
+                        <button
+                            className="absolute left-12 bottom-8 flex gap-1 font-semibold14 text-black-icon transition duration-150 hover:brightness-75 hover:contrast-125 cursor-pointer hover:text-main-default"
+                            onClick={handleLogout}
+                        >
                             <Logout className="w-4 h-4 aspect-square  text-black-icon" />
                             로그아웃
                         </button>

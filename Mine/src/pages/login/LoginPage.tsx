@@ -5,8 +5,37 @@ import Lock from '../../icon/lock.svg?react'
 import InputBox from '../../components/InputBox'
 import InputBoxWithPassword from '../../components/InputBoxWithPassword'
 import ButtonwithText from '../../components/ButtonwithText'
+import { useState } from 'react'
+import usePostAuthorization from '../../hooks/usePostAuthorization'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
+    const [loginForm, setLoginForm] = useState({
+        userId: '',
+        password: '',
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target
+        setLoginForm((prev) => ({
+            ...prev,
+            [id]: value,
+        }))
+    }
+    const { mutate: login, isPending } = usePostAuthorization()
+    const handleLoginSubmit = () => {
+        console.log('서버로 보낼 데이터:', loginForm)
+        if (isPending) return
+        login({
+            username: loginForm.userId,
+            password: loginForm.password,
+        })
+    }
+
+    const navigate = useNavigate()
+    const navigateToSignUp = () => {
+        navigate('/signup')
+    }
     return (
         <div className="relative min-h-screen bg-white flex flex-col items-center justify-center">
             <div className="absolute top-5 left-5">
@@ -21,8 +50,20 @@ export default function LoginPage() {
                 </div>
 
                 <div className="flex flex-col w-full gap-4">
-                    <InputBox id="id" placeholder="아이디" children={<User />} />
-                    <InputBoxWithPassword id="password" placeholder="비밀번호" children={<Lock />} />
+                    <InputBox
+                        id="userId"
+                        value={loginForm.userId}
+                        placeholder="아이디"
+                        children={<User />}
+                        onChange={handleChange}
+                    />
+                    <InputBoxWithPassword
+                        id="password"
+                        value={loginForm.password}
+                        placeholder="비밀번호"
+                        children={<Lock />}
+                        onChange={handleChange}
+                    />
                 </div>
 
                 <div className="w-full flex justify-end mb-8">
@@ -32,8 +73,8 @@ export default function LoginPage() {
                 </div>
 
                 <div className="flex flex-col gap-4 w-full">
-                    <ButtonwithText title="로그인" size="w-full h-12" />
-                    <ButtonwithText title="비밀번호" variant="white" size="w-full h-12" />
+                    <ButtonwithText title="로그인" size="w-full h-12" onclick={handleLoginSubmit} />
+                    <ButtonwithText title="회원가입" variant="white" size="w-full h-12" onclick={navigateToSignUp} />
                 </div>
             </div>
         </div>
