@@ -25,6 +25,7 @@ export default function LoginPage() {
     const { mutate: login, isPending } = usePostAuthorization()
     const handleLoginSubmit = () => {
         console.log('서버로 보낼 데이터:', loginForm)
+        if (isPending) return
         login({
             username: loginForm.userId,
             password: loginForm.password,
