@@ -9,3 +9,11 @@ export type ResponseAuthorization = {
     refreshToken: string
     expiresIn: number
 }
+
+export type SignupDto = {
+    username: string
+    email: string
+    password: string
+    nickname: string
+    interests: string[]
+}
