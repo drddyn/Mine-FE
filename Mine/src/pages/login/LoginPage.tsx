@@ -7,6 +7,7 @@ import InputBoxWithPassword from '../../components/InputBoxWithPassword'
 import ButtonwithText from '../../components/ButtonwithText'
 import { useState } from 'react'
 import usePostAuthorization from '../../hooks/usePostAuthorization'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
     const [loginForm, setLoginForm] = useState({
@@ -28,6 +29,11 @@ export default function LoginPage() {
             username: loginForm.userId,
             password: loginForm.password,
         })
+    }
+
+    const navigate = useNavigate()
+    const navigateToSignUp = () => {
+        navigate('/signup')
     }
     return (
         <div className="relative min-h-screen bg-white flex flex-col items-center justify-center">
@@ -67,7 +73,7 @@ export default function LoginPage() {
 
                 <div className="flex flex-col gap-4 w-full">
                     <ButtonwithText title="로그인" size="w-full h-12" onclick={handleLoginSubmit} />
-                    <ButtonwithText title="회원가입" variant="white" size="w-full h-12" />
+                    <ButtonwithText title="회원가입" variant="white" size="w-full h-12" onclick={navigateToSignUp} />
                 </div>
             </div>
         </div>
