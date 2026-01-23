@@ -6,15 +6,22 @@ import X from '../../icon/X.svg?react'
 import Logout from '../../icon/logout.svg?react'
 import Edit from '../../icon/edit.svg?react'
 import Check from '../../icon/check.svg?react'
+import usePostLogout from '../../hooks/usePostLogout'
 
-interface Props {
-  onClose: () => void
+interface SettingsProps {
+    onClose: () => void
 }
 
-export default function SettingsModal({ onClose }: Props) {
-  const [activeTab, setActiveTab] = useState<'profile' | 'screen'>('profile')
-  const [editMode, setEditMode] = useState(false)
+export default function SettingsModal({ onClose }: SettingsProps) {
+    const [activeTab, setActiveTab] = useState<'profile' | 'screen'>('profile')
+      const [editMode, setEditMode] = useState(false)
   const [showToast, setShowToast] = useState(false)
+    const { mutate: logout, isPending } = usePostLogout()
+    const handleLogout = () => {
+        if (isPending) return
+        logout()
+    }
+
 
   const cancelRef = useRef<HTMLButtonElement>(null)
   const saveRef = useRef<HTMLButtonElement>(null)
@@ -85,15 +92,15 @@ export default function SettingsModal({ onClose }: Props) {
             {activeTab === 'screen' && <ScreenSettings />}
           </div>
 
-          {activeTab === 'profile' && (
-            <>
-              <button 
-                onClick={handleLogout}
-                className="absolute left-12 bottom-8 flex gap-1 font-semibold14 text-black-icon hover:text-main-default"
-              >
-                <Logout className="w-4 h-4" />
-                로그아웃
-              </button>
+                {activeTab === 'profile' && (
+                    <>
+                        <button
+                            className="absolute left-12 bottom-8 flex gap-1 font-semibold14 text-black-icon transition duration-150 hover:brightness-75 hover:contrast-125 cursor-pointer hover:text-main-default"
+                            onClick={handleLogout}
+                        >
+                            <Logout className="w-4 h-4 aspect-square  text-black-icon" />
+                            로그아웃
+                        </button>
 
               {!editMode ? (
                 <button

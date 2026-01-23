@@ -1,16 +1,25 @@
-import type { ReactNode } from 'react'
+import type { ChangeEvent, ReactNode } from 'react'
 // import Eye from '../icon/eye.svg?react'
 import EyeOff from '../icon/eyeoff.svg?react'
 
 interface InputBoxProps {
     id: string
-    // value?: string
+    value?: string
     title?: string
     placeholder?: string
     description?: string
     children?: ReactNode
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
-export default function InputBoxWithPassword({ id, title, placeholder, description, children }: InputBoxProps) {
+export default function InputBoxWithPassword({
+    id,
+    value,
+    title,
+    placeholder,
+    description,
+    children,
+    onChange,
+}: InputBoxProps) {
     return (
         <>
             <div className="flex flex-col gap-2 select-none">
@@ -19,10 +28,12 @@ export default function InputBoxWithPassword({ id, title, placeholder, descripti
                     {children}
                     <input
                         id={id}
+                        value={value}
                         placeholder={placeholder}
                         className="flex-auto font-medium16 placeholder-black-whiteBoxOutline text-black-textSmallTitle outline-none"
                         maxLength={16}
                         type="password"
+                        onChange={onChange}
                     />
                     <EyeOff className="text-black-whiteBoxOutline group-focus-within:text-black-icon" />
                 </div>
