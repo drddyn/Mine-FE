@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import MineLogo from '../icon/minelogo.svg?react'
+import MineLogo from '../icon/minelogo_small.svg?react'
 import SidebarOpen from './sidebar/SidebarOpen'
 import Sidebar_main from '../icon/sidebar_main.svg?react'
 import Sidebar_new from '../icon/sidebar_new.svg?react'

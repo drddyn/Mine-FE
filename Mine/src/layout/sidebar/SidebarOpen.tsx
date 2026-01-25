@@ -1,4 +1,4 @@
-import MineLogo from '../../icon/minelogo.svg?react'
+import MineLogo from '../../icon/minelogo_small.svg?react'
 import SidebarButton from '../../icon/sidebarButton.svg?react'
 
 import SidebarBlock from './SidebarBlock'
