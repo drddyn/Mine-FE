@@ -11,13 +11,23 @@ import SidebarSectionList from './SidebarSectionList'
 import Setting from '../../icon/setting.svg?react'
 import { useState } from 'react'
 import SettingsModal from '../../components/settings/SettingsModal'
+import SidebarTitle from './SidebarTitle'
 
 interface SidebarProps {
     onclick: () => void
 }
 
 export default function SidebarOpen({ onclick }: SidebarProps) {
-    const [IsSettingOpen, SetIsSettingOpen] = useState(false)
+    const [isSettingOpen, setIsSettingOpen] = useState(false)
+    const [isMagazineOpen, setIsMagazineOpen] = useState(false)
+    const [isSectionOpen, setIsSectionOpen] = useState(false)
+
+    const handleMagazineToggleOpen = () => {
+        setIsMagazineOpen((prev) => !prev)
+    }
+    const handleSectionToggleOpen = () => {
+        setIsSectionOpen((prev) => !prev)
+    }
 
     return (
         <>
@@ -35,8 +45,22 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="" />
                     </div>
                     <div className="flex flex-col mt-6">
-                        <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />
-                        <SidebarMagazine title="2025 브랜드 리브랜딩" />
+                        <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" />
+                        {isMagazineOpen && (
+                            <>
+                                <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />
+                                <SidebarMagazine title="2025 브랜드 리브랜딩" />
+                            </>
+                        )}
+                    </div>
+                    <div className="flex flex-col mt-6">
+                        <SidebarTitle onClick={handleSectionToggleOpen} title="최근에 열람한 섹션" />
+                        {isSectionOpen && (
+                            <>
+                                <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />
+                                <SidebarMagazine title="2025 브랜드 리브랜딩" />
+                            </>
+                        )}
                     </div>
 
                     <div className="flex justify-between mt-auto mb-6 pl-6.5 pr-6 items-center ">
@@ -44,13 +68,13 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                             <div className="w-7.5 h-7.5 rounded-full bg-black-icon"></div>
                             <div className="font-light14 text-black-textSmallTitle">닉네임</div>
                         </div>
-                        <button onClick={() => SetIsSettingOpen(true)} className="cursor-pointer">
+                        <button onClick={() => setIsSettingOpen(true)} className="cursor-pointer">
                             <Setting />
                         </button>
                     </div>
                 </div>
             </div>
-            {IsSettingOpen && <SettingsModal onClose={() => SetIsSettingOpen(false)} />}
+            {isSettingOpen && <SettingsModal onClose={() => setIsSettingOpen(false)} />}
         </>
     )
 }
