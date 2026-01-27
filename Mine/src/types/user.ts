@@ -63,3 +63,17 @@ type Magazine = {
 }
 
 export type ResponseMyMagazine = PageResponse<Magazine>
+
+export type ResponseProfile = {
+    id: number
+    username: string
+    nickname: string
+    email: string
+    profileImageUrl: string
+    followerCount: number
+    followingCount: number
+    magazineCount: number
+    isPublic: boolean
+    interests: string[]
+    isFollowing: boolean
+}

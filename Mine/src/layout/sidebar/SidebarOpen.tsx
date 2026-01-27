@@ -13,6 +13,7 @@ import { useState } from 'react'
 import SettingsModal from '../../components/settings/SettingsModal'
 import SidebarTitle from './SidebarTitle'
 import useGetMyMagazines from '../../hooks/useGetMyMagazines'
+import useGetMyProfile from '../../hooks/useGetMyProfile'
 
 interface SidebarProps {
     onclick: () => void
@@ -30,15 +31,27 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         setIsSectionOpen((prev) => !prev)
     }
 
-    const { data, isLoading, isError } = useGetMyMagazines({
+    const {
+        data,
+        isLoading: isMagLoading,
+        isError: isMagError,
+    } = useGetMyMagazines({
         page: 0,
         size: 5,
         sort: [],
     })
 
-    if (isLoading) return null
-    if (isError) {
+    const { data: profile, isLoading: isProfileLoading, isError: isProfileError } = useGetMyProfile()
+
+    if (isMagLoading) return null
+    if (isMagError) {
         alert('목록 불러오기 실패')
+        return null
+    }
+
+    if (isProfileLoading) return null
+    if (isProfileError) {
+        alert('프로필 불러오기 실패')
         return null
     }
 
@@ -78,8 +91,8 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
                     <div className="flex justify-between mt-auto mb-6 pl-6.5 pr-6 items-center ">
                         <div className="flex gap-2 items-center">
-                            <div className="w-7.5 h-7.5 rounded-full bg-black-icon"></div>
-                            <div className="font-light14 text-black-textSmallTitle">닉네임</div>
+                            <img className="w-7.5 h-7.5 rounded-full" src={profile?.profileImageUrl} alt="프로필"></img>
+                            <div className="font-light14 text-black-textSmallTitle">{profile?.nickname}</div>
                         </div>
                         <button onClick={() => setIsSettingOpen(true)} className="cursor-pointer">
                             <Setting />
