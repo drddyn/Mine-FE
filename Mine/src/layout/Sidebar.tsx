@@ -17,7 +17,7 @@ export default function Sidebar() {
     return (
         <div className="fixed top-0 left-0 z-50">
             {!isSidebarOpen && (
-                <div className="w-20.5 h-screen flex flex-col gap-6 justify-start items-center pt-11.5 pb-6 bg-main-light">
+                <div className="w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-main-light">
                     <MineLogo className="cursor-pointer" onClick={toggleSidebar} />
                     <div className="flex flex-col">
                         <SidebarClosedBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />

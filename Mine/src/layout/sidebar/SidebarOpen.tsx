@@ -36,17 +36,20 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         sort: [],
     })
 
-    if (isLoading) return
-    if (isError) return alert('목록 불러오기 실패')
+    if (isLoading) return null
+    if (isError) {
+        alert('목록 불러오기 실패')
+        return null
+    }
 
     return (
         <>
-            <div className="h-screen w-66.5 bg-main-light rounded-r-[25px] z-50 transition-transform duration-30">
-                <div className="flex flex-col h-full gap-6">
-                    <div className="flex gap-2 mt-11.5 ml-6.25 items-center">
+            <div className="h-screen w-66.5 bg-main-light z-50 transition-transform duration-30">
+                <div className="flex flex-col h-full gap-9.5">
+                    <div className="flex gap-2 mt-8 ml-4 items-center">
                         <MineLogo />
-                        <div className="pr-20 font-semibold24 text-main-default">MINE</div>
-                        <SidebarButton onClick={onclick} />
+                        <div className="font-semibold24 pr-27 text-main-default">MINE</div>
+                        <SidebarButton className="cursor-pointer" onClick={onclick} />
                     </div>
                     <div className="flex flex-col">
                         <SidebarBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
