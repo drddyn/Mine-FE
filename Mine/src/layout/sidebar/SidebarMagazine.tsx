@@ -4,11 +4,12 @@ import SidebarHamburgerModal from './SidebarHamburgerModal'
 import { createPortal } from 'react-dom'
 
 interface SidebarMagazineProps {
+    key?: number
     title: string
     child?: React.ReactNode
 }
 
-export default function SidebarMagazine({ title }: SidebarMagazineProps) {
+export default function SidebarMagazine({ title, key }: SidebarMagazineProps) {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const [modalPos, setModalPos] = useState({ top: 0, left: 0 }) // 좌표 상태
 
@@ -26,7 +27,10 @@ export default function SidebarMagazine({ title }: SidebarMagazineProps) {
 
     return (
         <div className="w-full flex flex-col ">
-            <div className=" w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-7 pr-4 text-black-textSmallTitle font-semibold14">
+            <div
+                key={key}
+                className="w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-7 pr-4 text-black-textSmallTitle font-medium14"
+            >
                 {title}
                 <Hamburger className="cursor-pointer" onClick={handleHamburger} />
             </div>

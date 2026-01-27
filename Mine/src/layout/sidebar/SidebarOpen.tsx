@@ -12,6 +12,7 @@ import Setting from '../../icon/setting.svg?react'
 import { useState } from 'react'
 import SettingsModal from '../../components/settings/SettingsModal'
 import SidebarTitle from './SidebarTitle'
+import useGetMyMagazines from '../../hooks/useGetMyMagazines'
 
 interface SidebarProps {
     onclick: () => void
@@ -28,6 +29,15 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     const handleSectionToggleOpen = () => {
         setIsSectionOpen((prev) => !prev)
     }
+
+    const { data, isLoading, isError } = useGetMyMagazines({
+        page: 0,
+        size: 5,
+        sort: [],
+    })
+
+    if (isLoading) return
+    if (isError) return alert('목록 불러오기 실패')
 
     return (
         <>
@@ -48,8 +58,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" />
                         {isMagazineOpen && (
                             <>
-                                <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />
-                                <SidebarMagazine title="2025 브랜드 리브랜딩" />
+                                {data?.content.map((magazine) => (
+                                    <SidebarMagazine key={magazine.id} title={magazine.title} />
+                                ))}
                             </>
                         )}
                     </div>
@@ -57,8 +68,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarTitle onClick={handleSectionToggleOpen} title="최근에 열람한 섹션" />
                         {isSectionOpen && (
                             <>
-                                <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />
-                                <SidebarMagazine title="2025 브랜드 리브랜딩" />
+                                <SidebarSectionList title="베스트셀러" />
                             </>
                         )}
                     </div>
