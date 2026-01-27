@@ -77,3 +77,8 @@ export type ResponseProfile = {
     interests: string[]
     isFollowing: boolean
 }
+export type ProfileDto = {
+    nickname: string
+    username: string
+    profileImageUrl: string
+}

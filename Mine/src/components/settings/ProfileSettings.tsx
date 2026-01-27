@@ -1,10 +1,12 @@
 import { useState, type RefObject } from 'react'
 import Camera from '../../icon/camera.svg?react'
+import useUserStore from '../../stores/user'
+import useUpdateProfile from '../../hooks/useUpdateProfile'
 
 interface ProfileData {
     nickname: string
-    userId: string
-    profileImage: string
+    username: string
+    profileImageUrl: string
 }
 
 interface ProfileSettingProps {
@@ -16,19 +18,28 @@ interface ProfileSettingProps {
 }
 
 export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCancel, refSave }: ProfileSettingProps) {
+    const { user } = useUserStore()
+    const { mutateAsync: updateProfile } = useUpdateProfile()
     const [saved, setSaved] = useState<ProfileData>({
-        nickname: '홍길동',
-        userId: 'thisisID',
-        profileImage: 'https://i.pravatar.cc/100?img=12',
+        nickname: user?.nickname ?? '',
+        username: user?.username ?? '',
+        profileImageUrl: user?.profileImageUrl ?? '',
     })
 
     const [draft, setDraft] = useState<ProfileData>(saved)
     const [editingField, setEditingField] = useState<null | 'nickname' | 'userId'>(null)
 
-    const handleSave = () => {
-        setSaved(draft)
-        onSave(draft)
-        setEditingField(null)
+    const handleSave = async () => {
+        try {
+            await updateProfile(draft)
+            setSaved(draft)
+            onSave(draft)
+            setEditingField(null)
+        } catch (error) {
+            console.error('수정 실패:', error)
+            alert('수정 중 오류가 발생했습니다.')
+            handleCancel() // 에러 시 원래 데이터로 복구
+        }
     }
 
     const handleCancel = () => {
@@ -41,7 +52,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         const file = e.target.files?.[0]
         if (!file) return
         const previewUrl = URL.createObjectURL(file)
-        setDraft({ ...draft, profileImage: previewUrl })
+        setDraft({ ...draft, profileImageUrl: previewUrl })
     }
 
     const viewData = editMode ? draft : saved
@@ -50,7 +61,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         <div className="h-full flex flex-col">
             <div className="flex items-center ml-10">
                 <div className="relative shrink-0 -translate-y-4">
-                    <img src={viewData.profileImage} alt="profile" className="w-25 h-25 rounded-full object-cover" />
+                    <img src={viewData.profileImageUrl} alt="profile" className="w-25 h-25 rounded-full object-cover" />
                     {editMode && (
                         <label className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow cursor-pointer">
                             <Camera className="w-4 h-4 fill-main-default" />
@@ -84,9 +95,9 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                         <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">아이디</span>
                         {editMode && editingField === 'userId' ? (
                             <input
-                                value={draft.userId}
+                                value={draft.username}
                                 autoFocus
-                                onChange={(e) => setDraft({ ...draft, userId: e.target.value })}
+                                onChange={(e) => setDraft({ ...draft, username: e.target.value })}
                                 onBlur={() => setEditingField(null)}
                                 className="border-b border-black outline-none font-medium16 pb-1 bg-transparent"
                             />
@@ -95,7 +106,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                                 onClick={() => editMode && setEditingField('userId')}
                                 className={`font-medium16 ${editMode ? 'border-b border-black cursor-text ' : ''}`}
                             >
-                                {viewData.userId}
+                                {viewData.username}
                             </span>
                         )}
                     </div>
@@ -107,7 +118,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                     <div className="flex items-center">
                         <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">이메일</span>
-                        <span className="font-medium16">ahdfahe@gmail.com</span>
+                        <span className="font-medium16">{user?.email}</span>
                     </div>
                 </div>
             </div>

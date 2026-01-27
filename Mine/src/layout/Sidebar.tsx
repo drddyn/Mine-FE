@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MineLogo from '../icon/minelogo_small.svg?react'
 import SidebarOpen from './sidebar/SidebarOpen'
 import Sidebar_main from '../icon/sidebar_main.svg?react'
@@ -6,12 +6,29 @@ import Sidebar_new from '../icon/sidebar_new.svg?react'
 import Sidebar_like from '../icon/sidebar_like.svg?react'
 import Sidebar_others from '../icon/sidebar_others.svg?react'
 import SidebarClosedBlock from './sidebar/SidebarClosedBlock'
+import useGetMyProfile from '../hooks/useGetMyProfile'
+import useUserStore from '../stores/user'
 
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev)
+    }
+    const { data: profile, isLoading: isProfileLoading, isError: isProfileError } = useGetMyProfile()
+    const setUser = useUserStore((state) => state.setUser)
+    const user = useUserStore((state) => state.user)
+
+    useEffect(() => {
+        if (profile) {
+            setUser(profile) // API로 받아온 정보를 주스탠드에 저장
+        }
+    }, [profile, setUser])
+
+    if (isProfileLoading) return null
+    if (isProfileError) {
+        alert('프로필 불러오기 실패')
+        return null
     }
 
     return (
@@ -26,6 +43,7 @@ export default function Sidebar() {
                         <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="" />
                     </div>
                     <div className="w-7.5 h-7.5 rounded-full bg-black-image mt-auto"></div>
+                    <img src={user?.profileImageUrl} className="w-7.5 h-7.5 rounded-full mt-auto"></img>
                 </div>
             )}
 
