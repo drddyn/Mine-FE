@@ -27,7 +27,7 @@ export default function SidebarClosedBlock({ icon, title, to }: SidebarClosedBlo
                     opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition z-50
                 "
             >
-                <div className="flex items-center gap-3 w-26">
+                <div className="flex items-center gap-3 ">
                     <span className="shrink-0 ml-1.5">{icon}</span>
                     <span className="whitespace-nowrap">{title}</span>
                 </div>

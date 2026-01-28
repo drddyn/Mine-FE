@@ -17,6 +17,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
     const [editMode, setEditMode] = useState(false)
     const [showToast, setShowToast] = useState(false)
     const { mutate: logout, isPending } = usePostLogout()
+
     const handleLogout = () => {
         if (isPending) return
         logout()
