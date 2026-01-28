@@ -42,7 +42,6 @@ export default function Sidebar() {
                         <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="" />
                         <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="" />
                     </div>
-                    <div className="w-7.5 h-7.5 rounded-full bg-black-image mt-auto"></div>
                     <img src={user?.profileImageUrl} className="w-7.5 h-7.5 rounded-full mt-auto"></img>
                 </div>
             )}
