@@ -70,7 +70,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         {isMagazineOpen && (
                             <>
                                 {data?.content.map((magazine) => (
-                                    <SidebarMagazine key={magazine.id} title={magazine.title} />
+                                    <SidebarMagazine id={magazine.id} title={magazine.title} />
                                 ))}
                             </>
                         )}

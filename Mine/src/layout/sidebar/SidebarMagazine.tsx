@@ -4,14 +4,18 @@ import SidebarHamburgerModal from './SidebarHamburgerModal'
 import { createPortal } from 'react-dom'
 
 interface SidebarMagazineProps {
-    key?: number
+    id: number
     title: string
     child?: React.ReactNode
 }
 
-export default function SidebarMagazine({ title, key }: SidebarMagazineProps) {
+export default function SidebarMagazine({ title, id }: SidebarMagazineProps) {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const [modalPos, setModalPos] = useState({ top: 0, left: 0 }) // 좌표 상태
+
+    const handleCloseHamburger = () => {
+        setIsHamburgerOpen((prev) => !prev)
+    }
 
     const handleHamburger = (e: React.MouseEvent) => {
         // 클릭된 요소(햄버거 아이콘)의 위치 정보를 가져옵니다.
@@ -21,21 +25,28 @@ export default function SidebarMagazine({ title, key }: SidebarMagazineProps) {
             top: rect.top + window.scrollY,
             left: rect.right + 10, // 아이콘 오른쪽에서 10px 띄움
         })
-
-        setIsHamburgerOpen((prev) => !prev)
+        handleCloseHamburger
     }
 
     return (
         <div className="w-full flex flex-col ">
             <div
-                key={key}
+                key={id}
                 className="w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-6 pr-4 text-black-textSmallTitle font-medium14"
             >
                 {title}
                 <Hamburger className="cursor-pointer" onClick={handleHamburger} />
             </div>
             {isHamburgerOpen &&
-                createPortal(<SidebarHamburgerModal top={modalPos.top} left={modalPos.left} />, document.body)}
+                createPortal(
+                    <SidebarHamburgerModal
+                        handleClose={handleCloseHamburger}
+                        id={id}
+                        top={modalPos.top}
+                        left={modalPos.left}
+                    />,
+                    document.body
+                )}
         </div>
     )
 }
