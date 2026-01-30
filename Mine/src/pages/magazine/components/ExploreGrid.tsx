@@ -1,13 +1,17 @@
-import ExploreItem from "./ExploreItem"
+import ExploreItem from "./ExploreItem";
 
-const DUMMY_COUNT = 100
+const DUMMY_COUNT = 100;
 
-export default function ExploreGrid() {
+interface ExploreGridProps {
+  startIndex?: number; 
+}
+
+export default function ExploreGrid({ startIndex = 0 }: ExploreGridProps) {
   return (
     <div className="grid grid-cols-[362px_362px_362px] gap-4">
-      {Array.from({ length: DUMMY_COUNT }).map((_, idx) => (
-        <ExploreItem key={idx} />
+      {Array.from({ length: DUMMY_COUNT - startIndex }).map((_, idx) => (
+        <ExploreItem key={startIndex + idx} />
       ))}
     </div>
-  )
+  );
 }

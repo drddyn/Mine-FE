@@ -3,15 +3,15 @@ export default function ExploreItem() {
     <div
       className="
         relative
-        w-[362px]
-        h-[240px]
-        bg-gray-300
+        w-90.5
+        h-60
+        bg-black-textInTheBox
         overflow-hidden
         cursor-pointer
       "
     >
       {/* 썸네일 placeholder */}
-      <div className="absolute inset-0 bg-gray-400" />
+      <div className="absolute inset-0 bg-black-textInTheBox" />
 
       {/* 제목 영역 */}
       <div
@@ -19,8 +19,8 @@ export default function ExploreItem() {
           absolute
           bottom-4
           right-4
-          w-[202px]
-          h-[32px]
+          w-50.5
+          h-8
           flex
           items-end
         "
@@ -29,10 +29,8 @@ export default function ExploreItem() {
           className="
             w-full
             font-[MaruBuri]
-            font-semibold
-            text-[24px]
-            leading-[1]
-            tracking-[-0.025em]
+            font-semibold24
+            leading-none
             text-white
             text-right
           "
