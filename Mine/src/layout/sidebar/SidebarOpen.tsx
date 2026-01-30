@@ -1,4 +1,4 @@
-import MineLogo from '../../icon/minelogo.svg?react'
+import MineLogo from '../../icon/minelogo_small.svg?react'
 import SidebarButton from '../../icon/sidebarButton.svg?react'
 
 import SidebarBlock from './SidebarBlock'
@@ -32,7 +32,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
                         <SidebarBlock icon={<Sidebar_new />} title="새 매거진" to="" />
                         <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" to="" />
-                        <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="" />
+                        <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
                     </div>
                     <div className="flex flex-col mt-6">
                         <SidebarMagazine title="베스트셀러" child={<SidebarSectionList />} />

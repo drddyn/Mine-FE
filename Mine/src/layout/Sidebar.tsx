@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import MineLogo from '../icon/minelogo.svg?react'
+import MineLogo from '../icon/minelogo_small.svg?react'
 import SidebarOpen from './sidebar/SidebarOpen'
 import Sidebar_main from '../icon/sidebar_main.svg?react'
 import Sidebar_new from '../icon/sidebar_new.svg?react'
@@ -23,7 +23,7 @@ export default function Sidebar() {
                         <SidebarClosedBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
                         <SidebarClosedBlock icon={<Sidebar_new />} title="새 매거진" to="" />
                         <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="" />
-                        <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="" />
+                        <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
                     </div>
                     <div className="w-7.5 h-7.5 rounded-full bg-black-image mt-auto"></div>
                 </div>

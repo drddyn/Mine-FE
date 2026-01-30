@@ -5,6 +5,8 @@ import LoginPage from '../pages/login/LoginPage'
 import FindingPage from '../pages/login/FindingPage'
 import SignupPage from '../pages/signup/SignupPage'
 import LandingPage from '../pages/landing/LandingPage'
+import ExplorePage from '../pages/magazine/ExplorePage'
+
 
 
 import RootLayout from '../layout/RootLayout'
@@ -17,6 +19,7 @@ export const router = createBrowserRouter([
             { index: true, element: <MainPage /> },
             { path: 'landing', element: <LandingPage /> },
             { path: 'mymagazine', element: <MagazinePage /> },
+            { path: 'magazine/explore', element: <ExplorePage /> },
             { path: 'login', element: <LoginPage /> },
             { path: 'signup', element: <SignupPage /> },
             { path: 'login/finding', element: <FindingPage /> },
