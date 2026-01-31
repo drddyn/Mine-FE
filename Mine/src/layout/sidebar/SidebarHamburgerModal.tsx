@@ -14,6 +14,7 @@ interface SidebarHamburgerModalProps {
     left: number
     id: number
     handleClose: () => void
+    onEdit: (id: number) => void
 }
 
 function HamburgerSection({ icon, title, onclick }: HamburgerSectionProps) {
@@ -28,11 +29,15 @@ function HamburgerSection({ icon, title, onclick }: HamburgerSectionProps) {
     )
 }
 
-export default function SidebarHamburgerModal({ id, top, left, handleClose }: SidebarHamburgerModalProps) {
+export default function SidebarHamburgerModal({ id, top, left, handleClose, onEdit }: SidebarHamburgerModalProps) {
     const deleteMutation = useDeleteMagazine()
     const onDeleteClick: React.MouseEventHandler<HTMLDivElement> = () => {
-        deleteMutation.mutate({ id: id }) // 여기 id를 실제 값으로 넣기
-        handleClose
+        deleteMutation.mutate({ id: id })
+        handleClose()
+    }
+    const onEditClick: React.MouseEventHandler<HTMLDivElement> = () => {
+        onEdit(id)
+        handleClose()
     }
     return (
         <div
@@ -41,7 +46,7 @@ export default function SidebarHamburgerModal({ id, top, left, handleClose }: Si
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="공유" icon={<Share />} />
-            <HamburgerSection title="이름 변경" icon={<Edit />} />
+            <HamburgerSection title="이름 변경" icon={<Edit />} onclick={onEditClick} />
             <HamburgerSection title="삭제" icon={<Delete />} onclick={onDeleteClick} />
         </div>
     )
