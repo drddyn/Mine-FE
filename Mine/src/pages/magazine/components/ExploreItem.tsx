@@ -2,38 +2,13 @@ export default function ExploreItem() {
   return (
     <div
       className="
-        relative
-        w-90.5
-        h-60
-        bg-black-textInTheBox
-        overflow-hidden
-        cursor-pointer
+        relative w-90.5 h-60 bg-black-textInTheBox overflow-hidden cursor-pointer
       "
     >
-      {/* 썸네일 placeholder */}
       <div className="absolute inset-0 bg-black-textInTheBox" />
-
-      {/* 제목 영역 */}
-      <div
-        className="
-          absolute
-          bottom-4
-          right-4
-          w-50.5
-          h-8
-          flex
-          items-end
-        "
-      >
+      <div className="absolute bottom-4 right-4 w-50.5 h-8 flex items-end">
         <p
-          className="
-            w-full
-            font-[MaruBuri]
-            font-semibold24
-            leading-none
-            text-white
-            text-right
-          "
+          className="w-full font-[MaruBuri] font-semibold24 leading-none text-white text-right"
         >
           매거진 제목
         </p>

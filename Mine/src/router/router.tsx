@@ -6,6 +6,8 @@ import FindingPage from '../pages/login/FindingPage'
 import SignupPage from '../pages/signup/SignupPage'
 import LandingPage from '../pages/landing/LandingPage'
 import ExplorePage from '../pages/magazine/ExplorePage'
+import SavedMagazinePage from '../pages/magazine/SavedMagazinePage'
+
 
 
 
@@ -20,6 +22,7 @@ export const router = createBrowserRouter([
             { path: 'landing', element: <LandingPage /> },
             { path: 'mymagazine', element: <MagazinePage /> },
             { path: 'magazine/explore', element: <ExplorePage /> },
+            { path: 'magazine/saved', element: <SavedMagazinePage /> },
             { path: 'login', element: <LoginPage /> },
             { path: 'signup', element: <SignupPage /> },
             { path: 'login/finding', element: <FindingPage /> },
