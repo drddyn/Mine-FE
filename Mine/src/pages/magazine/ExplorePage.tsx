@@ -54,7 +54,6 @@ export default function ExplorePage() {
 
   return (
     <div className="min-h-screen pt-39.25 pb-10 px-32.75 relative">
-      {/* 🔹 상단 그림자 */}
       <div
         className="pointer-events-none fixed top-0 left-0 right-0 z-10 transition-opacity duration-300"
         style={{
@@ -64,20 +63,17 @@ export default function ExplorePage() {
         }}
       />
 
-      {/* 🔹 하단 그림자 */}
       <div
         className="pointer-events-none fixed bottom-0 left-0 right-0 z-10 transition-opacity duration-300"
         style={{
           height: `${SHADOW_HEIGHT}px`,
           opacity: bottomShadow,
           background: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
-        }}
+        }} 
       />
 
       <ExploreGrid />
-
-      {/* 스크롤 여유 */}
       <div className="h-[120vh]" />
     </div>
-  );
+  ); 
 }

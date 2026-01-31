@@ -22,7 +22,7 @@ export default function Sidebar() {
                     <div className="flex flex-col">
                         <SidebarClosedBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
                         <SidebarClosedBlock icon={<Sidebar_new />} title="새 매거진" to="" />
-                        <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="" />
+                        <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="/magazine/saved" />
                         <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
                     </div>
                     <div className="w-7.5 h-7.5 rounded-full bg-black-image mt-auto"></div>
