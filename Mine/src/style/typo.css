@@ -35,4 +35,10 @@
     .font-regular32 {
         @apply text-[32px] leading-[133%] tracking-[-0.025em] font-normal;
     }
+    .font-medium12 {
+        @apply text-[12px] leading-[130%] tracking-[-0.025em] font-medium;
+    }
+    .font-medium14 {
+        @apply text-[14px] leading-[122%] tracking-[-0.025em] font-medium;
+    }
 }
