@@ -1,5 +1,13 @@
 import type { PatchMagazineTitleDto, PostMagazineDto, RequestDeleteMagazine } from '../types/magazine'
+import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
 import { axiosInstance } from './axios'
+
+export const getMyMagazines = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
+    const res = await axiosInstance.get(`/api/magazines`, {
+        params: { page, size, sort },
+    })
+    return res.data
+}
 
 export const deleteMagazine = async ({ id }: RequestDeleteMagazine) => {
     const res = await axiosInstance.delete(`/api/magazines/${id}`)
