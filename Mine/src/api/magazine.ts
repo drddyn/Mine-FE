@@ -1,4 +1,9 @@
-import type { PatchMagazineTitleDto, PostMagazineDto, RequestDeleteMagazine } from '../types/magazine'
+import type {
+    PatchMagazineTitleDto,
+    PostMagazineDto,
+    RequestDeleteMagazine,
+    ResponseRecentSection,
+} from '../types/magazine'
 import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
 import { axiosInstance } from './axios'
 
@@ -29,5 +34,10 @@ export const patchMagazineTitle = async ({ id, title, introduction }: PatchMagaz
         introduction: introduction,
     }
     const res = await axiosInstance.patch(`api/magazines/${id}`, body)
+    return res.data
+}
+
+export const getRecentSection = async (): Promise<ResponseRecentSection> => {
+    const res = await axiosInstance.get(`api/sections/recent`)
     return res.data
 }

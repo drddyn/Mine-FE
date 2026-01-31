@@ -59,3 +59,16 @@ export type PatchMagazineTitleDto = {
     title: string
     introduction: string
 }
+
+type Section = {
+    id: number
+    heading: string
+    content: string
+    imageUrl: string
+    layoutType: string
+    layoutHint: string
+    caption: string
+    displayOrder: number
+}
+
+export type ResponseRecentSection = Section[]
