@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Hamburger from '../../icon/hamburger.svg?react'
 import SidebarHamburgerModal from './SidebarHamburgerModal'
 import { createPortal } from 'react-dom'
@@ -12,57 +12,51 @@ interface SidebarMagazineProps {
 
 export default function SidebarMagazine({ title, id }: SidebarMagazineProps) {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
-    const [modalPos, setModalPos] = useState({ top: 0, left: 0 }) // 좌표 상태
+    const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
 
     const [isEditing, setIsEditing] = useState(false)
-    const [draftTitle, setDraftTitle] = useState(title)
+    const [draftTitle, setDraftTitle] = useState('')
     const inputRef = useRef<HTMLTextAreaElement>(null)
 
     const updateTitleMutation = useUpdateMagazineTitle()
-    const handleCloseHamburger = () => {
-        setIsHamburgerOpen((prev) => !prev)
-    }
-    useEffect(() => {
-        if (!isEditing) setDraftTitle(title)
-    }, [title, isEditing])
 
-    useEffect(() => {
-        if (isEditing) {
-            requestAnimationFrame(() => {
-                inputRef.current?.focus()
-                const len = inputRef.current?.value.length ?? 0
-                inputRef.current?.setSelectionRange(len, len)
-            })
-        }
-    }, [isEditing])
+    const openHamburger = () => setIsHamburgerOpen(true)
+    const closeHamburger = () => setIsHamburgerOpen(false)
 
     const handleHamburger = (e: React.MouseEvent) => {
-        // 클릭된 요소(햄버거 아이콘)의 위치 정보를 가져옵니다.
         const rect = e.currentTarget.getBoundingClientRect()
-        // 아이콘의 오른쪽 끝 지점을 기준으로 위치 설정
         setModalPos({
             top: rect.top + window.scrollY,
-            left: rect.right + 10, // 아이콘 오른쪽에서 10px 띄움
+            left: rect.right + 10,
         })
-        handleCloseHamburger()
+        openHamburger()
     }
 
     const beginEdit = () => {
+        setDraftTitle(title)
         setIsEditing(true)
+        requestAnimationFrame(() => {
+            inputRef.current?.focus()
+            const len = inputRef.current?.value.length ?? 0
+            inputRef.current?.setSelectionRange(len, len)
+        })
     }
 
     const cancelEdit = () => {
-        setDraftTitle(title)
         setIsEditing(false)
+        setDraftTitle('')
     }
+
     const commitEdit = () => {
         const next = draftTitle.trim()
+
         if (!next) {
             cancelEdit()
             return
         }
+
         if (next === title) {
-            setIsEditing(false)
+            cancelEdit()
             return
         }
 
@@ -70,11 +64,12 @@ export default function SidebarMagazine({ title, id }: SidebarMagazineProps) {
             { id, title: next, introduction: '' },
             {
                 onSuccess: () => {
-                    setIsEditing(false)
+                    cancelEdit()
                 },
             }
         )
     }
+
     const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Escape') {
             e.preventDefault()
@@ -87,30 +82,37 @@ export default function SidebarMagazine({ title, id }: SidebarMagazineProps) {
         }
     }
 
+    const shownTitle = isEditing ? draftTitle : title
+
     return (
-        <div className="w-full flex flex-col ">
+        <div className="w-full flex flex-col">
             <div
                 key={id}
-                className={`w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-6 pr-4 text-black-textSmallTitle font-medium14 select-none ${isEditing && 'bg-main-opacity20'}`}
+                className={`w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-6 pr-4 text-black-textSmallTitle font-medium14 select-none ${
+                    isEditing ? 'bg-main-opacity20' : ''
+                }`}
             >
                 {!isEditing ? (
-                    <span className="truncate">{title}</span>
+                    <span className="truncate">{shownTitle}</span>
                 ) : (
                     <textarea
                         ref={inputRef}
-                        value={draftTitle}
+                        value={shownTitle}
                         onChange={(e) => setDraftTitle(e.target.value)}
                         onKeyDown={onKeyDown}
                         onBlur={commitEdit}
-                        className="w-full resize-none overflow-hidden outline-none text-black-textSmallTitle font-medium14"
+                        className="w-full resize-none overflow-hidden bg-transparent outline-none text-black-textSmallTitle font-medium14"
+                        rows={1}
                     />
                 )}
-                <Hamburger className="cursor-pointer" onClick={handleHamburger} />
+
+                <Hamburger className="cursor-pointer shrink-0 ml-2" onClick={handleHamburger} />
             </div>
+
             {isHamburgerOpen &&
                 createPortal(
                     <SidebarHamburgerModal
-                        handleClose={handleCloseHamburger}
+                        handleClose={closeHamburger}
                         id={id}
                         top={modalPos.top}
                         left={modalPos.left}
