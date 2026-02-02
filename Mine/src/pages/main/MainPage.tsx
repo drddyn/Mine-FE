@@ -1,17 +1,14 @@
-import { useState } from 'react'
 import LLMInputBox from '../../components/LLMInputBox'
+import usePostMagazine from '../../hooks/usePostMagazine'
 
 export default function MainPage() {
-    const [isLoading, setIsLoading] = useState(false)
+    const postMagazineMutation = usePostMagazine()
+    const isLoading = postMagazineMutation.isPending
 
     const handleSend = (value: string) => {
         console.log('전송 내용:', value)
 
-        setIsLoading(true)
-
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 3000)
+        postMagazineMutation.mutate({ topic: value, user_mood: '' })
     }
 
     return (

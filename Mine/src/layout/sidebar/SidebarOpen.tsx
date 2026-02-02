@@ -15,6 +15,7 @@ import SidebarTitle from './SidebarTitle'
 import useGetMyMagazines from '../../hooks/useGetMyMagazines'
 // import useGetMyProfile from '../../hooks/useGetMyProfile'
 import useUserStore from '../../stores/user'
+import useGetRecentSection from '../../hooks/useGetRecentSection'
 
 interface SidebarProps {
     onclick: () => void
@@ -42,11 +43,17 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         sort: [],
     })
 
+    const { data: section, isLoading: isSecLoading, isError: isSecError } = useGetRecentSection()
+
     const { user } = useUserStore()
 
-    if (isMagLoading) return null
+    if (isMagLoading || isSecLoading) return null
     if (isMagError) {
         alert('목록 불러오기 실패')
+        return null
+    }
+    if (isSecError) {
+        alert('섹션 불러오기 실패')
         return null
     }
 
@@ -70,7 +77,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         {isMagazineOpen && (
                             <>
                                 {data?.content.map((magazine) => (
-                                    <SidebarMagazine key={magazine.id} title={magazine.title} />
+                                    <SidebarMagazine id={magazine.id} title={magazine.title} />
                                 ))}
                             </>
                         )}
@@ -79,7 +86,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarTitle onClick={handleSectionToggleOpen} title="최근에 열람한 섹션" />
                         {isSectionOpen && (
                             <>
-                                <SidebarSectionList title="베스트셀러" />
+                                {section?.map((section) => (
+                                    <SidebarSectionList key={section.id} title={section.heading} />
+                                ))}
                             </>
                         )}
                     </div>
