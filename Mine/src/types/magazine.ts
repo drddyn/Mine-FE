@@ -69,6 +69,16 @@ type Section = {
     layoutHint: string
     caption: string
     displayOrder: number
+    magazineId: number
+    magazineTitle: string
+    viewedAt: string
 }
 
 export type ResponseRecentSection = Section[]
+
+export type SectionDetailDto = {
+    magazineId: number
+    sectionId: number
+}
+
+export type ResponseGetSectionDetail = Section
