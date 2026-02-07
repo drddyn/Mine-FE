@@ -3,6 +3,7 @@ import type {
     PostMagazineDto,
     RequestDeleteMagazine,
     ResponseRecentSection,
+    SectionDetailDto,
 } from '../types/magazine'
 import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
 import { axiosInstance } from './axios'
@@ -39,5 +40,10 @@ export const patchMagazineTitle = async ({ id, title, introduction }: PatchMagaz
 
 export const getRecentSection = async (): Promise<ResponseRecentSection> => {
     const res = await axiosInstance.get(`api/sections/recent`)
+    return res.data
+}
+
+export const getSectionDetail = async ({ magazineId, sectionId }: SectionDetailDto) => {
+    const res = await axiosInstance.get(`api/magazines/${magazineId}/sections/${sectionId}`)
     return res.data
 }

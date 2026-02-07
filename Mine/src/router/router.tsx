@@ -7,11 +7,8 @@ import SignupPage from '../pages/signup/SignupPage'
 import LandingPage from '../pages/landing/LandingPage'
 import ExplorePage from '../pages/magazine/ExplorePage'
 import SavedMagazinePage from '../pages/magazine/SavedMagazinePage'
-
-
-
-
 import RootLayout from '../layout/RootLayout'
+import SectionPage from '../pages/magazine/SectionPage'
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +18,7 @@ export const router = createBrowserRouter([
             { index: true, element: <MainPage /> },
             { path: 'landing', element: <LandingPage /> },
             { path: 'mymagazine', element: <MagazinePage /> },
+            { path: 'magazine/:magazineId/section/:sectionId', element: <SectionPage /> },
             { path: 'magazine/explore', element: <ExplorePage /> },
             { path: 'magazine/saved', element: <SavedMagazinePage /> },
             { path: 'login', element: <LoginPage /> },

@@ -13,15 +13,16 @@ import { useState } from 'react'
 import SettingsModal from '../../components/settings/SettingsModal'
 import SidebarTitle from './SidebarTitle'
 import useGetMyMagazines from '../../hooks/useGetMyMagazines'
-// import useGetMyProfile from '../../hooks/useGetMyProfile'
 import useUserStore from '../../stores/user'
 import useGetRecentSection from '../../hooks/useGetRecentSection'
+import { useNavigate } from 'react-router-dom'
 
 interface SidebarProps {
     onclick: () => void
 }
 
 export default function SidebarOpen({ onclick }: SidebarProps) {
+    const navigate = useNavigate()
     const [isSettingOpen, setIsSettingOpen] = useState(false)
     const [isMagazineOpen, setIsMagazineOpen] = useState(false)
     const [isSectionOpen, setIsSectionOpen] = useState(false)
@@ -34,7 +35,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     }
 
     const {
-        data,
+        data: magazine,
         isLoading: isMagLoading,
         isError: isMagError,
     } = useGetMyMagazines({
@@ -46,6 +47,11 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     const { data: section, isLoading: isSecLoading, isError: isSecError } = useGetRecentSection()
 
     const { user } = useUserStore()
+
+    const handleSectionClick = (magazineId: number, sectionId: number) => {
+        navigate(`/magazine/${magazineId}/section/${sectionId}`)
+        onclick()
+    }
 
     if (isMagLoading || isSecLoading) return null
     if (isMagError) {
@@ -76,7 +82,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" />
                         {isMagazineOpen && (
                             <>
-                                {data?.content.map((magazine) => (
+                                {magazine?.content.map((magazine) => (
                                     <SidebarMagazine id={magazine.id} title={magazine.title} />
                                 ))}
                             </>
@@ -87,7 +93,13 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         {isSectionOpen && (
                             <>
                                 {section?.map((section) => (
-                                    <SidebarSectionList key={section.id} title={section.heading} />
+                                    <SidebarSectionList
+                                        key={section.id}
+                                        title={section.heading}
+                                        onclick={() => handleSectionClick(section.magazineId, section.id)}
+                                        magazineId={section.magazineId}
+                                        sectionId={section.id}
+                                    />
                                 ))}
                             </>
                         )}

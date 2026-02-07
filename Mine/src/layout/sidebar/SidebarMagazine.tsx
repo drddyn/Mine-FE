@@ -8,9 +8,10 @@ interface SidebarMagazineProps {
     id: number
     title: string
     child?: React.ReactNode
+    onclick?: () => void
 }
 
-export default function SidebarMagazine({ title, id }: SidebarMagazineProps) {
+export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineProps) {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
 
@@ -91,6 +92,7 @@ export default function SidebarMagazine({ title, id }: SidebarMagazineProps) {
                 className={`w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-6 pr-4 text-black-textSmallTitle font-medium14 select-none ${
                     isEditing ? 'bg-main-opacity20' : ''
                 }`}
+                onClick={onclick}
             >
                 {!isEditing ? (
                     <span className="truncate">{shownTitle}</span>
