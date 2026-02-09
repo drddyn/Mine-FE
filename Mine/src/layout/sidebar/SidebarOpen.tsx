@@ -12,10 +12,10 @@ import Setting from '../../icon/setting.svg?react'
 import { useState } from 'react'
 import SettingsModal from '../../components/settings/SettingsModal'
 import SidebarTitle from './SidebarTitle'
-import useGetMyMagazines from '../../hooks/useGetMyMagazines'
 import useUserStore from '../../stores/user'
 import useGetRecentSection from '../../hooks/useGetRecentSection'
 import { useNavigate } from 'react-router-dom'
+import useGetMyMagazineList from '../../hooks/useGetMyMagazines'
 
 interface SidebarProps {
     onclick: () => void
@@ -38,7 +38,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         data: magazine,
         isLoading: isMagLoading,
         isError: isMagError,
-    } = useGetMyMagazines({
+    } = useGetMyMagazineList({
         page: 0,
         size: 5,
         sort: [],
