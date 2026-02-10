@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <MainPage /> },
             { path: 'landing', element: <LandingPage /> },
-            { path: 'mymagazine', element: <MagazinePage /> },
+            { path: 'magazine/:magazineId', element: <MagazinePage /> },
             { path: 'magazine/:magazineId/section/:sectionId', element: <SectionPage /> },
             { path: 'magazine/explore', element: <ExplorePage /> },
             { path: 'magazine/saved', element: <SavedMagazinePage /> },

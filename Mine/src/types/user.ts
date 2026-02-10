@@ -36,3 +36,22 @@ export type ProfileDto = {
     username: string
     profileImageUrl: string
 }
+
+export type User = {
+    id: number
+    username: string
+    nickname: string
+    email: string
+    profileImageUrl: string
+    followerCount: number
+    followingCount: number
+    magazineCount: number
+    isPublic: boolean
+    interests: string[]
+    isFollowing: boolean
+    role: 'USER'
+    createdAt: string
+    updatedAt: string
+    deleted: boolean
+    deletedAt: string
+}

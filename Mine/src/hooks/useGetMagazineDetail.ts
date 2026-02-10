@@ -1,0 +1,11 @@
+import { useQuery } from '@tanstack/react-query'
+import type { ResponseMagazineDetail } from '../types/magazine'
+import { getMagazineDetail } from '../api/magazine'
+
+export default function useGetMagazineDetail(magazineId: number) {
+    return useQuery<ResponseMagazineDetail>({
+        queryKey: ['magazine', magazineId],
+        queryFn: () => getMagazineDetail(magazineId),
+        select: (data) => data,
+    })
+}

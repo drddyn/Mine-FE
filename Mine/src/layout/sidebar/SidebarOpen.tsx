@@ -24,8 +24,8 @@ interface SidebarProps {
 export default function SidebarOpen({ onclick }: SidebarProps) {
     const navigate = useNavigate()
     const [isSettingOpen, setIsSettingOpen] = useState(false)
-    const [isMagazineOpen, setIsMagazineOpen] = useState(false)
-    const [isSectionOpen, setIsSectionOpen] = useState(false)
+    const [isMagazineOpen, setIsMagazineOpen] = useState(true)
+    const [isSectionOpen, setIsSectionOpen] = useState(true)
 
     const handleMagazineToggleOpen = () => {
         setIsMagazineOpen((prev) => !prev)
@@ -50,6 +50,10 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/magazine/${magazineId}/section/${sectionId}`)
+        onclick()
+    }
+    const handleMagazineClick = (magazineId: number) => {
+        navigate(`/magazine/${magazineId}`)
         onclick()
     }
 
@@ -83,7 +87,11 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         {isMagazineOpen && (
                             <>
                                 {magazine?.content.map((magazine) => (
-                                    <SidebarMagazine id={magazine.id} title={magazine.title} />
+                                    <SidebarMagazine
+                                        id={magazine.magazineId}
+                                        title={magazine.title}
+                                        onclick={() => handleMagazineClick(magazine.magazineId)}
+                                    />
                                 ))}
                             </>
                         )}
@@ -94,11 +102,11 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                             <>
                                 {section?.map((section) => (
                                     <SidebarSectionList
-                                        key={section.id}
+                                        key={section.sectionId}
                                         title={section.heading}
-                                        onclick={() => handleSectionClick(section.magazineId, section.id)}
+                                        onclick={() => handleSectionClick(section.magazineId, section.sectionId)}
                                         magazineId={section.magazineId}
-                                        sectionId={section.id}
+                                        sectionId={section.sectionId}
                                     />
                                 ))}
                             </>

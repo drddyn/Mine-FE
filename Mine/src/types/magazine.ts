@@ -1,3 +1,5 @@
+import type { User } from './user'
+
 export type PageResponse<T> = {
     totalPages: number
     totalElements: number
@@ -31,19 +33,55 @@ export type MyMagazinesDto = {
     sort: string[]
 }
 
-type Magazine = {
-    id: number
+type BaseMagazine = {
+    magazineId: number
     title: string
     subtitle: string
     introduction: string
     coverImageUrl: string
-    username: string
-    likeCount: number
-    commentCount: number
     createdAt: string
 }
 
+//목록 조회를 위한 타입
+export type Magazine = BaseMagazine & {
+    username: string
+    likeCount: number
+    commentCount: number
+}
+
 export type ResponseMyMagazine = PageResponse<Magazine>
+
+export type ResponseMagazineDetail = BaseMagazine & {
+    tags: string
+    moodboardImageUrl: string
+    moodboardDescription: string
+    createdAt: string
+    user: User
+    sections: Section[]
+    // version: number
+}
+
+type Paragraph = {
+    id: number
+    section: string
+    subtitle: string
+    text: string
+    imageUrl: string
+    displayOrder: 0
+}
+type Section = {
+    sectionId: number
+    heading: string
+    thumbnailUrl: string
+    paragraphs: Paragraph[]
+    imageUrl: string
+    layoutType: string
+    layoutHint: string
+    displayOrder: number
+    magazineId: number
+    magazineTitle: string
+    viewedAt: string
+}
 
 export type RequestDeleteMagazine = {
     id: number
@@ -60,20 +98,6 @@ export type PatchMagazineTitleDto = {
     introduction: string
 }
 
-type Section = {
-    id: number
-    heading: string
-    content: string
-    imageUrl: string
-    layoutType: string
-    layoutHint: string
-    caption: string
-    displayOrder: number
-    magazineId: number
-    magazineTitle: string
-    viewedAt: string
-}
-
 export type ResponseRecentSection = Section[]
 
 export type SectionDetailDto = {
@@ -81,4 +105,16 @@ export type SectionDetailDto = {
     sectionId: number
 }
 
-export type ResponseGetSectionDetail = Section
+export type ResponseGetSectionDetail = {
+    sectionId: number
+    heading: string
+    paragraphs: Paragraph[]
+    thumnbnail_url: string
+    layout_type: string
+    layout_hint: string
+    caption: string
+    display_order: number
+    // magazineId: number
+    // magazineTitle: string
+    // viewedAt: string
+}

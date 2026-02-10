@@ -47,3 +47,8 @@ export const getSectionDetail = async ({ magazineId, sectionId }: SectionDetailD
     const res = await axiosInstance.get(`api/magazines/${magazineId}/sections/${sectionId}`)
     return res.data
 }
+
+export const getMagazineDetail = async (magazineId: number) => {
+    const res = await axiosInstance.get(`api/magazines/${magazineId}`)
+    return res.data
+}
