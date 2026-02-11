@@ -17,6 +17,7 @@ export default function SectionPage() {
                     <MagazineInfo magTitle={data?.caption} />
                     {content?.map((content) => (
                         <SectionPart
+                            id={content?.id}
                             smallTitle={content?.subtitle}
                             content={content.text}
                             imageUrl={content?.imageUrl}

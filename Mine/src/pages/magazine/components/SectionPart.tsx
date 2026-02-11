@@ -1,7 +1,10 @@
-import Delete from '../../../icon/delete.svg?react'
+import { useState } from 'react'
+import Hamburger from '../../../icon/hamburger.svg?react'
 import parse from 'html-react-parser'
+import SectionHamburgerModal from '../../../components/HamburgerModal'
 
 interface SectionPartProps {
+    id?: number
     sectionDir?: string
     titleDir?: string
     size?: string
@@ -10,15 +13,48 @@ interface SectionPartProps {
     imageUrl?: string
 }
 
-export default function SectionPart({ sectionDir, titleDir, size, smallTitle, content, imageUrl }: SectionPartProps) {
+export default function SectionPart({
+    id,
+    sectionDir,
+    titleDir,
+    size,
+    smallTitle,
+    content,
+    imageUrl,
+}: SectionPartProps) {
     const htmlcontent = content
+    const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
+    const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
+    const openHamburger = () => setIsHamburgerOpen(true)
+    const closeHamburger = () => setIsHamburgerOpen(false)
+
+    const handleHamburger = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        setModalPos({
+            top: rect.top + window.scrollY,
+            left: rect.right + 10,
+        })
+        openHamburger()
+    }
     return (
         <section className="group flex w-full h-69.5 items-start gap-10" dir={sectionDir}>
             <img src={imageUrl} className={`w-57.5 h-full rounded-lg ${size}`}></img>
             <div className="flex flex-col ltr:ml-2.5 rtl:mr-2.5 h-full items-start gap-6 flex-1">
                 <div className="flex w-full justify-between items-center " dir={titleDir}>
                     <div className="font-semibold36 font-maruburi text-black-textBigTitle">{smallTitle}</div>
-                    <Delete className="hover:text-black-icon text-transparent" />
+                    <Hamburger
+                        className="hover:text-black-icon text-black-icon cursor-pointer"
+                        onClick={handleHamburger}
+                    />
+                    {isHamburgerOpen && (
+                        <SectionHamburgerModal
+                            handleClose={closeHamburger}
+                            id={id}
+                            top={modalPos.top}
+                            left={modalPos.left}
+                            // onEdit={}
+                        />
+                    )}
                 </div>
                 <div className="w-full font-regular16 text-black-textMain break-all " dir="ltr">
                     {parse(htmlcontent)}
