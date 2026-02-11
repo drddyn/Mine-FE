@@ -1,37 +1,40 @@
-import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import SectionCover from './components/SectionCover'
-import SectionPage from './SectionPage'
+import useGetMagazineDetail from '../../hooks/useGetMagazineDetail'
+import { GridContainor } from './components/GridContainor'
+import ProfileBox from './components/ProfileBox'
 
-type PageDepth = 'main' | 'section'
 export default function MagazinePage() {
-    const [depth, setDepth] = useState<PageDepth>('main')
+    const { magazineId } = useParams()
+    const { data, isPending } = useGetMagazineDetail(Number(magazineId))
+    const navigate = useNavigate()
+
+    const handleSectionClick = (magazineId: number, sectionId: number) => {
+        navigate(`/magazine/${magazineId}/section/${sectionId}`)
+    }
+    if (isPending) return <></>
+
+    const content = data?.sections
     return (
-        <>
-            {depth === 'main' && (
-                <div className="flex justify-center items-start gap-4 mt-30">
-                    <div className="flex flex-col gap-4">
-                        <SectionCover size="w-55 h-27.5" onclick={() => setDepth('section')} />
-                        <SectionCover size="w-55 h-50" />
-                        <SectionCover size="w-55 h-40" />
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="flex gap-4">
-                            <SectionCover size="w-85 h-60.5" />
-                            <SectionCover size="w-60 h-60.5" />
-                        </div>
-                        <div className="flex gap-4">
-                            <SectionCover size="w-60 h-60.5" />
-                            <SectionCover size="w-85 h-60.5" />
-                        </div>
-                    </div>
-                    <div className="flex flex-col w-55 gap-4">
-                        <SectionCover size="h-27.5" />
-                        <SectionCover size="h-50" />
-                        <SectionCover size="h-[158px]" />
-                    </div>
+        <div style={{ backgroundImage: `url(${data?.coverImageUrl})` }} className="bg-cover overflow-hidden">
+            <div className="mt-9">
+                <ProfileBox
+                    nickname={data?.user.nickname}
+                    profileImage={data?.user.profileImageUrl}
+                    classname="justify-end mr-6.5"
+                />
+                <div className="flex justify-center items-start p-30 h-screen overflow-auto">
+                    <GridContainor>
+                        {content?.map((item) => (
+                            <SectionCover
+                                key={item.sectionId}
+                                imageUrl={item.thumbnailUrl}
+                                onclick={() => handleSectionClick(Number(magazineId), item.sectionId)}
+                            /> // 작은 컴포넌트
+                        ))}
+                    </GridContainor>
                 </div>
-            )}
-            {depth === 'section' && <SectionPage />}
-        </>
+            </div>
+        </div>
     )
 }

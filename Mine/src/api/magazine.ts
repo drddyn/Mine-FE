@@ -8,7 +8,7 @@ import type {
 import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
 import { axiosInstance } from './axios'
 
-export const getMyMagazines = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
+export const getMyMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
     const res = await axiosInstance.get(`/api/magazines`, {
         params: { page, size, sort },
     })
@@ -45,5 +45,10 @@ export const getRecentSection = async (): Promise<ResponseRecentSection> => {
 
 export const getSectionDetail = async ({ magazineId, sectionId }: SectionDetailDto) => {
     const res = await axiosInstance.get(`api/magazines/${magazineId}/sections/${sectionId}`)
+    return res.data
+}
+
+export const getMagazineDetail = async (magazineId: number) => {
+    const res = await axiosInstance.get(`api/magazines/${magazineId}`)
     return res.data
 }
