@@ -2,7 +2,7 @@ import Edit from '../icon/edit.svg?react'
 import Delete from '../icon/delete.svg?react'
 import { HamburgerSection } from './HamburgerSection'
 
-interface SidebarHamburgerModalProps {
+interface SectionHamburgerModalProps {
     top: number
     left: number
     id?: number
@@ -11,7 +11,7 @@ interface SidebarHamburgerModalProps {
     // onEdit: (id?: number) => void
 }
 
-export default function SectionHamburgerModal({ id, top, left, handleClose }: SidebarHamburgerModalProps) {
+export default function SectionHamburgerModal({ id, top, left, handleClose }: SectionHamburgerModalProps) {
     const onDeleteClick: React.MouseEventHandler<HTMLDivElement> = () => {
         handleClose()
     }

@@ -2,7 +2,7 @@ import Share from '../../icon/share.svg?react'
 import Edit from '../../icon/edit.svg?react'
 import Delete from '../../icon/delete.svg?react'
 import useDeleteMagazine from '../../hooks/useDeleteMagazine'
-import { HamburgerSection } from '../../components/HamburgerModal'
+import { HamburgerSection } from '../../components/HamburgerSection'
 
 interface SidebarHamburgerModalProps {
     top: number
