@@ -52,3 +52,10 @@ export const getMagazineDetail = async (magazineId: number) => {
     const res = await axiosInstance.get(`api/magazines/${magazineId}`)
     return res.data
 }
+
+export const getLikedMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
+    const res = await axiosInstance.get(`/api/magazines/liked`, {
+        params: { page, size, sort },
+    })
+    return res.data
+}
