@@ -3,7 +3,7 @@ import Hamburger from '../../../icon/hamburger.svg?react'
 import ProfileBox from './ProfileBox'
 import Heart from '../../../icon/heart.svg?react'
 import { useState } from 'react'
-import SectionHamburgerModal from '../../../components/HamburgerModal'
+import SectionHamburgerModal from '../../../components/SectionHamburgerModal'
 
 interface MagazineInfoProps {
     magTitle?: string
@@ -33,7 +33,7 @@ export default function MagazineInfo({ magTitle, nickname, profileImage, hearts,
                 {isHamburgerOpen && (
                     <SectionHamburgerModal
                         handleClose={closeHamburger}
-                        id={sectionId}
+                        sectionId={sectionId}
                         top={modalPos.top}
                         left={modalPos.left}
                         // onEdit={}

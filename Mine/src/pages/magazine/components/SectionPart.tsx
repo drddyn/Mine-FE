@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Hamburger from '../../../icon/hamburger.svg?react'
 import parse from 'html-react-parser'
-import SectionHamburgerModal from '../../../components/HamburgerModal'
+import ParagraphHamburgerModal from '../../../components/ParagraphHamburgerModal'
 
 interface SectionPartProps {
     id?: number
@@ -47,9 +47,10 @@ export default function SectionPart({
                         onClick={handleHamburger}
                     />
                     {isHamburgerOpen && (
-                        <SectionHamburgerModal
+                        <ParagraphHamburgerModal
                             handleClose={closeHamburger}
-                            id={id}
+                            sectionId={id}
+                            // magazineId={}
                             top={modalPos.top}
                             left={modalPos.left}
                             // onEdit={}

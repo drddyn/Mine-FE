@@ -1,6 +1,7 @@
 import useGetSectionDetail from '../../../hooks/useGetSectionDetail'
 import { useMagazine } from '../MagazineProvider'
 import MagazineInfo from './MagazineInfo'
+import SectionIndexList from './SectionIndexList'
 import SectionPart from './SectionPart'
 
 interface SectionContentProps {
@@ -20,8 +21,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
 
     return (
         <div style={{ backgroundImage: `url(${magazinedata?.coverImageUrl})` }} className="flex h-screen">
-            <div className="flex justify-center w-275 h-full bg-white">
-                <div className="flex flex-col w-245 items-center gap-14 mb-60">
+            <div className=" flex justify-center w-275 h-full bg-white relative">
+                <SectionIndexList sectionId={Number(sectionId)} />
+                <div className="flex flex-col w-245 items-center gap-14 mb-60 z-10">
                     <MagazineInfo
                         magTitle={magazinedata?.title}
                         nickname={user?.nickname}
@@ -29,6 +31,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                         sectionId={Number(magazineId)}
                         // hearts={data.}
                     />
+
                     {content?.map((content) => (
                         <SectionPart
                             id={content?.id}

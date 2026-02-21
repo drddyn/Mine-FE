@@ -100,10 +100,13 @@ export type PatchMagazineTitleDto = {
 
 export type ResponseRecentSection = Section[]
 
-export type SectionDetailDto = {
+export type SectionDetailDto = BaseSection
+
+type BaseSection = {
     magazineId: number
     sectionId: number
 }
+export type DeleteSectionDto = BaseSection
 
 export type ResponseGetSectionDetail = {
     sectionId: number
