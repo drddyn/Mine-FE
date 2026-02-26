@@ -7,6 +7,7 @@ interface ProfileData {
     nickname: string
     username: string
     profileImageUrl: string
+    profileImage: File | null
 }
 
 interface ProfileSettingProps {
@@ -24,8 +25,8 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         nickname: user?.nickname ?? '',
         username: user?.username ?? '',
         profileImageUrl: user?.profileImageUrl ?? '',
+        profileImage: null,
     })
-
     const [draft, setDraft] = useState<ProfileData>(saved)
     const [editingField, setEditingField] = useState<null | 'nickname' | 'userId'>(null)
 
@@ -52,7 +53,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         const file = e.target.files?.[0]
         if (!file) return
         const previewUrl = URL.createObjectURL(file)
-        setDraft({ ...draft, profileImageUrl: previewUrl })
+        setDraft({ ...draft, profileImageUrl: previewUrl, profileImage: file })
     }
 
     const viewData = editMode ? draft : saved
