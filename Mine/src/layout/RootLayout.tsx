@@ -1,19 +1,15 @@
-import { Outlet, useLocation } from 'react-router-dom'
-import Sidebar from './Sidebar'
+import { Outlet } from 'react-router-dom'
+
+import Layout from './Layout'
+import LLMInputLayout from '../components/LLMInputLayout'
 
 export default function RootLayout() {
-    const location = useLocation()
-
-    const hideSidebarRoutes = ['/login', '/signup', '/landing']
-    const shouldHideSidebar = hideSidebarRoutes.includes(location.pathname)
-
     return (
-        <div className="relative min-h-screen">
-            {!shouldHideSidebar && <Sidebar />}
-
-            <div className={!shouldHideSidebar ? 'pl-20.5' : ''}>
+        <div>
+            <Layout>
                 <Outlet />
-            </div>
+            </Layout>
+            <LLMInputLayout />
         </div>
     )
 }

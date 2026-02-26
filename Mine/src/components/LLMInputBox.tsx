@@ -40,7 +40,7 @@ export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
 
     return (
         <div
-            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-main-light border py-3 px-7 gap-10 ${isFocused ? 'border-main-default' : 'border-main-opacity50'} ${isExpanded ? 'rounded-4xl ' : 'rounded-full'}`}
+            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-main-light border py-3 px-7 gap-10 ${isFocused ? 'border-main-default opacity-100' : 'border-main-opacity50 opacity-40'} ${isExpanded ? 'rounded-4xl ' : 'rounded-full'}`}
         >
             <textarea
                 ref={textareaRef}

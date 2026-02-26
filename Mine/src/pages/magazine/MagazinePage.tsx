@@ -22,6 +22,7 @@ export default function MagazinePage() {
                     nickname={data?.user.nickname}
                     profileImage={data?.user.profileImageUrl}
                     classname="justify-end mr-6.5"
+                    mode="magazine"
                 />
                 <div className="flex justify-center items-start p-30 h-screen overflow-auto">
                     <GridContainor>

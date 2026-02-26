@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import Hamburger from '../../icon/hamburger.svg?react'
-import SidebarHamburgerModal from './SidebarHamburgerModal'
+import SidebarHamburgerModal from '../../components/hamburgerModal/SidebarHamburgerModal'
 import { createPortal } from 'react-dom'
 import useUpdateMagazineTitle from '../../hooks/useUpdateMagazineTitle'
 
