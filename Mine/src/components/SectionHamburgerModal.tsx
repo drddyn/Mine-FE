@@ -33,7 +33,7 @@ export default function SectionHamburgerModal({
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="이름 변경" icon={<Edit />} />
-            <HamburgerSection title="삭제" icon={<Delete />} onclick={onDeleteClick} />
+            <HamburgerSection title="삭제" icon={<Delete />} onClick={onDeleteClick} />
         </div>
     )
 }

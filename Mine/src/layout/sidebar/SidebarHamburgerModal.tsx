@@ -29,8 +29,8 @@ export default function SidebarHamburgerModal({ id, top, left, handleClose, onEd
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="공유" icon={<Share />} />
-            <HamburgerSection title="이름 변경" icon={<Edit />} onclick={onEditClick} />
-            <HamburgerSection title="삭제" icon={<Delete />} onclick={onDeleteClick} />
+            <HamburgerSection title="이름 변경" icon={<Edit />} onClick={onEditClick} />
+            <HamburgerSection title="삭제" icon={<Delete />} onClick={onDeleteClick} />
         </div>
     )
 }

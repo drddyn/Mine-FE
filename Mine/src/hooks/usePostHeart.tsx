@@ -6,7 +6,7 @@ export default function usePostHeart() {
 
     return useMutation({
         mutationFn: (id: number) => postHeart(id),
-        onSuccess: (data, magazineId) => {
+        onSuccess: (magazineId) => {
             queryClient.invalidateQueries({ queryKey: ['hearts', magazineId] })
         },
         onError: (error) => {

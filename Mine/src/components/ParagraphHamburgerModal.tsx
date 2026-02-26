@@ -14,7 +14,7 @@ interface ParagraphHamburgerModalProps {
 
 export default function ParagraphHamburgerModal({
     sectionId,
-    magazineId,
+    // magazineId,
     top,
     left,
     handleClose,
@@ -32,7 +32,7 @@ export default function ParagraphHamburgerModal({
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="이름 변경" icon={<Edit />} />
-            <HamburgerSection title="삭제" icon={<Delete />} onclick={onDeleteClick} />
+            <HamburgerSection title="삭제" icon={<Delete />} onClick={onDeleteClick} />
         </div>
     )
 }
