@@ -58,6 +58,7 @@ export type ResponseMagazineDetail = BaseMagazine & {
     createdAt: string
     user: User
     sections: Section[]
+    likeCount: number
     // version: number
 }
 

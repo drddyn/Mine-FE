@@ -1,18 +1,18 @@
 import Share from '../../../icon/share.svg?react'
 import Hamburger from '../../../icon/hamburger.svg?react'
 import ProfileBox from './ProfileBox'
-import Heart from '../../../icon/heart.svg?react'
 import { useState } from 'react'
 import SectionHamburgerModal from '../../../components/SectionHamburgerModal'
+import HeartCount from './HeartCount'
+import { useMagazine } from '../MagazineProvider'
 
 interface MagazineInfoProps {
-    magTitle?: string
     nickname?: string
     profileImage?: string
-    hearts?: number
     sectionId?: number
 }
-export default function MagazineInfo({ magTitle, nickname, profileImage, hearts, sectionId }: MagazineInfoProps) {
+export default function MagazineInfo({ nickname, profileImage, sectionId }: MagazineInfoProps) {
+    const magazinedata = useMagazine()
     const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const openHamburger = () => setIsHamburgerOpen(true)
@@ -28,7 +28,7 @@ export default function MagazineInfo({ magTitle, nickname, profileImage, hearts,
     return (
         <div className="flex max-w-245 w-full justify-between items-center self-stretch mt-9">
             <div className="flex items-center gap-2">
-                <div className="font-regular16 font-maruburi text-black-textBigTitle">{magTitle}</div>
+                <div className="font-regular16 font-maruburi text-black-textBigTitle">{magazinedata?.title}</div>
                 <Hamburger className="rotate-90 text-black-icon" onClick={handleHamburger} />
                 {isHamburgerOpen && (
                     <SectionHamburgerModal
@@ -41,8 +41,7 @@ export default function MagazineInfo({ magTitle, nickname, profileImage, hearts,
                 )}
             </div>
             <div className="flex items-center gap-1">
-                <Heart className="text-black-icon" />
-                <div className="text-black-icon">{hearts}</div>
+                <HeartCount hearts={magazinedata?.likeCount} magazineId={magazinedata?.magazineId} />
                 <Share className="text-black-icon" />
             </div>
             <ProfileBox nickname={nickname} profileImage={profileImage} mode="section" />

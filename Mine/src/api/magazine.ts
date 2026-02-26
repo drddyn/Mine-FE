@@ -58,3 +58,8 @@ export const deleteSection = async ({ magazineId, sectionId }: DeleteSectionDto)
     const res = await axiosInstance.delete(`api/magazines/${magazineId}/sections/${sectionId}`)
     return res.data
 }
+
+export const postHeart = async (id: number) => {
+    const res = await axiosInstance.post(`api/magazines/${id}/likes`)
+    return res.data
+}
