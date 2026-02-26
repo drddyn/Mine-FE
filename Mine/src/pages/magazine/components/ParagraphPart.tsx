@@ -2,9 +2,11 @@ import { useState } from 'react'
 import Hamburger from '../../../icon/hamburger.svg?react'
 import parse from 'html-react-parser'
 import ParagraphHamburgerModal from '../../../components/hamburgerModal/ParagraphHamburgerModal'
+import { useMagazine } from '../MagazineProvider'
 
-interface SectionPartProps {
-    id?: number
+interface ParagraphPartProps {
+    paragrahId?: number
+    sectionId?: number
     sectionDir?: string
     titleDir?: string
     size?: string
@@ -13,15 +15,18 @@ interface SectionPartProps {
     imageUrl?: string
 }
 
-export default function SectionPart({
-    id,
+export default function ParagraphPart({
+    paragrahId,
+    sectionId,
     sectionDir,
     titleDir,
     size,
     smallTitle,
     content,
     imageUrl,
-}: SectionPartProps) {
+}: ParagraphPartProps) {
+    const magazinedata = useMagazine()
+
     const htmlcontent = content
     const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
@@ -49,8 +54,9 @@ export default function SectionPart({
                     {isHamburgerOpen && (
                         <ParagraphHamburgerModal
                             handleClose={closeHamburger}
-                            sectionId={id}
-                            // magazineId={}
+                            sectionId={sectionId}
+                            magazineId={magazinedata?.magazineId}
+                            paragraphId={paragrahId}
                             top={modalPos.top}
                             left={modalPos.left}
                             // onEdit={}

@@ -2,7 +2,7 @@ import useGetSectionDetail from '../../../hooks/useGetSectionDetail'
 import { useMagazine } from '../MagazineProvider'
 import MagazineInfo from './MagazineInfo'
 import SectionIndexList from './SectionIndexList'
-import SectionPart from './SectionPart'
+import ParagraphPart from './ParagraphPart'
 
 interface SectionContentProps {
     sectionId: number
@@ -31,8 +31,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     />
 
                     {content?.map((content) => (
-                        <SectionPart
-                            id={content?.id}
+                        <ParagraphPart
+                            paragrahId={content?.paragraphId}
+                            sectionId={sectionId}
                             smallTitle={content?.subtitle}
                             content={content.text}
                             imageUrl={content?.imageUrl}

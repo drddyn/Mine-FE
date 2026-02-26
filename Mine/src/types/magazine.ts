@@ -63,7 +63,7 @@ export type ResponseMagazineDetail = BaseMagazine & {
 }
 
 type Paragraph = {
-    id: number
+    paragraphId: number
     section: string
     subtitle: string
     text: string
@@ -121,4 +121,8 @@ export type ResponseGetSectionDetail = {
     // magazineId: number
     // magazineTitle: string
     // viewedAt: string
+}
+
+export type DeleteParagraphDto = BaseSection & {
+    paragraphId: number
 }

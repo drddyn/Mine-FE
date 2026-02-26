@@ -1,27 +1,34 @@
 import Edit from '../../icon/edit.svg?react'
 import Delete from '../../icon/delete.svg?react'
 import { HamburgerSection } from './HamburgerSection'
+import useDeleteParagraph from '../../hooks/useDeleteParagraph'
 
 interface ParagraphHamburgerModalProps {
     top: number
     left: number
     sectionId?: number
     magazineId?: number
+    paragraphId?: number
     children?: React.ReactNode
     handleClose: () => void
     // onEdit: (id?: number) => void
 }
 
 export default function ParagraphHamburgerModal({
+    paragraphId,
     sectionId,
-    // magazineId,
+    magazineId,
     top,
     left,
     handleClose,
 }: ParagraphHamburgerModalProps) {
-    // const deleteSectionMutation = useDeleteSection()
+    const deleteParagraphMutation = useDeleteParagraph()
     const onDeleteClick: React.MouseEventHandler<HTMLDivElement> = () => {
-        // deleteSectionMutation.mutate({ magazineId: Number(magazineId), sectionId: Number(sectionId) })
+        deleteParagraphMutation.mutate({
+            magazineId: Number(magazineId),
+            sectionId: Number(sectionId),
+            paragraphId: Number(paragraphId),
+        })
         handleClose()
     }
 
