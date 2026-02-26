@@ -15,10 +15,6 @@ export const patchMyProfile = async (profileData: ProfileDto): Promise<ResponseP
     if (profileData.profileImage instanceof File) {
         formData.append('profileImage', profileData.profileImage)
     }
-    const res = await axiosInstance.patch(`/api/users/me`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    })
+    const res = await axiosInstance.patch(`/api/users/me`, formData)
     return res.data
 }
