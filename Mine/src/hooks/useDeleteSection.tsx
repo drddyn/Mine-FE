@@ -6,8 +6,8 @@ export default function useDeleteSection() {
     const queryClient = useQueryClient()
     return useMutation({
         mutationFn: (params: DeleteSectionDto) => deleteSection(params),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['sections'] })
+        onSuccess: (_, variables) => {
+            queryClient.invalidateQueries({ queryKey: ['magazine', variables.magazineId] })
         },
         onError: (error) => {
             console.log('삭제 실패', error)

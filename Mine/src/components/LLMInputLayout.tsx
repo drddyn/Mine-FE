@@ -8,7 +8,7 @@ export default function LLMInputLayout() {
 
     if (!isHiddenPath)
         return (
-            <div className="absolute bottom-8 translate-x-1/2 justify-center">
+            <div className="absolute bottom-8 translate-x-1/2">
                 <LLMInputBox />
             </div>
         )

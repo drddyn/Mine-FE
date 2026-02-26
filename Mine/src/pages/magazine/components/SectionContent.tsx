@@ -27,7 +27,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     <MagazineInfo
                         nickname={user?.nickname}
                         profileImage={user?.profileImageUrl}
-                        sectionId={Number(magazineId)}
+                        sectionId={Number(sectionId)}
                     />
 
                     {content?.map((content) => (
