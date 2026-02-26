@@ -1,5 +1,5 @@
-import Edit from '../icon/edit.svg?react'
-import Delete from '../icon/delete.svg?react'
+import Edit from '../../icon/edit.svg?react'
+import Delete from '../../icon/delete.svg?react'
 import { HamburgerSection } from './HamburgerSection'
 
 interface ParagraphHamburgerModalProps {

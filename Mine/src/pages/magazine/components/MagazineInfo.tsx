@@ -1,8 +1,7 @@
-import Share from '../../../icon/share.svg?react'
 import Hamburger from '../../../icon/hamburger.svg?react'
 import ProfileBox from './ProfileBox'
 import { useState } from 'react'
-import SectionHamburgerModal from '../../../components/SectionHamburgerModal'
+import SectionHamburgerModal from '../../../components/hamburgerModal/SectionHamburgerModal'
 import HeartCount from './HeartCount'
 import { useMagazine } from '../MagazineProvider'
 
@@ -40,10 +39,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId }: Maga
                     />
                 )}
             </div>
-            <div className="flex items-center gap-1">
-                <HeartCount hearts={magazinedata?.likeCount} magazineId={magazinedata?.magazineId} />
-                <Share className="text-black-icon" />
-            </div>
+            <HeartCount hearts={magazinedata?.likeCount} magazineId={magazinedata?.magazineId} />
             <ProfileBox nickname={nickname} profileImage={profileImage} mode="section" />
         </div>
     )

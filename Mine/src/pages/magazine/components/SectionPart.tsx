@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Hamburger from '../../../icon/hamburger.svg?react'
 import parse from 'html-react-parser'
-import ParagraphHamburgerModal from '../../../components/ParagraphHamburgerModal'
+import ParagraphHamburgerModal from '../../../components/hamburgerModal/ParagraphHamburgerModal'
 
 interface SectionPartProps {
     id?: number
