@@ -1,0 +1,73 @@
+{
+  "hash": "44272bf1",
+  "configHash": "4d03675f",
+  "lockfileHash": "121b478d",
+  "browserHash": "fb20b351",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "56fbb398",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "e8fd9b32",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "d387d6ee",
+      "needsInterop": true
+    },
+    "@tanstack/react-query": {
+      "src": "../../node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "3f00366c",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "aa16d1b7",
+      "needsInterop": false
+    },
+    "html-react-parser": {
+      "src": "../../node_modules/html-react-parser/esm/index.mjs",
+      "file": "html-react-parser.js",
+      "fileHash": "d7ca752a",
+      "needsInterop": false
+    },
+    "zustand": {
+      "src": "../../node_modules/zustand/esm/index.mjs",
+      "file": "zustand.js",
+      "fileHash": "c987bbf8",
+      "needsInterop": false
+    },
+    "react-dom": {
+      "src": "../../node_modules/react-dom/index.js",
+      "file": "react-dom.js",
+      "fileHash": "f3a0726a",
+      "needsInterop": true
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "e7d732b7",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-LJPUJ6WH": {
+      "file": "chunk-LJPUJ6WH.js"
+    },
+    "chunk-Y6BMGME7": {
+      "file": "chunk-Y6BMGME7.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}

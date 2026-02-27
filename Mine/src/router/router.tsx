@@ -11,19 +11,22 @@ import RootLayout from '../layout/RootLayout'
 import SectionPage from '../pages/magazine/SectionPage'
 
 export const router = createBrowserRouter([
+    // ✅ RootLayout 필요 없는 페이지들 (로그인/회원가입/랜딩/찾기)
+    { path: '/landing', element: <LandingPage /> },
+    { path: '/login', element: <LoginPage /> },
+    { path: '/login/finding', element: <FindingPage /> },
+    { path: '/signup', element: <SignupPage /> },
+
+    // ✅ RootLayout 필요한 페이지들
     {
         path: '/',
         element: <RootLayout />,
         children: [
             { index: true, element: <MainPage /> },
-            { path: 'landing', element: <LandingPage /> },
             { path: 'magazine/:magazineId', element: <MagazinePage /> },
             { path: 'magazine/:magazineId/section/:sectionId', element: <SectionPage /> },
             { path: 'magazine/explore', element: <ExplorePage /> },
             { path: 'magazine/saved', element: <SavedMagazinePage /> },
-            { path: 'login', element: <LoginPage /> },
-            { path: 'signup', element: <SignupPage /> },
-            { path: 'login/finding', element: <FindingPage /> },
         ],
     },
 ])

@@ -17,6 +17,9 @@
     .font-semibold24 {
         @apply text-[24px] leading-[120%] tracking-[-0.025em] font-semibold;
     }
+    .font-bold20 {
+    @apply text-[20px] leading-[100%] tracking-[-0.025em] font-bold;
+    }
     .font-bold32 {
         @apply text-[32px] leading-[118%] tracking-[-0.025em] font-bold;
     }

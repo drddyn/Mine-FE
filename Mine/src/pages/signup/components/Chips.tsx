@@ -1,18 +1,23 @@
 interface ChipProps {
-    key?: number
-    title: string
-    isActive: boolean
-    onClick: () => void
+  title: string;
+  isActive: boolean;
+  onClick: () => void;
 }
 
-export default function Chip({ key, title, isActive, onClick }: ChipProps) {
-    return (
-        <div
-            key={key}
-            className={`flex px-5 py-2.5 justify-center items-center rounded-3xl font-semibold16 hover:bg-main-emphasis hover:text-white ${isActive ? 'bg-main-default text-white' : ' bg-black-whiteBoxOutline text-black-textBigTitle'}`}
-            onClick={onClick}
-        >
-            {title}
-        </div>
-    )
+export default function Chip({ title, isActive, onClick }: ChipProps) {
+  return (
+    <div
+      onClick={onClick}
+      className={`cursor-pointer h-12 px-5 flex items-center justify-center
+        rounded-3xl font-semibold20 transition-all duration-150 border border-[1px]
+        ${
+          isActive
+            ? "bg-white text-black border-white"
+            : "bg-transparent text-white border-white/50 hover:bg-white/15"
+        }
+      `}
+    >
+      {title}
+    </div>
+  );
 }
