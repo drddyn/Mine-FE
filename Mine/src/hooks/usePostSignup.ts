@@ -14,6 +14,6 @@ export default function usePostSignup() {
         onError: (error) => {
             console.log('회원가입 실패:', error)
             alert('아이디 또는 비밀번호를 확인해 주세요')
-        },
+        }
     })
 }
