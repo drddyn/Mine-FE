@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../../icon/minelogo.svg?url";
@@ -56,11 +56,12 @@ export default function SignupPage() {
     signupForm.nickname.trim() !== "" &&
     signupForm.email.trim() !== "";
 
-  const isValidPassword = (() => {
+  const isValidPassword = useMemo(() => {
     const pw = signupForm.password;
     if (pw.length < 8 || pw.length > 16) return false;
     return /[A-Za-z]/.test(pw) && /[0-9]/.test(pw);
-  })();
+  }, [signupForm.password]);
+
   const canGoNext2 =
     isValidPassword &&
     !!signupForm.passwordCheck &&
@@ -78,7 +79,6 @@ export default function SignupPage() {
     else if(step ===2) goNext();
     else if(step===3) handleSignupSubmit();
   };
-  
 
   const nextLabel = step === 3 ? "가입하기" : "다음으로";
   const isNextDisabled =
@@ -91,7 +91,6 @@ export default function SignupPage() {
       className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
       style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
     >
-
       <div className="absolute inset-0 bg-black/45" />
       <div className="absolute inset-y-0 right-0 w-1/2">
         <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
