@@ -40,7 +40,7 @@ export default function LoginPage() {
             <div className="absolute inset-y-0 right-0 w-1/2">
                 <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
                 <div className="absolute inset-0 backdrop-blur-[6px]" />
-                <div className="absolute inset-0 bg-white/5" />
+                <div className="absolute inset-0 bg-white/8" />
             </div>
 
             <div
@@ -110,7 +110,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isPending}
-                            className="w-100 h-12 mt-6 rounded-2xl text-white font-medium16 bg-[#505050B2] px-3.5 transition disabled:opacity-50"
+                            className="w-100 h-12 mt-6 rounded-2xl text-white font-medium16 bg-[#505050B2] px-3.5 transition opacity-70 hover:opacity-100 disabled:opacity-50 cursor-pointer"
                         >
                             {isPending ? '로그인 중...' : '로그인'}
                         </button>
@@ -118,7 +118,7 @@ export default function LoginPage() {
                         <button
                             type="button"
                             onClick={() => navigate('/signup')}
-                            className="w-100 h-12 rounded-2xl text-white font-medium16 bg-[#FFFFFF66] px-3.5 transition border border-black-image"
+                            className="w-100 h-12 rounded-2xl text-white font-medium16 bg-[#FFFFFF66] px-3.5 transition border opacity-70 border-black-image hover:opacity-100 cursor-pointer"
                         >
                             회원가입
                         </button>
