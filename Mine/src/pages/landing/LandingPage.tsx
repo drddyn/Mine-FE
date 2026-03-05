@@ -24,7 +24,7 @@ export default function LandingPage() {
       <Minelogo className="absolute left-20 top-17 w-35 h-17.5 z-20" />
 
       <div className="absolute left-20 top-68.75 w-150 h-47.5 z-20">
-        <h1 className="text-white text-[80px] font-bold leading-tight">
+        <h1 className="text-white text-20 font-bold leading-tight">
           나만의 매거진
           <br />
           아카이빙 플랫폼

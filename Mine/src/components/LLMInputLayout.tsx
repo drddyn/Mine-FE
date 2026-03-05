@@ -3,7 +3,7 @@ import LLMInputBox from './LLMInputBox'
 
 export default function LLMInputLayout() {
     const location = useLocation()
-    const hiddenPath = ['/login', '/signup', '/']
+    const hiddenPath = ['/login', '/signup', '/landing', '/']
     const isHiddenPath = hiddenPath.includes(location.pathname)
 
     if (!isHiddenPath)
