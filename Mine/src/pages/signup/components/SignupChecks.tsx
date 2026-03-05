@@ -1,55 +1,104 @@
-import ButtonwithText from '../../../components/ButtonwithText'
-import useGetInterests from '../../../hooks/useGetInterests'
-import ProgressBar_Second from '../../../icon/progressbar_second.svg?react'
-import Chip from './Chips'
+import { useMemo, useState } from "react";
+import EyeoffIcon from "../../../icon/eyeoff.svg?react";
 
 interface SignupChecksProps {
-    formData: { interests: string[] }
-    onChange: (interests: string[]) => void
-    onClick: () => void
-    onPrev?: () => void
+  formData: {
+    password: string;
+    passwordCheck: string;
+  };
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SignupChecks({ formData, onPrev, onChange, onClick }: SignupChecksProps) {
-    const { data: interests } = useGetInterests()
+export default function SignupChecks({ formData, onChange }: SignupChecksProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordCheck, setShowPasswordCheck] = useState(false);
 
-    const handleChipClick = (code: string) => {
-        const prev = formData.interests
-        if (prev.includes(code)) {
-            onChange(prev.filter((item) => item !== code))
-        } else {
-            if (prev.length >= 3) {
-                alert('최대 3개까지만 선택할 수 있습니다.')
-                return
-            }
-            onChange([...prev, code])
-        }
-    }
-    return (
-        <div className="flex flex-col gap-6 items-center w-246">
-            <ProgressBar_Second className="mb-10" />
-            <div className="flex flex-col w-full h-95.75 pl-24 items-start gap-4">
-                <div className="flex w-full items-start gap-2">
-                    <div className="text-black-textSmallTitle font-semibold20">관심분야</div>
-                    <div className="text-main-default font-semibold16 self-end">최대 3개를 선택해주세요.</div>
-                </div>
-                <div className="flex w-178.25 h-full pl-5 flex-col items-start gap-4 select-none">
-                    <div className="flex flex-wrap gap-2">
-                        {interests?.map((item) => (
-                            <Chip
-                                key={item.id}
-                                title={item.name}
-                                isActive={formData.interests.includes(item.code)}
-                                onClick={() => handleChipClick(item.code)}
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div className="w-full flex flex-col mt-12.25 items-end gap-4 ">
-                    <ButtonwithText title="이전으로" variant="white" onclick={onPrev} />
-                    <ButtonwithText title="MINE 시작하기" onclick={onClick} />
-                </div>
-            </div>
+  const isValidPassword = useMemo(() => {
+    const pw = formData.password;
+    if (pw.length < 8 || pw.length > 16) return false;
+    return /[A-Za-z]/.test(pw) && /[0-9]/.test(pw);
+  }, [formData.password]);
+
+  const showPwRuleError = useMemo(() => {
+    if (!formData.password) return false;
+    return !isValidPassword;
+  }, [formData.password, isValidPassword]);
+
+  const isMismatch = useMemo(() => {
+    if (!formData.passwordCheck) return false;
+    return formData.password !== formData.passwordCheck;
+  }, [formData.password, formData.passwordCheck]);
+
+  const fieldWrap =
+    "flex items-center w-full h-[48px] py-[20px] px-[18px] " +
+    "rounded-[15px] border border-[#505050] bg-white/30";
+
+  const inputBase =
+    "flex-1 bg-transparent outline-none text-white placeholder:text-white/60";
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-105 flex flex-col">
+        {/* 비밀번호 */}
+        <div className="w-full mb-10">
+          <div className="text-white/80 font-semibold20 mb-2">비밀번호</div>
+          <div className={fieldWrap}>
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={onChange}
+              placeholder="abcdef1234"
+              className={inputBase}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              className="pr-3 ml-auto text-white/70 hover:text-white transition-colors duration-150"
+              aria-label="toggle password"
+            >
+              <EyeoffIcon  className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="pl-2 mt-2 font-light14">
+            {showPwRuleError ? (
+              <span className="text-red-500">비밀번호는 8~16자이며 영어와 숫자를 모두 포함해야 합니다.</span>
+            ) : (
+              <span className="text-white/45">영어, 숫자 포함 8~16자</span>
+            )}
+          </div>
         </div>
-    )
+
+        {/* 비밀번호 확인 */}
+        <div className="w-full">
+          <div className="text-white/80 font-semibold20 mb-2">비밀번호 확인</div>
+          <div className={fieldWrap}>
+            <input
+              id="passwordCheck"
+              type={showPasswordCheck ? "text" : "password"}
+              value={formData.passwordCheck}
+              onChange={onChange}
+              placeholder="abcdef1234"
+              className={inputBase}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPasswordCheck((v) => !v)}
+              className="pr-3 ml-auto text-white/70 hover:text-white transition-colors duration-150"
+              aria-label="toggle passwordCheck"
+            >
+              <EyeoffIcon  className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="pl-2 mt-2 font-light14">
+            {isMismatch ? (
+              <span className="text-red-500">비밀번호가 같지 않습니다</span>
+            ) : (
+              <span className="text-white/45"> </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

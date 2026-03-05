@@ -9,11 +9,11 @@ export default function usePostSignup() {
         mutationFn: (signupData: SignupDto) => postSignup(signupData),
         onSuccess: (data) => {
             console.log('회원가입 성공!', data)
-            navigate('/login')
+            navigate('/')
         },
         onError: (error) => {
             console.log('회원가입 실패:', error)
             alert('아이디 또는 비밀번호를 확인해 주세요')
-        },
+        }
     })
 }
