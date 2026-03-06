@@ -89,7 +89,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
         <div className="w-full flex flex-col">
             <div
                 key={id}
-                className={`w-full flex justify-between hover:bg-main-opacity20 py-2 items-center pl-6 pr-4 text-black-textSmallTitle font-medium14 select-none ${
+                className={`w-full flex justify-between hover:bg-gray-600-op80 hover:text-gray-100 py-2 items-center pl-5 pr-4 text-gray-100-op70 font-medium14 select-none ${
                     isEditing ? 'bg-main-opacity20' : ''
                 }`}
                 onClick={onclick}
@@ -108,7 +108,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
                     />
                 )}
 
-                <Hamburger className="cursor-pointer shrink-0 ml-2" onClick={handleHamburger} />
+                <Hamburger className="cursor-pointer shrink-0" onClick={handleHamburger} />
             </div>
 
             {isHamburgerOpen &&

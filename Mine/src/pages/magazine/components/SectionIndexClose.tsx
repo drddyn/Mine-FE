@@ -13,10 +13,10 @@ export default function SectionIndexClose({ title, sectionId, magazineId }: Sect
     }
     return (
         <div
-            className="flex bg-black-textBigTitle opacity-30 px-2 py-3 w-30 h-8.5 justify-center items-center cursor-pointer"
+            className="flex bg-gray-600-op30 px-2 py-3 w-30 h-8.5 justify-center items-center cursor-pointer"
             onClick={onClickhandle}
         >
-            <div className="flex w-full font-medium12 text-white truncate">{title}</div>
+            <div className="flex w-full font-medium12 text-gray-100 truncate">{title}</div>
         </div>
     )
 }

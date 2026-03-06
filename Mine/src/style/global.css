@@ -3,6 +3,13 @@
 
 @font-face {
     font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
     src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
@@ -27,23 +34,24 @@
     font-weight: 600;
     font-style: normal;
 }
+
 @font-face {
-    font-family: 'Poltawski';
-    src: url('/fonts/poltawski-nowy-v5-latin-600.woff2') format('woff2');
-    font-weight: 600;
+    font-family: 'NotoSerif';
+    src: url('/fonts/NotoSerifKR-Medium.ttf');
+    font-weight: 500;
     font-style: normal;
 }
+
 @font-face {
-    font-family: 'Maruburi';
-    src: url('/fonts/MaruBuri-Regular.otf');
+    font-family: 'NotoSerif';
+    src: url('/fonts/NotoSerifKR-SemiBold.ttf');
     font-weight: 600;
     font-style: normal;
 }
 
 @theme {
     --font-pretendard: 'Pretendard';
-    --font-poltawski: 'Poltawski';
-    --font-maruburi: 'Maruburi';
+    --font-notoserif: 'NotoSerif';
 
     --color-gray-100: #ffffff;
     --color-gray-200: #d9d9d9;
@@ -53,14 +61,14 @@
     --color-gray-600: #111111;
     --color-heart: #f95c40;
 
-    --color-gray-100-op30: #ffffff opacity: 0.3;
-    --color-gray-200-op40: #d9d9d9 opacity: 0.4;
-    --color-gray-300-op70: #a9a9a9 opacity: 0.7;
-    --color-gray-400-op70: #767676 opacity: 0.7;
-    --color-gray-500-op30: #505050 opacity: 0.3;
-    --color-gray-600-op80: #111111 opacity: 0.8;
+    --color-gray-100-op30: #ffffff4d;
+    --color-gray-100-op40: #ffffff66;
+    --color-gray-100-op70: #ffffffb3;
+    --color-gray-500-op70: #505050b3;
+    --color-gray-600-op30: #1111114d;
+    --color-gray-600-op80: #111111cc;
 }
 html,
 body {
-    font-family: Pretendard, Poltawski, Maruburi;
+    font-family: Pretendard, NotoSerif;
 }

@@ -27,7 +27,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId }: Maga
     return (
         <div className="flex max-w-245 w-full justify-between items-center self-stretch mt-9">
             <div className="flex items-center gap-2">
-                <div className="font-regular16 font-maruburi text-black-textBigTitle">{magazinedata?.title}</div>
+                <div className="font-regular16 font-notoserif text-gray-600">{magazinedata?.title}</div>
                 <Hamburger className="rotate-90 text-black-icon" onClick={handleHamburger} />
                 {isHamburgerOpen && (
                     <SectionHamburgerModal

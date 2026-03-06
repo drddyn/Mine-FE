@@ -23,8 +23,8 @@ export default function SidebarClosedBlock({ icon, title, to }: SidebarClosedBlo
                 onClick={handleClick}
                 className="
                     absolute -left-7.5 top-1/2 -translate-y-1/2
-                    flex px-6 py-1.75 bg-main-opacity20 text-black-textSmallTitle font-semibold14 rounded-tr-lg rounded-br-2xl
-                    opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition z-50
+                    flex px-6 py-1.75 bg-gray-500-op70 text-black-textSmallTitle font-semibold14 rounded-tr-lg rounded-br-2xl
+                    opacity-0 group-hover:bg-gray-600 pointer-events-none group-hover:pointer-events-auto transition z-50 cursor-pointer
                 "
             >
                 <div className="flex items-center gap-3 ">

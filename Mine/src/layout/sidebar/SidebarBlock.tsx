@@ -14,7 +14,7 @@ export default function SidebarBlock({ title, icon, to }: SidebarBlockProps) {
     }
     return (
         <div
-            className="w-full flex hover:bg-main-opacity20 py-1.75 gap-3 items-center pl-5 text-black-textSmallTitle font-semibold14 cursor-pointer"
+            className="w-full flex hover:bg-gray-600-op80 py-1.75 gap-3 items-center pl-5 text-gray-100-op70  hover:text-gray-100 font-semibold14 cursor-pointer"
             onClick={handleClick}
         >
             {icon}
