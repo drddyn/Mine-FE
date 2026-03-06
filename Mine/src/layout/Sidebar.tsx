@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import MineLogo from '../icon/minelogo_small.svg?react'
 import SidebarOpen from './sidebar/SidebarOpen'
 import Sidebar_main from '../icon/sidebar_main.svg?react'
@@ -9,9 +9,12 @@ import SidebarClosedBlock from './sidebar/SidebarClosedBlock'
 import useGetMyProfile from '../hooks/useGetMyProfile'
 import useUserStore from '../stores/user'
 
-export default function Sidebar() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+interface SidebarProps {
+    isSidebarOpen: boolean
+    setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev)
     }
@@ -32,7 +35,7 @@ export default function Sidebar() {
     }
 
     return (
-        <div className="fixed top-0 left-0 z-50">
+        <div>
             {!isSidebarOpen && (
                 <div className="w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-main-light">
                     <MineLogo className="cursor-pointer" onClick={toggleSidebar} />

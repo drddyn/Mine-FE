@@ -34,7 +34,7 @@ export type ResponseProfile = {
 export type ProfileDto = {
     nickname: string
     username: string
-    profileImageUrl: string
+    profileImage: File | null
 }
 
 export type User = {

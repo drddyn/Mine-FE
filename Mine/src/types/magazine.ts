@@ -58,11 +58,12 @@ export type ResponseMagazineDetail = BaseMagazine & {
     createdAt: string
     user: User
     sections: Section[]
+    likeCount: number
     // version: number
 }
 
 type Paragraph = {
-    id: number
+    paragraphId: number
     section: string
     subtitle: string
     text: string
@@ -100,10 +101,13 @@ export type PatchMagazineTitleDto = {
 
 export type ResponseRecentSection = Section[]
 
-export type SectionDetailDto = {
+export type SectionDetailDto = BaseSection
+
+type BaseSection = {
     magazineId: number
     sectionId: number
 }
+export type DeleteSectionDto = BaseSection
 
 export type ResponseGetSectionDetail = {
     sectionId: number
@@ -117,4 +121,8 @@ export type ResponseGetSectionDetail = {
     // magazineId: number
     // magazineTitle: string
     // viewedAt: string
+}
+
+export type DeleteParagraphDto = BaseSection & {
+    paragraphId: number
 }

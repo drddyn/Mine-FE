@@ -16,14 +16,14 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
             { index: true, element: <MainPage /> },
-            { path: 'landing', element: <LandingPage /> },
             { path: 'magazine/:magazineId', element: <MagazinePage /> },
             { path: 'magazine/:magazineId/section/:sectionId', element: <SectionPage /> },
             { path: 'magazine/explore', element: <ExplorePage /> },
             { path: 'magazine/saved', element: <SavedMagazinePage /> },
-            { path: 'login', element: <LoginPage /> },
-            { path: 'signup', element: <SignupPage /> },
-            { path: 'login/finding', element: <FindingPage /> },
+            { path: '/landing', element: <LandingPage /> },
+            { path: '/login', element: <LoginPage /> },
+            { path: '/login/finding', element: <FindingPage /> },
+            { path: '/signup', element: <SignupPage /> },
         ],
     },
 ])

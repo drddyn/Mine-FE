@@ -2,12 +2,7 @@ import Share from '../../icon/share.svg?react'
 import Edit from '../../icon/edit.svg?react'
 import Delete from '../../icon/delete.svg?react'
 import useDeleteMagazine from '../../hooks/useDeleteMagazine'
-
-interface HamburgerSectionProps {
-    icon: React.ReactNode
-    title: string
-    onclick?: React.MouseEventHandler<HTMLDivElement>
-}
+import { HamburgerSection } from './HamburgerSection'
 
 interface SidebarHamburgerModalProps {
     top: number
@@ -15,18 +10,6 @@ interface SidebarHamburgerModalProps {
     id: number
     handleClose: () => void
     onEdit: (id: number) => void
-}
-
-function HamburgerSection({ icon, title, onclick }: HamburgerSectionProps) {
-    return (
-        <div
-            className="flex h-9 w-full px-5 py-2 items-center gap-2 bg-main-light hover:bg-main-opacity20 font-medium14 hover:font-semibold14 text-black-textSmallTitle"
-            onClick={onclick}
-        >
-            <span className="[&>svg]:w-5 [&>svg]:h-5 text-black-textSmallTitle">{icon}</span>
-            {title}
-        </div>
-    )
 }
 
 export default function SidebarHamburgerModal({ id, top, left, handleClose, onEdit }: SidebarHamburgerModalProps) {
@@ -46,8 +29,8 @@ export default function SidebarHamburgerModal({ id, top, left, handleClose, onEd
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="공유" icon={<Share />} />
-            <HamburgerSection title="이름 변경" icon={<Edit />} onclick={onEditClick} />
-            <HamburgerSection title="삭제" icon={<Delete />} onclick={onDeleteClick} />
+            <HamburgerSection title="이름 변경" icon={<Edit />} onClick={onEditClick} />
+            <HamburgerSection title="삭제" icon={<Delete />} onClick={onDeleteClick} />
         </div>
     )
 }

@@ -1,4 +1,6 @@
 import type {
+    DeleteParagraphDto,
+    DeleteSectionDto,
     PatchMagazineTitleDto,
     PostMagazineDto,
     RequestDeleteMagazine,
@@ -57,5 +59,22 @@ export const getLikedMagazineList = async ({ page, size, sort }: MyMagazinesDto)
     const res = await axiosInstance.get(`/api/magazines/liked`, {
         params: { page, size, sort },
     })
+    return res.data
+}
+
+export const deleteSection = async ({ magazineId, sectionId }: DeleteSectionDto) => {
+    const res = await axiosInstance.delete(`api/magazines/${magazineId}/sections/${sectionId}`)
+    return res.data
+}
+
+export const postHeart = async (id: number) => {
+    const res = await axiosInstance.post(`api/magazines/${id}/likes`)
+    return res.data
+}
+
+export const deleteParagraph = async ({ magazineId, sectionId, paragraphId }: DeleteParagraphDto) => {
+    const res = await axiosInstance.delete(
+        `api/magazines/${magazineId}/sections/${sectionId}/paragraphs/${paragraphId}`
+    )
     return res.data
 }

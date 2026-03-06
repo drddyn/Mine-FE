@@ -1,4 +1,4 @@
-import { useState, type RefObject } from 'react'
+import { useEffect, useState, type RefObject } from 'react'
 import Camera from '../../icon/camera.svg?react'
 import useUserStore from '../../stores/user'
 import useUpdateProfile from '../../hooks/useUpdateProfile'
@@ -7,6 +7,7 @@ interface ProfileData {
     nickname: string
     username: string
     profileImageUrl: string
+    profileImage: File | null
 }
 
 interface ProfileSettingProps {
@@ -24,8 +25,8 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         nickname: user?.nickname ?? '',
         username: user?.username ?? '',
         profileImageUrl: user?.profileImageUrl ?? '',
+        profileImage: null,
     })
-
     const [draft, setDraft] = useState<ProfileData>(saved)
     const [editingField, setEditingField] = useState<null | 'nickname' | 'userId'>(null)
 
@@ -52,10 +53,20 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         const file = e.target.files?.[0]
         if (!file) return
         const previewUrl = URL.createObjectURL(file)
-        setDraft({ ...draft, profileImageUrl: previewUrl })
+        setDraft({ ...draft, profileImageUrl: previewUrl, profileImage: file })
     }
 
     const viewData = editMode ? draft : saved
+
+    useEffect(() => {
+        const currentImageUrl = draft.profileImageUrl
+        // 컴포넌트 언마운트 또는 profileImageUrl 변경 시 이전 blob URL을 메모리에서 해제합니다.
+        return () => {
+            if (currentImageUrl && currentImageUrl.startsWith('blob:')) {
+                URL.revokeObjectURL(currentImageUrl)
+            }
+        }
+    }, [draft.profileImageUrl])
 
     return (
         <div className="h-full flex flex-col">
