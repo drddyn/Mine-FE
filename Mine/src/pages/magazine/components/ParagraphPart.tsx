@@ -46,7 +46,7 @@ export default function ParagraphPart({
             <img src={imageUrl} className={`w-57.5 h-full rounded-lg ${size}`}></img>
             <div className="flex flex-col ltr:ml-2.5 rtl:mr-2.5 h-full items-start gap-6 flex-1">
                 <div className="flex w-full justify-between items-center " dir={titleDir}>
-                    <div className="font-semibold36 font-maruburi text-black-textBigTitle">{smallTitle}</div>
+                    <div className="font-medium36 font-maruburi text-black-textBigTitle">{smallTitle}</div>
                     <Hamburger
                         className="hover:text-black-icon text-black-icon cursor-pointer"
                         onClick={handleHamburger}

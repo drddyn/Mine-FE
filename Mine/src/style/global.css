@@ -45,26 +45,20 @@
     --font-poltawski: 'Poltawski';
     --font-maruburi: 'Maruburi';
 
-    --color-main-default: #6898bb;
-    --color-main-emphasis: #46576d;
-    --color-main-opacity50: #b3cbdd;
-    --color-main-opacity20: #d8e4ed;
-    --color-main-light: #f4f7fa;
-    --color-main-heart: #f95c40;
+    --color-gray-100: #ffffff;
+    --color-gray-200: #d9d9d9;
+    --color-gray-300: #a9a9a9;
+    --color-gray-400: #767676;
+    --color-gray-500: #505050;
+    --color-gray-600: #111111;
+    --color-heart: #f95c40;
 
-    --color-white: #ffffff;
-
-    --color-black-image: #808080;
-    --color-black-icon: #a9a9a9;
-    --color-black-whiteBoxOutline: #d9d9d9;
-    --color-black-textInTheBox: #767676;
-    --color-black-textMain: #505050;
-    --color-black-textBigTitle: #111111;
-    --color-black-textSmallTitle: #545156;
-
-    --color-lightborder: #B3CBDD;
-    --color-boldborder: #6898BB;
-    --color-buttonbackgd: #F4F7FA;
+    --color-gray-100-op30: #ffffff opacity: 0.3;
+    --color-gray-200-op40: #d9d9d9 opacity: 0.4;
+    --color-gray-300-op70: #a9a9a9 opacity: 0.7;
+    --color-gray-400-op70: #767676 opacity: 0.7;
+    --color-gray-500-op30: #505050 opacity: 0.3;
+    --color-gray-600-op80: #111111 opacity: 0.8;
 }
 html,
 body {
