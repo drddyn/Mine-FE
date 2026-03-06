@@ -4,6 +4,16 @@ import useGetMagazineDetail from '../../hooks/useGetMagazineDetail'
 import { GridContainor } from './components/GridContainor'
 import ProfileBox from './components/ProfileBox'
 
+const isValidUrl = (url?: string) => {
+  if (!url) return false
+  try {
+    const parsed = new URL(url)
+    return parsed.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 export default function MagazinePage() {
     const { magazineId } = useParams()
     const { data, isPending } = useGetMagazineDetail(Number(magazineId))
@@ -16,9 +26,14 @@ export default function MagazinePage() {
     if (isPending) return <></>
     if (!data) return <></>
 
+    const safeCoverImageUrl = isValidUrl(data.coverImageUrl) ? data.coverImageUrl : ''
     const content = data?.sections
+
     return (
-        <div style={{ backgroundImage: `url(${data?.coverImageUrl})` }} className="bg-cover overflow-hidden">
+        <div
+            style={{ backgroundImage: safeCoverImageUrl ? `url(${safeCoverImageUrl})` : 'none' }}
+            className="bg-cover overflow-hidden"
+        >
             <div className="mt-9">
                 {data.user && (
                     <ProfileBox
