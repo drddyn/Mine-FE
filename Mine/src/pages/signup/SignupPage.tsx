@@ -115,7 +115,7 @@ export default function SignupPage() {
                     <button
                         type="button"
                         onClick={handlePrevClick}
-                        className="w-50 h-12 rounded-2xl border border-black-image transition-colors duration-150 text-gray-100 font-medium16 bg-gray-100-op40"
+                        className="w-50 h-12 rounded-2xl border border-gray-300 transition-colors duration-150 text-gray-100 font-medium16 bg-gray-100-op40"
                     >
                         이전으로
                     </button>

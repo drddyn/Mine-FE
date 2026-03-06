@@ -90,7 +90,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
             <div
                 key={id}
                 className={`w-full flex justify-between hover:bg-gray-600-op80 hover:text-gray-100 py-2 items-center pl-5 pr-4 text-gray-100-op70 font-medium14 select-none ${
-                    isEditing ? 'bg-main-opacity20' : ''
+                    isEditing ? 'bg-gray-600-op80' : ''
                 }`}
                 onClick={onclick}
             >
@@ -103,7 +103,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
                         onChange={(e) => setDraftTitle(e.target.value)}
                         onKeyDown={onKeyDown}
                         onBlur={commitEdit}
-                        className="w-full resize-none overflow-hidden bg-transparent outline-none text-black-textSmallTitle font-medium14"
+                        className="w-full resize-none overflow-hidden bg-transparent outline-none text-gray-200 font-medium14"
                         rows={1}
                     />
                 )}

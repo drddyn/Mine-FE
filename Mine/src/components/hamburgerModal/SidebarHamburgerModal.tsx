@@ -25,7 +25,7 @@ export default function SidebarHamburgerModal({ id, top, left, handleClose, onEd
     return (
         <div
             key={id}
-            className="fixed flex flex-col w-36.5 h-31 py-2 rounded-lg bg-white border border-main-opacity20 shadow-[0 4px 4px 0 rgba(0, 0, 0, 0.25)] z-100"
+            className="fixed flex flex-col px-1 py-2 rounded-lg bg-gray-500-op70 shadow-[0 4px 4px 0 rgba(0, 0, 0, 0.25)] z-100"
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="공유" icon={<Share />} />
