@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import SavedMagazineItem from './components/SavedMagazineItem'
 import ArrowPagination from './components/ArrowPagination'
-import LLMInputBox from '../../components/LLMInputBox'
 import useGetLikedMagazineList from '../../hooks/useGetLikedMagazineList'
 
 const CARD_WIDTH = 476
@@ -22,7 +21,6 @@ export default function SavedMagazinePage() {
   if (isError) return <div>불러오기 실패</div>
 
   const magazines = data?.content ?? []
-  console.log('liked magazines:', magazines) 
 
   if (magazines.length === 0) {
     return <div className="p-10">찜한 매거진이 아직 없어요.</div>
@@ -62,10 +60,6 @@ export default function SavedMagazinePage() {
           onNext={() => setColumnIndex((prev) => Math.min(prev + 1, TOTAL_COLUMNS - 1))}
           onPrev={() => setColumnIndex((prev) => Math.max(prev - 1, 0))}
         />
-      </div>
-
-      <div className="fixed bottom-8 right-73.5 z-20 opacity-70 focus-within:opacity-100 transition-opacity duration-300">
-        <LLMInputBox />
       </div>
     </div>
   )
