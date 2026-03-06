@@ -55,6 +55,13 @@ export const getMagazineDetail = async (magazineId: number) => {
     return res.data
 }
 
+export const getLikedMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
+    const res = await axiosInstance.get(`/api/magazines/liked`, {
+        params: { page, size, sort },
+    })
+    return res.data
+}
+
 export const deleteSection = async ({ magazineId, sectionId }: DeleteSectionDto) => {
     const res = await axiosInstance.delete(`api/magazines/${magazineId}/sections/${sectionId}`)
     return res.data
