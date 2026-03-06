@@ -37,8 +37,8 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
     return (
         <div>
             {!isSidebarOpen && (
-                <div className="w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-main-light">
-                    <MineLogo className="cursor-pointer" onClick={toggleSidebar} />
+                <div className="w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-gray-500-op70">
+                    <MineLogo className="cursor-pointer text-white" onClick={toggleSidebar} />
                     <div className="flex flex-col">
                         <SidebarClosedBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
                         <SidebarClosedBlock icon={<Sidebar_new />} title="새 매거진" to="" />

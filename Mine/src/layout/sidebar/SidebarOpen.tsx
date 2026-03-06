@@ -69,11 +69,11 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
     return (
         <>
-            <div className="h-screen w-66.5 bg-main-light z-50 transition-transform duration-30">
+            <div className="h-screen w-60 bg-gray-500-op70 z-50 transition-transform duration-30 pb-4">
                 <div className="flex flex-col h-full gap-9.5">
-                    <div className="flex gap-2 mt-8 ml-4 items-center">
+                    <div className="flex gap-2 mt-8 mr-4 ml-5 items-center">
                         <MineLogo />
-                        <div className="font-semibold24 pr-27 text-main-default">MINE</div>
+                        <div className="font-semibold24 pr-20 text-white">MINE</div>
                         <SidebarButton className="cursor-pointer" onClick={onclick} />
                     </div>
                     <div className="flex flex-col">
@@ -113,13 +113,13 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         )}
                     </div>
 
-                    <div className="flex justify-between mt-auto mb-6 pl-6.5 pr-6 items-center ">
+                    <div className="flex justify-between mt-auto pl-6.5 pr-6 items-center ">
                         <div className="flex gap-2 items-center">
                             <img className="w-7.5 h-7.5 rounded-full" src={user?.profileImageUrl} alt="프로필"></img>
-                            <div className="font-light14 text-black-textSmallTitle">{user?.nickname}</div>
+                            <div className="font-light14 text-white">{user?.nickname}</div>
                         </div>
                         <button onClick={() => setIsSettingOpen(true)} className="cursor-pointer">
-                            <Setting />
+                            <Setting className="text-gray-100-op70" />
                         </button>
                     </div>
                 </div>
