@@ -80,6 +80,7 @@ export default function SignupPage() {
             className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
             style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
         >
+            {/* 배경 어둡게 */}
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-y-0 right-0 w-1/2">
                 <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
@@ -87,10 +88,7 @@ export default function SignupPage() {
                 <div className="absolute inset-0 bg-white/5" />
             </div>
 
-            <div
-                className="absolute z-10 text-white font-semibold20 leading-6 font-semibold"
-                style={{ width: 120, height: 72, top: 68, left: 80, opacity: 1 }}
-            >
+            <div className="absolute z-10 text-gray-100 font-semibold20 w-30 h-18 top-17 left-20">
                 나만의 매거진
                 <br />
                 아카이빙
@@ -117,8 +115,7 @@ export default function SignupPage() {
                     <button
                         type="button"
                         onClick={handlePrevClick}
-                        className="w-50 h-12 rounded-2xl border border-black-image transition-colors duration-150 text-white font-medium16"
-                        style={{ background: '#FFFFFF66' }}
+                        className="w-50 h-12 rounded-2xl border border-black-image transition-colors duration-150 text-gray-100 font-medium16 bg-gray-100-op40"
                     >
                         이전으로
                     </button>
@@ -126,8 +123,7 @@ export default function SignupPage() {
                         type="button"
                         onClick={handleNextClick}
                         disabled={isNextDisabled}
-                        className="w-50 h-12 rounded-2xl transition-colors duration-150 text-white font-medium16 disabled:opacity-50"
-                        style={{ background: '#505050B2' }}
+                        className="w-50 h-12 rounded-2xl transition-colors duration-150 text-gray-100 font-medium16 disabled:opacity-50 bg-gray-500-op70"
                     >
                         {nextLabel}
                     </button>

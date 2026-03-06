@@ -101,7 +101,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => navigate('/login/finding', { state: { bgUrl } })}
-                                className="font-light14 text-white/70 hover:text-white transition"
+                                className="font-light14 text-gray-100-op70 hover:text-gray-100 transition"
                             >
                                 아이디/비밀번호 찾기
                             </button>
@@ -110,7 +110,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isPending}
-                            className="w-100 h-12 mt-6 rounded-2xl text-white font-medium16 bg-[#505050B2] px-3.5 transition opacity-70 hover:opacity-100 disabled:opacity-50 cursor-pointer"
+                            className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-500-op70 px-3.5 transition hover:bg-gray-500 disabled:opacity-50 cursor-pointer"
                         >
                             {isPending ? '로그인 중...' : '로그인'}
                         </button>
@@ -118,7 +118,7 @@ export default function LoginPage() {
                         <button
                             type="button"
                             onClick={() => navigate('/signup')}
-                            className="w-100 h-12 rounded-2xl text-white font-medium16 bg-[#FFFFFF66] px-3.5 transition border opacity-70 border-black-image hover:opacity-100 cursor-pointer"
+                            className="w-100 h-12 rounded-2xl text-gray-100 font-medium16 bg-gray-100-op40 px-3.5 transition border border-gray-400 hover:bg-gray-100-op70 cursor-pointer"
                         >
                             회원가입
                         </button>
