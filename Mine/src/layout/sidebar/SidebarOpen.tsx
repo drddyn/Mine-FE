@@ -69,7 +69,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
     return (
         <>
-            <div className="h-screen w-60 bg-gray-500-op70 z-50 transition-transform duration-30 pb-4">
+            <div className="absolute top-0 left-0 h-screen w-60 bg-gray-500-op70 z-50 transition-transform duration-30 pb-4">
                 <div className="flex flex-col h-full gap-9.5">
                     <div className="flex gap-2 mt-8 mr-4 ml-5 items-center">
                         <MineLogo />

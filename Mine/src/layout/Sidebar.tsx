@@ -35,9 +35,9 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
     }
 
     return (
-        <div>
+        <div className="relative z-50">
             {!isSidebarOpen && (
-                <div className="w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-gray-500-op70">
+                <div className="absolute top-0 left-0 w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-gray-500-op70">
                     <MineLogo className="cursor-pointer text-white" onClick={toggleSidebar} />
                     <div className="flex flex-col">
                         <SidebarClosedBlock icon={<Sidebar_main />} title="메인" to="/mymagazine" />
@@ -51,8 +51,10 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
 
             {isSidebarOpen && (
                 <>
-                    <div className="inset-0 z-40 pointer-events-none" onClick={toggleSidebar} />
-                    <SidebarOpen onclick={toggleSidebar} />
+                    {/* <div className="fixed inset-0 z-40 " onClick={toggleSidebar} /> */}
+                    <div className="absolute top-0 left-0">
+                        <SidebarOpen onclick={toggleSidebar} />
+                    </div>
                 </>
             )}
         </div>
