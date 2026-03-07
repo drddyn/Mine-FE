@@ -32,6 +32,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId }: Maga
                 {isHamburgerOpen && (
                     <SectionHamburgerModal
                         handleClose={closeHamburger}
+                        magazineId={magazinedata?.magazineId}
                         sectionId={sectionId}
                         top={modalPos.top}
                         left={modalPos.left}
