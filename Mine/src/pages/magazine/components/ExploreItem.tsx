@@ -1,8 +1,37 @@
-export default function ExploreItem() {
+import { useNavigate } from 'react-router-dom'
+import type { Magazine } from '../../../types/magazine'
+
+type Props = {
+    magazine: Magazine
+}
+
+const isValidUrl = (url?: string) => {
+    if (!url) return false
+    try {
+        const parsed = new URL(url)
+        return parsed.protocol === 'https:'
+    } catch {
+        return false
+    }
+}
+
+export default function ExploreItem({ magazine }: Props) {
+    const navigate = useNavigate()
+    const safeImageUrl = isValidUrl(magazine.coverImageUrl) ? magazine.coverImageUrl : ''
+
     return (
-        <div className="flex w-90.5 h-60 px-5 py-4 bg-black-textInTheBox overflow-hidden cursor-pointer">
+        <div
+            className="flex w-90.5 h-60 px-5 py-4 overflow-hidden cursor-pointer"
+            style={{
+                backgroundImage: safeImageUrl ? `url(${safeImageUrl})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundColor: safeImageUrl ? 'transparent' : '#1a1a1a',
+            }}
+            onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
+        >
             <p className="flex mt-auto ml-auto font-notoserif font-semibold24 leading-none text-white text-right">
-                매거진 제목
+                {magazine.title}
             </p>
         </div>
     )

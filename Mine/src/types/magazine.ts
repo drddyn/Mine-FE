@@ -126,3 +126,14 @@ export type ResponseGetSectionDetail = {
 export type DeleteParagraphDto = BaseSection & {
     paragraphId: number
 }
+
+export type FeedDto = {
+    cursorId?: number | null
+    limit?: number
+}
+
+export type ResponseFeed = {
+    content: Magazine[]
+    nextCursor: number
+    hasNext: boolean
+}
