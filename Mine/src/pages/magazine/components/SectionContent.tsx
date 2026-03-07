@@ -23,7 +23,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
 
     return (
         <div style={{ backgroundImage: `url(${magazinedata?.coverImageUrl})` }} className="flex h-screen">
-            <div className={`flex justify-center w-275 h-full bg-white relative ${isOpen ? 'ml-60' : 'ml-15'}`}>
+            <div
+                className={`flex justify-center w-275 h-full bg-white relative transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}
+            >
                 <SectionIndexList sectionId={Number(sectionId)} />
                 <div className="flex flex-col w-245 items-center gap-14 mb-60 z-10">
                     <MagazineInfo

@@ -36,7 +36,7 @@ export default function MagazinePage() {
             style={{ backgroundImage: safeCoverImageUrl ? `url(${safeCoverImageUrl})` : 'none' }}
             className="bg-cover overflow-hidden"
         >
-            <div className={`mt-9 ${isOpen ? 'ml-60' : 'ml-15'}`}>
+            <div className={`mt-9 transition-all duration-300 ${isOpen ? 'ml-60' : 'ml-15'}`}>
                 {data.user && (
                     <ProfileBox
                         nickname={data.user.nickname}
