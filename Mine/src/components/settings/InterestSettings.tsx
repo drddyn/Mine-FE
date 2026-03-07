@@ -1,5 +1,7 @@
 import useGetInterests from '../../hooks/useGetInterests'
 
+const MAX_INTERESTS = 3
+
 interface Props {
     interests: string[]
     onChange: (interests: string[]) => void
@@ -12,7 +14,7 @@ export default function InterestSettings({ interests, onChange }: Props) {
         if (interests.includes(code)) {
             onChange(interests.filter((i) => i !== code))
         } else {
-            if (interests.length >= 3) return
+            if (interests.length >= MAX_INTERESTS) return
             onChange([...interests, code])
         }
     }
@@ -25,24 +27,11 @@ export default function InterestSettings({ interests, onChange }: Props) {
                 <div
                     key={item.id}
                     onClick={() => toggleInterest(item.code)}
-                    className="cursor-pointer"
-                    style={{
-                        display: 'flex',
-                        padding: '6px 12px',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        gap: '16px',
-                        borderRadius: '24px',
-                        border: '1px solid',
-                        borderColor: interests.includes(item.code) ? '#fff' : 'rgba(255,255,255,0.3)',
-                        background: interests.includes(item.code) ? '#1111114d' : 'transparent',
-                        color: '#FFF',
-                        fontFamily: 'Pretendard',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        lineHeight: '140%',
-                        letterSpacing: '-0.4px',
-                    }}
+                    className={`cursor-pointer flex items-center justify-center px-3 py-1.5 rounded-full border text-white font-semibold text-base leading-[140%] tracking-[-0.4px] transition-colors
+                        ${interests.includes(item.code)
+                            ? 'border-white bg-gray-600-op30'
+                            : 'border-white/30 bg-transparent'
+                        }`}
                 >
                     {item.name}
                 </div>
