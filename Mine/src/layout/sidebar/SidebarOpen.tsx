@@ -70,7 +70,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     return (
         <>
             <div className="absolute top-0 left-0 h-screen w-60 bg-gray-500-op70 z-50 transition-transform duration-30 pb-4">
-                <div className="flex flex-col h-full gap-9.5">
+                <div className="flex flex-col h-full gap-6">
                     <div className="flex gap-2 mt-8 mr-4 ml-5 items-center">
                         <MineLogo />
                         <div className="font-semibold24 pr-20 text-white">MINE</div>
@@ -82,8 +82,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" to="/magazine/saved" />
                         <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
                     </div>
-                    <div className="flex flex-col mt-6">
-                        <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" />
+                    <div className="flex flex-col">
+                        <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" isOpen={isMagazineOpen} />
+
                         {isMagazineOpen && (
                             <>
                                 {magazine?.content.map((magazine) => (
@@ -96,8 +97,12 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                             </>
                         )}
                     </div>
-                    <div className="flex flex-col mt-6">
-                        <SidebarTitle onClick={handleSectionToggleOpen} title="최근에 열람한 섹션" />
+                    <div className="flex flex-col">
+                        <SidebarTitle
+                            onClick={handleSectionToggleOpen}
+                            title="최근에 열람한 섹션"
+                            isOpen={isSectionOpen}
+                        />
                         {isSectionOpen && (
                             <>
                                 {section?.map((section) => (
