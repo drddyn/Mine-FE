@@ -1,16 +1,15 @@
 import ExploreItem from './ExploreItem'
-
-const DUMMY_COUNT = 100
+import type { Magazine } from '../../../types/magazine'
 
 interface ExploreGridProps {
-    startIndex?: number
+    magazines: Magazine[]
 }
 
-export default function ExploreGrid({ startIndex = 0 }: ExploreGridProps) {
+export default function ExploreGrid({ magazines }: ExploreGridProps) {
     return (
         <div className="grid grid-cols-3 gap-4">
-            {Array.from({ length: DUMMY_COUNT - startIndex }).map((_, idx) => (
-                <ExploreItem key={startIndex + idx} />
+            {magazines.map((magazine) => (
+                <ExploreItem key={magazine.magazineId} magazine={magazine} />
             ))}
         </div>
     )
