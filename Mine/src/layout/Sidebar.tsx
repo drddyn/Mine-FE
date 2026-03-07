@@ -8,16 +8,11 @@ import Sidebar_others from '../icon/sidebar_others.svg?react'
 import SidebarClosedBlock from './sidebar/SidebarClosedBlock'
 import useGetMyProfile from '../hooks/useGetMyProfile'
 import useUserStore from '../stores/user'
+import useSidebarStore from '../stores/sidebar'
 
-interface SidebarProps {
-    isSidebarOpen: boolean
-    setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+export default function Sidebar() {
+    const { isOpen, toggleSidebar } = useSidebarStore()
 
-export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
-    const toggleSidebar = () => {
-        setIsSidebarOpen((prev) => !prev)
-    }
     const { data: profile, isLoading: isProfileLoading, isError: isProfileError } = useGetMyProfile()
     const setUser = useUserStore((state) => state.setUser)
     const user = useUserStore((state) => state.user)
@@ -36,7 +31,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
 
     return (
         <div className="relative z-50">
-            {!isSidebarOpen && (
+            {!isOpen && (
                 <div className="absolute top-0 left-0 w-15 h-screen flex flex-col gap-9.5 justify-start items-center pt-8 pb-6 bg-gray-500-op70">
                     <MineLogo className="cursor-pointer text-white" onClick={toggleSidebar} />
                     <div className="flex flex-col">
@@ -49,9 +44,8 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
                 </div>
             )}
 
-            {isSidebarOpen && (
+            {isOpen && (
                 <>
-                    {/* <div className="fixed inset-0 z-40 " onClick={toggleSidebar} /> */}
                     <div className="absolute top-0 left-0">
                         <SidebarOpen onclick={toggleSidebar} />
                     </div>
