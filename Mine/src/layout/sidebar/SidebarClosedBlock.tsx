@@ -13,7 +13,7 @@ export default function SidebarClosedBlock({ icon, title, to }: SidebarClosedBlo
         navigate(to)
     }
     return (
-        <div className="relative py-1.75 group">
+        <div className="relative py-2 group z-50">
             <button type="button" onClick={handleClick} className="w-full flex justify-center">
                 {icon}
             </button>
