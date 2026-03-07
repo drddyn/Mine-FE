@@ -3,6 +3,7 @@ import { useMagazine } from '../MagazineProvider'
 import MagazineInfo from './MagazineInfo'
 import SectionIndexList from './SectionIndexList'
 import ParagraphPart from './ParagraphPart'
+import useSidebarStore from '../../../stores/sidebar'
 
 interface SectionContentProps {
     sectionId: number
@@ -10,6 +11,7 @@ interface SectionContentProps {
 }
 
 export default function SectionContent({ sectionId, magazineId }: SectionContentProps) {
+    const { isOpen } = useSidebarStore()
     const magazinedata = useMagazine()
     const { data, isLoading } = useGetSectionDetail(Number(magazineId), Number(sectionId))
     const user = magazinedata?.user
@@ -21,7 +23,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
 
     return (
         <div style={{ backgroundImage: `url(${magazinedata?.coverImageUrl})` }} className="flex h-screen">
-            <div className=" flex justify-center w-275 h-full bg-white relative">
+            <div
+                className={`flex justify-center w-275 h-full bg-white relative transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}
+            >
                 <SectionIndexList sectionId={Number(sectionId)} />
                 <div className="flex flex-col w-245 items-center gap-14 mb-60 z-10">
                     <MagazineInfo
