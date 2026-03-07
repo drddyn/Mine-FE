@@ -27,8 +27,8 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     const handleHamburger = (e: React.MouseEvent) => {
         const rect = e.currentTarget.getBoundingClientRect()
         setModalPos({
-            top: rect.top + window.scrollY,
-            left: rect.right + 10,
+            top: rect.top + window.scrollY + 15,
+            left: rect.right - 20,
         })
         openHamburger()
     }
@@ -92,10 +92,11 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
                 className={`w-full flex justify-between hover:bg-gray-600-op80 hover:text-gray-100 py-2 items-center pl-5 pr-4 text-gray-100-op70 font-medium14 select-none ${
                     isEditing ? 'bg-gray-600-op80' : ''
                 }`}
-                onClick={onclick}
             >
                 {!isEditing ? (
-                    <span className="truncate">{shownTitle}</span>
+                    <span className="truncate" onClick={onclick}>
+                        {shownTitle}
+                    </span>
                 ) : (
                     <textarea
                         ref={inputRef}
