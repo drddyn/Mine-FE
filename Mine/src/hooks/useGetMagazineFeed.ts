@@ -3,10 +3,10 @@ import type { ResponseFeed } from '../types/magazine'
 import { getMagazineFeed } from '../api/magazine'
 
 export default function useGetMagazineFeed() {
-    return useInfiniteQuery<ResponseFeed, Error, ResponseFeed, string[], number | null>({
+    return useInfiniteQuery({
         queryKey: ['magazineFeed'],
-        queryFn: ({ pageParam }) => getMagazineFeed({ cursorId: pageParam }),
+        queryFn: ({ pageParam }: { pageParam: number | null }) => getMagazineFeed({ cursorId: pageParam }),
         initialPageParam: null,
-        getNextPageParam: (lastPage) => lastPage.hasNext ? lastPage.nextCursor : undefined,
+        getNextPageParam: (lastPage: ResponseFeed) => lastPage.hasNext ? lastPage.nextCursor : undefined,
     })
 }
