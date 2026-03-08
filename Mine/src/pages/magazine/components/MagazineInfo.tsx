@@ -29,9 +29,10 @@ export default function MagazineInfo({ nickname, profileImage, sectionId }: Maga
             <div className="flex items-center gap-2">
                 <div className="font-regular16 font-notoserif text-gray-600">{magazinedata?.title}</div>
                 <Hamburger className="rotate-90 text-black-icon" onClick={handleHamburger} />
-                {isHamburgerOpen && (
+                {isHamburgerOpen && magazinedata?.magazineId !== undefined && sectionId !== undefined && (
                     <SectionHamburgerModal
                         handleClose={closeHamburger}
+                        magazineId={magazinedata?.magazineId}
                         sectionId={sectionId}
                         top={modalPos.top}
                         left={modalPos.left}

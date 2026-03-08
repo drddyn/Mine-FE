@@ -13,25 +13,15 @@ export default function SidebarClosedBlock({ icon, title, to }: SidebarClosedBlo
         navigate(to)
     }
     return (
-        <div className="relative py-2 group z-50">
-            <button type="button" onClick={handleClick} className="w-full flex justify-center">
-                {icon}
-            </button>
-
-            <button
-                type="button"
-                onClick={handleClick}
-                className="
-                    absolute -left-7.5 top-1/2 -translate-y-1/2
-                    flex px-6 py-1.75 bg-gray-500-op70 text-gray-100 font-semibold14 rounded-tr-lg rounded-br-2xl
-                    opacity-0 group-hover:opacity-100 group-hover:bg-gray-600 pointer-events-none group-hover:pointer-events-auto transition z-50 cursor-pointer
-                "
-            >
-                <div className="flex items-center gap-3 ">
-                    <span className="shrink-0 ml-1.5">{icon}</span>
-                    <span className="whitespace-nowrap">{title}</span>
+        <div className="group">
+            <div className="relative group-hover:bg-gray-600-op80">
+                <button className="flex px-5 py-2" onClick={handleClick} aria-label={title}>
+                    {icon}
+                </button>
+                <div className="absolute font-medium12 text-gray-100 left-16 top-1.5 px-3 py-0.75 bg-gray-600-op80 group-hover:opacity-100 opacity-0 rounded-full whitespace-nowrap">
+                    {title}
                 </div>
-            </button>
+            </div>
         </div>
     )
 }
