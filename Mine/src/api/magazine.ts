@@ -13,14 +13,14 @@ import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
 import { axiosInstance } from './axios'
 
 export const getMyMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
-    const res = await axiosInstance.get(`/api/magazines`, {
+    const res = await axiosInstance.get(`api/magazines`, {
         params: { page, size, sort },
     })
     return res.data
 }
 
 export const deleteMagazine = async ({ id }: RequestDeleteMagazine) => {
-    const res = await axiosInstance.delete(`/api/magazines/${id}`)
+    const res = await axiosInstance.delete(`api/magazines/${id}`)
     return res.data
 }
 
@@ -58,7 +58,7 @@ export const getMagazineDetail = async (magazineId: number) => {
 }
 
 export const getLikedMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
-    const res = await axiosInstance.get(`/api/magazines/liked`, {
+    const res = await axiosInstance.get(`api/magazines/liked`, {
         params: { page, size, sort },
     })
     return res.data
@@ -82,7 +82,7 @@ export const deleteParagraph = async ({ magazineId, sectionId, paragraphId }: De
 }
 
 export const getMagazineFeed = async ({ cursorId, limit = 10 }: FeedDto): Promise<ResponseFeed> => {
-    const res = await axiosInstance.get(`/api/magazines/feed`, {
+    const res = await axiosInstance.get(`api/magazines/feed`, {
         params: { cursorId, limit },
     })
     return res.data

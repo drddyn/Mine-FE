@@ -6,6 +6,9 @@ import Kakao from '../../icon/kakao.svg?react'
 import Instagram from '../../icon/instagram.svg?react'
 import Check from '../../icon/check.svg?react'
 
+const MODAL_HEIGHT = 212
+const TOAST_MARGIN = 102
+
 interface ShareModalProps {
     onClose: () => void
 }
@@ -13,10 +16,14 @@ interface ShareModalProps {
 export default function ShareModal({ onClose }: ShareModalProps) {
     const [showToast, setShowToast] = useState(false)
 
-    const handleCopyLink = () => {
-        navigator.clipboard.writeText(window.location.href)
-        setShowToast(true)
-        setTimeout(() => setShowToast(false), 2000)
+    const handleCopyLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href)
+            setShowToast(true)
+            setTimeout(() => setShowToast(false), 2000)
+        } catch (err) {
+            console.error('링크 복사에 실패했습니다:', err)
+        }
     }
 
     const buttons = [
@@ -30,7 +37,7 @@ export default function ShareModal({ onClose }: ShareModalProps) {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
             <div
                 className="relative flex flex-col justify-center px-8 bg-gray-600-op80 rounded-2xl"
-                style={{ width: '480px', height: '212px', gap: '25px' }}
+                style={{ width: '480px', height: `${MODAL_HEIGHT}px`, gap: '25px' }}
             >
                 <button onClick={onClose} className="absolute top-5 right-5">
                     <X style={{ width: '16px', height: '16px' }} className="**:stroke-white" />
@@ -56,8 +63,15 @@ export default function ShareModal({ onClose }: ShareModalProps) {
 
             {showToast && (
                 <div
-                    className="absolute animate-in fade-in slide-in-from-top-2 flex items-center bg-gray-500 rounded-lg shadow-lg px-5 py-3"
-                    style={{ top: 'calc(50% + 106px + 102px)', left: '50%', transform: 'translateX(-50%)', width: '270px', height: '48px', gap: '12px' }}
+                    className="absolute animate-in fade-in slide-in-from-top-2 flex items-center bg-gray-500 rounded-lg px-5 py-3"
+                    style={{
+                        top: `calc(50% + ${MODAL_HEIGHT / 2}px + ${TOAST_MARGIN}px)`,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '270px',
+                        height: '48px',
+                        gap: '12px',
+                    }}
                 >
                     <Check className="w-5 h-5 text-gray-100" />
                     <span className="font-semibold16 text-gray-100">링크가 복사되었습니다.</span>

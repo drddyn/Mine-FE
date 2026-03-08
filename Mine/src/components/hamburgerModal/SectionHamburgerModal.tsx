@@ -37,7 +37,7 @@ export default function SectionHamburgerModal({ sectionId, magazineId, top, left
             )}
 
             {showShareModal && (
-                <ShareModal onClose={() => { setShowShareModal(false); handleClose() }} />
+                <ShareModal onClose={handleClose} />
             )}
         </>
     )
