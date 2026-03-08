@@ -45,7 +45,7 @@ export default function MagazinePage() {
                         mode="magazine"
                     />
                 )}
-                <div className="flex justify-center items-start p-30 h-screen overflow-auto">
+                <div className="flex justify-center items-start p-20 h-screen overflow-auto">
                     <GridContainor>
                         {content?.map((item) => (
                             <SectionCover
