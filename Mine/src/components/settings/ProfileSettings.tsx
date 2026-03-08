@@ -29,6 +29,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
     })
     const [draft, setDraft] = useState<ProfileData>(saved)
     const [editingField, setEditingField] = useState<null | 'nickname' | 'userId'>(null)
+    const [isPublic, setIsPublic] = useState(true)
 
     const handleSave = async () => {
         try {
@@ -39,7 +40,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         } catch (error) {
             console.error('수정 실패:', error)
             alert('수정 중 오류가 발생했습니다.')
-            handleCancel() // 에러 시 원래 데이터로 복구
+            handleCancel()
         }
     }
 
@@ -60,7 +61,6 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
     useEffect(() => {
         const currentImageUrl = draft.profileImageUrl
-        // 컴포넌트 언마운트 또는 profileImageUrl 변경 시 이전 blob URL을 메모리에서 해제합니다.
         return () => {
             if (currentImageUrl && currentImageUrl.startsWith('blob:')) {
                 URL.revokeObjectURL(currentImageUrl)
@@ -83,19 +83,19 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                 <div className="absolute top-12 bottom-12 left-94 w-69 flex flex-col gap-4 justify-center">
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">닉네임</span>
+                        <span className="w-20 text-white/70 font-light14 shrink-0">닉네임</span>
                         {editMode && editingField === 'nickname' ? (
                             <input
                                 value={draft.nickname}
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, nickname: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border-black outline-none font-medium16 pb-1 bg-transparent"
+                                className="border-b border-white outline-none font-medium16 pb-1 bg-transparent text-white"
                             />
                         ) : (
                             <span
                                 onClick={() => editMode && setEditingField('nickname')}
-                                className={`font-medium16 ${editMode ? 'border-b border-black cursor-text' : ''}`}
+                                className={`font-medium16 text-white ${editMode ? 'border-b border-white cursor-text' : ''}`}
                             >
                                 {viewData.nickname}
                             </span>
@@ -103,19 +103,19 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">아이디</span>
+                        <span className="w-20 text-white/70 font-light14 shrink-0">아이디</span>
                         {editMode && editingField === 'userId' ? (
                             <input
                                 value={draft.username}
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, username: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border-black outline-none font-medium16 pb-1 bg-transparent"
+                                className="border-b border-white outline-none font-medium16 pb-1 bg-transparent text-white"
                             />
                         ) : (
                             <span
                                 onClick={() => editMode && setEditingField('userId')}
-                                className={`font-medium16 ${editMode ? 'border-b border-black cursor-text ' : ''}`}
+                                className={`font-medium16 text-white ${editMode ? 'border-b border-white cursor-text' : ''}`}
                             >
                                 {viewData.username}
                             </span>
@@ -123,13 +123,28 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">비밀번호</span>
-                        <span className="font-medium16">word******</span>
+                        <span className="w-20 text-white/70 font-light14 shrink-0">비밀번호</span>
+                        <span className="font-medium16 text-white">********</span>
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">이메일</span>
-                        <span className="font-medium16">{user?.email}</span>
+                        <span className="w-20 text-white/70 font-light14 shrink-0">이메일</span>
+                        <span className="font-medium16 text-white">{user?.email}</span>
+                    </div>
+
+                    <div className="flex items-center">
+                        <span className="w-20 text-white/70 font-light14 shrink-0">프로필 공개</span>
+                        <div
+                            onClick={() => setIsPublic(!isPublic)}
+                            className={`relative w-12 h-6 rounded-full transition-colors duration-300 cursor-pointer bg-white/20 ${
+                                isPublic ? 'bg-main-default' : 'bg-white/40'
+                            }`}
+                        >
+                            <div
+                                className="absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all duration-300"
+                                style={{ left: isPublic ? '4px' : 'calc(100% - 20px)' }}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

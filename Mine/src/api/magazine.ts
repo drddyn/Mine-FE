@@ -1,9 +1,11 @@
 import type {
     DeleteParagraphDto,
     DeleteSectionDto,
+    FeedDto,
     PatchMagazineTitleDto,
     PostMagazineDto,
     RequestDeleteMagazine,
+    ResponseFeed,
     ResponseRecentSection,
     SectionDetailDto,
 } from '../types/magazine'
@@ -76,5 +78,12 @@ export const deleteParagraph = async ({ magazineId, sectionId, paragraphId }: De
     const res = await axiosInstance.delete(
         `api/magazines/${magazineId}/sections/${sectionId}/paragraphs/${paragraphId}`
     )
+    return res.data
+}
+
+export const getMagazineFeed = async ({ cursorId, limit = 10 }: FeedDto): Promise<ResponseFeed> => {
+    const res = await axiosInstance.get(`/api/magazines/feed`, {
+        params: { cursorId, limit },
+    })
     return res.data
 }

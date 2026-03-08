@@ -72,3 +72,22 @@ html,
 body {
     font-family: Pretendard, NotoSerif;
 }
+
+@layer utilities {
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px; /* 스크롤바 두께 */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent; /* 트랙 배경을 투명하게 */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1111114d; /* 스크롤바 핸들 색상 (gray-600 정도) */
+        border-radius: 10px; /* 핸들을 둥글게 */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #6b7280; /* 호버 시 색상 (gray-500) */
+    }
+}
