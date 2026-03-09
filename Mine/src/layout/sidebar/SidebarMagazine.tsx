@@ -25,10 +25,11 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     const closeHamburger = () => setIsHamburgerOpen(false)
 
     const handleHamburger = (e: React.MouseEvent) => {
+        e.stopPropagation()
         const rect = e.currentTarget.getBoundingClientRect()
         setModalPos({
-            top: rect.top + window.scrollY,
-            left: rect.right + 10,
+            top: rect.top + window.scrollY + 15,
+            left: rect.right - 20,
         })
         openHamburger()
     }
