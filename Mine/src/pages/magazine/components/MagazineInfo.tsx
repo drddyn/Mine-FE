@@ -31,8 +31,8 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
         <div className="flex w-full justify-between items-center self-stretch">
             <div className="flex items-center gap-2 basis-100">
                 <div
-                    className={`cursor-pointer ${mode === 'section' ? 'font-regular16 font-notoserif text-gray-600' : 'font-normal20 font-pretendard text-gray-100'}`}
-                    onClick={() => onClick?.(magazinedata?.magazineId ?? 0)}
+                    className={`cursor-pointer ${mode === 'section' ? 'font-regular16 font-notoserif text-gray-600' : 'font-semibold20 font-pretendard text-gray-100'}`}
+                    onClick={() => magazinedata?.magazineId && onClick?.(magazinedata.magazineId)}
                 >
                     {magazinedata?.title}
                 </div>

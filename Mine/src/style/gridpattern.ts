@@ -64,15 +64,15 @@ export const GRID_ITEM_LAYOUT_PRESETS: Record<number, string[]> = {
     ],
 }
 
-export const GRID_LAYOUT_PRESENT: Record<number, string[]> = {
-    1: ['grid-col-1'],
-    2: ['grid-col-1'],
-    3: ['grid-cols-5'],
-    4: ['grid-cols-3 grid-rows-2'],
-    5: ['grid-cols-19 grid-rows-2'],
-    6: ['grid-cols-12 grid-rows-2'],
-    7: ['grid-cols-18 grid-rows-2'],
-    8: ['grid-cols-34 grid-rows-2'],
-    9: ['grid-cols-9 grid-rows-18'],
-    10: ['grid-cols-9 grid-rows-18'],
+export const GRID_LAYOUT_PRESENT: Record<number, string> = {
+    1: 'grid-col-1',
+    2: 'grid-col-1',
+    3: 'grid-cols-5',
+    4: 'grid-cols-3 grid-rows-2',
+    5: 'grid-cols-19 grid-rows-2',
+    6: 'grid-cols-12 grid-rows-2',
+    7: 'grid-cols-18 grid-rows-2',
+    8: 'grid-cols-34 grid-rows-2',
+    9: 'grid-cols-9 grid-rows-18',
+    10: 'grid-cols-9 grid-rows-18',
 }
