@@ -15,11 +15,11 @@ export const patchMyProfile = async (profileData: ProfileDto): Promise<ResponseP
     if (profileData.profileImage instanceof File) {
         formData.append('profileImage', profileData.profileImage)
     }
-    const res = await axiosInstance.patch(`/api/users/me`, formData)
+    const res = await axiosInstance.patch(`api/users/me`, formData)
     return res.data
 }
 
 export const patchVisibility = async (isPublic: boolean) => {
-    const res = await axiosInstance.patch(`/api/users/me/visibility`, { isPublic })
+    const res = await axiosInstance.patch(`api/users/me/visibility`, { isPublic })
     return res.data
 }

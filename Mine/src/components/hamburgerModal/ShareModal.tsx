@@ -6,8 +6,8 @@ import Kakao from '../../icon/kakao.svg?react'
 import Instagram from '../../icon/instagram.svg?react'
 import Check from '../../icon/check.svg?react'
 
-const MODAL_HEIGHT = 212
 const TOAST_MARGIN = 102
+const MODAL_HEIGHT = 212
 
 interface ShareModalProps {
     onClose: () => void
@@ -35,17 +35,14 @@ export default function ShareModal({ onClose }: ShareModalProps) {
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
-            <div
-                className="relative flex flex-col justify-center px-8 bg-gray-600-op80 rounded-2xl"
-                style={{ width: '480px', height: `${MODAL_HEIGHT}px`, gap: '25px' }}
-            >
+            <div className="relative flex flex-col justify-center px-8 bg-gray-600-op80 rounded-2xl w-120 h-53 gap-6.25">
                 <button onClick={onClose} className="absolute top-5 right-5">
-                    <X style={{ width: '16px', height: '16px' }} className="**:stroke-white" />
+                    <X className="w-5 h-5 **:stroke-white" />
                 </button>
 
                 <span className="font-semibold24 text-gray-100">공유</span>
 
-                <div className="flex items-center justify-center" style={{ gap: '28px' }}>
+                <div className="flex items-center justify-center gap-7">
                     {buttons.map(({ icon, label, onClick }) => (
                         <button
                             key={label}
@@ -63,14 +60,11 @@ export default function ShareModal({ onClose }: ShareModalProps) {
 
             {showToast && (
                 <div
-                    className="absolute animate-in fade-in slide-in-from-top-2 flex items-center bg-gray-500 rounded-lg px-5 py-3"
+                    className="absolute animate-in fade-in slide-in-from-top-2 flex items-center bg-gray-500 rounded-lg px-5 py-3 w-67.5 h-12 gap-3"
                     style={{
                         top: `calc(50% + ${MODAL_HEIGHT / 2}px + ${TOAST_MARGIN}px)`,
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        width: '270px',
-                        height: '48px',
-                        gap: '12px',
                     }}
                 >
                     <Check className="w-5 h-5 text-gray-100" />
