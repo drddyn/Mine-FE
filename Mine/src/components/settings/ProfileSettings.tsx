@@ -91,7 +91,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                 <div className="absolute top-12 bottom-12 left-94 w-69 flex flex-col gap-4 justify-center">
                     <div className="flex items-center">
-                        <span className="w-20 text-white/70 font-light14 shrink-0">닉네임</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">닉네임</span>
                         {editMode && editingField === 'nickname' ? (
                             <input
                                 value={draft.nickname}
@@ -111,7 +111,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-white/70 font-light14 shrink-0">아이디</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">아이디</span>
                         {editMode && editingField === 'userId' ? (
                             <input
                                 value={draft.username}
@@ -131,26 +131,25 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-white/70 font-light14 shrink-0">비밀번호</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">비밀번호</span>
                         <span className="font-medium16 text-white">********</span>
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-white/70 font-light14 shrink-0">이메일</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">이메일</span>
                         <span className="font-medium16 text-white">{user?.email}</span>
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-white/70 font-light14 shrink-0">프로필 공개</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">프로필 공개</span>
                         <div
                             onClick={handleToggleVisibility}
-                            className={`relative w-12 h-6 rounded-full transition-colors duration-300 cursor-pointer bg-white/20 ${
-                                isPublic ? 'bg-white/40' : 'bg-main-default'
+                            className={`relative w-7.5 h-3.5 rounded-full transition-colors duration-300 cursor-pointer ${
+                                isPublic ? `bg-gray-300` : `bg-gray-400`
                             }`}
                         >
                             <div
-                                className="absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all duration-300"
-                                style={{ left: isPublic ? 'calc(100% - 20px)' : '4px' }}
+                                className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow transition-all duration-300 ${isPublic ? 'bg-white left-[calc(100%-12px)]' : 'bg-gray-500 -left-1'}`}
                             />
                         </div>
                     </div>
