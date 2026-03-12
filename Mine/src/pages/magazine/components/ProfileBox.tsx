@@ -8,7 +8,7 @@ interface ProfileBoxProps {
 export default function ProfileBox({ nickname, profileImage, classname, mode }: ProfileBoxProps) {
     return (
         <div className={`flex gap-2 items-center ${classname}`}>
-            <div className={`${mode === 'magazine' ? 'text-main-light' : 'text-black-smalltitle'} font-regular16`}>
+            <div className={`${mode === 'magazine' ? 'text-gray-100' : 'text-gray-600'} font-regular16`}>
                 {nickname}
             </div>
             <img src={profileImage} className="w-12.5 h-12.5 rounded-full object-cover" />
