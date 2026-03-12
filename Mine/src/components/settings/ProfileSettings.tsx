@@ -2,6 +2,7 @@ import { useEffect, useState, type RefObject } from 'react'
 import Camera from '../../icon/camera.svg?react'
 import useUserStore from '../../stores/user'
 import useUpdateProfile from '../../hooks/useUpdateProfile'
+import usePatchVisibility from '../../hooks/usePatchVisibility'
 
 interface ProfileData {
     nickname: string
@@ -21,6 +22,7 @@ interface ProfileSettingProps {
 export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCancel, refSave }: ProfileSettingProps) {
     const { user } = useUserStore()
     const { mutateAsync: updateProfile } = useUpdateProfile()
+    const { mutate: patchVisibility } = usePatchVisibility()
     const [saved, setSaved] = useState<ProfileData>({
         nickname: user?.nickname ?? '',
         username: user?.username ?? '',
@@ -29,7 +31,13 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
     })
     const [draft, setDraft] = useState<ProfileData>(saved)
     const [editingField, setEditingField] = useState<null | 'nickname' | 'userId'>(null)
-    const [isPublic, setIsPublic] = useState(true)
+    const [isPublic, setIsPublic] = useState(false)
+
+    const handleToggleVisibility = () => {
+        const newValue = !isPublic
+        setIsPublic(newValue)
+        patchVisibility(newValue)
+    }
 
     const handleSave = async () => {
         try {
@@ -135,14 +143,14 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     <div className="flex items-center">
                         <span className="w-20 text-white/70 font-light14 shrink-0">프로필 공개</span>
                         <div
-                            onClick={() => setIsPublic(!isPublic)}
+                            onClick={handleToggleVisibility}
                             className={`relative w-12 h-6 rounded-full transition-colors duration-300 cursor-pointer bg-white/20 ${
-                                isPublic ? 'bg-main-default' : 'bg-white/40'
+                                isPublic ? 'bg-white/40' : 'bg-main-default'
                             }`}
                         >
                             <div
                                 className="absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all duration-300"
-                                style={{ left: isPublic ? '4px' : 'calc(100% - 20px)' }}
+                                style={{ left: isPublic ? 'calc(100% - 20px)' : '4px' }}
                             />
                         </div>
                     </div>
