@@ -40,7 +40,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         isError: isMagError,
     } = useGetMyMagazineList({
         page: 0,
-        size: 5,
+        size: 100,
         sort: [],
     })
 
@@ -82,21 +82,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" to="/magazine/saved" />
                         <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
                     </div>
-                    <div className="flex flex-col">
-                        <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" isOpen={isMagazineOpen} />
 
-                        {isMagazineOpen && (
-                            <>
-                                {magazine?.content.map((magazine) => (
-                                    <SidebarMagazine
-                                        id={magazine.magazineId}
-                                        title={magazine.title}
-                                        onclick={() => handleMagazineClick(magazine.magazineId)}
-                                    />
-                                ))}
-                            </>
-                        )}
-                    </div>
                     <div className="flex flex-col">
                         <SidebarTitle
                             onClick={handleSectionToggleOpen}
@@ -115,6 +101,21 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                                     />
                                 ))}
                             </>
+                        )}
+                    </div>
+                    <div className="flex flex-col">
+                        <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" isOpen={isMagazineOpen} />
+
+                        {isMagazineOpen && (
+                            <div className="h-52 overflow-auto custom-scrollbar">
+                                {magazine?.content.map((magazine) => (
+                                    <SidebarMagazine
+                                        id={magazine.magazineId}
+                                        title={magazine.title}
+                                        onclick={() => handleMagazineClick(magazine.magazineId)}
+                                    />
+                                ))}
+                            </div>
                         )}
                     </div>
 
