@@ -18,3 +18,8 @@ export const patchMyProfile = async (profileData: ProfileDto): Promise<ResponseP
     const res = await axiosInstance.patch(`/api/users/me`, formData)
     return res.data
 }
+
+export const patchVisibility = async (isPublic: boolean) => {
+    const res = await axiosInstance.patch(`/api/users/me/visibility`, { isPublic })
+    return res.data
+}

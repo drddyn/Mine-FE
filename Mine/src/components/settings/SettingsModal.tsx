@@ -6,9 +6,9 @@ import InterestSettings from './InterestSettings'
 import X from '../../icon/X.svg?react'
 import Logout from '../../icon/logout.svg?react'
 import Edit from '../../icon/edit.svg?react'
-import Check from '../../icon/check.svg?react'
 import usePostLogout from '../../hooks/usePostLogout'
 import usePutInterests from '../../hooks/usePutInterests'
+import Toast from '../common/Toast'
 
 interface SettingsProps {
     onClose: () => void
@@ -142,7 +142,8 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                     {activeTab === 'interest' && (
                         <button
                             onClick={handleSave}
-                            className="absolute right-8 bottom-4 flex items-center gap-1 font-semibold16 text-white"
+                            disabled={selectedInterests.length === 0}
+                            className="absolute right-12 bottom-4 flex items-center gap-1 font-semibold16 text-white disabled:opacity-40"
                         >
                             <Edit className="w-4 h-4" />
                             저장
@@ -151,22 +152,14 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                 </div>
 
                 {showLogoutToast && (
-                    <div
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-19.5 animate-in fade-in slide-in-from-top-2"
-                        style={{ display: 'flex', width: '270px', height: '48px', padding: '12px 20px', alignItems: 'center', gap: '4px', borderRadius: '8px', background: '#505050', boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.15)', zIndex: 1001 }}
-                    >
-                        <Check className="w-5 h-5 text-white" />
-                        <span className="text-white text-4 font-semibold16 leading-none">로그아웃되었습니다.</span>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-19.5 animate-in fade-in slide-in-from-top-2 z-50">
+                        <Toast message="로그아웃되었습니다." />
                     </div>
                 )}
 
                 {showSaveToast && (
-                    <div
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-19.5 animate-in fade-in slide-in-from-top-2"
-                        style={{ display: 'flex', width: '270px', height: '48px', padding: '12px 20px', alignItems: 'center', gap: '4px', borderRadius: '8px', background: '#505050', boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.15)', zIndex: 1001 }}
-                    >
-                        <Check className="w-5 h-5 text-white" />
-                        <span className="text-white text-4 font-semibold16 leading-none">저장되었습니다.</span>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-19.5 animate-in fade-in slide-in-from-top-2 z-50">
+                        <Toast message="저장되었습니다." />
                     </div>
                 )}
             </div>
