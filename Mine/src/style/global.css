@@ -64,9 +64,14 @@
     --color-gray-100-op30: #ffffff4d;
     --color-gray-100-op40: #ffffff66;
     --color-gray-100-op70: #ffffffb3;
+
+    --color-gray-300-op70: #a9a9a9b3;
+
+    --color-gray-500-op40: #50505066;
     --color-gray-500-op70: #505050b3;
+
     --color-gray-600-op30: #1111114d;
-    --color-gray-600-op80: #111111cc;
+    --color-gray-600-op70: #111111b3;
 }
 html,
 body {
