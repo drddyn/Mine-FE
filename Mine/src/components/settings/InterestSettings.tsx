@@ -22,16 +22,16 @@ export default function InterestSettings({ interests, onChange }: Props) {
     if (isLoading) return <div className="text-white">불러오는 중...</div>
 
     return (
-        <div className="flex flex-wrap gap-2 overflow-y-auto custom-scrollbar max-h-40">
+        <div className="flex flex-wrap gap-2 overflow-y-auto custom-scrollbar max-w-116.25 max-h-40">
             {categories?.map((item) => (
                 <div
                     key={item.id}
                     onClick={() => toggleInterest(item.code)}
-                    className={`cursor-pointer flex items-center justify-center px-3 py-1.5 rounded-full border text-white font-semibold16 text-base transition-colors
+                    className={`cursor-pointer flex items-center justify-center px-3 py-1.5 rounded-full border font-semibold16 text-base transition-colors
                         ${
                             interests.includes(item.code)
-                                ? 'border-white bg-gray-600-op30'
-                                : 'border-white/30 bg-transparent'
+                                ? 'bg-gray-100 text-gray-600'
+                                : 'border-white/30 bg-transparent text-gray-100'
                         }`}
                 >
                     {item.name}

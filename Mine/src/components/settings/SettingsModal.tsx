@@ -147,9 +147,8 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         <button
                             onClick={handleSave}
                             disabled={selectedInterests.length === 0}
-                            className="absolute right-12 bottom-4 flex items-center gap-1 font-semibold16 text-white disabled:opacity-40"
+                            className="absolute right-12 bottom-8 flex font-semibold16 text-white disabled:opacity-40 px-3 py-1 rounded-2xl border border-gray-100 hover:bg-gray-100-op40"
                         >
-                            <Edit className="w-4 h-4" />
                             저장
                         </button>
                     )}
