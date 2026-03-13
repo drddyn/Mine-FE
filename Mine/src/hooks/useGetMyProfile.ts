@@ -6,6 +6,8 @@ export default function useGetMyProfile() {
     return useQuery<ResponseProfile>({
         queryKey: ['profile'],
         queryFn: () => getMyProfile(),
+        retry: false,
+        throwOnError: false,
         select: (data) => data,
     })
 }
