@@ -10,7 +10,7 @@ export default function SidebarSectionList({ title, key, onclick, magazineId, se
     return (
         <div
             key={key}
-            className="flex hover:bg-gray-600-op80 py-2 h-9 items-center pl-5 pr-5 select-none"
+            className="flex hover:bg-gray-600-op70 py-2 h-9 items-center pl-5 pr-5 select-none"
             onClick={() => onclick(magazineId, sectionId)}
         >
             <label className="block w-full hover:text-gray-100 overflow-hidden text-ellipsis whitespace-nowrap text-gray-100-op70 font-medium14">

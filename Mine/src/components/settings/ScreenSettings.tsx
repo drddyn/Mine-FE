@@ -1,28 +1,52 @@
 import { useState, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import IconAddPhoto from '../../icon/add_photo_alternate.svg?react'
+
+import useCreateMoodboard from '../../hooks/useCreateMoodboard'
+import useUploadImage from '../../hooks/useUploadImage'
+
 import ConfirmModal from '../common/ConfirmModal'
 import Toast from '../common/Toast'
 
 export default function ScreenSettings() {
+    const { magazineId } = useParams<{ magazineId: string }>()
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [showToast, setShowToast] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const { mutateAsync: uploadImage } = useUploadImage()
+    const { mutateAsync: createMoodboard } = useCreateMoodboard()
 
     const handleOpenFile = () => {
         fileInputRef.current?.click()
     }
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
-        console.log('선택된 이미지:', file)
+        try {
+            await uploadImage(file)
+            setShowToast(true)
+            setTimeout(() => setShowToast(false), 3000)
+        } catch (error) {
+            console.error('이미지 업로드 실패:', error)
+        }
     }
 
-    const handleConfirm = () => {
-        setIsConfirmOpen(false)
-        setShowToast(true)
-        setTimeout(() => setShowToast(false), 3000)
+    const handleConfirm = async () => {
+        if (isLoading) return
+        setIsLoading(true)
+        try {
+            await createMoodboard(Number(magazineId))
+            setIsConfirmOpen(false)
+            setShowToast(true)
+            setTimeout(() => setShowToast(false), 3000)
+        } catch (error) {
+            console.error('무드보드 생성 실패:', error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -45,13 +69,7 @@ export default function ScreenSettings() {
                 </button>
             </div>
 
-            <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleFileChange}
-            />
+            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
 
             {isConfirmOpen && (
                 <ConfirmModal
@@ -59,6 +77,7 @@ export default function ScreenSettings() {
                     description={`AI가 새로운 이미지를 생성하여 현재 무드보드에\n적용합니다.`}
                     onConfirm={handleConfirm}
                     onCancel={() => setIsConfirmOpen(false)}
+                    isLoading={isLoading}
                 />
             )}
 

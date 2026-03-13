@@ -7,6 +7,7 @@ import X from '../../icon/X.svg?react'
 import Logout from '../../icon/logout.svg?react'
 import Edit from '../../icon/edit.svg?react'
 import usePostLogout from '../../hooks/usePostLogout'
+import usePutInterests from '../../hooks/usePutInterests'
 import Toast from '../common/Toast'
 
 interface SettingsProps {
@@ -20,6 +21,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
     const [showSaveToast, setShowSaveToast] = useState(false)
     const [selectedInterests, setSelectedInterests] = useState<string[]>([])
     const { mutate: logout, isPending } = usePostLogout()
+    const { mutateAsync: putInterests } = usePutInterests()
 
     const handleLogout = () => {
         if (isPending) return
@@ -42,12 +44,18 @@ export default function SettingsModal({ onClose }: SettingsProps) {
         onClose()
     }
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (activeTab === 'profile') {
             saveRef.current?.click()
             setEditMode(false)
         } else if (activeTab === 'interest') {
             if (selectedInterests.length === 0) return
+            try {
+                await putInterests(selectedInterests)
+            } catch (error) {
+                console.error('관심사 저장 실패:', error)
+                return
+            }
         }
         setShowSaveToast(true)
         setTimeout(() => setShowSaveToast(false), 2000)
@@ -56,26 +64,35 @@ export default function SettingsModal({ onClose }: SettingsProps) {
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-                <div className="relative w-193 h-65 bg-gray-500 rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex overflow-hidden">
+                <div className="relative w-193 h-65 bg-gray-600-op70 rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex overflow-hidden">
                     <button onClick={handleClose} className="absolute top-5 right-5 p-1 z-10">
                         <X className="w-6 h-6 text-white **:stroke-white" />
                     </button>
 
                     <div className="w-45 pt-10 pl-10 flex flex-col gap-2 shrink-0">
                         <button
-                            onClick={() => { setActiveTab('profile'); setEditMode(false) }}
+                            onClick={() => {
+                                setActiveTab('profile')
+                                setEditMode(false)
+                            }}
                             className={`text-left transition-all ${activeTab === 'profile' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
                         >
                             프로필 설정
                         </button>
                         <button
-                            onClick={() => { setActiveTab('interest'); setEditMode(false) }}
+                            onClick={() => {
+                                setActiveTab('interest')
+                                setEditMode(false)
+                            }}
                             className={`text-left transition-all ${activeTab === 'interest' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
                         >
                             관심사 설정
                         </button>
                         <button
-                            onClick={() => { setActiveTab('screen'); setEditMode(false) }}
+                            onClick={() => {
+                                setActiveTab('screen')
+                                setEditMode(false)
+                            }}
                             className={`text-left transition-all ${activeTab === 'screen' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
                         >
                             화면 설정
@@ -93,10 +110,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                             />
                         )}
                         {activeTab === 'interest' && (
-                            <InterestSettings
-                                interests={selectedInterests}
-                                onChange={setSelectedInterests}
-                            />
+                            <InterestSettings interests={selectedInterests} onChange={setSelectedInterests} />
                         )}
                         {activeTab === 'screen' && <ScreenSettings />}
                     </div>
@@ -111,8 +125,8 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         </button>
                     )}
 
-                    {activeTab === 'profile' && (
-                        !editMode ? (
+                    {activeTab === 'profile' &&
+                        (!editMode ? (
                             <button
                                 onClick={() => setEditMode(true)}
                                 className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white/70 hover:text-white"
@@ -128,9 +142,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                                 <Edit className="w-4 h-4" />
                                 저장
                             </button>
-                        )
-                    )}
-
+                        ))}
                     {activeTab === 'interest' && (
                         <button
                             onClick={handleSave}

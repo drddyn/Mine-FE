@@ -87,3 +87,8 @@ export const getMagazineFeed = async ({ cursorId, limit = 10 }: FeedDto): Promis
     })
     return res.data
 }
+
+export const createMoodboard = async (magazineId: number) => {
+    const res = await axiosInstance.post(`api/magazines/${magazineId}/moodboards`)
+    return res.data
+}
