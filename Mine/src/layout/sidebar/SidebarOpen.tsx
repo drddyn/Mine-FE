@@ -16,6 +16,7 @@ import useUserStore from '../../stores/user'
 import useGetRecentSection from '../../hooks/useGetRecentSection'
 import { useNavigate } from 'react-router-dom'
 import useGetMyMagazineList from '../../hooks/useGetMyMagazines'
+import SidebarSkeleton from './SidebarSkeleton'
 
 interface SidebarProps {
     onclick: () => void
@@ -57,7 +58,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         onclick()
     }
 
-    if (isMagLoading || isSecLoading) return null
+    if (isMagLoading || isSecLoading) return <SidebarSkeleton />
     if (isMagError) {
         alert('목록 불러오기 실패')
         return null
