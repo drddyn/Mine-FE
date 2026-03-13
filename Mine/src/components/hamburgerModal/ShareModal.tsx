@@ -35,7 +35,7 @@ export default function ShareModal({ onClose }: ShareModalProps) {
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
-            <div className="relative flex flex-col justify-center px-8 bg-gray-600-op80 rounded-2xl w-120 h-53 gap-6.25">
+            <div className="relative flex flex-col justify-center px-8 bg-gray-600-op70 rounded-2xl w-120 h-53 gap-6.25">
                 <button onClick={onClose} className="absolute top-5 right-5">
                     <X className="w-5 h-5 **:stroke-white" />
                 </button>
@@ -44,11 +44,7 @@ export default function ShareModal({ onClose }: ShareModalProps) {
 
                 <div className="flex items-center justify-center gap-7">
                     {buttons.map(({ icon, label, onClick }) => (
-                        <button
-                            key={label}
-                            onClick={onClick}
-                            className="flex flex-col items-center w-16 gap-2"
-                        >
+                        <button key={label} onClick={onClick} className="flex flex-col items-center w-16 gap-2">
                             <div className="w-14 h-14 flex items-center justify-center rounded-full border border-gray-100">
                                 {icon}
                             </div>
