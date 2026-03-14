@@ -2,10 +2,8 @@ import { useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import IconAddPhoto from '../../icon/add_photo_alternate.svg?react'
-
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
 import useUploadImage from '../../hooks/useUploadImage'
-
 import ConfirmModal from '../common/ConfirmModal'
 import Toast from '../common/Toast'
 
@@ -68,7 +66,6 @@ export default function ScreenSettings() {
                     <span className="font-regular14">컴퓨터에서 이미지 가져오기</span>
                 </button>
             </div>
-
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
 
             {isConfirmOpen && (
