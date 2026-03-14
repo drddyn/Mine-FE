@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import usePostMagazine from '../../hooks/usePostMagazine'
+import GuestPage from './GuestPage'
 import landingBg from '../../assets/bg1.jpg'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
+import { useAuthStore } from '../../stores/auth'
 
 export default function MainPage() {
     const postMagazineMutation = usePostMagazine()
-    const isLoading = postMagazineMutation.isPending
+    const isPending = postMagazineMutation.isPending
     const [topic, setTopic] = useState('')
     const [userMood, setUserMood] = useState('')
+    const { isLoggedIn } = useAuthStore()
+
+    if (!isLoggedIn) return <GuestPage />
 
     const handleSend = () => {
         if (!topic.trim()) return
@@ -24,10 +29,10 @@ export default function MainPage() {
                 backgroundPosition: 'center',
             }}
         >
-            <div className="absolute inset-0 bg-linear-to-r from-gray-500-op70 via-black/45 to-gray-500-op70" />
+            <div className="absolute inset-0 bg-linear-to-r from-gray-500-op70 via-black/45 to-gray-500-op70 z-0" />
             <div
-                className={`relative z-10 flex flex-col items-center transition-all duration-700 ease-in-out ${
-                    isLoading ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100'
+                className={`relative flex flex-col items-center transition-all duration-700 ease-in-out z-30 ${
+                    isPending ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100'
                 }`}
             >
                 <span className="text-gray-100 font-notoserif font-medium36">나만의 매거진을 만들어볼까요?</span>
@@ -43,7 +48,7 @@ export default function MainPage() {
                 </div>
             </div>
 
-            {isLoading && <MakingLoadingPage />}
+            {isPending && <MakingLoadingPage />}
         </div>
     )
 }

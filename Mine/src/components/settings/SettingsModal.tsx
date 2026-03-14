@@ -26,10 +26,10 @@ export default function SettingsModal({ onClose }: SettingsProps) {
     const handleLogout = () => {
         if (isPending) return
         logout()
+        onClose()
         setShowLogoutToast(true)
         setTimeout(() => {
             setShowLogoutToast(false)
-            onClose()
         }, 2000)
     }
 
