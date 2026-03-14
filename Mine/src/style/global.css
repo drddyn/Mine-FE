@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+@import './typo.css';
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSerif';
+    src: url('/fonts/NotoSerifKR-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotoSerif';
+    src: url('/fonts/NotoSerifKR-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@theme {
+    --font-pretendard: 'Pretendard';
+    --font-notoserif: 'NotoSerif';
+
+    --color-gray-100: #ffffff;
+    --color-gray-200: #d9d9d9;
+    --color-gray-300: #a9a9a9;
+    --color-gray-400: #767676;
+    --color-gray-500: #505050;
+    --color-gray-600: #111111;
+    --color-heart: #f95c40;
+
+    --color-gray-100-op30: #ffffff4d;
+    --color-gray-100-op40: #ffffff66;
+    --color-gray-100-op70: #ffffffb3;
+
+    --color-gray-300-op70: #a9a9a9b3;
+
+    --color-gray-500-op40: #50505066;
+    --color-gray-500-op70: #505050b3;
+
+    --color-gray-600-op30: #1111114d;
+    --color-gray-600-op70: #111111b3;
+}
+html,
+body {
+    font-family: Pretendard, NotoSerif;
+}
+
+@layer utilities {
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px; /* 스크롤바 두께 */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent; /* 트랙 배경을 투명하게 */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1111114d; /* 스크롤바 핸들 색상 (gray-600 정도) */
+        border-radius: 10px; /* 핸들을 둥글게 */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #6b7280; /* 호버 시 색상 (gray-500) */
+    }
+}

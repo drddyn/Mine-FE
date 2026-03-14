@@ -1,0 +1,130 @@
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import logo from '../../icon/minelogo.svg?url'
+import UserIcon from '../../icon/user.svg?react'
+import LockIcon from '../../icon/lock.svg?react'
+import EyeIcon from '../../icon/eye.svg?react'
+import usePostAuthorization from '../../hooks/usePostAuthorization'
+
+export default function LoginPage() {
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const bgUrl = (location.state as { bgUrl?: string } | null)?.bgUrl ?? sessionStorage.getItem('landingBg') ?? ''
+
+    const [userId, setUserId] = useState('')
+    const [pw, setPw] = useState('')
+    const [showPw, setShowPw] = useState(false)
+
+    const { mutate: login, isPending } = usePostAuthorization()
+
+    const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+
+        if (!userId.trim() || !pw.trim()) {
+            alert('아이디와 비밀번호를 입력해주세요.')
+            return
+        }
+
+        login({ username: userId, password: pw })
+    }
+
+    return (
+        <div
+            className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
+            style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
+        >
+            <div className="absolute inset-0 bg-black/45" />
+
+            <div className="absolute inset-y-0 right-0 w-1/2">
+                <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
+                <div className="absolute inset-0 backdrop-blur-[6px]" />
+                <div className="absolute inset-0 bg-white/8" />
+            </div>
+
+            <div
+                className="absolute z-10 text-white leading-6 font-semibold20"
+                style={{ width: 120, height: 72, top: 68, left: 80, opacity: 1 }}
+            >
+                나만의 매거진
+                <br />
+                아카이빙
+                <br />
+                플랫폼
+            </div>
+
+            <div className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-center z-10">
+                <div className="w-105 translate-y-1.5">
+                    <div className="text-center mb-10">
+                        <img src={logo} alt="Mile logo" className="mx-auto h-17.5 w-35" />
+                    </div>
+
+                    <form onSubmit={onSubmit} className="flex flex-col items-center gap-4">
+                        <div className="relative w-100">
+                            <span className="absolute left-7.5 top-1/2 -translate-y-1/2 text-white/80">
+                                <UserIcon className="w-6 h-6" />
+                            </span>
+                            <input
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                placeholder="아이디"
+                                className="w-full h-12 pl-16 pr-4 py-2.75 rounded-[15px]
+                           bg-white/10 border border-black-whiteBoxOutline text-white
+                           placeholder:text-white/60 outline-none focus:border-white/70"
+                            />
+                        </div>
+
+                        <div className="relative w-100">
+                            <span className="absolute left-7.5 top-1/2 -translate-y-1/2 text-white/80">
+                                <LockIcon className="w-6 h-6" />
+                            </span>
+                            <input
+                                type={showPw ? 'text' : 'password'}
+                                value={pw}
+                                onChange={(e) => setPw(e.target.value)}
+                                placeholder="비밀번호"
+                                className="w-full h-12 pl-16 pr-11 py-2.75 rounded-[15px]
+                           bg-white/10 border border-black-whiteBoxOutline text-white
+                           placeholder:text-white/60 outline-none focus:border-white/70"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPw((v) => !v)}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition"
+                            >
+                                <EyeIcon className="w-6 h-6" />
+                            </button>
+                        </div>
+
+                        <div className="w-100 flex justify-end pr-1.5">
+                            <button
+                                type="button"
+                                onClick={() => navigate('/login/finding', { state: { bgUrl } })}
+                                className="font-light14 text-gray-100-op70 hover:text-gray-100 transition"
+                            >
+                                아이디/비밀번호 찾기
+                            </button>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isPending}
+                            className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-500-op70 px-3.5 transition hover:bg-gray-500 disabled:opacity-50 cursor-pointer"
+                        >
+                            {isPending ? '로그인 중...' : '로그인'}
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate('/signup')}
+                            className="w-100 h-12 rounded-2xl text-gray-100 font-medium16 bg-gray-100-op40 px-3.5 transition border border-gray-400 hover:bg-gray-100-op70 cursor-pointer"
+                        >
+                            회원가입
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    )
+}
