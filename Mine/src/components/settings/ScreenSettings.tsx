@@ -66,14 +66,7 @@ export default function ScreenSettings() {
                     <span className="font-regular14">컴퓨터에서 이미지 가져오기</span>
                 </button>
             </div>
-
-            <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleFileChange}
-            />
+            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
 
             {isConfirmOpen && (
                 <ConfirmModal

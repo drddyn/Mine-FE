@@ -1,4 +1,4 @@
-import {type KeyboardEvent } from 'react'
+import { type KeyboardEvent } from 'react'
 
 interface MagazineInputProps {
     topic: string
@@ -8,14 +8,14 @@ interface MagazineInputProps {
     onSubmit: () => void
 }
 
-export default function MagazineInput({
+export default function NewMagazineInput({
     topic,
     userMood,
     onTopicChange,
     onUserMoodChange,
     onSubmit,
 }: MagazineInputProps) {
-    const handleKeyDown = (e: KeyboardEvent <HTMLInputElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault()
             onSubmit()
@@ -24,16 +24,9 @@ export default function MagazineInput({
 
     return (
         <div className="relative mx-auto flex flex-col w-192.5">
-            <div
-                className="flex items-center w-full border border-b-0 border-gray-500 bg-gray-100-op30"
-                style={{
-                    height: '54px',
-                    padding: '20px 28px',
-                    borderRadius: '20px 20px 0 0', //Tailwind 미지원 값
-                }}
-            >
+            <div className="flex items-center w-full border border-b-0 border-gray-500 bg-gray-100-op30 h-13.5 py-5 px-7 rounded-t-[20px]">
                 <div className="flex flex-col flex-1">
-                    <span className="text-gray-100/50 font-medium12">주제</span>
+                    <span className="text-gray-200 font-medium12">주제</span>
                     <input
                         value={topic}
                         onChange={(e) => onTopicChange(e.target.value)}
@@ -44,16 +37,9 @@ export default function MagazineInput({
                 </div>
             </div>
 
-            <div
-                className="flex items-center w-full border border-gray-500 bg-gray-100-op30"
-                style={{
-                    height: '54px',
-                    padding: '20px 12px 20px 28px',
-                    borderRadius: '0 0 20px 20px', //Tailwind 미지원 값
-                }}
-            >
+            <div className="flex items-center w-full border border-gray-500 bg-gray-100-op30 h-13.5 py-5 pl-7 pr-3 rounded-b-[20px]">
                 <div className="flex flex-col flex-1">
-                    <span className="text-gray-100/50 font-medium12">분위기</span>
+                    <span className="text-gray-200 font-medium12">분위기</span>
                     <input
                         value={userMood}
                         onChange={(e) => onUserMoodChange(e.target.value)}
@@ -65,19 +51,11 @@ export default function MagazineInput({
                 <button
                     onClick={onSubmit}
                     disabled={!topic.trim()}
-                    className={`flex shrink-0 items-center justify-center transition-all duration-200 ${
-                        topic.trim() ? 'bg-gray-500-op70' : ''
+                    className={`flex shrink-0 w-13.25 h-7.5 px-4 py-2 rounded-[40px] items-center justify-center transition-all duration-200 cursor-pointer ${
+                        topic.trim()
+                            ? 'bg-gray-500 shadow-[0_4px_8px_0_rgba(0,0,0,0.12),0_16px_32px_0_rgba(0,0,0,0.20)]'
+                            : 'bg-gray-500-op40 shadow-none'
                     }`}
-                    style={{
-                        width: '53px',
-                        height: '30px',
-                        padding: '8px 16px',
-                        borderRadius: '40px', //Tailwind 미지원 값
-                        background: topic.trim() ? undefined : 'rgba(80, 80, 80, 0.40)', //디자인 시스템 변수 미지원 값
-                        boxShadow: topic.trim()
-                            ? '0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 16px 32px 0 rgba(0, 0, 0, 0.20)' //디자인 시스템 변수 미지원 값
-                            : 'none',
-                    }}
                 >
                     <span className="text-gray-100 whitespace-nowrap font-medium14">입력</span>
                 </button>
