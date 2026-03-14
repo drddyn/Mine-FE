@@ -4,11 +4,9 @@ import GuestPage from './GuestPage'
 import landingBg from '../../assets/bg1.jpg'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
-import useUserStore from '../../stores/user'
 import { useAuthStore } from '../../stores/auth'
 
 export default function MainPage() {
-    // const user = useUserStore((state) => state.user)
     const postMagazineMutation = usePostMagazine()
     const isPending = postMagazineMutation.isPending
     const [topic, setTopic] = useState('')
