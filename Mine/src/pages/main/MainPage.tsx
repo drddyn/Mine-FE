@@ -1,10 +1,10 @@
+import { useState } from 'react'
 import usePostMagazine from '../../hooks/usePostMagazine'
 import useGetMyProfile from '../../hooks/useGetMyProfile'
 import GuestPage from './GuestPage'
 import landingBg from '../../assets/bg1.jpg'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
-import { useState } from 'react'
 
 export default function MainPage() {
     const { data: profile, isLoading, isError } = useGetMyProfile()
@@ -12,6 +12,9 @@ export default function MainPage() {
     const isPending = postMagazineMutation.isPending
     const [topic, setTopic] = useState('')
     const [userMood, setUserMood] = useState('')
+
+    if (isLoading) return null
+    if (isError || !profile) return <GuestPage />
 
     const handleSend = () => {
         if (!topic.trim()) return
@@ -31,7 +34,6 @@ export default function MainPage() {
             }}
         >
             <div className="absolute inset-0 bg-linear-to-r from-gray-500-op70 via-black/45 to-gray-500-op70" />
-
             <div
                 className={`flex flex-col items-center transition-all duration-700 ease-in-out ${
                     isPending ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100'
