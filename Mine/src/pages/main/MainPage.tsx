@@ -1,28 +1,24 @@
 import { useState } from 'react'
 import usePostMagazine from '../../hooks/usePostMagazine'
-import useGetMyProfile from '../../hooks/useGetMyProfile'
 import GuestPage from './GuestPage'
 import landingBg from '../../assets/bg1.jpg'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
+import useUserStore from '../../stores/user'
 
 export default function MainPage() {
-    const { data: profile, isLoading, isError } = useGetMyProfile()
+    const user = useUserStore((state) => state.user)
     const postMagazineMutation = usePostMagazine()
     const isPending = postMagazineMutation.isPending
     const [topic, setTopic] = useState('')
     const [userMood, setUserMood] = useState('')
 
-    if (isLoading) return null
-    if (isError || !profile) return <GuestPage />
+    if (!user) return <GuestPage />
 
     const handleSend = () => {
         if (!topic.trim()) return
         postMagazineMutation.mutate({ topic: topic, user_mood: userMood })
     }
-
-    if (isLoading) return null
-    if (isError || !profile) return <GuestPage />
 
     return (
         <div
@@ -52,7 +48,7 @@ export default function MainPage() {
                 </div>
             </div>
 
-            {isLoading && <MakingLoadingPage />}
+            {isPending && <MakingLoadingPage />}
         </div>
     )
 }
