@@ -1,18 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import type { Magazine } from '../../../types/magazine'
+import { isValidUrl } from '../../../utils/url'
 
 type Props = {
     magazine: Magazine
-}
-
-const isValidUrl = (url?: string) => {
-    if (!url) return false
-    try {
-        const parsed = new URL(url)
-        return parsed.protocol === 'https:'
-    } catch {
-        return false
-    }
 }
 
 export default function ExploreItem({ magazine }: Props) {
