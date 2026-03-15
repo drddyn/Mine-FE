@@ -10,7 +10,7 @@ export default function ScreenSettingsModal({ isOpen, onClose }: ScreenSettingsM
 
     return (
         <div
-            className="fixed inset-0 bg-gray-600-op30 flex items-center justify-center z-999"
+            className="fixed inset-0 bg-black/40 flex items-center justify-center z-999"
             onClick={onClose}
         >
             <div
