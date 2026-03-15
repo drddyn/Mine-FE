@@ -7,7 +7,7 @@ import useSidebarStore from '../../../stores/sidebar'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import IconWandStars from '../../../icon/wand_stars.svg?react'
-import ScreenSettings from '../../../components/settings/ScreenSettings'
+import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModal'
 
 interface SectionContentProps {
     sectionId: number
@@ -59,7 +59,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     ))}
                 </div>
 
-                {/* 우측 하단 무드보드 아이콘 버튼 */}
                 <button
                     onClick={() => setIsScreenSettingsOpen(true)}
                     className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
@@ -68,20 +67,10 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                 </button>
             </div>
 
-            {/* 화면 설정 모달 */}
-            {isScreenSettingsOpen && (
-                <div
-                    className="fixed inset-0 bg-black/40 flex items-center justify-center z-999"
-                    onClick={() => setIsScreenSettingsOpen(false)}
-                >
-                    <div
-                        className="relative bg-gray-600-op70 rounded-2xl p-10 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <ScreenSettings />
-                    </div>
-                </div>
-            )}
+            <ScreenSettingsModal
+                isOpen={isScreenSettingsOpen}
+                onClose={() => setIsScreenSettingsOpen(false)}
+            />
         </div>
     )
 }

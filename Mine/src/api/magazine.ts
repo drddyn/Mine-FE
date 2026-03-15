@@ -92,3 +92,8 @@ export const createMoodboard = async (magazineId: number) => {
     const res = await axiosInstance.post(`api/magazines/${magazineId}/moodboards`)
     return res.data
 }
+
+export const patchMagazineCover = async (id: number, coverImageUrl: string) => {
+    const res = await axiosInstance.patch(`api/magazines/${id}/cover`, { coverImageUrl })
+    return res.data
+}
