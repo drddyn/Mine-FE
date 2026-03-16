@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SavedMagazineItem from './components/SavedMagazineItem'
 import ArrowPagination from './components/ArrowPagination'
 import useGetLikedMagazineList from '../../hooks/useGetLikedMagazineList'
+import SavedMagazineSkeleton from '../../components/skeleton/SavedMagazineSkeleton'
 
 const CARD_WIDTH = 476
 const GAP = 16
@@ -17,7 +18,7 @@ export default function SavedMagazinePage() {
     sort: ['createdAt,desc'],
   })
 
-  if (isLoading) return <div>로딩중...</div>
+  if (isLoading) return <SavedMagazineSkeleton />
   if (isError) return <div>불러오기 실패</div>
 
   const magazines = data?.content ?? []

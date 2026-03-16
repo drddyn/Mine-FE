@@ -5,6 +5,7 @@ import SectionIndexList from './SectionIndexList'
 import ParagraphPart from './ParagraphPart'
 import useSidebarStore from '../../../stores/sidebar'
 import { useNavigate } from 'react-router-dom'
+import SectionSkeleton from '../../../components/skeleton/SectionSkeleton'
 
 interface SectionContentProps {
     sectionId: number
@@ -23,7 +24,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
         navigate(`/magazine/${magazineId}`)
     }
     if (isLoading) {
-        return <></>
+        return <SectionSkeleton />
     }
 
     return (

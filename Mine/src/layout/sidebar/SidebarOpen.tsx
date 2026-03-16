@@ -109,8 +109,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
                         {isMagazineOpen && (
                             <div className="h-52 overflow-auto custom-scrollbar">
-                                {magazine?.content.map((magazine) => (
+                                {magazine?.content?.map((magazine) => (
                                     <SidebarMagazine
+                                        
                                         id={magazine.magazineId}
                                         title={magazine.title}
                                         onclick={() => handleMagazineClick(magazine.magazineId)}
