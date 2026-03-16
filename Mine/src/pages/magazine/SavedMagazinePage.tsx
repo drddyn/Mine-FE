@@ -6,7 +6,8 @@ import savedbg from '../../assets/savedbg.jpg'
 
 const CARD_WIDTH = 476
 const GAP = 16
-const COLUMN_STEP = CARD_WIDTH + GAP
+const COLUMNS_PER_VIEW = 2
+const COLUMN_STEP = (CARD_WIDTH + GAP) * COLUMNS_PER_VIEW
 const ITEMS_PER_COLUMN = 2
 
 export default function SavedMagazinePage() {
@@ -35,7 +36,7 @@ export default function SavedMagazinePage() {
 
     return (
         <div
-            className="relative min-h-screen overflow-x-hidden"
+            className="relative min-h-screen overflow-x-hidden flex items-center"
             style={{
                 backgroundImage: `url(${savedbg})`,
                 backgroundSize: 'cover',
@@ -46,10 +47,8 @@ export default function SavedMagazinePage() {
             {/* 어두운 오버레이 */}
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
 
-            <div className="relative pt-25 pb-40 px-51.5">
+            <div className="relative w-full py-[133px] pl-[266px]">
                 <div className="relative">
-                    <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-51.5 z-10" />
-
                     <div className="relative overflow-x-visible overflow-y-visible w-full">
                         <div
                             className="flex gap-4 transition-transform duration-500 ease-in-out will-change-transform"
