@@ -2,6 +2,8 @@ import { useEffect, useState, type RefObject } from 'react'
 import Camera from '../../icon/camera.svg?react'
 import useUserStore from '../../stores/user'
 import useUpdateProfile from '../../hooks/useUpdateProfile'
+import usePatchVisibility from '../../hooks/usePatchVisibility'
+import TabButton from '../../icon/tab_button.svg?react'
 
 interface ProfileData {
     nickname: string
@@ -21,6 +23,7 @@ interface ProfileSettingProps {
 export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCancel, refSave }: ProfileSettingProps) {
     const { user } = useUserStore()
     const { mutateAsync: updateProfile } = useUpdateProfile()
+    const { mutate: patchVisibility } = usePatchVisibility()
     const [saved, setSaved] = useState<ProfileData>({
         nickname: user?.nickname ?? '',
         username: user?.username ?? '',
@@ -29,6 +32,13 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
     })
     const [draft, setDraft] = useState<ProfileData>(saved)
     const [editingField, setEditingField] = useState<null | 'nickname' | 'userId'>(null)
+    const [isPublic, setIsPublic] = useState(false)
+
+    const handleToggleVisibility = () => {
+        const newValue = !isPublic
+        setIsPublic(newValue)
+        patchVisibility(newValue)
+    }
 
     const handleSave = async () => {
         try {
@@ -39,7 +49,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
         } catch (error) {
             console.error('수정 실패:', error)
             alert('수정 중 오류가 발생했습니다.')
-            handleCancel() // 에러 시 원래 데이터로 복구
+            handleCancel()
         }
     }
 
@@ -60,7 +70,6 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
     useEffect(() => {
         const currentImageUrl = draft.profileImageUrl
-        // 컴포넌트 언마운트 또는 profileImageUrl 변경 시 이전 blob URL을 메모리에서 해제합니다.
         return () => {
             if (currentImageUrl && currentImageUrl.startsWith('blob:')) {
                 URL.revokeObjectURL(currentImageUrl)
@@ -83,19 +92,19 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                 <div className="absolute top-12 bottom-12 left-94 w-69 flex flex-col gap-4 justify-center">
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">닉네임</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">닉네임</span>
                         {editMode && editingField === 'nickname' ? (
                             <input
                                 value={draft.nickname}
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, nickname: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border-black outline-none font-medium16 pb-1 bg-transparent"
+                                className="border-b border-white outline-none font-medium16 pb-1 bg-transparent text-white"
                             />
                         ) : (
                             <span
                                 onClick={() => editMode && setEditingField('nickname')}
-                                className={`font-medium16 ${editMode ? 'border-b border-black cursor-text' : ''}`}
+                                className={`font-medium16 text-white ${editMode ? 'border-b border-white cursor-text' : ''}`}
                             >
                                 {viewData.nickname}
                             </span>
@@ -103,19 +112,19 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">아이디</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">아이디</span>
                         {editMode && editingField === 'userId' ? (
                             <input
                                 value={draft.username}
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, username: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border-black outline-none font-medium16 pb-1 bg-transparent"
+                                className="border-b border-white outline-none font-medium16 pb-1 bg-transparent text-white"
                             />
                         ) : (
                             <span
                                 onClick={() => editMode && setEditingField('userId')}
-                                className={`font-medium16 ${editMode ? 'border-b border-black cursor-text ' : ''}`}
+                                className={`font-medium16 text-white ${editMode ? 'border-b border-white cursor-text' : ''}`}
                             >
                                 {viewData.username}
                             </span>
@@ -123,13 +132,34 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">비밀번호</span>
-                        <span className="font-medium16">word******</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">비밀번호</span>
+
+                        <div className="flex flex-row gap-2">
+                            <span className="font-medium16 text-white">********</span>
+                            <button className="flex justify-center items-center text-gray-100 border border-gray-100 font-medium12 leading-none px-2 py-0.5 rounded-full gap-1 cursor-pointer">
+                                <TabButton />
+                                변경
+                            </button>
+                        </div>
                     </div>
 
                     <div className="flex items-center">
-                        <span className="w-20 text-black-textSmallTitle font-light14 shrink-0">이메일</span>
-                        <span className="font-medium16">{user?.email}</span>
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">이메일</span>
+                        <span className="font-medium16 text-white">{user?.email}</span>
+                    </div>
+
+                    <div className="flex items-center">
+                        <span className="w-20 text-gray-200 font-light14 shrink-0">프로필 공개</span>
+                        <div
+                            onClick={handleToggleVisibility}
+                            className={`relative w-7.5 h-3.5 rounded-full transition-colors duration-300 cursor-pointer ${
+                                isPublic ? `bg-gray-300` : `bg-gray-400`
+                            }`}
+                        >
+                            <div
+                                className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow transition-all duration-300 ${isPublic ? 'bg-white left-[calc(100%-12px)]' : 'bg-gray-500 -left-1'}`}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

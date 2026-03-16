@@ -25,7 +25,6 @@ export default function Sidebar() {
 
     if (isProfileLoading) return null
     if (isProfileError) {
-        alert('프로필 불러오기 실패')
         return null
     }
 

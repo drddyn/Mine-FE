@@ -8,7 +8,7 @@ export default function SectionCover({ imageUrl, size, onclick }: SectionCoverPr
     return (
         <img
             src={imageUrl}
-            className={`cursor-pointer select-none rounded-lg object-cover max-w-70 max-h-100 ${size}`}
+            className={`cursor-pointer select-none object-cover w-full h-full ${size}`}
             onClick={onclick}
         />
     )
