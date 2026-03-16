@@ -9,10 +9,9 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: 'http://52.63.142.228:8080',
+                target: 'https://api.minelover.com',
                 changeOrigin: true,
             },
         },
     },
 })
-
