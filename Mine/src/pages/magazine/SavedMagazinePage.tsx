@@ -45,10 +45,9 @@ export default function SavedMagazinePage() {
                 backgroundAttachment: 'fixed',
             }}
         >
-            {/* 어두운 오버레이 */}
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
 
-            <div className="relative w-full py-[133px] pl-[266px]">
+            <div className="relative w-full py-33.25 pl-66.5">
                 <div className="relative">
                     <div className="relative overflow-x-visible overflow-y-visible w-full">
                         <div

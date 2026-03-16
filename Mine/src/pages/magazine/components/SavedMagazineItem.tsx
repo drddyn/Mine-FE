@@ -20,7 +20,7 @@ export default function SavedMagazineItem({ magazine }: Props) {
 
   return (
     <div
-      className="flex justify-end items-end shrink-0 cursor-pointer w-[476px] h-[268px] p-[16px_28px]"
+      className="flex justify-end items-end shrink-0 cursor-pointer w-119 h-67 p-[16px_28px]"
       style={{
         backgroundImage: safeImageUrl ? `url(${safeImageUrl})` : 'none',
         backgroundSize: 'cover',
