@@ -5,6 +5,7 @@ import { GridContainor } from './components/GridContainor'
 import useSidebarStore from '../../stores/sidebar'
 import MagazineInfo from './components/MagazineInfo'
 import { MagazineProvider } from './MagazineProvider'
+import MagazineSkeleton from '../../components/skeleton/MagazineSkeleton'
 
 const isValidUrl = (url?: string) => {
     if (!url) return false
@@ -26,7 +27,7 @@ export default function MagazinePage() {
         navigate(`/magazine/${magazineId}/section/${sectionId}`)
     }
 
-    if (isPending) return <></>
+    if (isPending) return <MagazineSkeleton />
     if (!data) return <></>
 
     const safeCoverImageUrl = isValidUrl(data.coverImageUrl) ? data.coverImageUrl : ''
