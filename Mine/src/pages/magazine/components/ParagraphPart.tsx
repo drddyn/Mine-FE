@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Hamburger from '../../../icon/hamburger.svg?react'
-import parse from 'html-react-parser'
+import ReactMarkDown from 'react-markdown'
 import ParagraphHamburgerModal from '../../../components/hamburgerModal/ParagraphHamburgerModal'
 import { useMagazine } from '../MagazineProvider'
 
@@ -27,7 +27,7 @@ export default function ParagraphPart({
 }: ParagraphPartProps) {
     const magazinedata = useMagazine()
 
-    const htmlcontent = content
+    const mdcontent = content
     const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const openHamburger = () => setIsHamburgerOpen(true)
@@ -64,7 +64,7 @@ export default function ParagraphPart({
                     )}
                 </div>
                 <div className="w-full font-regular16 text-black-textMain break-all " dir="ltr">
-                    {parse(htmlcontent)}
+                    <ReactMarkDown>{mdcontent}</ReactMarkDown>
                 </div>
             </div>
         </section>
