@@ -33,6 +33,7 @@ export default function SavedMagazinePage() {
     )
 
     const TOTAL_COLUMNS = columns.length
+    const TOTAL_PAGES = Math.ceil(TOTAL_COLUMNS / COLUMNS_PER_VIEW)
 
     return (
         <div
@@ -66,9 +67,9 @@ export default function SavedMagazinePage() {
                 </div>
 
                 <ArrowPagination
-                    currentPage={Math.min(columnIndex + 1, TOTAL_COLUMNS)}
-                    totalPages={TOTAL_COLUMNS}
-                    onNext={() => setColumnIndex((prev) => Math.min(prev + 1, TOTAL_COLUMNS - 1))}
+                    currentPage={Math.min(columnIndex + 1, TOTAL_PAGES)}
+                    totalPages={TOTAL_PAGES}
+                    onNext={() => setColumnIndex((prev) => Math.min(prev + 1, TOTAL_PAGES * COLUMNS_PER_VIEW - COLUMNS_PER_VIEW))}
                     onPrev={() => setColumnIndex((prev) => Math.max(prev - 1, 0))}
                 />
             </div>

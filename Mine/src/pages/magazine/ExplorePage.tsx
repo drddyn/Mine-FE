@@ -49,7 +49,7 @@ export default function ExplorePage() {
             />
 
             <div className="relative z-20 flex justify-center">
-                <div style={{ marginLeft: isOpen ? '240px' : '60px' }}>
+                <div className={`transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}>
                     <ExploreGrid magazines={magazines} />
                     <div ref={observerRef} className="h-10" />
                     {isFetchingNextPage && <div className="text-center py-4">로딩중...</div>}
