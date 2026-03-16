@@ -17,7 +17,10 @@ export default function LLMInputLayout() {
 
     const sectionMatch = matchPath('/magazine/:magazineId/section/:sectionId', location.pathname)
     const magazineMatch = matchPath('/magazine/:magazineId', location.pathname)
+
     const currentMagazineId = magazineMatch?.params.magazineId
+
+    const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
 
     let handleSend = (value: string) => {
         console.log('기본 전송:', value)
@@ -32,7 +35,7 @@ export default function LLMInputLayout() {
                 message: value,
             })
         }
-    } else if (!isHiddenPath && magazineMatch && currentMagazineId) {
+    } else if (!isHiddenPath && magazineMatch && isNumericMagazineId) {
         const { magazineId } = magazineMatch.params
         handleSend = async (value: string) => {
             postAddSectionMutation.mutate({
