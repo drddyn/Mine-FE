@@ -137,3 +137,41 @@ export type ResponseFeed = {
     nextCursor: number
     hasNext: boolean
 }
+
+export type RequestAddSection = {
+    magazineId: number
+    message: string
+}
+
+export type RequestAddSectionInSectionPage = {
+    magazineId: number
+    sectionId: number
+    message: string
+}
+export type ResponseAddSection = {
+    message: string
+    actionType: string
+    section: {
+        heading: string
+        paragraphs: Paragraph[]
+        sectionId: number
+        thumbnailUrl: string
+        layoutType: string
+        layoutHint: string
+        displayOrder: number
+    }
+}
+
+export type ResponseAddSectionInSectionPage = {
+    message: string
+    actionType: string
+    section: {
+        heading: string
+        paragraphs: Paragraph[]
+        sectionId: number
+        thumbnailUrl: string
+        layoutType: string
+        layoutHint: string
+        displayOrder: number
+    }
+}

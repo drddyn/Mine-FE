@@ -4,7 +4,11 @@ import type {
     FeedDto,
     PatchMagazineTitleDto,
     PostMagazineDto,
+    RequestAddSection,
+    RequestAddSectionInSectionPage,
     RequestDeleteMagazine,
+    ResponseAddSection,
+    ResponseAddSectionInSectionPage,
     ResponseFeed,
     ResponseRecentSection,
     SectionDetailDto,
@@ -90,5 +94,23 @@ export const getMagazineFeed = async ({ cursorId, limit = 10 }: FeedDto): Promis
 
 export const createMoodboard = async (magazineId: number) => {
     const res = await axiosInstance.post(`api/magazines/${magazineId}/moodboards`)
+    return res.data
+}
+export const postAddSection = async ({ magazineId, message }: RequestAddSection): Promise<ResponseAddSection> => {
+    const body = {
+        message: message,
+    }
+    const res = await axiosInstance.post(`api/magazines/${magazineId}/interact`, body)
+    return res.data
+}
+export const postAddSectionInSectionPage = async ({
+    magazineId,
+    sectionId,
+    message,
+}: RequestAddSectionInSectionPage): Promise<ResponseAddSectionInSectionPage> => {
+    const body = {
+        message: message,
+    }
+    const res = await axiosInstance.post(`api/magazines/${magazineId}/sections/${sectionId}/interact`, body)
     return res.data
 }
