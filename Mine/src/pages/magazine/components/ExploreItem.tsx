@@ -12,7 +12,7 @@ export default function ExploreItem({ magazine }: Props) {
 
     return (
         <div
-            className="flex w-90.5 h-60 px-5 py-4 overflow-hidden cursor-pointer"
+            className="flex justify-end items-end w-90.5 h-60 px-5 py-4 overflow-hidden cursor-pointer"
             style={{
                 backgroundImage: safeImageUrl ? `url(${safeImageUrl})` : 'none',
                 backgroundSize: 'cover',
@@ -21,7 +21,7 @@ export default function ExploreItem({ magazine }: Props) {
             }}
             onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
         >
-            <p className="flex mt-auto ml-auto font-notoserif font-semibold24 leading-none text-white text-right">
+            <p className="font-notoserif font-semibold24 leading-none text-white text-right">
                 {magazine.title}
             </p>
         </div>
