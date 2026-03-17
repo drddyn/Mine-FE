@@ -34,7 +34,9 @@ export default function MagazinePage() {
     const content = data?.sections
 
     return (
+        <>
         <MagazineProvider id={Number(magazineId)}>
+            <MagazineSkeleton/>
             <div
                 style={{ backgroundImage: safeCoverImageUrl ? `url(${safeCoverImageUrl})` : 'none' }}
                 className="bg-cover overflow-hidden"
@@ -64,5 +66,6 @@ export default function MagazinePage() {
                 </div>
             </div>
         </MagazineProvider>
+        </>
     )
 }

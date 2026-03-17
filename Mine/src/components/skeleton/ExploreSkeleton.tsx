@@ -1,29 +1,33 @@
-import { SkeletonBox } from '../../components/skeleton/SkeletonBase'
+import { SkeletonBox, SkeletonAvatar } from '../../components/skeleton/SkeletonBase'
+
 
 export default function ExploreSkeleton() {
     return (
-        <div className="w-full flex flex-col px-4 py-6 gap-6">
-            {/* 검색바 영역 */}
-            <SkeletonBox width="w-full" height="h-10" rounded="rounded-full" />
-            
-            {/* 피처드(큰 썸네일) 영역 */}
-            <SkeletonBox width="w-full" height="h-56" rounded="rounded-xl" />
-            
-            {/* 가로 스크롤 카테고리 칩 목록 */}
-            <div className="flex gap-2 overflow-hidden">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                    <SkeletonBox key={idx} width="w-16 shrink-0" height="h-8" rounded="rounded-full" />
-                ))}
-            </div>
-
-            {/* 2열 그리드 아티클들 */}
-            <div className="grid grid-cols-2 gap-4">
-                {Array.from({ length: 4 }).map((_, idx) => (
-                    <div key={idx} className="flex flex-col gap-2">
-                        <SkeletonBox width="w-full" height="h-32" rounded="rounded-lg" />
-                        <SkeletonBox width="w-3/4" height="h-4" />
+        <div className="w-full h-screen overflow-y-auto bg-white">
+            <div className="relative w-full min-h-full">
+                
+                {/* 1. 시작 위치 설정: 좌측 199px, 상단 161px 패딩 */}
+                <div className="pt-40.25 pl-49.75 pb-20">
+                    
+                    {/* 2. 3열 그리드 및 간격 8px 설정 */}
+                    <div className="grid grid-cols-3 gap-2 w-fit">
+                        {/* 3행 3열 (총 9개) */}
+                        {Array.from({ length: 9 }).map((_, idx) => (
+                            <SkeletonBox 
+                                key={idx} 
+                                width="w-[362px]" 
+                                height="h-[240px]" 
+                                rounded="rounded-none" 
+                            />
+                        ))}
                     </div>
-                ))}
+
+                    {/* 3. 하단 중앙 로딩 (그리드 너비에 맞춰 중앙 정렬) */}
+                    <div className="w-[calc(362px*3+8px*2)] flex justify-center py-10">
+                        <SkeletonAvatar size="w-[30px] h-[30px]" className="bg-gray-200" />
+                    </div>
+                    
+                </div>
             </div>
         </div>
     )

@@ -1,18 +1,35 @@
 import { SkeletonBox } from '../../components/skeleton/SkeletonBase'
+import SidebarSkeleton from '../../layout/sidebar/SidebarSkeleton'
 
 export default function SavedMagazineSkeleton() {
     return (
-        <div className="w-full flex flex-col gap-4 px-4 py-6">
-            {Array.from({ length: 5 }).map((_, idx) => (
-                <div key={idx} className="flex gap-4 items-center">
-                    <SkeletonBox width="w-24 shrink-0" height="h-24" rounded="rounded-md" />
-                    <div className="flex flex-col gap-2 w-full">
-                        <SkeletonBox width="w-2/3" height="h-5" />
-                        <SkeletonBox width="w-1/2" height="h-4" />
-                        <SkeletonBox width="w-1/3" height="h-3" className="mt-2" />
-                    </div>
+        <div className="flex w-full min-h-screen">
+            {/* 사이드바 영역 */}
+            <SidebarSkeleton />
+
+            {/* 메인 컨텐츠 영역: 왼쪽에서 266px, 위에서 133px 떨어진 지점부터 시작 */}
+            <div 
+                className="flex-1" 
+                style={{ 
+                    paddingLeft: 'calc(266px - 256px)', // 사이드바 너비(예: 256px)를 제외한 나머지 여백
+                    paddingTop: '133px' 
+                }}
+            >
+                {/* 2행 3열 그리드, 간격 8px */}
+                <div 
+                    className="grid grid-cols-3 w-fit" 
+                    style={{ gap: '8px' }}
+                >
+                    {Array.from({ length: 6 }).map((_, idx) => (
+                        <SkeletonBox 
+                            key={idx} 
+                            width="476px" 
+                            height="268px" 
+                            rounded="rounded-md" 
+                        />
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     )
 }

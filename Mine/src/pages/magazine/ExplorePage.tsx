@@ -26,10 +26,12 @@ export default function ExplorePage() {
     if (isLoading) return <ExploreSkeleton />
 
     return (
+        <>
+        <ExploreSkeleton/>
         <div className="min-h-screen pt-39.25 pb-10 px-32.75 relative">
             <ExploreGrid magazines={magazines} />
             <div ref={observerRef} className="h-10" />
             {isFetchingNextPage && <div className="text-center py-4">로딩중...</div>}
-        </div>
+        </div></>
     )
 }

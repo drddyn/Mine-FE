@@ -34,6 +34,8 @@ export default function SavedMagazinePage() {
   const TOTAL_COLUMNS = columns.length
 
   return (
+    <>
+    <SavedMagazineSkeleton/>
     <div className="relative min-h-screen bg-white overflow-x-hidden">
       <div className="relative pt-25 pb-40 px-51.5">
         <div className="relative">
@@ -63,5 +65,6 @@ export default function SavedMagazinePage() {
         />
       </div>
     </div>
+    </>
   )
 }

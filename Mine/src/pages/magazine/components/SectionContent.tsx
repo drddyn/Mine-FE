@@ -28,6 +28,8 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }
 
     return (
+        <>
+        <SectionSkeleton/>
         <div style={{ backgroundImage: `url(${magazinedata?.coverImageUrl})` }} className="flex h-screen">
             <div
                 className={`flex justify-center w-275 h-full bg-white relative transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}
@@ -55,6 +57,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     ))}
                 </div>
             </div>
-        </div>
+        </div></>
     )
 }
