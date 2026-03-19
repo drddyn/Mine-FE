@@ -97,15 +97,18 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
 
                 <Hamburger className="rotate-90 text-black-icon cursor-pointer" onClick={handleHamburger} />
 
-                {isHamburgerOpen && mode === 'section' && magazinedata?.magazineId !== undefined && sectionId !== undefined && (
-                    <SectionHamburgerModal
-                        handleClose={closeHamburger}
-                        magazineId={magazinedata?.magazineId}
-                        sectionId={sectionId}
-                        top={modalPos.top}
-                        left={modalPos.left}
-                    />
-                )}
+                {isHamburgerOpen &&
+                    mode === 'section' &&
+                    magazinedata?.magazineId !== undefined &&
+                    sectionId !== undefined && (
+                        <SectionHamburgerModal
+                            handleClose={closeHamburger}
+                            magazineId={magazinedata?.magazineId}
+                            sectionId={sectionId}
+                            top={modalPos.top}
+                            left={modalPos.left}
+                        />
+                    )}
             </div>
 
             <HeartCount
@@ -115,7 +118,9 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
             />
             <ProfileBox nickname={nickname} profileImage={profileImage} mode={mode} classname="basis-100 justify-end" />
 
-            {isHamburgerOpen && mode === 'magazine' && magazinedata?.magazineId !== undefined &&
+            {isHamburgerOpen &&
+                mode === 'magazine' &&
+                magazinedata?.magazineId !== undefined &&
                 createPortal(
                     <SidebarHamburgerModal
                         handleClose={closeHamburger}
@@ -128,8 +133,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                         }}
                     />,
                     document.body
-                )
-            }
+                )}
         </div>
     )
 }

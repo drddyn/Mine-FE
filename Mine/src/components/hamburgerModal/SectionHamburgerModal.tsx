@@ -15,7 +15,13 @@ interface SectionHamburgerModalProps {
     handleClose: () => void
 }
 
-export default function SectionHamburgerModal({ sectionId, magazineId, top, left, handleClose }: SectionHamburgerModalProps) {
+export default function SectionHamburgerModal({
+    sectionId,
+    magazineId,
+    top,
+    left,
+    handleClose,
+}: SectionHamburgerModalProps) {
     const modalRef = useRef<HTMLDivElement>(null)
     useClickOutside(modalRef, handleClose)
 
@@ -41,9 +47,7 @@ export default function SectionHamburgerModal({ sectionId, magazineId, top, left
                 </div>
             )}
 
-            {showShareModal && (
-                <ShareModal onClose={handleClose} />
-            )}
+            {showShareModal && <ShareModal onClose={handleClose} />}
         </>
     )
 }

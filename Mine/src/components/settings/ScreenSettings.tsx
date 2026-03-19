@@ -17,7 +17,6 @@ export default function ScreenSettings() {
     const { mutateAsync: uploadImage } = useUploadImage()
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
     const { mutateAsync: patchCover } = usePatchMagazineCover()
-
     const handleOpenFile = () => {
         fileInputRef.current?.click()
     }

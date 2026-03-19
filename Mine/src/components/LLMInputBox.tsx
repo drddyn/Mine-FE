@@ -61,8 +61,7 @@ export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
             <button
                 onClick={handleSend}
                 disabled={!text.trim()}
-                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}
-            `}
+                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}`}
             >
                 <Arrow />
             </button>

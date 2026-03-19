@@ -13,6 +13,7 @@ interface ParagraphHamburgerModalProps {
     paragraphId?: number
     children?: React.ReactNode
     handleClose: () => void
+    // onEdit: (id?: number) => void
 }
 
 export default function ParagraphHamburgerModal({

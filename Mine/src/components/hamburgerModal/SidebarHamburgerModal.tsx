@@ -46,9 +46,7 @@ export default function SidebarHamburgerModal({ id, top, left, handleClose, onEd
                 </div>
             )}
 
-            {showShareModal && (
-                <ShareModal onClose={handleClose} />
-            )}
+            {showShareModal && <ShareModal onClose={handleClose} />}
         </>
     )
 }

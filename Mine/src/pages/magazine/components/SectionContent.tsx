@@ -26,7 +26,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const handleClick = (magazineId: number) => {
         navigate(`/magazine/${magazineId}`)
     }
-
     if (isLoading) {
         return <></>
     }
@@ -58,7 +57,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                         />
                     ))}
                 </div>
-
                 <button
                     onClick={() => setIsScreenSettingsOpen(true)}
                     className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100"

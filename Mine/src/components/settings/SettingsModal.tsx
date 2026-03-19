@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import ProfileSettings from './ProfileSettings'
 import InterestSettings from './InterestSettings'
-
 import X from '../../icon/X.svg?react'
 import Logout from '../../icon/logout.svg?react'
 import Edit from '../../icon/edit.svg?react'
