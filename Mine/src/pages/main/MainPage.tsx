@@ -22,12 +22,8 @@ export default function MainPage() {
 
     return (
         <div
-            className="flex flex-col items-center justify-center w-full h-full relative z-0 overflow-hidden"
-            style={{
-                backgroundImage: `url(${landingBg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
+            className="flex flex-col items-center justify-center w-full h-full relative z-0 overflow-hidden bg-cover bg-center"
+            style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-linear-to-r from-gray-500-op70 via-black/45 to-gray-500-op70 z-0" />
             <div

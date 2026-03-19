@@ -61,16 +61,12 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
 
                 <button
                     onClick={() => setIsScreenSettingsOpen(true)}
-                    className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
+                    className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100"
                 >
-                    <IconWandStars className="w-6 h-6 **:fill-current" />
+                    <IconWandStars className="w-6 h-6" />
                 </button>
             </div>
-
-            <ScreenSettingsModal
-                isOpen={isScreenSettingsOpen}
-                onClose={() => setIsScreenSettingsOpen(false)}
-            />
+            <ScreenSettingsModal isOpen={isScreenSettingsOpen} onClose={() => setIsScreenSettingsOpen(false)} />
         </div>
     )
 }
