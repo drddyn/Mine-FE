@@ -96,6 +96,7 @@ export const createMoodboard = async (magazineId: number) => {
     const res = await axiosInstance.post(`api/magazines/${magazineId}/moodboards`)
     return res.data
 }
+
 export const postAddSection = async ({ magazineId, message }: RequestAddSection): Promise<ResponseAddSection> => {
     const body = {
         message: message,
@@ -103,6 +104,7 @@ export const postAddSection = async ({ magazineId, message }: RequestAddSection)
     const res = await axiosInstance.post(`api/magazines/${magazineId}/interact`, body)
     return res.data
 }
+
 export const postAddSectionInSectionPage = async ({
     magazineId,
     sectionId,
@@ -112,5 +114,10 @@ export const postAddSectionInSectionPage = async ({
         message: message,
     }
     const res = await axiosInstance.post(`api/magazines/${magazineId}/sections/${sectionId}/interact`, body)
+    return res.data
+}
+
+export const patchMagazineCover = async (id: number, coverImageUrl: string) => {
+    const res = await axiosInstance.patch(`api/magazines/${id}/cover`, { coverImageUrl })
     return res.data
 }

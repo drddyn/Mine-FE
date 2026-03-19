@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import IconAddPhoto from '../../icon/add_photo_alternate.svg?react'
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
 import useUploadImage from '../../hooks/useUploadImage'
+import usePatchMagazineCover from '../../hooks/usePatchMagazineCover'
 import ConfirmModal from '../common/ConfirmModal'
 import Toast from '../common/Toast'
 
@@ -15,6 +16,7 @@ export default function ScreenSettings() {
     const fileInputRef = useRef<HTMLInputElement>(null)
     const { mutateAsync: uploadImage } = useUploadImage()
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
+    const { mutateAsync: patchCover } = usePatchMagazineCover()
 
     const handleOpenFile = () => {
         fileInputRef.current?.click()
@@ -24,9 +26,9 @@ export default function ScreenSettings() {
         const file = e.target.files?.[0]
         if (!file) return
         try {
-            await uploadImage(file)
+            const { imageUrl } = await uploadImage(file)
+            await patchCover({ id: Number(magazineId), coverImageUrl: imageUrl })
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('이미지 업로드 실패:', error)
         }
@@ -39,7 +41,6 @@ export default function ScreenSettings() {
             await createMoodboard(Number(magazineId))
             setIsConfirmOpen(false)
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
         } finally {
@@ -47,20 +48,29 @@ export default function ScreenSettings() {
         }
     }
 
+    useEffect(() => {
+        if (showToast) {
+            const timerId = setTimeout(() => {
+                setShowToast(false)
+            }, 3000)
+            return () => clearTimeout(timerId)
+        }
+    }, [showToast])
+
     return (
         <>
             <div className="w-136.5 h-36.5 flex gap-6.5">
                 <button
                     onClick={() => setIsConfirmOpen(true)}
-                    className="flex flex-col w-65 h-full rounded-2xl border border-white/30 bg-white/10 items-center justify-center gap-3 text-white/70 transition-colors duration-150 hover:bg-white/20 hover:border-white/50 hover:text-white"
+                    className="flex flex-col w-65 h-full rounded-2xl border border-gray-100-op40 bg-gray-500-op40 items-center justify-center gap-3 text-gray-100-op70 transition-colors duration-150 hover:bg-white/20 hover:border-gray-100-op40 hover:text-gray-100-op70"
                 >
-                    <IconWandStars className="w-6 h-6 aspect-square **:stroke-current **:fill-current" />
+                    <IconWandStars className="w-6 h-6 aspect-square **:fill-current" />
                     <span className="font-regular14">AI로 무드보드 생성하기</span>
                 </button>
 
                 <button
                     onClick={handleOpenFile}
-                    className="flex flex-col w-65 h-full rounded-2xl border border-white/30 bg-white/10 items-center justify-center gap-3 text-white/70 transition-colors duration-150 hover:bg-white/20 hover:border-white/50 hover:text-white"
+                    className="flex flex-col w-65 h-full rounded-2xl border border-gray-100-op40 bg-gray-500-op40 items-center justify-center gap-3 text-gray-100-op70 transition-colors duration-150 hover:bg-white/20 hover:border-gray-100-op40 hover:text-gray-100-op70"
                 >
                     <IconAddPhoto className="w-6 h-6 aspect-square **:stroke-current **:fill-current" />
                     <span className="font-regular14">컴퓨터에서 이미지 가져오기</span>
