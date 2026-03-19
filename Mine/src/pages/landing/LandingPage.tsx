@@ -12,12 +12,8 @@ export default function LandingPage() {
 
     return (
         <div
-            className="relative min-h-screen w-screen overflow-hidden"
-            style={{
-                backgroundImage: `url(${landingBg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
+            className="relative min-h-screen w-screen overflow-hidden bg-center bg-cover"
+            style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
             <Minelogo className="absolute left-20 top-17 w-35 h-17.5 z-20" />
