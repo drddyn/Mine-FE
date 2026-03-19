@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import ProfileSettings from './ProfileSettings'
-import ScreenSettings from './ScreenSettings'
 import InterestSettings from './InterestSettings'
 
 import X from '../../icon/X.svg?react'
@@ -15,7 +14,7 @@ interface SettingsProps {
 }
 
 export default function SettingsModal({ onClose }: SettingsProps) {
-    const [activeTab, setActiveTab] = useState<'profile' | 'interest' | 'screen'>('profile')
+    const [activeTab, setActiveTab] = useState<'profile' | 'interest'>('profile')
     const [editMode, setEditMode] = useState(false)
     const [showLogoutToast, setShowLogoutToast] = useState(false)
     const [showSaveToast, setShowSaveToast] = useState(false)
@@ -88,15 +87,6 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         >
                             관심사 설정
                         </button>
-                        <button
-                            onClick={() => {
-                                setActiveTab('screen')
-                                setEditMode(false)
-                            }}
-                            className={`text-left transition-all ${activeTab === 'screen' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
-                        >
-                            화면 설정
-                        </button>
                     </div>
 
                     <div className="flex-1 py-14 pr-10 overflow-hidden">
@@ -112,7 +102,6 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         {activeTab === 'interest' && (
                             <InterestSettings interests={selectedInterests} onChange={setSelectedInterests} />
                         )}
-                        {activeTab === 'screen' && <ScreenSettings />}
                     </div>
 
                     {activeTab === 'profile' && (
