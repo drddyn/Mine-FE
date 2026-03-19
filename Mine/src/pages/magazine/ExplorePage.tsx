@@ -27,13 +27,10 @@ export default function ExplorePage() {
 
     return (
         <div
-            className="min-h-screen pt-39.25 pb-10 relative"
+            className="min-h-screen pt-39.25 pb-10 relative bg-center bg-cover min-w-300"
             style={{
                 backgroundImage: `url(${explorebg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
                 backgroundAttachment: 'fixed',
-                minWidth: '1200px',
             }}
         >
             {/* 어두운 오버레이 */}
@@ -44,7 +41,8 @@ export default function ExplorePage() {
                 className="fixed top-0 left-0 w-full pointer-events-none z-10"
                 style={{
                     height: '244px',
-                    background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.40) 29.51%, rgba(255, 255, 255, 0.00) 93.65%)',
+                    background:
+                        'linear-gradient(180deg, rgba(255, 255, 255, 0.40) 29.51%, rgba(255, 255, 255, 0.00) 93.65%)',
                 }}
             />
 

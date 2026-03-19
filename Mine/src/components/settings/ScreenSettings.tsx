@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import IconAddPhoto from '../../icon/add_photo_alternate.svg?react'
@@ -29,7 +29,6 @@ export default function ScreenSettings() {
             const { imageUrl } = await uploadImage(file)
             await patchCover({ id: Number(magazineId), coverImageUrl: imageUrl })
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('이미지 업로드 실패:', error)
         }
@@ -42,13 +41,21 @@ export default function ScreenSettings() {
             await createMoodboard(Number(magazineId))
             setIsConfirmOpen(false)
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
         } finally {
             setIsLoading(false)
         }
     }
+
+    useEffect(() => {
+        if (showToast) {
+            const timerId = setTimeout(() => {
+                setShowToast(false)
+            }, 3000)
+            return () => clearTimeout(timerId)
+        }
+    }, [showToast])
 
     return (
         <>

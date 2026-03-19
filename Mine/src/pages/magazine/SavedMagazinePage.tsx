@@ -29,7 +29,7 @@ export default function SavedMagazinePage() {
     }
 
     const columns = Array.from({ length: Math.ceil(magazines.length / ITEMS_PER_COLUMN) }, (_, i) =>
-        magazines.slice(i * ITEMS_PER_COLUMN, i * ITEMS_PER_COLUMN + ITEMS_PER_COLUMN),
+        magazines.slice(i * ITEMS_PER_COLUMN, i * ITEMS_PER_COLUMN + ITEMS_PER_COLUMN)
     )
 
     const TOTAL_COLUMNS = columns.length
@@ -37,11 +37,9 @@ export default function SavedMagazinePage() {
 
     return (
         <div
-            className="relative min-h-screen overflow-x-hidden flex items-center"
+            className="relative min-h-screen overflow-x-hidden flex items-center bg-center bg-cover"
             style={{
                 backgroundImage: `url(${savedbg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
                 backgroundAttachment: 'fixed',
             }}
         >
@@ -68,7 +66,9 @@ export default function SavedMagazinePage() {
                 <ArrowPagination
                     currentPage={Math.min(columnIndex + 1, TOTAL_PAGES)}
                     totalPages={TOTAL_PAGES}
-                    onNext={() => setColumnIndex((prev) => Math.min(prev + 1, TOTAL_PAGES * COLUMNS_PER_VIEW - COLUMNS_PER_VIEW))}
+                    onNext={() =>
+                        setColumnIndex((prev) => Math.min(prev + 1, TOTAL_PAGES * COLUMNS_PER_VIEW - COLUMNS_PER_VIEW))
+                    }
                     onPrev={() => setColumnIndex((prev) => Math.max(prev - 1, 0))}
                 />
             </div>

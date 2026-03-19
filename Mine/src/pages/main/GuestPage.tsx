@@ -27,12 +27,8 @@ export default function GuestPage() {
 
     return (
         <div
-            className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden"
-            style={{
-                backgroundImage: `url(${bg2})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
+            className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden bg-center bg-cover"
+            style={{ backgroundImage: `url(${bg2})` }}
         >
             <div className="absolute inset-0 bg-black/30" />
             <div
