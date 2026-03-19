@@ -98,10 +98,7 @@ export const createMoodboard = async (magazineId: number) => {
 }
 
 export const postAddSection = async ({ magazineId, message }: RequestAddSection): Promise<ResponseAddSection> => {
-    const body = {
-        message: message,
-    }
-    const res = await axiosInstance.post(`api/magazines/${magazineId}/interact`, body)
+    const res = await axiosInstance.post(`api/magazines/${magazineId}/interact`, { message })
     return res.data
 }
 
@@ -110,10 +107,7 @@ export const postAddSectionInSectionPage = async ({
     sectionId,
     message,
 }: RequestAddSectionInSectionPage): Promise<ResponseAddSectionInSectionPage> => {
-    const body = {
-        message: message,
-    }
-    const res = await axiosInstance.post(`api/magazines/${magazineId}/sections/${sectionId}/interact`, body)
+    const res = await axiosInstance.post(`api/magazines/${magazineId}/sections/${sectionId}/interact`, { message })
     return res.data
 }
 

@@ -1,12 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import type { RequestAddSectionInSectionPage } from '../types/magazine'
 import { postAddSectionInSectionPage } from '../api/magazine'
 
 export default function usePostAddSectionInSectionPage() {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: ({ magazineId, sectionId, message }: RequestAddSectionInSectionPage) =>
-            postAddSectionInSectionPage({ magazineId, sectionId, message }),
+        mutationFn: postAddSectionInSectionPage,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['mymagazines', 'sections'] })
         },

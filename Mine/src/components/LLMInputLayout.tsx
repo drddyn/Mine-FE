@@ -22,29 +22,26 @@ export default function LLMInputLayout() {
 
     const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
 
-    let handleSend = (value: string) => {
-        console.log('기본 전송:', value)
-    }
     if (!isLoggedIn || isHiddenPath) return null
-    if (!isHiddenPath && sectionMatch) {
-        const { magazineId, sectionId } = sectionMatch.params
-        handleSend = async (value: string) => {
+
+    const handleSend = (value: string) => {
+        if (sectionMatch) {
+            // 섹션 페이지
+            const { magazineId, sectionId } = sectionMatch.params
             postAddInSectionPageMutation.mutate({
                 magazineId: Number(magazineId),
                 sectionId: Number(sectionId),
                 message: value,
             })
-        }
-    } else if (!isHiddenPath && magazineMatch && isNumericMagazineId) {
-        const { magazineId } = magazineMatch.params
-        handleSend = async (value: string) => {
+        } else if (magazineMatch && isNumericMagazineId) {
+            // 매거진 페이지
+            const { magazineId } = magazineMatch.params
             postAddSectionMutation.mutate({
                 magazineId: Number(magazineId),
                 message: value,
             })
-        }
-    } else if (!isHiddenPath) {
-        handleSend = async (value: string) => {
+        } else {
+            // 그외 페이지
             postMagazineMutation.mutate({
                 topic: value,
                 user_mood: '',

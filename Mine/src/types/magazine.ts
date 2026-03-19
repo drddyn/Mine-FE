@@ -162,16 +162,4 @@ export type ResponseAddSection = {
     }
 }
 
-export type ResponseAddSectionInSectionPage = {
-    message: string
-    actionType: string
-    section: {
-        heading: string
-        paragraphs: Paragraph[]
-        sectionId: number
-        thumbnailUrl: string
-        layoutType: string
-        layoutHint: string
-        displayOrder: number
-    }
-}
+export type ResponseAddSectionInSectionPage = ResponseAddSection
