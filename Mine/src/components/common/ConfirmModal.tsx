@@ -27,8 +27,8 @@ export default function ConfirmModal({
                         <p
                             className="font-regular20 text-white/70 whitespace-pre-line"
                             style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
+                        >
                             {description}
-                            >
                         </p>
                     )}
                 </div>
@@ -52,4 +52,3 @@ export default function ConfirmModal({
         </div>
     )
 }
-
