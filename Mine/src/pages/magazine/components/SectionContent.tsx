@@ -66,7 +66,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     <IconWandStars className="w-6 h-6" />
                 </button>
             </div>
-
             <ScreenSettingsModal isOpen={isScreenSettingsOpen} onClose={() => setIsScreenSettingsOpen(false)} />
         </div>
     )
