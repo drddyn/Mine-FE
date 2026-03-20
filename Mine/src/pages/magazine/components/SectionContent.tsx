@@ -5,13 +5,12 @@ import SectionIndexList from './SectionIndexList'
 import ParagraphPart from './ParagraphPart'
 import useSidebarStore from '../../../stores/sidebar'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import IconWandStars from '../../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../../hooks/useCreateMoodboard'
 import Toast from '../../../components/common/Toast'
-import { useParams } from 'react-router-dom'
 
 interface SectionContentProps {
     sectionId: number
@@ -22,7 +21,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const { isOpen } = useSidebarStore()
     const magazinedata = useMagazine()
     const navigate = useNavigate()
-    const { magazineId: magazineIdParam } = useParams<{ magazineId: string }>()
     const { data, isLoading } = useGetSectionDetail(Number(magazineId), Number(sectionId))
     const user = magazinedata?.user
     const content = data?.paragraphs
@@ -32,6 +30,12 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
 
+    useEffect(() => {
+        if (!showToast) return
+        const timer = setTimeout(() => setShowToast(false), 3000)
+        return () => clearTimeout(timer)
+    }, [showToast])
+
     const handleClick = (magazineId: number) => {
         navigate(`/magazine/${magazineId}`)
     }
@@ -40,10 +44,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
         if (isConfirmLoading) return
         setIsConfirmLoading(true)
         try {
-            await createMoodboard(Number(magazineIdParam))
+            await createMoodboard(Number(magazineId))
             setIsConfirmOpen(false)
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
         } finally {

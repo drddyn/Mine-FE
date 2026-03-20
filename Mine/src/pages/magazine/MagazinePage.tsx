@@ -5,7 +5,7 @@ import { GridContainor } from './components/GridContainor'
 import useSidebarStore from '../../stores/sidebar'
 import MagazineInfo from './components/MagazineInfo'
 import { MagazineProvider } from './MagazineProvider'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../components/common/ConfirmModal'
@@ -33,6 +33,12 @@ export default function MagazinePage() {
     const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
 
+    useEffect(() => {
+        if (!showToast) return
+        const timer = setTimeout(() => setShowToast(false), 3000)
+        return () => clearTimeout(timer)
+    }, [showToast])
+
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/magazine/${magazineId}/section/${sectionId}`)
     }
@@ -44,7 +50,6 @@ export default function MagazinePage() {
             await createMoodboard(Number(magazineId))
             setIsConfirmOpen(false)
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
         } finally {

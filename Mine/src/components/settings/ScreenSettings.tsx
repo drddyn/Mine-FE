@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import IconAddPhoto from '../../icon/add_photo_alternate.svg?react'
@@ -19,15 +19,20 @@ export default function ScreenSettings({ onClose, onRequestConfirm }: ScreenSett
     const { mutateAsync: uploadImage } = useUploadImage()
     const { mutateAsync: patchCover } = usePatchMagazineCover()
 
+    useEffect(() => {
+        if (!showToast) return
+        const timer = setTimeout(() => setShowToast(false), 3000)
+        return () => clearTimeout(timer)
+    }, [showToast])
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
         try {
             const { imageUrl } = await uploadImage(file)
             await patchCover({ id: Number(magazineId), coverImageUrl: imageUrl })
-            setToastMessage('커버 이미지가 변경되었습니다.')
+            setToastMessage('무드보드가 변경되었습니다.')
             setShowToast(true)
-            setTimeout(() => setShowToast(false), 3000)
         } catch (error) {
             console.error('이미지 업로드 실패:', error)
         }
