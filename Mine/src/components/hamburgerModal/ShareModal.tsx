@@ -45,7 +45,7 @@ export default function ShareModal({ onClose }: ShareModalProps) {
                 <div className="flex items-center justify-center gap-7">
                     {buttons.map(({ icon, label, onClick }) => (
                         <button key={label} onClick={onClick} className="flex flex-col items-center w-16 gap-2">
-                            <div className="w-14 h-14 flex items-center justify-center rounded-full border border-gray-100">
+                            <div className="w-14 h-14 flex items-center justify-center rounded-full border border-gray-100 hover:bg-gray-600-op70 transition-colors duration-150">
                                 {icon}
                             </div>
                             <span className="font-medium12 text-gray-100 text-center">{label}</span>

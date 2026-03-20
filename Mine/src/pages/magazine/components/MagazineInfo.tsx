@@ -58,7 +58,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
             return
         }
         updateTitleMutation.mutate(
-            { id: magazinedata?.magazineId ?? 0, title: next, introduction: '' },
+            { id: magazinedata?.magazineId ?? 0, title: next, introduction: magazinedata?.introduction ?? '' },
             { onSuccess: () => cancelEdit() }
         )
     }
