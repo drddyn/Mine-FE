@@ -9,7 +9,6 @@ interface ParagraphPartProps {
     sectionId?: number
     sectionDir?: string
     titleDir?: string
-    size?: string
     smallTitle?: string
     content: string
     imageUrl?: string
@@ -20,7 +19,6 @@ export default function ParagraphPart({
     sectionId,
     sectionDir,
     titleDir,
-    size,
     smallTitle,
     content,
     imageUrl,
@@ -42,8 +40,8 @@ export default function ParagraphPart({
         openHamburger()
     }
     return (
-        <section className="group flex w-full h-69.5 items-start gap-10" dir={sectionDir}>
-            <img src={imageUrl} className={`w-57.5 h-full rounded-lg ${size}`}></img>
+        <section className="group flex w-full items-center gap-10" dir={sectionDir}>
+            {imageUrl && <img src={imageUrl} className="object-scale-down max-h-70 max-w-[45%] shrink-0 "></img>}
             <div className="flex flex-col ltr:ml-2.5 rtl:mr-2.5 h-full items-start gap-6 flex-1">
                 <div className="flex w-full justify-between items-center " dir={titleDir}>
                     <div className="font-medium36 font-notoserif text-gray-600">{smallTitle}</div>

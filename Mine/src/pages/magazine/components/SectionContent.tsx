@@ -31,38 +31,43 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }
 
     return (
-        <div style={{ backgroundImage: `url(${magazinedata?.coverImageUrl})` }} className="flex h-screen">
+        <div
+            style={{ backgroundImage: `url(${magazinedata?.coverImageUrl})` }}
+            className="w-full overflow-hidden bg-fixed bg-cover h-screen"
+        >
             <div
-                className={`flex justify-center w-275 h-full bg-white relative transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}
+                className={`justify-center h-full overflow-y-auto overflow-x-hidden transition-all duration-200 scrollbar-no ${isOpen ? 'ml-60' : 'ml-15'}`}
             >
-                <SectionIndexList sectionId={Number(sectionId)} />
-                <div className="flex flex-col w-245 items-center gap-14 mt-9 mb-60 z-10">
-                    <MagazineInfo
-                        nickname={user?.nickname}
-                        profileImage={user?.profileImageUrl}
-                        sectionId={Number(sectionId)}
-                        mode="section"
-                        onClick={handleClick}
-                    />
-
-                    {content?.map((content) => (
-                        <ParagraphPart
-                            paragrahId={content?.paragraphId}
-                            sectionId={sectionId}
-                            smallTitle={content?.subtitle}
-                            content={content.text}
-                            imageUrl={content?.imageUrl}
-                            sectionDir="rtl"
-                            titleDir="ltr"
+                <div className="flex justify-center px-15 bg-white relative min-h-full w-275 mr-32">
+                    <SectionIndexList sectionId={Number(sectionId)} />
+                    <div className="flex flex-col w-245 items-center gap-14 mt-9 mb-22 z-10">
+                        <MagazineInfo
+                            nickname={user?.nickname}
+                            profileImage={user?.profileImageUrl}
+                            sectionId={Number(sectionId)}
+                            mode="section"
+                            onClick={handleClick}
                         />
-                    ))}
+                        {content?.map((item, index) => (
+                            <ParagraphPart
+                                key={item?.paragraphId || index}
+                                paragrahId={item?.paragraphId}
+                                sectionId={sectionId}
+                                smallTitle={item?.subtitle}
+                                content={item?.text}
+                                imageUrl={item?.imageUrl}
+                                sectionDir={index % 2 === 0 ? 'rtl' : 'ltr'}
+                                titleDir={index % 2 === 0 ? 'ltr' : 'rtl'}
+                            />
+                        ))}
+                    </div>
+                    <button
+                        onClick={() => setIsScreenSettingsOpen(true)}
+                        className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100"
+                    >
+                        <IconWandStars className="w-6 h-6" />
+                    </button>
                 </div>
-                <button
-                    onClick={() => setIsScreenSettingsOpen(true)}
-                    className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100"
-                >
-                    <IconWandStars className="w-6 h-6" />
-                </button>
             </div>
             <ScreenSettingsModal isOpen={isScreenSettingsOpen} onClose={() => setIsScreenSettingsOpen(false)} />
         </div>
