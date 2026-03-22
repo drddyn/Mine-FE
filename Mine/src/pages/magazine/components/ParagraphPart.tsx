@@ -25,7 +25,6 @@ export default function ParagraphPart({
 }: ParagraphPartProps) {
     const magazinedata = useMagazine()
 
-    const mdcontent = content
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const handleHamburger = () => setIsHamburgerOpen((prev) => !prev)
     const closeHamburger = () => setIsHamburgerOpen(false)
@@ -55,7 +54,7 @@ export default function ParagraphPart({
                     </div>
                 </div>
                 <div className="w-full font-regular16 text-black-textMain break-all " dir="ltr">
-                    <ReactMarkDown>{mdcontent}</ReactMarkDown>
+                    <ReactMarkDown>{content}</ReactMarkDown>
                 </div>
             </div>
         </section>

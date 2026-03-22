@@ -50,7 +50,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                         />
                         {content?.map((item, index) => (
                             <ParagraphPart
-                                key={item?.paragraphId || index}
+                                key={item?.paragraphId}
                                 paragrahId={item?.paragraphId}
                                 sectionId={sectionId}
                                 smallTitle={item?.subtitle}
