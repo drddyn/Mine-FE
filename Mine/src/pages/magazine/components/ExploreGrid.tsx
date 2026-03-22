@@ -7,7 +7,13 @@ interface ExploreGridProps {
 
 export default function ExploreGrid({ magazines }: ExploreGridProps) {
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div
+            className="grid"
+            style={{
+                gridTemplateColumns: 'repeat(3, 362px)',
+                gap: '8px',
+            }}
+        >
             {magazines.map((magazine) => (
                 <ExploreItem key={magazine.magazineId} magazine={magazine} />
             ))}

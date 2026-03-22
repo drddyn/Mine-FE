@@ -1,10 +1,11 @@
+import { useRef, useState } from 'react'
 import Edit from '../../icon/edit.svg?react'
 import Share from '../../icon/share.svg?react'
 import Delete from '../../icon/delete.svg?react'
 import { HamburgerSection } from './HamburgerSection'
 import useDeleteSection from '../../hooks/useDeleteSection'
-import { useState } from 'react'
 import ShareModal from './ShareModal'
+import useClickOutside from '../../hooks/useClickOutside'
 
 interface SectionHamburgerModalProps {
     top: number
@@ -14,7 +15,16 @@ interface SectionHamburgerModalProps {
     handleClose: () => void
 }
 
-export default function SectionHamburgerModal({ sectionId, magazineId, top, left, handleClose }: SectionHamburgerModalProps) {
+export default function SectionHamburgerModal({
+    sectionId,
+    magazineId,
+    top,
+    left,
+    handleClose,
+}: SectionHamburgerModalProps) {
+    const modalRef = useRef<HTMLDivElement>(null)
+    useClickOutside(modalRef, handleClose)
+
     const deleteSectionMutation = useDeleteSection()
     const [showShareModal, setShowShareModal] = useState(false)
 
@@ -27,6 +37,7 @@ export default function SectionHamburgerModal({ sectionId, magazineId, top, left
         <>
             {!showShareModal && (
                 <div
+                    ref={modalRef}
                     className="fixed flex flex-col px-1 py-1 rounded-lg bg-gray-500-op70 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-100"
                     style={{ top: `${top}px`, left: `${left}px` }}
                 >
@@ -36,9 +47,7 @@ export default function SectionHamburgerModal({ sectionId, magazineId, top, left
                 </div>
             )}
 
-            {showShareModal && (
-                <ShareModal onClose={handleClose} />
-            )}
+            {showShareModal && <ShareModal onClose={handleClose} />}
         </>
     )
 }

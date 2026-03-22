@@ -5,6 +5,9 @@ import SectionIndexList from './SectionIndexList'
 import ParagraphPart from './ParagraphPart'
 import useSidebarStore from '../../../stores/sidebar'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import IconWandStars from '../../../icon/wand_stars.svg?react'
+import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModal'
 
 interface SectionContentProps {
     sectionId: number
@@ -18,6 +21,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const { data, isLoading } = useGetSectionDetail(Number(magazineId), Number(sectionId))
     const user = magazinedata?.user
     const content = data?.paragraphs
+    const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
 
     const handleClick = (magazineId: number) => {
         navigate(`/magazine/${magazineId}`)
@@ -53,7 +57,14 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                         />
                     ))}
                 </div>
+                <button
+                    onClick={() => setIsScreenSettingsOpen(true)}
+                    className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100"
+                >
+                    <IconWandStars className="w-6 h-6" />
+                </button>
             </div>
+            <ScreenSettingsModal isOpen={isScreenSettingsOpen} onClose={() => setIsScreenSettingsOpen(false)} />
         </div>
     )
 }
