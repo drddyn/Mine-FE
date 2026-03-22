@@ -5,7 +5,6 @@ import SectionHamburgerModal from '../../../components/hamburgerModal/SectionHam
 import SidebarHamburgerModal from '../../../components/hamburgerModal/SidebarHamburgerModal'
 import HeartCount from './HeartCount'
 import { useMagazine } from '../MagazineProvider'
-import { createPortal } from 'react-dom'
 import useUpdateMagazineTitle from '../../../hooks/useUpdateMagazineTitle'
 
 interface MagazineInfoProps {
@@ -19,24 +18,14 @@ interface MagazineInfoProps {
 
 export default function MagazineInfo({ nickname, profileImage, sectionId, mode, onClick }: MagazineInfoProps) {
     const magazinedata = useMagazine()
-    const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [draftTitle, setDraftTitle] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
     const updateTitleMutation = useUpdateMagazineTitle()
 
-    const openHamburger = () => setIsHamburgerOpen(true)
+    const toggleHamburger = () => setIsHamburgerOpen((prev) => !prev)
     const closeHamburger = () => setIsHamburgerOpen(false)
-
-    const handleHamburger = (e: React.MouseEvent) => {
-        const rect = e.currentTarget.getBoundingClientRect()
-        setModalPos({
-            top: rect.top + window.scrollY,
-            left: rect.right + 10,
-        })
-        openHamburger()
-    }
 
     const beginEdit = () => {
         setDraftTitle(magazinedata?.title ?? '')
@@ -95,20 +84,35 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                     />
                 )}
 
-                <Hamburger className="rotate-90 text-black-icon cursor-pointer" onClick={handleHamburger} />
+                <div className="relative flex items-center">
+                    <Hamburger className="rotate-90 text-black-icon cursor-pointer" onClick={toggleHamburger} />
 
-                {isHamburgerOpen &&
-                    mode === 'section' &&
-                    magazinedata?.magazineId !== undefined &&
-                    sectionId !== undefined && (
-                        <SectionHamburgerModal
+                    {isHamburgerOpen &&
+                        mode === 'section' &&
+                        magazinedata?.magazineId !== undefined &&
+                        sectionId !== undefined && (
+                            <SectionHamburgerModal
+                                handleClose={closeHamburger}
+                                magazineId={magazinedata?.magazineId}
+                                sectionId={sectionId}
+                                top={10}
+                                left={10}
+                            />
+                        )}
+
+                    {isHamburgerOpen && mode === 'magazine' && magazinedata?.magazineId !== undefined && (
+                        <SidebarHamburgerModal
                             handleClose={closeHamburger}
-                            magazineId={magazinedata?.magazineId}
-                            sectionId={sectionId}
-                            top={modalPos.top}
-                            left={modalPos.left}
+                            id={magazinedata.magazineId}
+                            top={10}
+                            left={10}
+                            onEdit={() => {
+                                closeHamburger()
+                                beginEdit()
+                            }}
                         />
                     )}
+                </div>
             </div>
 
             <HeartCount
@@ -117,23 +121,6 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                 classname="basis-1 justify-center"
             />
             <ProfileBox nickname={nickname} profileImage={profileImage} mode={mode} classname="basis-100 justify-end" />
-
-            {isHamburgerOpen &&
-                mode === 'magazine' &&
-                magazinedata?.magazineId !== undefined &&
-                createPortal(
-                    <SidebarHamburgerModal
-                        handleClose={closeHamburger}
-                        id={magazinedata.magazineId}
-                        top={modalPos.top}
-                        left={modalPos.left}
-                        onEdit={() => {
-                            closeHamburger()
-                            beginEdit()
-                        }}
-                    />,
-                    document.body
-                )}
         </div>
     )
 }

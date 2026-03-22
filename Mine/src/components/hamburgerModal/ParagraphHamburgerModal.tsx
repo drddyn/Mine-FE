@@ -41,7 +41,7 @@ export default function ParagraphHamburgerModal({
         <div
             ref={modalRef}
             key={sectionId}
-            className="fixed flex flex-col px-1 py-1 rounded-lg bg-gray-500-op70 shadow-[0 4px 4px 0 rgba(0, 0, 0, 0.25)] z-100"
+            className="absolute flex flex-col px-1 py-1 rounded-lg bg-gray-500-op70 shadow-[0 4px 4px 0 rgba(0, 0, 0, 0.25)] z-100"
             style={{ top: `${top}px`, left: `${left}px` }}
         >
             <HamburgerSection title="이름 변경" icon={<Edit />} />
