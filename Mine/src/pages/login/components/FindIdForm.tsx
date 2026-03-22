@@ -42,9 +42,8 @@ export default function FindIdForm() {
                     placeholder="홍길동"
                     maxLength={6}
                     className="w-100 h-12 py-5 px-7 rounded-[15px]
-                               border border-black-textMain text-white
-                               placeholder:text-white/60 outline-none focus:border-white"
-                    style={{ background: '#FFFFFF4D' }}
+                               border border-gray-500 text-gray-100
+                               placeholder:text-gray-100/60 outline-none focus:border-gray-100 bg-gray-100-op30"
                 />
             </div>
 
@@ -57,34 +56,30 @@ export default function FindIdForm() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="abc123@gmail.com"
                     className="w-100 h-12 py-5 px-7 rounded-[15px]
-                               border border-black-textMain text-white
-                               placeholder:text-white/60 outline-none focus:border-white"
-                    style={{ background: '#FFFFFF4D' }}
+                               border border-gray-500 text-gray-100
+                               placeholder:text-gray-100/60 outline-none focus:border-gray-100 bg-gray-100-op30"
                 />
             </div>
-
 
             <div className="flex flex-col items-center gap-4 mt-10 w-full">
                 <button
                     onClick={handleSubmit}
-                    className="w-100 h-12 rounded-2xl transition-colors duration-150 text-white font-medium16"
-                    style={{ background: '#505050B2', padding: '14px' }}
+                    className="w-100 h-12 p-3.5 rounded-2xl bg-gray-500-op70 transition-colors duration-150 text-white font-medium16"
                 >
                     아이디 찾기
                 </button>
                 <button
                     onClick={() => navigate(-1)}
-                    className="w-100 h-12 rounded-2xl border border-black-image transition-colors duration-150 text-white font-medium16"
-                    style={{ background: '#FFFFFF66', padding: '14px' }}
+                    className="w-100 h-12 p-3.5 rounded-2xl border border-gray-400 bg-gray-100-op40 transition-colors duration-150 text-gray-100 font-medium16"
                 >
                     이전으로
                 </button>
             </div>
 
-
             {submitted && (
                 <div className="mt-10 text-center text-white/80 font-semibold16 leading-5.5">
-                    작성하신 이메일로 아이디가 전송되었습니다.<br />
+                    작성하신 이메일로 아이디가 전송되었습니다.
+                    <br />
                     메일함을 확인해주세요.
                 </div>
             )}

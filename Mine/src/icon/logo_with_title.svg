@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.29 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: currentColor;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g>
+        <path class="cls-1" d="M32.17,27.25h-2V7.25h2v20Z"/>
+        <path class="cls-1" d="M48.92,27.25h-2V7.25h2v20Z"/>
+        <path class="cls-1" d="M54.92,27.25h-2V7.25h2v20Z"/>
+        <path class="cls-1" d="M60.92,27.25h-2V7.25h2v20Z"/>
+        <path class="cls-1" d="M70.29,27.25h-2V7.25h2v20Z"/>
+        <path class="cls-1" d="M32.17,7.25h2l5.37,20h-2l-5.37-20Z"/>
+        <path class="cls-1" d="M60.92,7.25h2l5.37,20h-2l-5.37-20Z"/>
+        <path class="cls-1" d="M46.92,7.25h-2l-5.37,20h2l5.37-20Z"/>
+        <path class="cls-1" d="M84.29,7.25v2h-10v-2h10Z"/>
+        <path class="cls-1" d="M84.29,25.25v2h-10v-2h10Z"/>
+        <path class="cls-1" d="M84.29,16.25v2h-10v-2h10Z"/>
+      </g>
+      <g>
+        <polyline class="cls-1" points="0 22.58 0 0 3.39 1.45 3.39 24.04"/>
+        <polyline class="cls-1" points="16.95 30 18.08 29.52 19.21 29.03 20.34 28.55 20.34 5.96 16.95 7.4 10.17 4.51 10.29 27.15"/>
+        <polygon class="cls-1" points="4.52 2.1 4.52 24.7 5.65 25.18 5.65 2.58 4.52 2.1"/>
+        <polygon class="cls-1" points="7.91 3.54 6.78 3.06 6.78 4.65 6.78 25.65 6.78 25.67 9.04 26.62 9.04 4.03 7.91 3.54"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import logo from '../../icon/minelogo.svg?url'
+import Minelogo from '../../icon/logo_with_title.svg?react'
 import SignupChecks from './components/SignupChecks'
 import SignupForms from './components/SignupForms'
 import SignupInterests from './components/SignupInterest'
@@ -97,7 +97,7 @@ export default function SignupPage() {
             </div>
 
             <div className="absolute top-27.75 right-0 w-1/2 flex justify-center z-20">
-                <img src={logo} alt="Mine logo" className="h-17.5 w-35" />
+                <Minelogo className="h-17.5 w-35 text-gray-100-op40" />
             </div>
 
             <div className="absolute top-55.25 right-0 w-1/2 flex justify-center z-10">
