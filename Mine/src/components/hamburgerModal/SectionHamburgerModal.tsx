@@ -38,7 +38,7 @@ export default function SectionHamburgerModal({
             {!showShareModal && (
                 <div
                     ref={modalRef}
-                    className="fixed flex flex-col px-1 py-1 rounded-lg bg-gray-500-op70 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-100"
+                    className="absolute flex flex-col px-1 py-1 rounded-lg bg-gray-500-op70 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-100"
                     style={{ top: `${top}px`, left: `${left}px` }}
                 >
                     <HamburgerSection title="공유" icon={<Share />} onClick={() => setShowShareModal(true)} />

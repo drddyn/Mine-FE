@@ -1,6 +1,6 @@
 export const GRID_ITEM_LAYOUT_PRESETS: Record<number, string[]> = {
-    1: ['col-span-2 row-span-4'], // 1개일 때: 전체 꽉 차게
-    2: ['col-span-2 row-span-2', 'col-span-2 row-span-2'], // 2개일 때: 반반
+    1: ['col-span-1 row-span-1'], // 1개일 때: 전체 꽉 차게
+    2: ['col-span-1 row-span-1 aspect-4/3', 'col-span-1 row-span-1 aspect-4/3'], // 2개일 때: 반반
     3: ['col-span-2 row-span-1', 'col-span-1 row-span-1', 'col-span-2 row-span-1'],
     4: ['col-span-2 row-span-1', 'col-span-1 row-span-1', 'col-span-1 row-span-1', 'col-span-2 row-span-1'],
     5: [
@@ -65,9 +65,9 @@ export const GRID_ITEM_LAYOUT_PRESETS: Record<number, string[]> = {
 }
 
 export const GRID_LAYOUT_PRESENT: Record<number, string> = {
-    1: 'grid-col-1',
-    2: 'grid-col-1',
-    3: 'grid-cols-5',
+    1: 'grid-cols-1',
+    2: 'grid-cols-2 grid-rows-1',
+    3: 'grid-cols-5 py-25',
     4: 'grid-cols-3 grid-rows-2',
     5: 'grid-cols-19 grid-rows-2',
     6: 'grid-cols-12 grid-rows-2',
