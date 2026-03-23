@@ -37,7 +37,7 @@ export default function SavedMagazinePage() {
 
     return (
         <div
-            className="relative min-h-screen overflow-x-hidden flex items-center bg-center bg-cover"
+            className="relative min-h-screen overflow-x-hidden bg-center bg-cover"
             style={{
                 backgroundImage: `url(${savedbg})`,
                 backgroundAttachment: 'fixed',
@@ -66,9 +66,7 @@ export default function SavedMagazinePage() {
                 <ArrowPagination
                     currentPage={Math.min(columnIndex + 1, TOTAL_PAGES)}
                     totalPages={TOTAL_PAGES}
-                    onNext={() =>
-                        setColumnIndex((prev) => Math.min(prev + 1, TOTAL_PAGES * COLUMNS_PER_VIEW - COLUMNS_PER_VIEW))
-                    }
+                    onNext={() => setColumnIndex((prev) => Math.min(prev + 1, TOTAL_PAGES - 1))}
                     onPrev={() => setColumnIndex((prev) => Math.max(prev - 1, 0))}
                 />
             </div>
