@@ -52,8 +52,8 @@ export default function Sidebar() {
                 <MineLogo className="cursor-pointer hover:text-gray-100 text-gray-100-op40 w-5 h-7.5" />
                 <div className="flex flex-col" onClick={(e) => e.stopPropagation()}>
                     <SidebarClosedBlock icon={<Sidebar_new />} title="새 매거진" to="" />
-                    <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="/magazine/saved" />
-                    <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
+                    <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="saved" />
+                    <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="explore" />
                 </div>
                 <img
                     src={user?.profileImageUrl}

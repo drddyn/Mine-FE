@@ -47,11 +47,11 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     const { user } = useUserStore()
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
-        navigate(`/magazine/${magazineId}/section/${sectionId}`)
+        navigate(`/${magazineId}/${sectionId}`)
         onclick()
     }
     const handleMagazineClick = (magazineId: number) => {
-        navigate(`/magazine/${magazineId}`)
+        navigate(`/${magazineId}`)
         onclick()
     }
 
@@ -75,8 +75,8 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                     </div>
                     <div className="flex flex-col">
                         <SidebarBlock icon={<Sidebar_new />} title="새 매거진" to="" />
-                        <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" to="/magazine/saved" />
-                        <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="/magazine/explore" />
+                        <SidebarBlock icon={<Sidebar_like />} title="저장한 매거진" to="saved" />
+                        <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="explore" />
                     </div>
 
                     <div className="flex flex-col">
