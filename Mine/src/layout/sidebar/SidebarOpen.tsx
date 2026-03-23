@@ -110,6 +110,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                             <div className="h-52 overflow-auto custom-scrollbar">
                                 {magazine?.content.map((magazine) => (
                                     <SidebarMagazine
+                                        key={magazine.magazineId}
                                         id={magazine.magazineId}
                                         title={magazine.title}
                                         onclick={() => handleMagazineClick(magazine.magazineId)}

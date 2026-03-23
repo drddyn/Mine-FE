@@ -67,9 +67,9 @@ export default function MagazinePage() {
         <MagazineProvider id={Number(magazineId)}>
             <div
                 style={{ backgroundImage: safeCoverImageUrl ? `url(${safeCoverImageUrl})` : 'none' }}
-                className="bg-cover overflow-hidden"
+                className="bg-cover h-full w-full overflow-hidden fixed bg-fixed"
             >
-                <div className={`flex flex-col transition-all duration-300 ${isOpen ? 'ml-60' : 'ml-15'}`}>
+                <div className={`flex flex-col h-full transition-all duration-300 ${isOpen ? 'ml-60' : 'ml-15'}`}>
                     {data.user && (
                         <div className="mt-9 pr-7 pl-10.5">
                             <MagazineInfo
@@ -80,17 +80,19 @@ export default function MagazinePage() {
                             />
                         </div>
                     )}
-                    <div className="flex justify-center items-start p-20 h-screen overflow-auto">
-                        <GridContainor>
-                            {content?.map((item) => (
-                                <SectionCover
-                                    key={item.sectionId}
-                                    imageUrl={item.thumbnailUrl}
-                                    onclick={() => handleSectionClick(Number(magazineId), item.sectionId)}
-                                />
-                            ))}
-                        </GridContainor>
-                    </div>
+                    <section className="flex-1 flex h-full w-full justify-center items-center pt-19 pb-40 overflow-hidden">
+                        <div className="flex w-full justify-center px-30">
+                            <GridContainor>
+                                {content?.map((item) => (
+                                    <SectionCover
+                                        key={item.sectionId}
+                                        imageUrl={item.thumbnailUrl}
+                                        onclick={() => handleSectionClick(Number(magazineId), item.sectionId)}
+                                    />
+                                ))}
+                            </GridContainor>
+                        </div>
+                    </section>
                 </div>
 
                 <button

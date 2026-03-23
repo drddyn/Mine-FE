@@ -96,4 +96,15 @@ body {
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #6b7280; /* 호버 시 색상 (gray-500) */
     }
+
+    /* Webkit 기반 브라우저 (Chrome, Safari, Edge 등) */
+    .scrollbar-no::-webkit-scrollbar {
+        display: none; /* 스크롤바 자체를 렌더링하지 않음 */
+    }
+
+    /* Firefox 등 다른 브라우저 지원을 위해 추가하면 좋은 속성 */
+    .scrollbar-no {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
 }
