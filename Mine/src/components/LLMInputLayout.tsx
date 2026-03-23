@@ -15,8 +15,8 @@ export default function LLMInputLayout() {
     const postAddInSectionPageMutation = usePostAddSectionInSectionPage()
     const postMagazineMutation = usePostMagazine()
 
-    const sectionMatch = matchPath('/magazine/:magazineId/section/:sectionId', location.pathname)
-    const magazineMatch = matchPath('/magazine/:magazineId', location.pathname)
+    const sectionMatch = matchPath('/:magazineId/:sectionId', location.pathname)
+    const magazineMatch = matchPath('/:magazineId', location.pathname)
 
     const currentMagazineId = magazineMatch?.params.magazineId
 

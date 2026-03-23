@@ -40,7 +40,7 @@ export default function MagazinePage() {
     }, [showToast])
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
-        navigate(`/magazine/${magazineId}/section/${sectionId}`)
+        navigate(`/${magazineId}/${sectionId}`)
     }
 
     const handleConfirm = async () => {
