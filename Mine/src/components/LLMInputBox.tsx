@@ -40,7 +40,7 @@ export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
 
     return (
         <div
-            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-main-light border py-3 px-7 gap-10 ${isFocused ? 'border-main-default opacity-100' : 'border-main-opacity50 opacity-40'} ${isExpanded ? 'rounded-4xl ' : 'rounded-full'}`}
+            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-gray-100-op90 border-gray-500 border py-3 px-3 gap-10 ${isFocused ? ' ' : 'opacity-40'} ${isExpanded ? 'rounded-4xl ' : 'rounded-full'}`}
         >
             <textarea
                 ref={textareaRef}
@@ -51,7 +51,7 @@ export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
                 onBlur={() => setIsFocused(false)}
                 onKeyDown={handleKeyDown}
                 placeholder="관심있는 주제를 입력해 주세요."
-                className="mb-1 w-full min-h-6 resize-none bg-transparent font-regular16 leading-normal text-black-textBigTitle outline-none placeholder-black-textInTheBox overflow-y-auto"
+                className="mb-1 ml-4 w-full min-h-6 resize-none font-regular16 leading-normal text-gray-600 outline-none placeholder-gray-500-op40 overflow-y-auto"
                 style={{
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
@@ -61,8 +61,7 @@ export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
             <button
                 onClick={handleSend}
                 disabled={!text.trim()}
-                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 focus-within:bg-main-default bg-main-opacity50 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}
-            `}
+                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}`}
             >
                 <Arrow />
             </button>

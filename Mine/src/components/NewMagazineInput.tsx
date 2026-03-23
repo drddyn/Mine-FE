@@ -15,6 +15,7 @@ export default function NewMagazineInput({
     onUserMoodChange,
     onSubmit,
 }: MagazineInputProps) {
+    const isTopicValid = Boolean(topic.trim())
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault()
@@ -50,9 +51,9 @@ export default function NewMagazineInput({
                 </div>
                 <button
                     onClick={onSubmit}
-                    disabled={!topic.trim()}
+                    disabled={!isTopicValid}
                     className={`flex shrink-0 w-13.25 h-7.5 px-4 py-2 rounded-[40px] items-center justify-center transition-all duration-200 cursor-pointer ${
-                        topic.trim()
+                        isTopicValid
                             ? 'bg-gray-500 shadow-[0_4px_8px_0_rgba(0,0,0,0.12),0_16px_32px_0_rgba(0,0,0,0.20)]'
                             : 'bg-gray-500-op40 shadow-none'
                     }`}

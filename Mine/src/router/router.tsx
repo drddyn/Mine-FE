@@ -9,6 +9,8 @@ import ExplorePage from '../pages/magazine/ExplorePage'
 import SavedMagazinePage from '../pages/magazine/SavedMagazinePage'
 import RootLayout from '../layout/RootLayout'
 import SectionPage from '../pages/magazine/SectionPage'
+import ProtectedRoute from './ProtectedRoute'
+import PublicRoute from './PublicRoute'
 
 export const router = createBrowserRouter([
     {
@@ -16,14 +18,70 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
             { index: true, element: <MainPage /> },
-            { path: 'magazine/:magazineId', element: <MagazinePage /> },
-            { path: 'magazine/:magazineId/section/:sectionId', element: <SectionPage /> },
-            { path: 'magazine/explore', element: <ExplorePage /> },
-            { path: 'magazine/saved', element: <SavedMagazinePage /> },
-            { path: '/landing', element: <LandingPage /> },
-            { path: '/login', element: <LoginPage /> },
-            { path: '/login/finding', element: <FindingPage /> },
-            { path: '/signup', element: <SignupPage /> },
+            {
+                path: ':magazineId',
+                element: (
+                    <ProtectedRoute>
+                        <MagazinePage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: ':magazineId/:sectionId',
+                element: (
+                    <ProtectedRoute>
+                        <SectionPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'explore',
+                element: (
+                    <ProtectedRoute>
+                        <ExplorePage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'saved',
+                element: (
+                    <ProtectedRoute>
+                        <SavedMagazinePage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'landing',
+                element: (
+                    <PublicRoute>
+                        <LandingPage />
+                    </PublicRoute>
+                ),
+            },
+            {
+                path: 'login',
+                element: (
+                    <PublicRoute>
+                        <LoginPage />
+                    </PublicRoute>
+                ),
+            },
+            {
+                path: 'login/finding',
+                element: (
+                    <PublicRoute>
+                        <FindingPage />
+                    </PublicRoute>
+                ),
+            },
+            {
+                path: 'signup',
+                element: (
+                    <PublicRoute>
+                        <SignupPage />
+                    </PublicRoute>
+                ),
+            },
         ],
     },
 ])

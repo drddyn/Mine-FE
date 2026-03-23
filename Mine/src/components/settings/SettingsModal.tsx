@@ -1,21 +1,21 @@
 import { useRef, useState } from 'react'
 import ProfileSettings from './ProfileSettings'
-import ScreenSettings from './ScreenSettings'
 import InterestSettings from './InterestSettings'
-
 import X from '../../icon/X.svg?react'
 import Logout from '../../icon/logout.svg?react'
 import Edit from '../../icon/edit.svg?react'
 import usePostLogout from '../../hooks/usePostLogout'
 import usePutInterests from '../../hooks/usePutInterests'
 import Toast from '../common/Toast'
+import { createPortal } from 'react-dom'
+import useClickOutside from '../../hooks/useClickOutside'
 
 interface SettingsProps {
     onClose: () => void
 }
 
 export default function SettingsModal({ onClose }: SettingsProps) {
-    const [activeTab, setActiveTab] = useState<'profile' | 'interest' | 'screen'>('profile')
+    const [activeTab, setActiveTab] = useState<'profile' | 'interest'>('profile')
     const [editMode, setEditMode] = useState(false)
     const [showLogoutToast, setShowLogoutToast] = useState(false)
     const [showSaveToast, setShowSaveToast] = useState(false)
@@ -26,10 +26,10 @@ export default function SettingsModal({ onClose }: SettingsProps) {
     const handleLogout = () => {
         if (isPending) return
         logout()
+        onClose()
         setShowLogoutToast(true)
         setTimeout(() => {
             setShowLogoutToast(false)
-            onClose()
         }, 2000)
     }
 
@@ -43,6 +43,9 @@ export default function SettingsModal({ onClose }: SettingsProps) {
         }
         onClose()
     }
+
+    const modalRef = useRef<HTMLDivElement>(null)
+    useClickOutside(modalRef, handleClose)
 
     const handleSave = async () => {
         if (activeTab === 'profile') {
@@ -61,10 +64,13 @@ export default function SettingsModal({ onClose }: SettingsProps) {
         setTimeout(() => setShowSaveToast(false), 2000)
     }
 
-    return (
+    return createPortal(
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-                <div className="relative w-193 h-65 bg-gray-600-op70 rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex overflow-hidden">
+                <div
+                    ref={modalRef}
+                    className="relative w-193 h-65 bg-gray-600-op70 rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex overflow-hidden"
+                >
                     <button onClick={handleClose} className="absolute top-5 right-5 p-1 z-10">
                         <X className="w-6 h-6 text-white **:stroke-white" />
                     </button>
@@ -75,7 +81,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                                 setActiveTab('profile')
                                 setEditMode(false)
                             }}
-                            className={`text-left transition-all ${activeTab === 'profile' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
+                            className={`text-left transition-all cursor-pointer ${activeTab === 'profile' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
                         >
                             프로필 설정
                         </button>
@@ -84,18 +90,9 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                                 setActiveTab('interest')
                                 setEditMode(false)
                             }}
-                            className={`text-left transition-all ${activeTab === 'interest' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
+                            className={`text-left transition-all cursor-pointer ${activeTab === 'interest' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
                         >
                             관심사 설정
-                        </button>
-                        <button
-                            onClick={() => {
-                                setActiveTab('screen')
-                                setEditMode(false)
-                            }}
-                            className={`text-left transition-all ${activeTab === 'screen' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
-                        >
-                            화면 설정
                         </button>
                     </div>
 
@@ -112,7 +109,6 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         {activeTab === 'interest' && (
                             <InterestSettings interests={selectedInterests} onChange={setSelectedInterests} />
                         )}
-                        {activeTab === 'screen' && <ScreenSettings />}
                     </div>
 
                     {activeTab === 'profile' && (
@@ -129,7 +125,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         (!editMode ? (
                             <button
                                 onClick={() => setEditMode(true)}
-                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white/70 hover:text-white"
+                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white/70 hover:text-white cursor-pointer"
                             >
                                 <Edit className="w-4 h-4" />
                                 수정
@@ -137,7 +133,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         ) : (
                             <button
                                 onClick={handleSave}
-                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white"
+                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white cursor-pointer"
                             >
                                 <Edit className="w-4 h-4" />
                                 저장
@@ -147,7 +143,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         <button
                             onClick={handleSave}
                             disabled={selectedInterests.length === 0}
-                            className="absolute right-12 bottom-8 flex font-semibold16 text-white disabled:opacity-40 px-3 py-1 rounded-2xl border border-gray-100 hover:bg-gray-100-op40"
+                            className="absolute right-12 bottom-8 flex font-semibold16 text-white disabled:opacity-40 px-3 py-1 rounded-2xl border border-gray-100 hover:bg-gray-100-op40 cursor-pointer"
                         >
                             저장
                         </button>
@@ -166,6 +162,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                     </div>
                 )}
             </div>
-        </div>
+        </div>,
+        document.body
     )
 }
