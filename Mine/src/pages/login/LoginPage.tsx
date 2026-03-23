@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import logo from '../../icon/minelogo.svg?url'
+import Minelogo from '../../icon/logo_with_title.svg?react'
 import UserIcon from '../../icon/user.svg?react'
 import LockIcon from '../../icon/lock.svg?react'
 import EyeIcon from '../../icon/eye.svg?react'
@@ -56,10 +56,7 @@ export default function LoginPage() {
 
             <div className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-center z-10">
                 <div className="w-105 translate-y-1.5">
-                    <div className="text-center mb-10">
-                        <img src={logo} alt="Mile logo" className="mx-auto h-17.5 w-35" />
-                    </div>
-
+                    <Minelogo className="mx-auto h-17.5 w-35 mb-10 text-gray-100/50 transition-transform" />
                     <form onSubmit={onSubmit} className="flex flex-col items-center gap-4">
                         <div className="relative w-100">
                             <span className="absolute left-7.5 top-1/2 -translate-y-1/2 text-white/80">

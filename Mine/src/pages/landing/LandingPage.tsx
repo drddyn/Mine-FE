@@ -1,4 +1,4 @@
-import Minelogo from '../../icon/minelogo.svg?react'
+import Minelogo from '../../icon/logo_with_title.svg?react'
 import landingBg from '../../assets/bg1.jpg'
 import { useNavigate } from 'react-router-dom'
 
@@ -16,13 +16,15 @@ export default function LandingPage() {
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
-            <Minelogo className="absolute left-20 top-17 w-35 h-17.5 z-20" />
+            <Minelogo className="absolute left-20 top-17 w-21 h-7.5 z-20 text-gray-100/50" />
 
             <div className="absolute left-20 top-68.75 w-155 h-47.5 z-20">
                 <div className="text-white text-8xl font-bold leading-tight">
                     나만의 매거진
                     <br />
-                    아카이빙 플랫폼
+                    아카이빙
+                    <br />
+                    플랫폼
                 </div>
             </div>
 

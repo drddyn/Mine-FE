@@ -64,7 +64,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
             className="w-full overflow-hidden bg-fixed bg-cover h-screen"
         >
             <div
-                className={`justify-center h-full overflow-y-auto overflow-x-hidden transition-all duration-200 scrollbar-no ${isOpen ? 'ml-60' : 'ml-15'}`}
+                className={`justify-center h-full overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-200 scrollbar-no ${isOpen ? 'ml-60' : 'ml-15'}`}
             >
                 <div className="flex justify-center px-15 bg-white relative min-h-full w-275 mr-32">
                     <SectionIndexList sectionId={Number(sectionId)} />
