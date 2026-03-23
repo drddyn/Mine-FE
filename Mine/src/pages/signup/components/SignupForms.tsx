@@ -51,7 +51,7 @@ export default function SignupForms({ formData, onChange }: SignupFormsProps) {
                         onChange={onChange}
                         placeholder="abc123@gmail.com"
                         className="w-full h-12 px-4.5 rounded-[15px]
-                       bg-gray-100/30 border border-gray-500 text-gray-100
+                       bg-gray-100-op30 border border-gray-500 text-gray-100
                        placeholder:text-gray-100/60 outline-none focus:border-gray-100"
                     />
                 </div>

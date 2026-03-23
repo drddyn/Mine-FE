@@ -50,7 +50,12 @@ export default function SignupChecks({ formData, onChange }: SignupChecksProps) 
                             placeholder="abcdef1234"
                             className={inputBase}
                         />
-                        <button type="button" onClick={() => setShowPassword((v) => !v)} aria-label="toggle password">
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword((v) => !v)}
+                            aria-label="toggle password"
+                            className="ml-auto"
+                        >
                             {showPassword ? (
                                 <EyeoffIcon className="w-6 h-6 text-gray-100/70" />
                             ) : (
@@ -85,6 +90,7 @@ export default function SignupChecks({ formData, onChange }: SignupChecksProps) 
                             type="button"
                             onClick={() => setShowPasswordCheck((v) => !v)}
                             aria-label="toggle passwordCheck"
+                            className="ml-auto"
                         >
                             {showPasswordCheck ? (
                                 <EyeoffIcon className="w-6 h-6 text-gray-100/70" />
