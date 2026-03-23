@@ -18,8 +18,7 @@ export default function ConfirmModal({
     isLoading = false,
 }: ConfirmModalProps) {
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* <div className="absolute inset-0" /> */}
+        <div className="fixed inset-0 bg-black/40 z-999 flex items-center justify-center">
             <div className="relative z-10 w-120 h-53 rounded-2xl bg-gray-600-op70 px-8 py-8 flex flex-col justify-between shadow-[0_4px_8px_rgba(0,0,0,0.12),0_16px_32px_rgba(0,0,0,0.20)]">
                 <div>
                     <h2 className="mb-3 font-semibold24 text-white">{title}</h2>
