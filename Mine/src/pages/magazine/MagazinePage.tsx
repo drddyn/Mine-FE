@@ -5,6 +5,12 @@ import { GridContainor } from './components/GridContainor'
 import useSidebarStore from '../../stores/sidebar'
 import MagazineInfo from './components/MagazineInfo'
 import { MagazineProvider } from './MagazineProvider'
+import { useState, useEffect } from 'react'
+import IconWandStars from '../../icon/wand_stars.svg?react'
+import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
+import ConfirmModal from '../../components/common/ConfirmModal'
+import useCreateMoodboard from '../../hooks/useCreateMoodboard'
+import Toast from '../../components/common/Toast'
 
 const isValidUrl = (url?: string) => {
     if (!url) return false
@@ -21,9 +27,34 @@ export default function MagazinePage() {
     const { magazineId } = useParams()
     const { data, isPending } = useGetMagazineDetail(Number(magazineId))
     const navigate = useNavigate()
+    const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+    const [isConfirmLoading, setIsConfirmLoading] = useState(false)
+    const [showToast, setShowToast] = useState(false)
+    const { mutateAsync: createMoodboard } = useCreateMoodboard()
+
+    useEffect(() => {
+        if (!showToast) return
+        const timer = setTimeout(() => setShowToast(false), 3000)
+        return () => clearTimeout(timer)
+    }, [showToast])
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/magazine/${magazineId}/section/${sectionId}`)
+    }
+
+    const handleConfirm = async () => {
+        if (isConfirmLoading) return
+        setIsConfirmLoading(true)
+        try {
+            await createMoodboard(Number(magazineId))
+            setIsConfirmOpen(false)
+            setShowToast(true)
+        } catch (error) {
+            console.error('무드보드 생성 실패:', error)
+        } finally {
+            setIsConfirmLoading(false)
+        }
     }
 
     if (isPending) return <></>
@@ -63,7 +94,36 @@ export default function MagazinePage() {
                         </div>
                     </section>
                 </div>
+
+                <button
+                    onClick={() => setIsScreenSettingsOpen(true)}
+                    className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
+                >
+                    <IconWandStars className="w-6 h-6 **:fill-current" />
+                </button>
             </div>
+
+            <ScreenSettingsModal
+                isOpen={isScreenSettingsOpen}
+                onClose={() => setIsScreenSettingsOpen(false)}
+                onRequestConfirm={() => setIsConfirmOpen(true)}
+            />
+
+            {isConfirmOpen && (
+                <ConfirmModal
+                    title="무드보드를 변경하시겠습니까?"
+                    description={`AI가 새로운 이미지를 생성하여 현재 무드보드에\n적용합니다.`}
+                    onConfirm={handleConfirm}
+                    onCancel={() => setIsConfirmOpen(false)}
+                    isLoading={isConfirmLoading}
+                />
+            )}
+
+            {showToast && (
+                <div className="fixed left-1/2 -translate-x-1/2 z-50 top-[calc(50%+208px)]">
+                    <Toast message="무드보드가 변경되었습니다." />
+                </div>
+            )}
         </MagazineProvider>
     )
 }
