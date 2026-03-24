@@ -1,32 +1,22 @@
-import { SkeletonBox, SkeletonAvatar } from '../../components/skeleton/SkeletonBase'
-
+import { SkeletonBox } from '../../components/skeleton/SkeletonBase'
+import useSidebarStore from '../../stores/sidebar'
 
 export default function ExploreSkeleton() {
+    const { isOpen } = useSidebarStore()
     return (
-        <div className="w-full h-screen overflow-y-auto bg-white">
-            <div className="relative w-full min-h-full">
-                
-                {/* 1. 시작 위치 설정: 좌측 199px, 상단 161px 패딩 */}
-                <div className="pt-40.25 pl-49.75 pb-20">
-                    
-                    {/* 2. 3열 그리드 및 간격 8px 설정 */}
-                    <div className="grid grid-cols-3 gap-2 w-fit">
-                        {/* 3행 3열 (총 9개) */}
-                        {Array.from({ length: 9 }).map((_, idx) => (
-                            <SkeletonBox 
-                                key={idx} 
-                                width="w-[362px]" 
-                                height="h-[240px]" 
-                                rounded="rounded-none" 
-                            />
-                        ))}
-                    </div>
-
-                    {/* 3. 하단 중앙 로딩 (그리드 너비에 맞춰 중앙 정렬) */}
-                    <div className="w-[calc(362px*3+8px*2)] flex justify-center py-10">
-                        <SkeletonAvatar size="w-[30px] h-[30px]" className="bg-gray-200" />
-                    </div>
-                    
+        <div className="flex w-full h-screen overflow-y-hidden pt-40.25">
+            <div className={`flex transition-all duration-300 ${isOpen ? 'w-60' : 'w-15'}`} />
+            <div className="relative flex flex-1 justify-center overflow-hidden ">
+                <div className="grid grid-cols-3 h-fit gap-2 shrink-0">
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
+                    <SkeletonBox className="w-90 h-60" />
                 </div>
             </div>
         </div>
