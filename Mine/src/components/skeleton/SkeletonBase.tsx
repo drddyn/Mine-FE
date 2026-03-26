@@ -9,7 +9,7 @@ export function SkeletonTitle({ className, children }: { children?: React.ReactN
 }
 
 export function SkeletonBox({ className }: SkeletonBaseProps) {
-    return <div className={`skeleton-shimmer relative overflow-hidden bg-gray-200 ${className}`} />
+    return <div className={`skeleton-shimmer overflow-hidden bg-gray-200 ${className}`} />
 }
 
 export function SkeletonAvatar({ className }: SkeletonBaseProps) {

@@ -6,7 +6,7 @@ export default function MagazineSkeleton() {
     return (
         <div className="flex w-full h-screen overflow-y-hidden">
             <div className={`flex transition-all duration-300 ${isOpen ? 'w-60' : 'w-15'}`} />
-            <div className="relative flex flex-1 flex-col justify-center overflow-hidden ">
+            <div className="relative flex flex-1 flex-col justify-center overflow-hidden">
                 <div className="flex flex-row items-center justify-between w-full px-8.5 pt-9">
                     <SkeletonTitle />
                     <div className="flex justify-center items-center gap-2">
