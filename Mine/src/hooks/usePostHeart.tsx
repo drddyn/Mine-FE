@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { postHeart } from '../api/magazine'
+import type { ResponseGetSectionDetail } from '../types/magazine'
 
 export default function usePostHeart(sectionId: number) { 
     const queryClient = useQueryClient()
@@ -13,7 +14,7 @@ export default function usePostHeart(sectionId: number) {
             await queryClient.cancelQueries({ queryKey });
             const previousData = queryClient.getQueryData(queryKey);
 
-            queryClient.setQueryData(queryKey, (old: any) => {
+            queryClient.setQueryData<ResponseGetSectionDetail | undefined>(queryKey, (old) => {
                 if (!old) return old;
                 return {
                     ...old,
@@ -23,12 +24,14 @@ export default function usePostHeart(sectionId: number) {
             });
             return { previousData };
         },
-        onError: (_err, magazineId, context) => {
-            queryKey = ['section', magazineId, Number(sectionId)];
+        onError: (err, magazineId, context) => {
+            const queryKey = ['section', magazineId, Number(sectionId)];
             queryClient.setQueryData(queryKey, context?.previousData);
+            console.error('매거진 하트 누르기 실패:', err);
+            alert('매거진 하트 누르기에 실패했습니다.');
         },
-        onSettled: () => {
-            //queryClient.invalidateQueries({ queryKey: ['section', magazineId, sectionId] });
+        onSettled: (_data, _error, magazineId) => {
+            queryClient.invalidateQueries({ queryKey: ['section', magazineId, Number(sectionId)] });
         },
     });
 }

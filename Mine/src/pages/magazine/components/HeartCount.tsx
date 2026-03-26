@@ -2,14 +2,14 @@
 import usePostHeart from '../../../hooks/usePostHeart'
 import Heart from '../../../icon/heart.svg?react'
 interface HeartCountProps {
-    hearts?: number
+    likeCount?: number
     isLiked?: boolean 
     magazineId?: number
     sectionId?: number
     classname?: string
 }
 
-export default function HeartCount({ likeCount, isLiked, magazineId, sectionId, classname }: any) {
+export default function HeartCount({ likeCount, isLiked, magazineId, sectionId, classname }: HeartCountProps) {
     // 훅에 sectionId를 전달해야 합니다.
     const postMutation = usePostHeart(Number(sectionId));
 
