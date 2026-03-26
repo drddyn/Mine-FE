@@ -11,6 +11,7 @@ export default defineConfig({
             '/api': {
                 target: 'https://api.minelover.com',
                 changeOrigin: true,
+                secure: false,
             },
         },
     },

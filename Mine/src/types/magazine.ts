@@ -118,9 +118,11 @@ export type ResponseGetSectionDetail = {
     layout_hint: string
     caption: string
     display_order: number
-    // magazineId: number
-    // magazineTitle: string
-    // viewedAt: string
+    magazineId: number
+    magazineTitle: string
+    viewedAt: string
+    likeCount: number
+    isLiked: boolean
 }
 
 export type DeleteParagraphDto = BaseSection & {
