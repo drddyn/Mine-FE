@@ -45,23 +45,22 @@ export default function SavedMagazinePage() {
             }}
         >
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
-            <div className="relative w-full py-33.25 pl-66.5">
-                <div className="relative">
-                    <div className="relative overflow-x-visible overflow-y-visible w-full">
-                        <div
-                            className="flex gap-4 transition-transform duration-500 ease-in-out will-change-transform"
-                            style={{ transform: `translateX(-${columnIndex * COLUMN_STEP}px)` }}
-                        >
-                            {columns.map((col, colIdx) => (
-                                <div key={colIdx} className="flex flex-col gap-4 shrink-0">
-                                    {col.map((magazine) => (
-                                        <SavedMagazineItem key={magazine.magazineId} magazine={magazine} />
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
+            <div className="relative flex flex-col justify-center w-full h-screen pl-66.5">
+                <div className="flex items-center overflow-visible w-full">
+                    <div
+                        className="flex gap-2 transition-transform duration-500 ease-in-out will-change-transform"
+                        style={{ transform: `translateX(-${columnIndex * COLUMN_STEP}px)` }}
+                    >
+                        {columns.map((col, colIdx) => (
+                            <div key={colIdx} className="flex flex-col gap-2 shrink-0">
+                                {col.map((magazine) => (
+                                    <SavedMagazineItem key={magazine.magazineId} magazine={magazine} />
+                                ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
+
                 <ArrowPagination
                     currentPage={Math.min(columnIndex + 1, TOTAL_PAGES)}
                     totalPages={TOTAL_PAGES}
