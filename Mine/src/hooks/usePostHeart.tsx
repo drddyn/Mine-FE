@@ -30,8 +30,8 @@ export default function usePostHeart(sectionId: number) {
             console.error('매거진 하트 누르기 실패:', err);
             alert('매거진 하트 누르기에 실패했습니다.');
         },
-        onSettled: (_data, _error, magazineId) => {
-            queryClient.invalidateQueries({ queryKey: ['section', magazineId, Number(sectionId)] });
+        onSettled: () => {
+            //queryClient.invalidateQueries({ queryKey: ['section', magazineId, Number(sectionId)] });
         },
     });
 }
