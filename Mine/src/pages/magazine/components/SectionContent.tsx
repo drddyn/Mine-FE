@@ -5,6 +5,7 @@ import SectionIndexList from './SectionIndexList'
 import ParagraphPart from './ParagraphPart'
 import useSidebarStore from '../../../stores/sidebar'
 import { useNavigate } from 'react-router-dom'
+import SectionSkeleton from '../../../components/skeleton/SectionSkeleton'
 import { useState, useEffect } from 'react'
 import IconWandStars from '../../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModal'
@@ -37,7 +38,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }, [showToast])
 
     const handleClick = (magazineId: number) => {
-        navigate(`/magazine/${magazineId}`)
+        navigate(`/${magazineId}`)
     }
 
     const handleConfirm = async () => {
@@ -55,7 +56,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }
 
     if (isLoading) {
-        return <></>
+        return <SectionSkeleton />
     }
 
     return (
@@ -97,7 +98,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     </button>
                 </div>
             </div>
-
             <ScreenSettingsModal
                 isOpen={isScreenSettingsOpen}
                 onClose={() => setIsScreenSettingsOpen(false)}

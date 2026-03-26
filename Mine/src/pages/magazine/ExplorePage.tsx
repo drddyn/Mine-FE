@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react'
 import ExploreGrid from './components/ExploreGrid'
 import useGetMagazineFeed from '../../hooks/useGetMagazineFeed'
+import ExploreSkeleton from '../../components/skeleton/ExploreSkeleton'
 import explorebg from '../../assets/explorebg.jpg'
 import useSidebarStore from '../../stores/sidebar'
 
 export default function ExplorePage() {
     const { isOpen } = useSidebarStore()
-    const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMagazineFeed()
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetMagazineFeed()
+
     const observerRef = useRef<HTMLDivElement>(null)
 
     const magazines = data?.pages.flatMap((page) => page.content) ?? []
@@ -24,6 +26,8 @@ export default function ExplorePage() {
         if (observerRef.current) observer.observe(observerRef.current)
         return () => observer.disconnect()
     }, [hasNextPage, isFetchingNextPage, fetchNextPage])
+
+    if (isLoading) return <ExploreSkeleton />
 
     return (
         <div

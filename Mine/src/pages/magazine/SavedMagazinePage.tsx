@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SavedMagazineItem from './components/SavedMagazineItem'
 import ArrowPagination from './components/ArrowPagination'
 import useGetLikedMagazineList from '../../hooks/useGetLikedMagazineList'
+import SavedMagazineSkeleton from '../../components/skeleton/SavedMagazineSkeleton'
 import savedbg from '../../assets/savedbg.jpg'
 
 const CARD_WIDTH = 476
@@ -19,7 +20,7 @@ export default function SavedMagazinePage() {
         sort: ['createdAt,desc'],
     })
 
-    if (isLoading) return <div>로딩중...</div>
+    if (isLoading) return <SavedMagazineSkeleton />
     if (isError) return <div>불러오기 실패</div>
 
     const magazines = data?.content ?? []
@@ -44,22 +45,19 @@ export default function SavedMagazinePage() {
             }}
         >
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
-
-            <div className="relative w-full py-33.25 pl-66.5">
-                <div className="relative">
-                    <div className="relative overflow-x-visible overflow-y-visible w-full">
-                        <div
-                            className="flex gap-4 transition-transform duration-500 ease-in-out will-change-transform"
-                            style={{ transform: `translateX(-${columnIndex * COLUMN_STEP}px)` }}
-                        >
-                            {columns.map((col, colIdx) => (
-                                <div key={colIdx} className="flex flex-col gap-4 shrink-0">
-                                    {col.map((magazine) => (
-                                        <SavedMagazineItem key={magazine.magazineId} magazine={magazine} />
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
+            <div className="relative flex flex-col justify-center w-full h-screen pl-66.5">
+                <div className="flex items-center overflow-visible w-full">
+                    <div
+                        className="flex gap-2 transition-transform duration-500 ease-in-out will-change-transform"
+                        style={{ transform: `translateX(-${columnIndex * COLUMN_STEP}px)` }}
+                    >
+                        {columns.map((col, colIdx) => (
+                            <div key={colIdx} className="flex flex-col gap-2 shrink-0">
+                                {col.map((magazine) => (
+                                    <SavedMagazineItem key={magazine.magazineId} magazine={magazine} />
+                                ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
 
