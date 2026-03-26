@@ -17,7 +17,7 @@ export default function ExploreItem({ magazine }: Props) {
                 backgroundImage: safeImageUrl ? `url(${safeImageUrl})` : 'none',
                 backgroundColor: safeImageUrl ? 'transparent' : '#1a1a1a',
             }}
-            onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
+            onClick={() => navigate(`/${magazine.magazineId}`)}
         >
             <p className="font-notoserif font-semibold24 leading-none text-white text-right">{magazine.title}</p>
         </div>

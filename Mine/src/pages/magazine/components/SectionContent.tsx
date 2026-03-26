@@ -38,7 +38,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }, [showToast])
 
     const handleClick = (magazineId: number) => {
-        navigate(`/magazine/${magazineId}`)
+        navigate(`/${magazineId}`)
     }
 
     const handleConfirm = async () => {
