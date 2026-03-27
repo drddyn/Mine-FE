@@ -89,7 +89,6 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     return (
         <div className="w-full flex flex-col">
             <div
-                key={id}
                 className={`w-full flex justify-between group hover:bg-gray-600-op70 hover:text-gray-100 py-2 items-center pl-5 pr-4 text-gray-100-op70 font-medium14 select-none ${
                     isEditing ? 'bg-gray-600-op70' : ''
                 }`}
@@ -120,6 +119,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
                     <SidebarHamburgerModal
                         handleClose={closeHamburger}
                         id={id}
+                        title={title}
                         top={modalPos.top}
                         left={modalPos.left}
                         onEdit={() => beginEdit()}

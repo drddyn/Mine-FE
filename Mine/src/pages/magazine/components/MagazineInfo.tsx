@@ -8,6 +8,7 @@ import { useMagazine } from '../MagazineProvider'
 import useUpdateMagazineTitle from '../../../hooks/useUpdateMagazineTitle'
 
 interface MagazineInfoProps {
+    title?: string
     nickname?: string
     profileImage?: string
     magazineId?: number
@@ -19,6 +20,7 @@ interface MagazineInfoProps {
 }
 
 export default function MagazineInfo({
+    title,
     nickname,
     profileImage,
     sectionId,
@@ -74,6 +76,8 @@ export default function MagazineInfo({
         }
     }
 
+    const currentSectionHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
+
     return (
         <div className="flex w-full justify-between items-center self-stretch">
             <div className="flex items-center gap-2 basis-100">
@@ -82,7 +86,7 @@ export default function MagazineInfo({
                         className={`cursor-pointer ${mode === 'section' ? 'font-regular16 font-notoserif text-gray-600' : 'font-semibold20 font-pretendard text-gray-100'}`}
                         onClick={() => magazinedata?.magazineId && onClick?.(magazinedata.magazineId)}
                     >
-                        {magazinedata?.title}
+                        {title}
                     </div>
                 ) : (
                     <input
@@ -106,6 +110,7 @@ export default function MagazineInfo({
                                 handleClose={closeHamburger}
                                 magazineId={magazinedata?.magazineId}
                                 sectionId={sectionId}
+                                heading={currentSectionHeading}
                                 top={10}
                                 left={10}
                             />
@@ -115,6 +120,7 @@ export default function MagazineInfo({
                         <SidebarHamburgerModal
                             handleClose={closeHamburger}
                             id={magazinedata.magazineId}
+                            title={magazinedata.title ?? ''}
                             top={10}
                             left={10}
                             onEdit={() => {
