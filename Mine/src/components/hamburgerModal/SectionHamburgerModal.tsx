@@ -4,11 +4,13 @@ import Share from '../../icon/share.svg?react'
 import Delete from '../../icon/delete.svg?react'
 import { HamburgerSection } from './HamburgerSection'
 import useDeleteSection from '../../hooks/useDeleteSection'
+import useDeleteMagazine from '../../hooks/useDeleteMagazine'
 import ShareModal from './ShareModal'
 import useClickOutside from '../../hooks/useClickOutside'
 import ConfirmModal from '../common/ConfirmModal'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import { useMagazine } from '../../pages/magazine/MagazineProvider'
 
 interface SectionHamburgerModalProps {
     top: number
@@ -17,6 +19,7 @@ interface SectionHamburgerModalProps {
     magazineId?: number
     heading: string
     handleClose: () => void
+    onEdit: () => void
 }
 
 export default function SectionHamburgerModal({
@@ -26,16 +29,25 @@ export default function SectionHamburgerModal({
     top,
     left,
     handleClose,
+    onEdit,
 }: SectionHamburgerModalProps) {
     const modalRef = useRef<HTMLDivElement>(null)
     useClickOutside(modalRef, handleClose)
 
     const navigate = useNavigate()
+    const magazinedata = useMagazine()
+
     const deleteSectionMutation = useDeleteSection({
         onSuccess: () => {
             navigate(`/${magazineId}`)
-        }
+        },
     })
+    const deleteMagazineMutation = useDeleteMagazine({
+        onSuccess: () => {
+            navigate('/')
+        },
+    })
+
     const [showShareModal, setShowShareModal] = useState(false)
     const [showConfirmModal, setShowConfirmModal] = useState(false)
 
@@ -44,7 +56,14 @@ export default function SectionHamburgerModal({
     }
 
     const onConfirmDelete = () => {
-        deleteSectionMutation.mutate({ magazineId: Number(magazineId), sectionId: Number(sectionId) })
+        const sectionCount = magazinedata?.sections?.length ?? 0
+
+        if (sectionCount <= 1) {
+            // 섹션이 1개 남았으면 매거진 삭제
+            deleteMagazineMutation.mutate({ id: Number(magazineId) })
+        } else {
+            deleteSectionMutation.mutate({ magazineId: Number(magazineId), sectionId: Number(sectionId) })
+        }
         setShowConfirmModal(false)
         handleClose()
     }
@@ -58,7 +77,7 @@ export default function SectionHamburgerModal({
                     style={{ top: `${top}px`, left: `${left}px` }}
                 >
                     <HamburgerSection title="공유" icon={<Share />} onClick={() => setShowShareModal(true)} />
-                    <HamburgerSection title="이름 변경" icon={<Edit />} />
+                    <HamburgerSection title="이름 변경" icon={<Edit />} onClick={onEdit} />
                     <HamburgerSection title="삭제" icon={<Delete />} onClick={onDeleteClick} />
                 </div>
             )}

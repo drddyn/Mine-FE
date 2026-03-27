@@ -18,6 +18,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     const [isEditing, setIsEditing] = useState(false)
     const [draftTitle, setDraftTitle] = useState('')
     const inputRef = useRef<HTMLTextAreaElement>(null)
+    const isCommittingRef = useRef(false)
 
     const updateTitleMutation = useUpdateMagazineTitle()
 
@@ -47,17 +48,16 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     const cancelEdit = () => {
         setIsEditing(false)
         setDraftTitle('')
+        isCommittingRef.current = false
     }
 
     const commitEdit = () => {
+        if (isCommittingRef.current) return
+        isCommittingRef.current = true
+
         const next = draftTitle.trim()
 
-        if (!next) {
-            cancelEdit()
-            return
-        }
-
-        if (next === title) {
+        if (!next || next === title) {
             cancelEdit()
             return
         }
