@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {isLoggedIn && <Sidebar />}
             <main className="h-full w-full overflow-y-auto duration-300">{children}</main>
             {message && (
-                <div className="fixed z-[9999] bottom-10 left-1/2 -translate-x-1/2">
+                <div className="fixed z-9999 bottom-10 left-1/2 -translate-x-1/2">
                     <Toast message={message} />
                 </div>
             )}

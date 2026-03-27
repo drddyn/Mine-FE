@@ -8,6 +8,7 @@ import { useMagazine } from '../MagazineProvider'
 import useUpdateMagazineTitle from '../../../hooks/useUpdateMagazineTitle'
 
 interface MagazineInfoProps {
+    title?: string
     nickname?: string
     profileImage?: string
     magazineId?: number
@@ -16,7 +17,7 @@ interface MagazineInfoProps {
     onClick?: (magazineId: number) => void
 }
 
-export default function MagazineInfo({ nickname, profileImage, sectionId, mode, onClick }: MagazineInfoProps) {
+export default function MagazineInfo({ title, nickname, profileImage, sectionId, mode, onClick }: MagazineInfoProps) {
     const magazinedata = useMagazine()
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -63,7 +64,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
         }
     }
 
-    const currentHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
+    const currentSectionHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
 
     return (
         <div className="flex w-full justify-between items-center self-stretch">
@@ -73,7 +74,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                         className={`cursor-pointer ${mode === 'section' ? 'font-regular16 font-notoserif text-gray-600' : 'font-semibold20 font-pretendard text-gray-100'}`}
                         onClick={() => magazinedata?.magazineId && onClick?.(magazinedata.magazineId)}
                     >
-                        {magazinedata?.title}
+                        {title}
                     </div>
                 ) : (
                     <input
@@ -97,7 +98,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                                 handleClose={closeHamburger}
                                 magazineId={magazinedata?.magazineId}
                                 sectionId={sectionId}
-                                heading={currentHeading}
+                                heading={currentSectionHeading}
                                 top={10}
                                 left={10}
                             />

@@ -71,6 +71,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     <SectionIndexList sectionId={Number(sectionId)} />
                     <div className="flex flex-col w-245 items-center gap-14 mt-9 mb-22 z-10">
                         <MagazineInfo
+                            title={data?.heading}
                             nickname={user?.nickname}
                             profileImage={user?.profileImageUrl}
                             sectionId={Number(sectionId)}
