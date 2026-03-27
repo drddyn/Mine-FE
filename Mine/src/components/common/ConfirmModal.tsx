@@ -30,8 +30,12 @@ export default function ConfirmModal({
                             style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
                         >
                             {description && <span>{description} </span>}
-                            {itemName && <span className="font-semibold20 text-gray-100">{itemName}</span>}
-                            {itemName && <span>이(가) 삭제됩니다.</span>}
+                            {itemName && (
+                                <>
+                                    <span className="font-semibold20 text-gray-100">{itemName}</span>
+                                    <span>이(가) 삭제됩니다.</span>
+                                </>
+                            )}
                         </p>
                     )}
                 </div>
@@ -42,7 +46,7 @@ export default function ConfirmModal({
                         disabled={isLoading}
                         className="flex items-center justify-center w-25 h-12 rounded-lg border border-gray-100-op30 font-medium16 text-gray-100 hover:bg-gray-600-op70 disabled:opacity-50"
                     >
-                        {isLoading ? '생성 중...' : confirmText}
+                        {isLoading ? '처리 중...' : confirmText}
                     </button>
                     <button
                         onClick={onCancel}
