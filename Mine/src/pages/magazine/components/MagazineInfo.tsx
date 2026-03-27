@@ -6,9 +6,9 @@ import SidebarHamburgerModal from '../../../components/hamburgerModal/SidebarHam
 import HeartCount from './HeartCount'
 import { useMagazine } from '../MagazineProvider'
 import useUpdateMagazineTitle from '../../../hooks/useUpdateMagazineTitle'
+import usePatchSection from '../../../hooks/usePatchSection'
 
 interface MagazineInfoProps {
-    title?: string
     nickname?: string
     profileImage?: string
     magazineId?: number
@@ -20,7 +20,6 @@ interface MagazineInfoProps {
 }
 
 export default function MagazineInfo({
-    title,
     nickname,
     profileImage,
     sectionId,
@@ -35,34 +34,58 @@ export default function MagazineInfo({
     const [isEditing, setIsEditing] = useState(false)
     const [draftTitle, setDraftTitle] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
+    const isCommittingRef = useRef(false)
     const updateTitleMutation = useUpdateMagazineTitle()
+    const patchSectionMutation = usePatchSection()
 
     const toggleHamburger = () => setIsHamburgerOpen((prev) => !prev)
     const closeHamburger = () => setIsHamburgerOpen(false)
 
-    const beginEdit = () => {
+    const currentHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
+
+    const beginMagazineEdit = () => {
         setDraftTitle(magazinedata?.title ?? '')
         setIsEditing(true)
-        requestAnimationFrame(() => {
-            inputRef.current?.focus()
-        })
+        requestAnimationFrame(() => inputRef.current?.focus())
+    }
+
+    const beginSectionEdit = () => {
+        setDraftTitle(currentHeading)
+        setIsEditing(true)
+        requestAnimationFrame(() => inputRef.current?.focus())
     }
 
     const cancelEdit = () => {
         setIsEditing(false)
         setDraftTitle('')
+        isCommittingRef.current = false
     }
 
     const commitEdit = () => {
+        if (isCommittingRef.current) return
+        isCommittingRef.current = true
+
         const next = draftTitle.trim()
-        if (!next || next === magazinedata?.title) {
-            cancelEdit()
-            return
+
+        if (mode === 'magazine') {
+            if (!next || next === magazinedata?.title) {
+                cancelEdit()
+                return
+            }
+            updateTitleMutation.mutate(
+                { id: magazinedata?.magazineId ?? 0, title: next, introduction: magazinedata?.introduction ?? '' },
+                { onSuccess: () => cancelEdit() }
+            )
+        } else {
+            if (!next || next === currentHeading || sectionId === undefined) {
+                cancelEdit()
+                return
+            }
+            patchSectionMutation.mutate(
+                { magazineId: magazinedata?.magazineId ?? 0, sectionId, heading: next },
+                { onSuccess: () => cancelEdit() }
+            )
         }
-        updateTitleMutation.mutate(
-            { id: magazinedata?.magazineId ?? 0, title: next, introduction: magazinedata?.introduction ?? '' },
-            { onSuccess: () => cancelEdit() }
-        )
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -76,6 +99,13 @@ export default function MagazineInfo({
         }
     }
 
+    const displayTitle = mode === 'section' ? currentHeading : magazinedata?.title
+
+    const handleTitleClick = () => {
+        if (mode === 'section' && magazinedata?.magazineId) {
+            onClick?.(magazinedata.magazineId)
+        }
+    }
     const currentSectionHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
 
     return (
@@ -84,9 +114,9 @@ export default function MagazineInfo({
                 {!isEditing ? (
                     <div
                         className={`cursor-pointer ${mode === 'section' ? 'font-regular16 font-notoserif text-gray-600' : 'font-semibold20 font-pretendard text-gray-100'}`}
-                        onClick={() => magazinedata?.magazineId && onClick?.(magazinedata.magazineId)}
+                        onClick={handleTitleClick}
                     >
-                        {title}
+                        {displayTitle}
                     </div>
                 ) : (
                     <input
@@ -113,6 +143,10 @@ export default function MagazineInfo({
                                 heading={currentSectionHeading}
                                 top={10}
                                 left={10}
+                                onEdit={() => {
+                                    closeHamburger()
+                                    beginSectionEdit()
+                                }}
                             />
                         )}
 
@@ -125,7 +159,7 @@ export default function MagazineInfo({
                             left={10}
                             onEdit={() => {
                                 closeHamburger()
-                                beginEdit()
+                                beginMagazineEdit()
                             }}
                         />
                     )}

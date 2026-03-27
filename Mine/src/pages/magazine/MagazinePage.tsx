@@ -74,7 +74,6 @@ export default function MagazinePage() {
                     {data.user && (
                         <div className="mt-9 pr-7 pl-10.5">
                             <MagazineInfo
-                                title={data.title}
                                 nickname={data.user.nickname}
                                 profileImage={data.user.profileImageUrl}
                                 magazineId={data.magazineId}

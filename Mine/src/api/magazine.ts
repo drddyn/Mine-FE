@@ -3,6 +3,7 @@ import type {
     DeleteSectionDto,
     FeedDto,
     PatchMagazineTitleDto,
+    PatchSectionDto,
     PostMagazineDto,
     RequestAddSection,
     RequestAddSectionInSectionPage,
@@ -30,8 +31,8 @@ export const deleteMagazine = async ({ id }: RequestDeleteMagazine) => {
 
 export const postMagazine = async ({ topic, user_mood }: PostMagazineDto) => {
     const body = {
-        topic: topic,
-        user_mood: user_mood,
+        topic,
+        user_mood,
     }
     const res = await axiosInstance.post('api/magazines', body)
     return res.data
@@ -39,8 +40,8 @@ export const postMagazine = async ({ topic, user_mood }: PostMagazineDto) => {
 
 export const patchMagazineTitle = async ({ id, title, introduction }: PatchMagazineTitleDto) => {
     const body = {
-        title: title,
-        introduction: introduction,
+        title,
+        introduction,
     }
     const res = await axiosInstance.patch(`api/magazines/${id}`, body)
     return res.data
@@ -113,5 +114,13 @@ export const postAddSectionInSectionPage = async ({
     message,
 }: RequestAddSectionInSectionPage): Promise<ResponseAddSectionInSectionPage> => {
     const res = await axiosInstance.post(`api/magazines/${magazineId}/sections/${sectionId}/interact`, { message })
+    return res.data
+}
+
+export const patchSection = async ({ magazineId, sectionId, heading, paragraphs }: PatchSectionDto) => {
+    const res = await axiosInstance.patch(`api/magazines/${magazineId}/sections/${sectionId}`, {
+        ...(heading !== undefined && { heading }),
+        ...(paragraphs !== undefined && { paragraphs }),
+    })
     return res.data
 }

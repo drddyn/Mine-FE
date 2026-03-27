@@ -165,3 +165,15 @@ export type ResponseAddSection = {
 }
 
 export type ResponseAddSectionInSectionPage = ResponseAddSection
+
+export type PatchSectionDto = {
+    magazineId: number
+    sectionId: number
+    heading?: string
+    paragraphs?: {
+        paragraphId: number
+        subtitle: string
+        text: string
+        imageUrl: string
+    }[]
+}
