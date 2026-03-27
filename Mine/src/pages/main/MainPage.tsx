@@ -17,7 +17,8 @@ export default function MainPage() {
 
     const handleSend = () => {
         if (!topic.trim()) return
-        postMagazineMutation.mutate({ topic: topic, user_mood: userMood })
+        if (isPending) return
+        postMagazineMutation.mutate({ topic, user_mood: userMood })
     }
 
     return (

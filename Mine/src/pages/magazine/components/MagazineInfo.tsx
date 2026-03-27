@@ -63,6 +63,8 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
         }
     }
 
+    const currentHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
+
     return (
         <div className="flex w-full justify-between items-center self-stretch">
             <div className="flex items-center gap-2 basis-100">
@@ -95,6 +97,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                                 handleClose={closeHamburger}
                                 magazineId={magazinedata?.magazineId}
                                 sectionId={sectionId}
+                                heading={currentHeading}
                                 top={10}
                                 left={10}
                             />
@@ -104,6 +107,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                         <SidebarHamburgerModal
                             handleClose={closeHamburger}
                             id={magazinedata.magazineId}
+                            title={magazinedata.title ?? ''}
                             top={10}
                             left={10}
                             onEdit={() => {

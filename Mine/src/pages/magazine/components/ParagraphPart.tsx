@@ -31,9 +31,9 @@ export default function ParagraphPart({
 
     return (
         <section className="group flex w-full items-center gap-10" dir={sectionDir}>
-            {imageUrl && <img src={imageUrl} className="object-scale-down max-h-70 max-w-[45%] shrink-0 "></img>}
+            {imageUrl && <img src={imageUrl} className="object-scale-down max-h-70 max-w-[45%] shrink-0" />}
             <div className="flex flex-col ltr:ml-2.5 rtl:mr-2.5 h-full items-start gap-6 flex-1">
-                <div className="flex w-full justify-between items-center " dir={titleDir}>
+                <div className="flex w-full justify-between items-center" dir={titleDir}>
                     <div className="font-medium36 font-notoserif text-gray-600">{smallTitle}</div>
                     <div className="relative flex items-center" dir="ltr">
                         <Hamburger
@@ -46,14 +46,14 @@ export default function ParagraphPart({
                                 sectionId={sectionId}
                                 magazineId={magazinedata?.magazineId}
                                 paragraphId={paragrahId}
+                                subtitle={smallTitle ?? ''}
                                 top={10}
                                 left={10}
-                                // onEdit={}
                             />
                         )}
                     </div>
                 </div>
-                <div className="w-full font-regular16 text-black-textMain break-all " dir="ltr">
+                <div className="w-full font-regular16 text-black-textMain break-all" dir="ltr">
                     <ReactMarkDown>{content}</ReactMarkDown>
                 </div>
             </div>

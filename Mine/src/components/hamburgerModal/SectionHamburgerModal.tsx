@@ -6,18 +6,23 @@ import { HamburgerSection } from './HamburgerSection'
 import useDeleteSection from '../../hooks/useDeleteSection'
 import ShareModal from './ShareModal'
 import useClickOutside from '../../hooks/useClickOutside'
+import ConfirmModal from '../common/ConfirmModal'
+import { createPortal } from 'react-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface SectionHamburgerModalProps {
     top: number
     left: number
     sectionId?: number
     magazineId?: number
+    heading: string
     handleClose: () => void
 }
 
 export default function SectionHamburgerModal({
     sectionId,
     magazineId,
+    heading,
     top,
     left,
     handleClose,
@@ -25,17 +30,28 @@ export default function SectionHamburgerModal({
     const modalRef = useRef<HTMLDivElement>(null)
     useClickOutside(modalRef, handleClose)
 
-    const deleteSectionMutation = useDeleteSection()
+    const navigate = useNavigate()
+    const deleteSectionMutation = useDeleteSection({
+        onSuccess: () => {
+            navigate(`/${magazineId}`)
+        }
+    })
     const [showShareModal, setShowShareModal] = useState(false)
+    const [showConfirmModal, setShowConfirmModal] = useState(false)
 
-    const onDeleteClick: React.MouseEventHandler<HTMLDivElement> = () => {
+    const onDeleteClick = () => {
+        setShowConfirmModal(true)
+    }
+
+    const onConfirmDelete = () => {
         deleteSectionMutation.mutate({ magazineId: Number(magazineId), sectionId: Number(sectionId) })
+        setShowConfirmModal(false)
         handleClose()
     }
 
     return (
         <>
-            {!showShareModal && (
+            {!showShareModal && !showConfirmModal && (
                 <div
                     ref={modalRef}
                     className="absolute flex flex-col px-1 py-1 rounded-lg bg-gray-500-op70 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-100"
@@ -48,6 +64,18 @@ export default function SectionHamburgerModal({
             )}
 
             {showShareModal && <ShareModal onClose={handleClose} />}
+
+            {showConfirmModal &&
+                createPortal(
+                    <ConfirmModal
+                        title="해당 섹션을 삭제하시겠습니까?"
+                        description="섹션"
+                        itemName={heading}
+                        onConfirm={onConfirmDelete}
+                        onCancel={() => setShowConfirmModal(false)}
+                    />,
+                    document.body
+                )}
         </>
     )
 }
