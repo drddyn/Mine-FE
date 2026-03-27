@@ -71,9 +71,13 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     <SectionIndexList sectionId={Number(sectionId)} />
                     <div className="flex flex-col w-245 items-center gap-14 mt-9 mb-22 z-10">
                         <MagazineInfo
+                            title={data?.heading}
                             nickname={user?.nickname}
                             profileImage={user?.profileImageUrl}
                             sectionId={Number(sectionId)}
+                            magazineId={Number(magazineId)} 
+                            likeCount={data?.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
+                            isLiked={data?.isLiked}     // 내 좋아요 상태 전달
                             mode="section"
                             onClick={handleClick}
                         />

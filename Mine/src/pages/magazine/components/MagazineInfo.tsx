@@ -13,11 +13,22 @@ interface MagazineInfoProps {
     profileImage?: string
     magazineId?: number
     sectionId?: number
+    likeCount?: number
+    isLiked?: boolean
     mode: 'section' | 'magazine'
     onClick?: (magazineId: number) => void
 }
 
-export default function MagazineInfo({ nickname, profileImage, sectionId, mode, onClick }: MagazineInfoProps) {
+export default function MagazineInfo({
+    nickname,
+    profileImage,
+    sectionId,
+    magazineId,
+    likeCount,
+    isLiked,
+    mode,
+    onClick,
+}: MagazineInfoProps) {
     const magazinedata = useMagazine()
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -95,6 +106,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
             onClick?.(magazinedata.magazineId)
         }
     }
+    const currentSectionHeading = magazinedata?.sections?.find((s) => s.sectionId === sectionId)?.heading ?? ''
 
     return (
         <div className="flex w-full justify-between items-center self-stretch">
@@ -128,7 +140,7 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                                 handleClose={closeHamburger}
                                 magazineId={magazinedata?.magazineId}
                                 sectionId={sectionId}
-                                heading={currentHeading}
+                                heading={currentSectionHeading}
                                 top={10}
                                 left={10}
                                 onEdit={() => {
@@ -155,8 +167,10 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
             </div>
 
             <HeartCount
-                hearts={magazinedata?.likeCount}
-                magazineId={magazinedata?.magazineId}
+                likeCount={likeCount} // SectionContent에서 받은 값
+                isLiked={isLiked} // SectionContent에서 받은 값
+                magazineId={magazineId || magazinedata?.magazineId}
+                sectionId={sectionId} // 연결 고리 완성!
                 classname="basis-1 justify-center"
             />
             <ProfileBox nickname={nickname} profileImage={profileImage} mode={mode} classname="basis-100 justify-end" />
