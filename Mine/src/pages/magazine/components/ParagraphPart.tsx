@@ -60,7 +60,12 @@ export default function ParagraphPart({
             return
         }
 
-        const updatedParagraphs = sectionDetail?.paragraphs.map((p) => ({
+        if (!sectionDetail?.paragraphs || sectionId === undefined) {
+            cancelEdit()
+            return
+        }
+
+        const updatedParagraphs = sectionDetail.paragraphs.map((p) => ({
             paragraphId: p.paragraphId,
             subtitle: p.paragraphId === paragrahId ? next : (p.subtitle ?? ''),
             text: p.text ?? '',
@@ -70,7 +75,7 @@ export default function ParagraphPart({
         patchSectionMutation.mutate(
             {
                 magazineId: magazinedata?.magazineId ?? 0,
-                sectionId: sectionId ?? 0,
+                sectionId,
                 paragraphs: updatedParagraphs,
             },
             { onSuccess: () => cancelEdit() }

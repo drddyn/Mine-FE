@@ -54,17 +54,15 @@ export default function ParagraphHamburgerModal({
         const paragraphCount = sectionDetail?.paragraphs?.length ?? 0
 
         if (paragraphCount <= 1) {
-            // 문단이 1개 남았으면 섹션 삭제
-            deleteSectionMutation.mutate({
-                magazineId: Number(magazineId),
-                sectionId: Number(sectionId),
-            })
+            if (magazineId === undefined || sectionId === undefined) {
+                return
+            }
+            deleteSectionMutation.mutate({ magazineId, sectionId })
         } else {
-            deleteParagraphMutation.mutate({
-                magazineId: Number(magazineId),
-                sectionId: Number(sectionId),
-                paragraphId: Number(paragraphId),
-            })
+            if (magazineId === undefined || sectionId === undefined || paragraphId === undefined) {
+                return
+            }
+            deleteParagraphMutation.mutate({ magazineId, sectionId, paragraphId })
         }
         setShowConfirmModal(false)
         handleClose()

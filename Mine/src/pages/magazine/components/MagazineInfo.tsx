@@ -66,12 +66,12 @@ export default function MagazineInfo({ nickname, profileImage, sectionId, mode, 
                 { onSuccess: () => cancelEdit() }
             )
         } else {
-            if (!next || next === currentHeading) {
+            if (!next || next === currentHeading || sectionId === undefined) {
                 cancelEdit()
                 return
             }
             patchSectionMutation.mutate(
-                { magazineId: magazinedata?.magazineId ?? 0, sectionId: sectionId ?? 0, heading: next },
+                { magazineId: magazinedata?.magazineId ?? 0, sectionId, heading: next },
                 { onSuccess: () => cancelEdit() }
             )
         }

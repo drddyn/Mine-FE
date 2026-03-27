@@ -5,13 +5,15 @@ import useToastStore from '../stores/toast'
 import Toast from '../components/common/Toast'
 import { useEffect } from 'react'
 
+const TOAST_DURATION = 3000
+
 export default function Layout({ children }: { children: React.ReactNode }) {
     const { isLoggedIn } = useAuthStore()
     const { message, hideToast } = useToastStore()
 
     useEffect(() => {
         if (!message) return
-        const timer = setTimeout(() => hideToast(), 3000)
+        const timer = setTimeout(() => hideToast(), TOAST_DURATION)
         return () => clearTimeout(timer)
     }, [message, hideToast])
 
@@ -20,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {isLoggedIn && <Sidebar />}
             <main className="h-full w-full overflow-y-auto duration-300">{children}</main>
             {message && (
-                <div className="fixed bottom-37.25 left-1/2 -translate-x-1/2 z-9999">
+                <div className="fixed bottom-[149px] left-1/2 -translate-x-1/2 z-[9999]">
                     <Toast message={message} />
                 </div>
             )}

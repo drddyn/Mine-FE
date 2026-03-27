@@ -58,11 +58,17 @@ export default function SectionHamburgerModal({
     const onConfirmDelete = () => {
         const sectionCount = magazinedata?.sections?.length ?? 0
 
+        if (magazineId === undefined) {
+            return
+        }
+
         if (sectionCount <= 1) {
-            // 섹션이 1개 남았으면 매거진 삭제
-            deleteMagazineMutation.mutate({ id: Number(magazineId) })
+            deleteMagazineMutation.mutate({ id: magazineId })
         } else {
-            deleteSectionMutation.mutate({ magazineId: Number(magazineId), sectionId: Number(sectionId) })
+            if (sectionId === undefined) {
+                return
+            }
+            deleteSectionMutation.mutate({ magazineId, sectionId })
         }
         setShowConfirmModal(false)
         handleClose()
