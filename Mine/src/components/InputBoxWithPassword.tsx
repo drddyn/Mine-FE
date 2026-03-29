@@ -7,6 +7,7 @@ interface InputBoxProps {
     title?: string
     placeholder?: string
     description?: string
+    isError?: boolean
     children?: ReactNode
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
@@ -16,22 +17,24 @@ export default function InputBoxWithPassword({
     title,
     placeholder,
     description,
+    isError = false,
     children,
     onChange,
 }: InputBoxProps) {
     const [showPassword, setShowPassword] = useState(false)
     return (
         <div className="flex flex-col gap-2 select-none">
-            {title && <div className="text-black-textSmallTitle font-semibold20">{title}</div>}
-            <div className="group w-full flex items-center h-12 rounded-2xl py-2.5 px-4 gap-2 border border-black-whiteBoxOutline bg-white focus-within:shadow-sm">
+            {title && <div className="text-gray-100/80 font-semibold20 mb-2">{title}</div>}
+            <div className="group w-full flex items-center h-12 rounded-2xl py-2.5 px-4 gap-2 border border-gray-500 bg-gray-100-op30 focus-within:shadow-sm">
                 {children}
                 <input
                     id={id}
+                    name={id}
                     value={value}
                     placeholder={placeholder}
-                    className="flex-auto font-medium16 placeholder-black-whiteBoxOutline text-black-textSmallTitle outline-none"
+                    className="flex-auto font-medium16 placeholder-gray-200/40 text-gray-100 outline-none"
                     maxLength={16}
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     onChange={onChange}
                 />
                 <button
@@ -46,8 +49,12 @@ export default function InputBoxWithPassword({
                         <EyeOn type="button" className="w-6 h-6 text-gray-100/70" />
                     )}
                 </button>
-                <div className="text-black-whiteBoxOutline font-light14 pl-2.5">{description}</div>
             </div>
+            {description && (
+                <div className="pl-2 mt-2 font-light14">
+                    <span className={isError ? 'text-red-500' : 'text-gray-100'}>{description}</span>
+                </div>
+            )}
         </div>
     )
 }
