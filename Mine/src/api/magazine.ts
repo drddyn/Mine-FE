@@ -18,14 +18,14 @@ import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
 import { axiosInstance } from './axios'
 
 export const getMyMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
-    const res = await axiosInstance.get(`api/magazines`, {
+    const res = await axiosInstance.get(`/api/magazines`, {
         params: { page, size, sort },
     })
     return res.data
 }
 
 export const deleteMagazine = async ({ id }: RequestDeleteMagazine) => {
-    const res = await axiosInstance.delete(`api/magazines/${id}`)
+    const res = await axiosInstance.delete(`/api/magazines/${id}`)
     return res.data
 }
 
@@ -34,7 +34,7 @@ export const postMagazine = async ({ topic, user_mood }: PostMagazineDto) => {
         topic,
         user_mood,
     }
-    const res = await axiosInstance.post('api/magazines', body)
+    const res = await axiosInstance.post('/api/magazines', body)
     return res.data
 }
 
@@ -43,68 +43,68 @@ export const patchMagazineTitle = async ({ id, title, introduction }: PatchMagaz
         title,
         introduction,
     }
-    const res = await axiosInstance.patch(`api/magazines/${id}`, body)
+    const res = await axiosInstance.patch(`/api/magazines/${id}`, body)
     return res.data
 }
 
 export const getRecentSection = async (): Promise<ResponseRecentSection> => {
-    const res = await axiosInstance.get(`api/sections/recent`)
+    const res = await axiosInstance.get(`/api/sections/recent`)
     return res.data
 }
 
 export const getSectionDetail = async ({ magazineId, sectionId }: SectionDetailDto) => {
-    const res = await axiosInstance.get(`api/magazines/${magazineId}/sections/${sectionId}`)
+    const res = await axiosInstance.get(`/api/magazines/${magazineId}/sections/${sectionId}`)
     return res.data
 }
 
 export const getMagazineDetail = async (magazineId: number) => {
-    const res = await axiosInstance.get(`api/magazines/${magazineId}`)
+    const res = await axiosInstance.get(`/api/magazines/${magazineId}`)
     return res.data
 }
 
 export const getLikedMagazineList = async ({ page, size, sort }: MyMagazinesDto): Promise<ResponseMyMagazine> => {
-    const res = await axiosInstance.get(`api/magazines/liked`, {
+    const res = await axiosInstance.get(`/api/magazines/liked`, {
         params: { page, size, sort },
     })
     return res.data
 }
 
 export const deleteSection = async ({ magazineId, sectionId }: DeleteSectionDto) => {
-    const res = await axiosInstance.delete(`api/magazines/${magazineId}/sections/${sectionId}`)
+    const res = await axiosInstance.delete(`/api/magazines/${magazineId}/sections/${sectionId}`)
     return res.data
 }
 
 export const postHeart = async (id: number) => {
-    const res = await axiosInstance.post(`api/magazines/${id}/likes`)
+    const res = await axiosInstance.post(`/api/magazines/${id}/likes`)
     return res.data
 }
 
 export const deleteParagraph = async ({ magazineId, sectionId, paragraphId }: DeleteParagraphDto) => {
     const res = await axiosInstance.delete(
-        `api/magazines/${magazineId}/sections/${sectionId}/paragraphs/${paragraphId}`
+        `/api/magazines/${magazineId}/sections/${sectionId}/paragraphs/${paragraphId}`
     )
     return res.data
 }
 
 export const getMagazineFeed = async ({ cursorId, limit = 10 }: FeedDto): Promise<ResponseFeed> => {
-    const res = await axiosInstance.get(`api/magazines/feed`, {
+    const res = await axiosInstance.get(`/api/magazines/feed`, {
         params: { cursorId, limit },
     })
     return res.data
 }
 
 export const createMoodboard = async (magazineId: number) => {
-    const res = await axiosInstance.post(`api/magazines/${magazineId}/moodboards`)
+    const res = await axiosInstance.post(`/api/magazines/${magazineId}/moodboards`)
     return res.data
 }
 
 export const patchMagazineCover = async (id: number, coverImageUrl: string) => {
-    const res = await axiosInstance.patch(`api/magazines/${id}/cover`, { coverImageUrl })
+    const res = await axiosInstance.patch(`/api/magazines/${id}/cover`, { coverImageUrl })
     return res.data
 }
 
 export const postAddSection = async ({ magazineId, message }: RequestAddSection): Promise<ResponseAddSection> => {
-    const res = await axiosInstance.post(`api/magazines/${magazineId}/interact`, { message })
+    const res = await axiosInstance.post(`/api/magazines/${magazineId}/interact`, { message })
     return res.data
 }
 
@@ -113,12 +113,12 @@ export const postAddSectionInSectionPage = async ({
     sectionId,
     message,
 }: RequestAddSectionInSectionPage): Promise<ResponseAddSectionInSectionPage> => {
-    const res = await axiosInstance.post(`api/magazines/${magazineId}/sections/${sectionId}/interact`, { message })
+    const res = await axiosInstance.post(`/api/magazines/${magazineId}/sections/${sectionId}/interact`, { message })
     return res.data
 }
 
 export const patchSection = async ({ magazineId, sectionId, heading, paragraphs }: PatchSectionDto) => {
-    const res = await axiosInstance.patch(`api/magazines/${magazineId}/sections/${sectionId}`, {
+    const res = await axiosInstance.patch(`/api/magazines/${magazineId}/sections/${sectionId}`, {
         ...(heading !== undefined && { heading }),
         ...(paragraphs !== undefined && { paragraphs }),
     })

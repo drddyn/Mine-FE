@@ -57,9 +57,9 @@ export default function SignupChecks({ formData, onChange }: SignupChecksProps) 
                             className="ml-auto"
                         >
                             {showPassword ? (
-                                <EyeoffIcon className="w-6 h-6 text-gray-100/70" />
+                                <EyeoffIcon type="button" className="w-6 h-6 text-gray-100/70" />
                             ) : (
-                                <Eyeon className="w-6 h-6 text-gray-100/70" />
+                                <Eyeon type="button" className="w-6 h-6 text-gray-100/70" />
                             )}
                         </button>
                     </div>
@@ -93,9 +93,9 @@ export default function SignupChecks({ formData, onChange }: SignupChecksProps) 
                             className="ml-auto"
                         >
                             {showPasswordCheck ? (
-                                <EyeoffIcon className="w-6 h-6 text-gray-100/70" />
+                                <EyeoffIcon type="button" className="w-6 h-6 text-gray-100/70" />
                             ) : (
-                                <Eyeon className="w-6 h-6 text-gray-100/70" />
+                                <Eyeon type="button" className="w-6 h-6 text-gray-100/70" />
                             )}
                         </button>
                     </div>
