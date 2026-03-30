@@ -44,9 +44,9 @@ export default function InputBoxWithPassword({
                     className="ml-auto"
                 >
                     {showPassword ? (
-                        <EyeOff type="button" className="w-6 h-6 text-gray-100/70" />
+                        <EyeOff className="w-6 h-6 text-gray-100/70" />
                     ) : (
-                        <EyeOn type="button" className="w-6 h-6 text-gray-100/70" />
+                        <EyeOn className="w-6 h-6 text-gray-100/70" />
                     )}
                 </button>
             </div>

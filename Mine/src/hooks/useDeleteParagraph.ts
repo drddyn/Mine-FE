@@ -33,7 +33,7 @@ export default function useDeleteParagraph() {
         onSettled: (_, __, variables) => {
             queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
             queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.magazineId] })
-            // queryClient.invalidateQueries({ queryKey: ['recentsections'] })
+            queryClient.invalidateQueries({ queryKey: ['recentsections'] })
             queryClient.invalidateQueries({ queryKey: ['section', variables.magazineId, variables.sectionId] })
         },
     })

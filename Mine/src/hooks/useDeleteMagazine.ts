@@ -26,7 +26,6 @@ export default function useDeleteMagazine(options?: UseDeleteMagazineOptions) {
             return { previousData }
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
             showToast('매거진이 삭제되었습니다.')
             options?.onSuccess?.()
         },
