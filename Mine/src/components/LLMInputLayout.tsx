@@ -22,6 +22,9 @@ export default function LLMInputLayout() {
 
     const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
 
+    const isAnyPending =
+        postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending || postMagazineMutation.isPending
+
     if (!isLoggedIn || isHiddenPath) return null
 
     const handleSend = (value: string) => {
@@ -52,7 +55,7 @@ export default function LLMInputLayout() {
     return (
         <div className="fixed bottom-8 left-0 w-full flex justify-center z-50 pointer-events-none">
             <div className="pointer-events-auto">
-                <LLMInputBox onSend={handleSend} />
+                <LLMInputBox onSend={handleSend} isPending={isAnyPending} />
             </div>
         </div>
     )

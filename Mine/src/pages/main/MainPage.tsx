@@ -41,6 +41,7 @@ export default function MainPage() {
                         onTopicChange={setTopic}
                         onUserMoodChange={setUserMood}
                         onSubmit={handleSend}
+                        isPending={isPending}
                     />
                 </div>
             </div>

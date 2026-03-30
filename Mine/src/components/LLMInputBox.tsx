@@ -3,9 +3,10 @@ import Arrow from '../icon/arrow.svg?react'
 interface LLMInputBoxProps {
     placeholder?: string
     onSend?: (value: string) => void
+    isPending?: boolean
 }
 
-export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
+export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
     const [text, setText] = useState('')
     const [isFocused, setIsFocused] = useState(false)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -60,7 +61,7 @@ export default function LLMInputBox({ onSend }: LLMInputBoxProps) {
 
             <button
                 onClick={handleSend}
-                disabled={!text.trim()}
+                disabled={!text.trim() || isPending}
                 className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}`}
             >
                 <Arrow />
