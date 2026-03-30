@@ -8,6 +8,7 @@ import SidebarClosedBlock from './sidebar/SidebarClosedBlock'
 import useGetMyProfile from '../hooks/useGetMyProfile'
 import useUserStore from '../stores/user'
 import useSidebarStore from '../stores/sidebar'
+import { SkeletonAvatar } from '../components/skeleton/SkeletonBase'
 
 export default function Sidebar() {
     const { isOpen, toggleSidebar } = useSidebarStore()
@@ -55,11 +56,15 @@ export default function Sidebar() {
                     <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="saved" />
                     <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="explore" />
                 </div>
-                <img
-                    src={user?.profileImageUrl}
-                    className="w-7.5 h-7.5 rounded-full mt-auto object-cover"
-                    alt="사용자 프로필"
-                />
+                {isProfileLoading ? (
+                    <SkeletonAvatar />
+                ) : (
+                    <img
+                        src={user?.profileImageUrl}
+                        className="w-7.5 h-7.5 rounded-full mt-auto object-cover"
+                        alt="사용자 프로필"
+                    />
+                )}
             </div>
 
             <div

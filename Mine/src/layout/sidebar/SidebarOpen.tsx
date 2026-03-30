@@ -49,11 +49,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/${magazineId}/${sectionId}`)
-        onclick()
     }
     const handleMagazineClick = (magazineId: number) => {
         navigate(`/${magazineId}`)
-        onclick()
     }
 
     if (isMagLoading || isSecLoading) return <SidebarSkeleton />
@@ -88,6 +86,15 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         />
                         {isSectionOpen && (
                             <>
+                                {isSecLoading && (
+                                    <>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                    </>
+                                )}
                                 {section?.map((section) => (
                                     <SidebarSectionList
                                         key={section.sectionId}
@@ -104,16 +111,27 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarTitle onClick={handleMagazineToggleOpen} title="내 매거진" isOpen={isMagazineOpen} />
 
                         {isMagazineOpen && (
-                            <div className="h-52 overflow-auto custom-scrollbar">
-                                {magazine?.content?.map((magazine) => (
-                                    <SidebarMagazine
-                                        key={magazine.magazineId}
-                                        id={magazine.magazineId}
-                                        title={magazine.title}
-                                        onclick={() => handleMagazineClick(magazine.magazineId)}
-                                    />
-                                ))}
-                            </div>
+                            <>
+                                {isMagLoading && (
+                                    <>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
+                                    </>
+                                )}
+                                <div className="h-52 overflow-auto custom-scrollbar">
+                                    {magazine?.content?.map((magazine) => (
+                                        <SidebarMagazine
+                                            key={magazine.magazineId}
+                                            id={magazine.magazineId}
+                                            title={magazine.title}
+                                            onclick={() => handleMagazineClick(magazine.magazineId)}
+                                        />
+                                    ))}
+                                </div>
+                            </>
                         )}
                     </div>
 
