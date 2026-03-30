@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { postHeart } from '../api/magazine'
-import type { ResponseGetSectionDetail } from '../types/magazine'
+import type { ResponseMagazineDetail } from '../types/magazine'
 
 export default function usePostHeart(sectionId: number) {
     const queryClient = useQueryClient()
@@ -14,7 +14,7 @@ export default function usePostHeart(sectionId: number) {
             await queryClient.cancelQueries({ queryKey })
             const previousData = queryClient.getQueryData(queryKey)
 
-            queryClient.setQueryData<ResponseGetSectionDetail | undefined>(queryKey, (old) => {
+            queryClient.setQueryData<ResponseMagazineDetail | undefined>(queryKey, (old) => {
                 if (!old) return old
                 return {
                     ...old,

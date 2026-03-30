@@ -36,22 +36,19 @@ export type ProfileDto = {
     username: string
     profileImage: File | null
 }
-
-export type User = {
+export type UserBase = {
     id: number
     username: string
     nickname: string
-    email: string
     profileImageUrl: string
+}
+
+export type User = UserBase & {
+    email: string
     followerCount: number
     followingCount: number
     magazineCount: number
     isPublic: boolean
     interests: string[]
     isFollowing: boolean
-    role: 'USER'
-    createdAt: string
-    updatedAt: string
-    deleted: boolean
-    deletedAt: string
 }
