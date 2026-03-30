@@ -130,7 +130,10 @@ export default function MagazineInfo({
                 )}
 
                 <div className="relative flex items-center">
-                    <Hamburger className="rotate-90 text-black-icon cursor-pointer" onClick={toggleHamburger} />
+                    <Hamburger
+                        className={`rotate-90 cursor-pointer ${mode === 'section' ? 'text-gray-300' : 'text-gray-100-op70'}`}
+                        onClick={toggleHamburger}
+                    />
 
                     {isHamburgerOpen &&
                         mode === 'section' &&
@@ -170,7 +173,6 @@ export default function MagazineInfo({
                 likeCount={likeCount} // SectionContent에서 받은 값
                 isLiked={isLiked} // SectionContent에서 받은 값
                 magazineId={magazineId || magazinedata?.magazineId}
-                sectionId={sectionId} // 연결 고리 완성!
                 classname="basis-1 justify-center"
             />
             <ProfileBox nickname={nickname} profileImage={profileImage} mode={mode} classname="basis-100 justify-end" />

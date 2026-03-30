@@ -1,37 +1,40 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { postHeart } from '../api/magazine'
-import type { ResponseGetSectionDetail } from '../types/magazine'
+import type { ResponseMagazineDetail } from '../types/magazine'
 
-export default function usePostHeart(sectionId: number) {
+export default function usePostHeart() {
     const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (magazineId: number) => postHeart(magazineId),
         onMutate: async (magazineId: number) => {
-            // [핵심] SectionContent에서 쓰는 ['section', magId, secId]와 완벽히 일치시켜야 함
-            const queryKey = ['section', magazineId, Number(sectionId)]
+            const queryKey = ['magazinedetail', magazineId]
 
             await queryClient.cancelQueries({ queryKey })
-            const previousData = queryClient.getQueryData(queryKey)
-
-            queryClient.setQueryData<ResponseGetSectionDetail | undefined>(queryKey, (old) => {
-                if (!old) return old
-                return {
-                    ...old,
-                    likeCount: old.isLiked ? (old.likeCount || 0) - 1 : (old.likeCount || 0) + 1,
-                    isLiked: !old.isLiked,
-                }
-            })
-            return { previousData }
+            const previousData = queryClient.getQueryData<ResponseMagazineDetail>(queryKey)
+            if (previousData) {
+                queryClient.setQueryData<ResponseMagazineDetail>(queryKey, (old) => {
+                    if (!old) return old
+                    return {
+                        ...old,
+                        // 하트 수 계산 및 상태 반전
+                        likeCount: old.isLiked ? old.likeCount - 1 : old.likeCount + 1,
+                        isLiked: !old.isLiked,
+                    }
+                })
+            }
+            return { previousData, queryKey }
         },
-        onError: (err, magazineId, context) => {
-            const queryKey = ['section', magazineId, Number(sectionId)]
-            queryClient.setQueryData(queryKey, context?.previousData)
+        onError: (err, _magazineId, context) => {
+            if (context?.previousData) {
+                queryClient.setQueryData(context.queryKey, context.previousData)
+            }
             console.error('매거진 하트 누르기 실패:', err)
-            alert('매거진 하트 누르기에 실패했습니다.')
         },
-        onSettled: (_data, _error, magazineId) => {
-            queryClient.invalidateQueries({ queryKey: ['magazine', magazineId, Number(sectionId)] })
+        onSettled: (_data, _error, _magazineId, context) => {
+            if (context?.queryKey) {
+                queryClient.invalidateQueries({ queryKey: context.queryKey })
+            }
         },
     })
 }

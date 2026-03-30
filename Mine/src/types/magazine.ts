@@ -1,4 +1,4 @@
-import type { User } from './user'
+import type { UserBase } from './user'
 
 export type PageResponse<T> = {
     totalPages: number
@@ -52,23 +52,20 @@ export type Magazine = BaseMagazine & {
 export type ResponseMyMagazine = PageResponse<Magazine>
 
 export type ResponseMagazineDetail = BaseMagazine & {
-    tags: string
+    user: UserBase
+    tags: string[]
     moodboardImageUrl: string
     moodboardDescription: string
-    createdAt: string
-    user: User
     sections: Section[]
     likeCount: number
-    // version: number
+    isLiked: boolean
 }
 
 type Paragraph = {
     paragraphId: number
-    section: string
     subtitle: string
     text: string
     imageUrl: string
-    displayOrder: 0
 }
 type Section = {
     sectionId: number
@@ -76,12 +73,7 @@ type Section = {
     thumbnailUrl: string
     paragraphs: Paragraph[]
     imageUrl: string
-    layoutType: string
-    layoutHint: string
     displayOrder: number
-    magazineId: number
-    magazineTitle: string
-    viewedAt: string
 }
 
 export type RequestDeleteMagazine = {
@@ -99,7 +91,16 @@ export type PatchMagazineTitleDto = {
     introduction: string
 }
 
-export type ResponseRecentSection = Section[]
+type RecentSection = {
+    sectionId: number
+    heading: string
+    displayOrder: number
+    magazineId: number
+    magazineTitle: string
+    viewedAt: string
+}
+
+export type ResponseRecentSection = RecentSection[]
 
 export type SectionDetailDto = BaseSection
 
@@ -110,19 +111,11 @@ type BaseSection = {
 export type DeleteSectionDto = BaseSection
 
 export type ResponseGetSectionDetail = {
-    sectionId: number
     heading: string
     paragraphs: Paragraph[]
-    thumnbnail_url: string
-    layout_type: string
-    layout_hint: string
-    caption: string
-    display_order: number
-    magazineId: number
-    magazineTitle: string
-    viewedAt: string
-    likeCount: number
-    isLiked: boolean
+    sectionId: number
+    thumbnailUrl: string
+    displayOrder: number
 }
 
 export type DeleteParagraphDto = BaseSection & {

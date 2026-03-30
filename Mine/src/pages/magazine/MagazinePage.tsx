@@ -78,6 +78,8 @@ export default function MagazinePage() {
                                 profileImage={data.user.profileImageUrl}
                                 magazineId={data.magazineId}
                                 mode="magazine"
+                                likeCount={data.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
+                                isLiked={data.isLiked} // 내 좋아요 상태 전달
                             />
                         </div>
                     )}
