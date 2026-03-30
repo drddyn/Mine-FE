@@ -4,9 +4,12 @@ import usePostAddSection from '../hooks/usePostAddSection'
 import usePostAddSectionInSectionPage from '../hooks/usePostAddSectionInSectionPage'
 import usePostMagazine from '../hooks/usePostMagazine'
 import { useAuthStore } from '../stores/auth'
+import useUserStore from '../stores/user'
+import useGetMagazineDetail from '../hooks/useGetMagazineDetail'
 
 export default function LLMInputLayout() {
     const { isLoggedIn } = useAuthStore()
+    const { user } = useUserStore()
     const location = useLocation()
     const hiddenPath = ['/login', '/signup', '/landing', '/']
     const isHiddenPath = hiddenPath.includes(location.pathname)
@@ -18,9 +21,14 @@ export default function LLMInputLayout() {
     const sectionMatch = matchPath('/:magazineId/:sectionId', location.pathname)
     const magazineMatch = matchPath('/:magazineId', location.pathname)
 
+    //magazineId 추출
     const currentMagazineId = magazineMatch?.params.magazineId
-
     const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
+
+    const { data: magazineDetail } = useGetMagazineDetail(Number(currentMagazineId))
+
+    // 🌟 매거진 주인이 '나'인지 판별 (실제 백엔드 DTO의 필드명에 맞게 수정해 주세요)
+    const isMyMagazine = magazineDetail?.user.id === user?.id
 
     const isAnyPending =
         postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending || postMagazineMutation.isPending
@@ -28,7 +36,7 @@ export default function LLMInputLayout() {
     if (!isLoggedIn || isHiddenPath) return null
 
     const handleSend = (value: string) => {
-        if (sectionMatch) {
+        if (sectionMatch && isMyMagazine) {
             // 섹션 페이지
             const { magazineId, sectionId } = sectionMatch.params
             postAddInSectionPageMutation.mutate({
@@ -36,7 +44,7 @@ export default function LLMInputLayout() {
                 sectionId: Number(sectionId),
                 message: value,
             })
-        } else if (magazineMatch && isNumericMagazineId) {
+        } else if (magazineMatch && isNumericMagazineId && isMyMagazine) {
             // 매거진 페이지
             const { magazineId } = magazineMatch.params
             postAddSectionMutation.mutate({
