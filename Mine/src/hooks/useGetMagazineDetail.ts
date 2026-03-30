@@ -4,7 +4,7 @@ import { getMagazineDetail } from '../api/magazine'
 
 export default function useGetMagazineDetail(magazineId: number) {
     return useQuery<ResponseMagazineDetail>({
-        queryKey: ['magazine', magazineId],
+        queryKey: ['magazinedetail', magazineId],
         queryFn: () => getMagazineDetail(magazineId),
         select: (data) => data,
     })

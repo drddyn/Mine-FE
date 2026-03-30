@@ -17,18 +17,13 @@ export default function useUpdateMagazineTitle() {
             const previousMyMagazines = queryClient.getQueriesData<ResponseMyMagazine>({ queryKey: ['mymagazines'] })
             const previousMagazineDetail = queryClient.getQueryData<ResponseMagazineDetail>(['magazine', id])
 
-            queryClient.setQueriesData<ResponseMyMagazine>(
-                { queryKey: ['mymagazines'] },
-                (old) => {
-                    if (!old) return old
-                    return {
-                        ...old,
-                        content: old.content.map((m) =>
-                            m.magazineId === id ? { ...m, title } : m
-                        ),
-                    }
+            queryClient.setQueriesData<ResponseMyMagazine>({ queryKey: ['mymagazines'] }, (old) => {
+                if (!old) return old
+                return {
+                    ...old,
+                    content: old.content.map((m) => (m.magazineId === id ? { ...m, title } : m)),
                 }
-            )
+            })
 
             queryClient.setQueryData<ResponseMagazineDetail>(['magazine', id], (old) => {
                 if (!old) return old
@@ -54,6 +49,7 @@ export default function useUpdateMagazineTitle() {
         onSettled: (_, __, variables) => {
             queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
             queryClient.invalidateQueries({ queryKey: ['magazine', variables.id] })
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.id] })
         },
     })
 }

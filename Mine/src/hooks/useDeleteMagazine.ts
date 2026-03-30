@@ -16,19 +16,17 @@ export default function useDeleteMagazine(options?: UseDeleteMagazineOptions) {
         onMutate: async ({ id }) => {
             await queryClient.cancelQueries({ queryKey: ['mymagazines'] })
             const previousData = queryClient.getQueriesData<ResponseMyMagazine>({ queryKey: ['mymagazines'] })
-            queryClient.setQueriesData<ResponseMyMagazine>(
-                { queryKey: ['mymagazines'] },
-                (old) => {
-                    if (!old) return old
-                    return {
-                        ...old,
-                        content: old.content.filter((m) => m.magazineId !== id),
-                    }
+            queryClient.setQueriesData<ResponseMyMagazine>({ queryKey: ['mymagazines'] }, (old) => {
+                if (!old) return old
+                return {
+                    ...old,
+                    content: old.content.filter((m) => m.magazineId !== id),
                 }
-            )
+            })
             return { previousData }
         },
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
             showToast('매거진이 삭제되었습니다.')
             options?.onSuccess?.()
         },
