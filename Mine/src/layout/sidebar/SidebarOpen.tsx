@@ -66,9 +66,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
     return (
         <>
-            <div className="absolute top-0 left-0 h-screen w-60 pb-4 bg-gray-500-op70 z-50 transition-transform ease-in-out duration-300">
+            <div className="absolute top-0 left-0 h-screen w-60 pt-8 pb-4 bg-gray-500-op70 z-50 transition-transform ease-in-out duration-300">
                 <div className="flex flex-col h-full gap-6">
-                    <div className="flex gap-2 mt-8 ml-5 mr-4 items-center justify-between">
+                    <div className="flex gap-2 ml-5 mr-4 items-center justify-between">
                         <MineLogo className="w-21 h-7.5 text-gray-100/50" />
                         <SidebarButton className="cursor-pointer text-gray-100-op70" onClick={onclick} />
                     </div>

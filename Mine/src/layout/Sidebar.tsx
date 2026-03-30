@@ -46,7 +46,7 @@ export default function Sidebar() {
             <div
                 onTransitionEnd={handleTransitionEnd}
                 onClick={handleSafeToggle}
-                className={`absolute top-0 left-0 w-15 h-screen flex flex-col gap-6 justify-start items-center pt-8 pb-8 bg-gray-500-op70 transition-opacity duration-200 ease-in-out ${
+                className={`absolute top-0 left-0 w-15 h-screen flex flex-col gap-6 justify-start items-center pt-8 pb-4 bg-gray-500-op70 transition-opacity duration-200 ease-in-out ${
                     isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
             >
