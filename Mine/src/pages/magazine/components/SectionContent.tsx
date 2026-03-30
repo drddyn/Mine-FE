@@ -12,6 +12,7 @@ import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModa
 import ConfirmModal from '../../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../../hooks/useCreateMoodboard'
 import Toast from '../../../components/common/Toast'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface SectionContentProps {
     sectionId: number
@@ -22,7 +23,8 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const { isOpen } = useSidebarStore()
     const magazinedata = useMagazine()
     const navigate = useNavigate()
-    const { data, isLoading } = useGetSectionDetail(Number(magazineId), Number(sectionId))
+    const queryClient = useQueryClient()
+    const { data, isLoading, isSuccess } = useGetSectionDetail(Number(magazineId), Number(sectionId))
     const user = magazinedata?.user
     const content = data?.paragraphs
     const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
@@ -36,6 +38,13 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
         const timer = setTimeout(() => setShowToast(false), 3000)
         return () => clearTimeout(timer)
     }, [showToast])
+    useEffect(() => {
+        // 2. 디테일 API 호출이 성공적으로 완료되었다면?
+        if (isSuccess) {
+            // 3. 서버에 조회 기록이 남았을 테니, 최근 본 섹션 목록을 새로고침합니다!
+            queryClient.invalidateQueries({ queryKey: ['recentsections'] })
+        }
+    }, [isSuccess, queryClient]) // isSuccess가 true로 바뀔 때 한 번 실행됨
 
     const handleClick = (magazineId: number) => {
         navigate(`/${magazineId}`)

@@ -44,7 +44,8 @@ axiosInstance.interceptors.response.use(
                 return axiosInstance(originalRequest)
             } catch (refreshError) {
                 // 리프레시 토큰마저 만료된 경우 로그아웃 처리
-                localStorage.clear()
+                localStorage.removeItem('accessToken')
+                localStorage.removeItem('refreshToken')
                 window.location.href = '/login'
                 alert('로그인이 만료되었습니다')
                 return Promise.reject(refreshError)

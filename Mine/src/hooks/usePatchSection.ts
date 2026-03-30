@@ -11,7 +11,8 @@ export default function usePatchSection() {
         mutationFn: (params: PatchSectionDto) => patchSection(params),
         onSuccess: (_, variables) => {
             showToast('수정이 완료되었습니다.')
-            queryClient.invalidateQueries({ queryKey: ['magazine', variables.magazineId] })
+            queryClient.invalidateQueries({ queryKey: ['mymagazines', variables.magazineId] })
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.magazineId] })
             queryClient.invalidateQueries({ queryKey: ['section', variables.magazineId, variables.sectionId] })
         },
         onError: () => {

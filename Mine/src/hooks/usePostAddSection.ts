@@ -5,8 +5,9 @@ export default function usePostAddSection() {
     const queryClient = useQueryClient()
     return useMutation({
         mutationFn: postAddSection,
-        onSuccess: () => {
+        onSuccess: (_, variables) => {
             queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.magazineId] })
         },
         onError: (error) => {
             console.log('섹션 생성:', error)

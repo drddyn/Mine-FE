@@ -122,7 +122,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                             <img
                                 className="w-7.5 h-7.5 rounded-full object-cover"
                                 src={user?.profileImageUrl}
-                                alt="프로필"
+                                alt="사용자 프로필"
                             />
                             <div className="font-light14 text-gray-100">{user?.nickname}</div>
                         </div>

@@ -6,6 +6,7 @@ interface MagazineInputProps {
     onTopicChange: (value: string) => void
     onUserMoodChange: (value: string) => void
     onSubmit: () => void
+    isPending: boolean
 }
 
 export default function NewMagazineInput({
@@ -14,6 +15,7 @@ export default function NewMagazineInput({
     onTopicChange,
     onUserMoodChange,
     onSubmit,
+    isPending,
 }: MagazineInputProps) {
     const isTopicValid = Boolean(topic.trim())
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -51,7 +53,7 @@ export default function NewMagazineInput({
                 </div>
                 <button
                     onClick={onSubmit}
-                    disabled={!isTopicValid}
+                    disabled={!isTopicValid || isPending}
                     className={`flex shrink-0 w-13.25 h-7.5 px-4 py-2 rounded-[40px] items-center justify-center transition-all duration-200 cursor-pointer ${
                         isTopicValid
                             ? 'bg-gray-500 shadow-[0_4px_8px_0_rgba(0,0,0,0.12),0_16px_32px_0_rgba(0,0,0,0.20)]'

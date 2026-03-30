@@ -58,7 +58,7 @@ export default function Sidebar() {
                 <img
                     src={user?.profileImageUrl}
                     className="w-7.5 h-7.5 rounded-full mt-auto object-cover"
-                    alt="profile"
+                    alt="사용자 프로필"
                 />
             </div>
 

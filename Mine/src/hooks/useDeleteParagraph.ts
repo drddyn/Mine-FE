@@ -31,8 +31,10 @@ export default function useDeleteParagraph() {
             alert('문단 삭제에 실패했습니다. 잠시 후에 다시 시도해 주세요')
         },
         onSettled: (_, __, variables) => {
-            queryClient.invalidateQueries({ queryKey: ['section', variables.magazineId, variables.sectionId] })
+            queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.magazineId] })
             queryClient.invalidateQueries({ queryKey: ['recentsections'] })
+            queryClient.invalidateQueries({ queryKey: ['section', variables.magazineId, variables.sectionId] })
         },
     })
 }

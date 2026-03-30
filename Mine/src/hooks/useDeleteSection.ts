@@ -31,12 +31,13 @@ export default function useDeleteSection(options?: UseDeleteSectionOptions) {
         },
         onError: (_, __, context) => {
             if (context?.previousData) {
-                queryClient.setQueryData(['magazine', context.magazineId], context.previousData)
+                queryClient.setQueryData(['mymagazines', context.magazineId], context.previousData)
             }
             alert('섹션 삭제에 실패했습니다. 잠시 후에 다시 시도해 주세요')
         },
         onSettled: (_, __, variables) => {
-            queryClient.invalidateQueries({ queryKey: ['magazine', variables.magazineId] })
+            queryClient.invalidateQueries({ queryKey: ['mymagazines', variables.magazineId] })
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.magazineId] })
             queryClient.invalidateQueries({ queryKey: ['recentsections'] })
         },
     })
