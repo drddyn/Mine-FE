@@ -130,7 +130,10 @@ export default function MagazineInfo({
                 )}
 
                 <div className="relative flex items-center">
-                    <Hamburger className="rotate-90 text-black-icon cursor-pointer" onClick={toggleHamburger} />
+                    <Hamburger
+                        className={`rotate-90 cursor-pointer ${mode === 'section' ? 'text-gray-300' : 'text-gray-100-op70'}`}
+                        onClick={toggleHamburger}
+                    />
 
                     {isHamburgerOpen &&
                         mode === 'section' &&
