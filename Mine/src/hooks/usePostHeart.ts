@@ -18,7 +18,7 @@ export default function usePostHeart() {
                     return {
                         ...old,
                         // 하트 수 계산 및 상태 반전
-                        likeCount: old.isLiked ? (old.likeCount || 0) - 1 : (old.likeCount || 0) + 1,
+                        likeCount: old.isLiked ? old.likeCount - 1 : old.likeCount + 1,
                         isLiked: !old.isLiked,
                     }
                 })

@@ -173,7 +173,6 @@ export default function MagazineInfo({
                 likeCount={likeCount} // SectionContent에서 받은 값
                 isLiked={isLiked} // SectionContent에서 받은 값
                 magazineId={magazineId || magazinedata?.magazineId}
-                sectionId={sectionId} // 연결 고리 완성!
                 classname="basis-1 justify-center"
             />
             <ProfileBox nickname={nickname} profileImage={profileImage} mode={mode} classname="basis-100 justify-end" />

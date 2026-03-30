@@ -114,8 +114,8 @@ export type ResponseGetSectionDetail = {
     heading: string
     paragraphs: Paragraph[]
     sectionId: number
-    thumnbnail_url: string
-    display_order: number
+    thumbnailUrl: string
+    displayOrder: number
 }
 
 export type DeleteParagraphDto = BaseSection & {

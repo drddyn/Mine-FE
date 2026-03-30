@@ -4,12 +4,11 @@ interface HeartCountProps {
     likeCount?: number
     isLiked?: boolean
     magazineId?: number
-    sectionId?: number
     classname?: string
 }
 
-export default function HeartCount({ likeCount, isLiked, magazineId, sectionId, classname }: HeartCountProps) {
-    const postMutation = usePostHeart(Number(sectionId))
+export default function HeartCount({ likeCount, isLiked, magazineId, classname }: HeartCountProps) {
+    const postMutation = usePostHeart()
 
     const handleHeartClick = () => {
         if (!magazineId) return
