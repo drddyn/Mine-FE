@@ -54,7 +54,6 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
         navigate(`/${magazineId}`)
     }
 
-    if (isMagLoading || isSecLoading) return <SidebarSkeleton />
     if (isMagError) {
         alert('목록 불러오기 실패')
         return null
@@ -86,15 +85,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         />
                         {isSectionOpen && (
                             <>
-                                {isSecLoading && (
-                                    <>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                    </>
-                                )}
+                                {isSecLoading && <SidebarSkeleton />}
                                 {section?.map((section) => (
                                     <SidebarSectionList
                                         key={section.sectionId}
@@ -112,15 +103,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
 
                         {isMagazineOpen && (
                             <>
-                                {isMagLoading && (
-                                    <>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                        <div className="flex hover:bg-gray-600-op70 py-2 h-9 select-none"></div>
-                                    </>
-                                )}
+                                {isMagLoading && <SidebarSkeleton />}
                                 <div className="h-52 overflow-auto custom-scrollbar">
                                     {magazine?.content?.map((magazine) => (
                                         <SidebarMagazine

@@ -14,7 +14,7 @@ export default function Sidebar() {
     const { isOpen, toggleSidebar } = useSidebarStore()
     const [isAnimating, setIsAnimating] = useState(false)
 
-    const { data: profile, isLoading: isProfileLoading, isError: isProfileError } = useGetMyProfile()
+    const { data: profile, isLoading: isProfileLoading } = useGetMyProfile()
     const setUser = useUserStore((state) => state.setUser)
     const user = useUserStore((state) => state.user)
 
@@ -23,9 +23,6 @@ export default function Sidebar() {
             setUser(profile)
         }
     }, [profile, setUser])
-
-    if (isProfileLoading) return null
-    if (isProfileError) return null
 
     const handleSafeToggle = () => {
         setIsAnimating(true)
