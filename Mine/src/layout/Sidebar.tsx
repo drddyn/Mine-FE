@@ -8,12 +8,13 @@ import SidebarClosedBlock from './sidebar/SidebarClosedBlock'
 import useGetMyProfile from '../hooks/useGetMyProfile'
 import useUserStore from '../stores/user'
 import useSidebarStore from '../stores/sidebar'
+import { SkeletonAvatar } from '../components/skeleton/SkeletonBase'
 
 export default function Sidebar() {
     const { isOpen, toggleSidebar } = useSidebarStore()
     const [isAnimating, setIsAnimating] = useState(false)
 
-    const { data: profile, isLoading: isProfileLoading, isError: isProfileError } = useGetMyProfile()
+    const { data: profile, isLoading: isProfileLoading } = useGetMyProfile()
     const setUser = useUserStore((state) => state.setUser)
     const user = useUserStore((state) => state.user)
 
@@ -22,9 +23,6 @@ export default function Sidebar() {
             setUser(profile)
         }
     }, [profile, setUser])
-
-    if (isProfileLoading) return null
-    if (isProfileError) return null
 
     const handleSafeToggle = () => {
         setIsAnimating(true)
@@ -45,7 +43,7 @@ export default function Sidebar() {
             <div
                 onTransitionEnd={handleTransitionEnd}
                 onClick={handleSafeToggle}
-                className={`absolute top-0 left-0 w-15 h-screen flex flex-col gap-6 justify-start items-center pt-8 pb-8 bg-gray-500-op70 transition-opacity duration-200 ease-in-out ${
+                className={`absolute top-0 left-0 w-15 h-screen flex flex-col gap-6 justify-start items-center pt-8 pb-4 bg-gray-500-op70 transition-opacity duration-200 ease-in-out ${
                     isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
             >
@@ -55,11 +53,15 @@ export default function Sidebar() {
                     <SidebarClosedBlock icon={<Sidebar_like />} title="저장한 매거진" to="saved" />
                     <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="explore" />
                 </div>
-                <img
-                    src={user?.profileImageUrl}
-                    className="w-7.5 h-7.5 rounded-full mt-auto object-cover"
-                    alt="profile"
-                />
+                {isProfileLoading ? (
+                    <SkeletonAvatar />
+                ) : (
+                    <img
+                        src={user?.profileImageUrl}
+                        className="w-7.5 h-7.5 rounded-full mt-auto object-cover"
+                        alt="사용자 프로필"
+                    />
+                )}
             </div>
 
             <div

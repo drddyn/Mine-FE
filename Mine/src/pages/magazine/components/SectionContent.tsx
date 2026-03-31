@@ -5,12 +5,14 @@ import SectionIndexList from './SectionIndexList'
 import ParagraphPart from './ParagraphPart'
 import useSidebarStore from '../../../stores/sidebar'
 import { useNavigate } from 'react-router-dom'
+import SectionSkeleton from '../../../components/skeleton/SectionSkeleton'
 import { useState, useEffect } from 'react'
 import IconWandStars from '../../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../../hooks/useCreateMoodboard'
 import Toast from '../../../components/common/Toast'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface SectionContentProps {
     sectionId: number
@@ -21,7 +23,8 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const { isOpen } = useSidebarStore()
     const magazinedata = useMagazine()
     const navigate = useNavigate()
-    const { data, isLoading } = useGetSectionDetail(Number(magazineId), Number(sectionId))
+    const queryClient = useQueryClient()
+    const { data, isLoading, isSuccess } = useGetSectionDetail(Number(magazineId), Number(sectionId))
     const user = magazinedata?.user
     const content = data?.paragraphs
     const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
@@ -35,9 +38,16 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
         const timer = setTimeout(() => setShowToast(false), 3000)
         return () => clearTimeout(timer)
     }, [showToast])
+    useEffect(() => {
+        // 2. 디테일 API 호출이 성공적으로 완료되었다면?
+        if (isSuccess) {
+            // 3. 서버에 조회 기록이 남았을 테니, 최근 본 섹션 목록을 새로고침합니다!
+            queryClient.invalidateQueries({ queryKey: ['recentsections'] })
+        }
+    }, [isSuccess, queryClient]) // isSuccess가 true로 바뀔 때 한 번 실행됨
 
     const handleClick = (magazineId: number) => {
-        navigate(`/magazine/${magazineId}`)
+        navigate(`/${magazineId}`)
     }
 
     const handleConfirm = async () => {
@@ -55,7 +65,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }
 
     if (isLoading) {
-        return <></>
+        return <SectionSkeleton />
     }
 
     return (
@@ -73,9 +83,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                             nickname={user?.nickname}
                             profileImage={user?.profileImageUrl}
                             sectionId={Number(sectionId)}
-                            magazineId={Number(magazineId)} 
-                            likeCount={data?.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
-                            isLiked={data?.isLiked}     // 내 좋아요 상태 전달
+                            magazineId={Number(magazineId)}
+                            likeCount={magazinedata?.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
+                            isLiked={magazinedata?.isLiked} // 내 좋아요 상태 전달
                             mode="section"
                             onClick={handleClick}
                         />
@@ -100,7 +110,6 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     </button>
                 </div>
             </div>
-
             <ScreenSettingsModal
                 isOpen={isScreenSettingsOpen}
                 onClose={() => setIsScreenSettingsOpen(false)}

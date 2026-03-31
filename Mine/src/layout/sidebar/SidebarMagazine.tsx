@@ -18,6 +18,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     const [isEditing, setIsEditing] = useState(false)
     const [draftTitle, setDraftTitle] = useState('')
     const inputRef = useRef<HTMLTextAreaElement>(null)
+    const isCommittingRef = useRef(false)
 
     const updateTitleMutation = useUpdateMagazineTitle()
 
@@ -47,17 +48,16 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     const cancelEdit = () => {
         setIsEditing(false)
         setDraftTitle('')
+        isCommittingRef.current = false
     }
 
     const commitEdit = () => {
+        if (isCommittingRef.current) return
+        isCommittingRef.current = true
+
         const next = draftTitle.trim()
 
-        if (!next) {
-            cancelEdit()
-            return
-        }
-
-        if (next === title) {
+        if (!next || next === title) {
             cancelEdit()
             return
         }
@@ -89,7 +89,6 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
     return (
         <div className="w-full flex flex-col">
             <div
-                key={id}
                 className={`w-full flex justify-between group hover:bg-gray-600-op70 hover:text-gray-100 py-2 items-center pl-5 pr-4 text-gray-100-op70 font-medium14 select-none ${
                     isEditing ? 'bg-gray-600-op70' : ''
                 }`}
@@ -120,6 +119,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
                     <SidebarHamburgerModal
                         handleClose={closeHamburger}
                         id={id}
+                        title={title}
                         top={modalPos.top}
                         left={modalPos.left}
                         onEdit={() => beginEdit()}

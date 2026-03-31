@@ -5,6 +5,7 @@ import { GridContainor } from './components/GridContainor'
 import useSidebarStore from '../../stores/sidebar'
 import MagazineInfo from './components/MagazineInfo'
 import { MagazineProvider } from './MagazineProvider'
+import MagazineSkeleton from '../../components/skeleton/MagazineSkeleton'
 import { useState, useEffect } from 'react'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
@@ -57,7 +58,7 @@ export default function MagazinePage() {
         }
     }
 
-    if (isPending) return <></>
+    if (isPending) return <MagazineSkeleton />
     if (!data) return <></>
 
     const safeCoverImageUrl = isValidUrl(data.coverImageUrl) ? data.coverImageUrl : ''
@@ -77,6 +78,8 @@ export default function MagazinePage() {
                                 profileImage={data.user.profileImageUrl}
                                 magazineId={data.magazineId}
                                 mode="magazine"
+                                likeCount={data.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
+                                isLiked={data.isLiked} // 내 좋아요 상태 전달
                             />
                         </div>
                     )}

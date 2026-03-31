@@ -16,7 +16,7 @@ export default function usePostAuthorization() {
             console.log('로그인 성공!', data)
             localStorage.setItem('accessToken', data.accessToken)
             localStorage.setItem('refreshToken', data.refreshToken)
-            queryClient.invalidateQueries({ queryKey: ['myInfo'] })
+            queryClient.invalidateQueries({ queryKey: ['profile'] })
             navigate('/')
         },
         onError: (error) => {

@@ -4,7 +4,7 @@ import { axiosInstance } from '../api/axios'
 
 export default function useGetInterests() {
     return useQuery<ResponseInterestsList>({
-        queryKey: ['intersts'],
+        queryKey: ['interests'],
         queryFn: async () => {
             const { data } = await axiosInstance.get('/api/interests')
             return data

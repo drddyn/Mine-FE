@@ -11,7 +11,7 @@ export const postAuthorization = async ({ username, password }: AuthorizationDto
 }
 
 export const postLogout = async () => {
-    const { data } = await axiosInstance.post('api/auth/logout')
+    const { data } = await axiosInstance.post('/api/auth/logout')
     return data
 }
 

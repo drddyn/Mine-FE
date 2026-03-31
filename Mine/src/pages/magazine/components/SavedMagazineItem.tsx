@@ -24,7 +24,7 @@ export default function SavedMagazineItem({ magazine }: Props) {
             style={{
                 backgroundImage: safeImageUrl ? `url(${safeImageUrl})` : 'none',
             }}
-            onClick={() => navigate(`/magazine/${magazine.magazineId}`)}
+            onClick={() => navigate(`/${magazine.magazineId}`)}
         >
             <span className="text-white text-right leading-normal font-notoserif font-semibold24">
                 {magazine.title}

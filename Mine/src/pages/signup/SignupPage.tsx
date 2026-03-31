@@ -115,7 +115,7 @@ export default function SignupPage() {
                     <button
                         type="button"
                         onClick={handlePrevClick}
-                        className="w-50 h-12 rounded-2xl border border-gray-300 transition-colors duration-150 text-gray-100 font-medium16 bg-gray-100-op40"
+                        className="w-50 h-12 rounded-2xl bg-gray-100-op40 hover:bg-gray-300 border border-gray-400 transition-colors duration-150 text-gray-100 font-medium16 cursor-pointer"
                     >
                         이전으로
                     </button>
@@ -123,7 +123,7 @@ export default function SignupPage() {
                         type="button"
                         onClick={handleNextClick}
                         disabled={isNextDisabled}
-                        className="w-50 h-12 rounded-2xl transition-colors duration-150 text-gray-100 font-medium16 disabled:opacity-50 bg-gray-500-op70"
+                        className="w-50 h-12 rounded-2xl transition-colors duration-150 text-gray-100 font-medium16 disabled:opacity-50 bg-gray-600-op70 enabled:hover:bg-gray-600"
                     >
                         {nextLabel}
                     </button>

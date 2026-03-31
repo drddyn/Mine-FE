@@ -9,7 +9,7 @@ interface SectionIndexProps {
 export default function SectionIndexClose({ title, sectionId, magazineId }: SectionIndexProps) {
     const navigate = useNavigate()
     const onClickhandle = () => {
-        navigate(`/magazine/${magazineId}/section/${sectionId}`)
+        navigate(`/${magazineId}/${sectionId}`)
     }
     return (
         <div
