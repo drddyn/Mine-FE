@@ -6,6 +6,7 @@ import usePostMagazine from '../hooks/usePostMagazine'
 import { useAuthStore } from '../stores/auth'
 import useUserStore from '../stores/user'
 import useGetMagazineDetail from '../hooks/useGetMagazineDetail'
+import { useToastStore } from '../stores/toastStore'
 
 export default function LLMInputLayout() {
     const { isLoggedIn } = useAuthStore()
@@ -30,27 +31,41 @@ export default function LLMInputLayout() {
     // 🌟 매거진 주인이 '나'인지 판별 (실제 백엔드 DTO의 필드명에 맞게 수정해 주세요)
     const isMyMagazine = magazineDetail?.user.id === user?.id
 
+    const { setToast } = useToastStore()
+
     const isAnyPending =
         postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending || postMagazineMutation.isPending
 
     if (!isLoggedIn || isHiddenPath) return null
 
-    const handleSend = (value: string) => {
+    const handleSend = async (value: string) => {
         if (sectionMatch && isMyMagazine) {
             // 섹션 페이지
             const { magazineId, sectionId } = sectionMatch.params
-            postAddInSectionPageMutation.mutate({
-                magazineId: Number(magazineId),
-                sectionId: Number(sectionId),
-                message: value,
-            })
+            setToast('section', 'loading')
+            try {
+                await postAddInSectionPageMutation.mutateAsync({
+                    magazineId: Number(magazineId),
+                    sectionId: Number(sectionId),
+                    message: value,
+                })
+                setToast('section', 'success')
+            } catch (error) {
+                setToast('section', 'hidden')
+            }
         } else if (magazineMatch && isNumericMagazineId && isMyMagazine) {
             // 매거진 페이지
             const { magazineId } = magazineMatch.params
-            postAddSectionMutation.mutate({
-                magazineId: Number(magazineId),
-                message: value,
-            })
+            setToast('section', 'loading')
+            try {
+                await postAddSectionMutation.mutateAsync({
+                    magazineId: Number(magazineId),
+                    message: value,
+                })
+                setToast('section', 'success')
+            } catch (error) {
+                setToast('section', 'hidden')
+            }
         } else {
             // 그외 페이지
             postMagazineMutation.mutate({
@@ -61,10 +76,12 @@ export default function LLMInputLayout() {
     }
 
     return (
-        <div className="fixed bottom-8 left-0 w-full flex justify-center z-50 pointer-events-none">
-            <div className="pointer-events-auto">
-                <LLMInputBox onSend={handleSend} isPending={isAnyPending} />
+        <>
+            <div className="fixed bottom-8 left-0 w-full flex justify-center z-50 pointer-events-none">
+                <div className="pointer-events-auto">
+                    <LLMInputBox onSend={handleSend} isPending={isAnyPending} />
+                </div>
             </div>
-        </div>
+        </>
     )
 }

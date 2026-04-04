@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import usePostMagazine from '../../hooks/usePostMagazine'
 import GuestPage from './GuestPage'
 import landingBg from '../../assets/bg1.jpg'
