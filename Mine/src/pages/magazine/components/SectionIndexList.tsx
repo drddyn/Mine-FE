@@ -19,7 +19,7 @@ export default function SectionIndexList({ sectionId }: SectionIndexListProps) {
                 return (
                     <div key={section.sectionId} className="relative flex items-center justify-end">
                         <div
-                            className={`transition-all duration-300 ease-in-out ${
+                            className={`transition-[opacity, clip-path] duration-300 ease-in-out ${
                                 isOpen ? 'z-20 opacity-100' : 'z-0 opacity-70'
                             }`}
                             style={{
