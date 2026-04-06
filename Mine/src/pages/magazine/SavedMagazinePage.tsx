@@ -48,7 +48,7 @@ export default function SavedMagazinePage() {
         >
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
 
-            <div className="fixed top-8.75 right-4.75 z-9999">
+            <div className="fixed top-8.75 right-4.75 z-30">
                 <SearchInput value={searchValue} onChange={setSearchValue} />
             </div>
 
