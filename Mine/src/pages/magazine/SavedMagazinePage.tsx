@@ -4,6 +4,7 @@ import ArrowPagination from './components/ArrowPagination'
 import useGetLikedMagazineList from '../../hooks/useGetLikedMagazineList'
 import SavedMagazineSkeleton from '../../components/skeleton/SavedMagazineSkeleton'
 import savedbg from '../../assets/savedbg.jpg'
+import SearchInput from '../../components/common/SearchInput'
 
 const CARD_WIDTH = 476
 const GAP = 16
@@ -13,6 +14,7 @@ const ITEMS_PER_COLUMN = 2
 
 export default function SavedMagazinePage() {
     const [columnIndex, setColumnIndex] = useState(0)
+    const [searchValue, setSearchValue] = useState('')
 
     const { data, isLoading, isError } = useGetLikedMagazineList({
         page: 0,
@@ -38,14 +40,19 @@ export default function SavedMagazinePage() {
 
     return (
         <div
-            className="relative min-h-screen overflow-x-hidden bg-center bg-cover"
+            className="relative min-h-screen bg-center bg-cover min-w-300"
             style={{
                 backgroundImage: `url(${savedbg})`,
                 backgroundAttachment: 'fixed',
             }}
         >
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
-            <div className="relative flex flex-col justify-center w-full h-screen pl-66.5">
+
+            <div className="fixed top-8.75 right-4.75 z-9999">
+                <SearchInput value={searchValue} onChange={setSearchValue} />
+            </div>
+
+            <div className="relative flex flex-col justify-center w-full h-screen pl-66.5 overflow-hidden">
                 <div className="flex items-center overflow-visible w-full">
                     <div
                         className="flex gap-2 transition-transform duration-500 ease-in-out will-change-transform"
