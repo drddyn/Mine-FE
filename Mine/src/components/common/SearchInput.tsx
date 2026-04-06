@@ -24,15 +24,15 @@ export default function SearchInput({ value, onChange, placeholder = '검색어�
                     onClick={() => setIsOpen(true)}
                     className="text-gray-100 opacity-60 hover:opacity-100 transition-opacity duration-200"
                 >
-                    <Search className="w-4.5 h-4.5 **:fill-current" />
+                    <Search className="w-4.5 h-4.5 fill-current" />
                 </button>
             ) : (
-                <div className="flex items-center gap-4 w-72 h-11 px-4 py-5 rounded-[80px] border border-gray-500 bg-gray-100-op30">
+                <div className="flex items-center gap-4 w-72 h-11 px-4 py-3 rounded-[80px] border border-gray-500 bg-gray-100-op30">
                     <button
                         onClick={() => setIsOpen(false)}
                         className={`shrink-0 text-gray-100 transition-opacity duration-200 ${value ? 'opacity-100' : 'opacity-60'}`}
                     >
-                        <Search className="w-4.5 h-4.5 **:fill-current" />
+                        <Search className="w-4.5 h-4.5 fill-current" />
                     </button>
                     <input
                         ref={inputRef}
