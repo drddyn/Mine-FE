@@ -111,8 +111,7 @@ body {
 .skeleton-shimmer {
     position: relative; /* 중요: ::after의 기준점 */
     overflow: hidden; /* 중요: 넘치는 빛 효과 제거 */
-    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
+    background-color: var(--color-gray-200);
 }
 .skeleton-shimmer::after {
     content: '';
@@ -142,6 +141,6 @@ body {
 }
 
 .lottie-container svg path {
-    fill: #111111b3 !important; /* 원하는 색상 코드를 직접 입력 */
-    stroke: #111111b3 !important;
+    fill: var(--color-gray-600-op70) !important; /* 원하는 색상 코드를 직접 입력 */
+    stroke: var(--color-gray-600-op70) !important;
 }
