@@ -2,7 +2,6 @@ import { matchPath, useLocation } from 'react-router-dom'
 import LLMInputBox from './LLMInputBox'
 import usePostAddSection from '../hooks/usePostAddSection'
 import usePostAddSectionInSectionPage from '../hooks/usePostAddSectionInSectionPage'
-import usePostMagazine from '../hooks/usePostMagazine'
 import { useAuthStore } from '../stores/auth'
 import useUserStore from '../stores/user'
 import useGetMagazineDetail from '../hooks/useGetMagazineDetail'
@@ -11,12 +10,11 @@ export default function LLMInputLayout() {
     const { isLoggedIn } = useAuthStore()
     const { user } = useUserStore()
     const location = useLocation()
-    const hiddenPath = ['/login', '/signup', '/landing', '/explore', '/saved']
+    const hiddenPath = ['/login', '/signup', '/landing', '/explore', '/saved', '/']
     const isHiddenPath = hiddenPath.includes(location.pathname)
 
     const postAddSectionMutation = usePostAddSection()
     const postAddInSectionPageMutation = usePostAddSectionInSectionPage()
-    const postMagazineMutation = usePostMagazine()
 
     const sectionMatch = matchPath('/:magazineId/:sectionId', location.pathname)
     const magazineMatch = matchPath('/:magazineId', location.pathname)
@@ -30,9 +28,7 @@ export default function LLMInputLayout() {
     // 매거진 주인이 '나'인지 판별
     const isMyMagazine = magazineDetail?.user.id === user?.id
 
-    const isAnyPending =
-        postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending || postMagazineMutation.isPending
-
+    const isAnyPending = postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending
     if (!isLoggedIn || isHiddenPath || !isMyMagazine) return null
 
     const handleSend = (value: string) => {
@@ -50,12 +46,6 @@ export default function LLMInputLayout() {
             postAddSectionMutation.mutate({
                 magazineId: Number(magazineId),
                 message: value,
-            })
-        } else {
-            // 그외 페이지
-            postMagazineMutation.mutate({
-                topic: value,
-                user_mood: '',
             })
         }
     }

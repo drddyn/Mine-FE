@@ -113,7 +113,9 @@ export const postAddSectionInSectionPage = async ({
     sectionId,
     message,
 }: RequestAddSectionInSectionPage): Promise<ResponseAddSectionInSectionPage> => {
-    const res = await axiosInstance.post(`/api/magazines/${magazineId}/sections/${sectionId}/interact`, { message })
+    const res = await axiosInstance.post(`/api/magazines/${magazineId}/sections/${sectionId}/paragraphs/ai`, {
+        message,
+    })
     return res.data
 }
 
