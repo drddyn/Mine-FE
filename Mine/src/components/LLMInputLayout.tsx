@@ -41,6 +41,7 @@ export default function LLMInputLayout() {
                     message: value,
                 })
             } catch (error) {
+                console.error('Failed to add section in section page:', error);
             }
         } else if (magazineMatch && isNumericMagazineId) {
             // 매거진 페이지
