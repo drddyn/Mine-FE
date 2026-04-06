@@ -14,6 +14,7 @@ interface ParagraphPartProps {
     smallTitle?: string
     content: string
     imageUrl?: string
+    isMyMagazine: boolean
 }
 
 export default function ParagraphPart({
@@ -24,6 +25,7 @@ export default function ParagraphPart({
     smallTitle,
     content,
     imageUrl,
+    isMyMagazine,
 }: ParagraphPartProps) {
     const magazinedata = useMagazine()
     const patchSectionMutation = usePatchSection()
@@ -110,27 +112,29 @@ export default function ParagraphPart({
                             className="bg-transparent outline-none font-medium36 font-notoserif text-gray-600 w-full"
                         />
                     )}
-                    <div className="relative flex items-center" dir="ltr">
-                        <Hamburger
-                            className="hover:text-black-icon text-black-icon cursor-pointer"
-                            onClick={handleHamburger}
-                        />
-                        {isHamburgerOpen && (
-                            <ParagraphHamburgerModal
-                                handleClose={closeHamburger}
-                                sectionId={sectionId}
-                                magazineId={magazinedata?.magazineId}
-                                paragraphId={paragrahId}
-                                subtitle={smallTitle ?? ''}
-                                top={10}
-                                left={10}
-                                onEdit={() => {
-                                    closeHamburger()
-                                    beginEdit()
-                                }}
+                    {isMyMagazine && (
+                        <div className="relative flex items-center" dir="ltr">
+                            <Hamburger
+                                className="hover:text-black-icon text-black-icon cursor-pointer"
+                                onClick={handleHamburger}
                             />
-                        )}
-                    </div>
+                            {isHamburgerOpen && (
+                                <ParagraphHamburgerModal
+                                    handleClose={closeHamburger}
+                                    sectionId={sectionId}
+                                    magazineId={magazinedata?.magazineId}
+                                    paragraphId={paragrahId}
+                                    subtitle={smallTitle ?? ''}
+                                    top={10}
+                                    left={10}
+                                    onEdit={() => {
+                                        closeHamburger()
+                                        beginEdit()
+                                    }}
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
                 <div className="w-full font-regular16 text-black-textMain break-all" dir="ltr">
                     <ReactMarkDown>{content}</ReactMarkDown>

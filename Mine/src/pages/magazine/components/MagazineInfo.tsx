@@ -15,6 +15,7 @@ interface MagazineInfoProps {
     sectionId?: number
     likeCount?: number
     isLiked?: boolean
+    isMyMagazine: boolean
     mode: 'section' | 'magazine'
     onClick?: (magazineId: number) => void
 }
@@ -26,6 +27,7 @@ export default function MagazineInfo({
     magazineId,
     likeCount,
     isLiked,
+    isMyMagazine,
     mode,
     onClick,
 }: MagazineInfoProps) {
@@ -129,44 +131,46 @@ export default function MagazineInfo({
                     />
                 )}
 
-                <div className="relative flex items-center">
-                    <Hamburger
-                        className={`rotate-90 cursor-pointer ${mode === 'section' ? 'text-gray-300' : 'text-gray-100-op70'}`}
-                        onClick={toggleHamburger}
-                    />
+                {isMyMagazine && (
+                    <div className="relative flex items-center">
+                        <Hamburger
+                            className={`rotate-90 cursor-pointer ${mode === 'section' ? 'text-gray-300' : 'text-gray-100-op70'}`}
+                            onClick={toggleHamburger}
+                        />
 
-                    {isHamburgerOpen &&
-                        mode === 'section' &&
-                        magazinedata?.magazineId !== undefined &&
-                        sectionId !== undefined && (
-                            <SectionHamburgerModal
+                        {isHamburgerOpen &&
+                            mode === 'section' &&
+                            magazinedata?.magazineId !== undefined &&
+                            sectionId !== undefined && (
+                                <SectionHamburgerModal
+                                    handleClose={closeHamburger}
+                                    magazineId={magazinedata?.magazineId}
+                                    sectionId={sectionId}
+                                    heading={currentSectionHeading}
+                                    top={10}
+                                    left={10}
+                                    onEdit={() => {
+                                        closeHamburger()
+                                        beginSectionEdit()
+                                    }}
+                                />
+                            )}
+
+                        {isHamburgerOpen && mode === 'magazine' && magazinedata?.magazineId !== undefined && (
+                            <SidebarHamburgerModal
                                 handleClose={closeHamburger}
-                                magazineId={magazinedata?.magazineId}
-                                sectionId={sectionId}
-                                heading={currentSectionHeading}
+                                id={magazinedata.magazineId}
+                                title={magazinedata.title ?? ''}
                                 top={10}
                                 left={10}
                                 onEdit={() => {
                                     closeHamburger()
-                                    beginSectionEdit()
+                                    beginMagazineEdit()
                                 }}
                             />
                         )}
-
-                    {isHamburgerOpen && mode === 'magazine' && magazinedata?.magazineId !== undefined && (
-                        <SidebarHamburgerModal
-                            handleClose={closeHamburger}
-                            id={magazinedata.magazineId}
-                            title={magazinedata.title ?? ''}
-                            top={10}
-                            left={10}
-                            onEdit={() => {
-                                closeHamburger()
-                                beginMagazineEdit()
-                            }}
-                        />
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
 
             <HeartCount
