@@ -96,6 +96,7 @@ export default function MagazinePage() {
                                         key={item.sectionId}
                                         imageUrl={item.thumbnailUrl}
                                         onclick={() => handleSectionClick(Number(magazineId), item.sectionId)}
+                                        title={item.heading}
                                     />
                                 ))}
                             </GridContainor>
