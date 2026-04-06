@@ -17,29 +17,14 @@ export default function SectionIndexList({ sectionId }: SectionIndexListProps) {
                 const isOpen = section.sectionId === sectionId
 
                 return (
-                    <div 
-                        key={section.sectionId} 
-                        className="relative flex items-center justify-end"
-                    >
-                        {/* 가짜 벽(Fake Wall) 삭제 */}
-
-                        {/* 1. clip-path 적용: 
-                             - inset(0 0 0 10%): 왼쪽에서 10%만큼을 잘라내어 숨깁니다.
-                             - inset(0 0 0 0): 전체를 다 보여줍니다.
-                          2. transition:
-                             - 잘리는 영역이 변하면서 자연스럽게 나타나는 효과를 줍니다.
-                        */}
-                        <div 
+                    <div key={section.sectionId} className="relative flex items-center justify-end">
+                        <div
                             className={`transition-all duration-300 ease-in-out ${
-                                isOpen 
-                                    ? 'z-20 opacity-100' 
-                                    : 'z-0 opacity-70'
+                                isOpen ? 'z-20 opacity-100' : 'z-0 opacity-70'
                             }`}
                             style={{
                                 /* 위치는 고정하되, '보이는 영역'만 조절 */
-                                clipPath: isOpen 
-                                    ? 'inset(0 0 0 0)' 
-                                    : 'inset(0 0 0 24px)' // 숫자는 인덱스의 '가려져야 할 너비'만큼 조절하세요
+                                clipPath: isOpen ? 'inset(0 0 0 0)' : 'inset(0 0 0 24px)', // 숫자는 인덱스의 '가려져야 할 너비'만큼 조절
                             }}
                         >
                             {isOpen ? (
