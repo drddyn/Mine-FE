@@ -88,8 +88,8 @@ export default function MagazinePage() {
                             />
                         </div>
                     )}
-                    <section className="flex-1 flex h-full w-full justify-center items-center pt-19 pb-40 overflow-hidden">
-                        <div className="flex w-full justify-center px-30">
+                    <section className="flex-1 flex h-full w-full justify-center items-center overflow-hidden">
+                        <div className="flex w-full h-full items-center justify-center px-30">
                             <GridContainor>
                                 {content?.map((item) => (
                                     <SectionCover
