@@ -11,7 +11,7 @@ export default function LLMInputLayout() {
     const { isLoggedIn } = useAuthStore()
     const { user } = useUserStore()
     const location = useLocation()
-    const hiddenPath = ['/login', '/signup', '/landing', '/']
+    const hiddenPath = ['/login', '/signup', '/landing', '/explore', '/saved']
     const isHiddenPath = hiddenPath.includes(location.pathname)
 
     const postAddSectionMutation = usePostAddSection()
@@ -22,18 +22,18 @@ export default function LLMInputLayout() {
     const magazineMatch = matchPath('/:magazineId', location.pathname)
 
     //magazineId 추출
-    const currentMagazineId = magazineMatch?.params.magazineId
+    const currentMagazineId = sectionMatch?.params.magazineId || magazineMatch?.params.magazineId
     const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
 
     const { data: magazineDetail } = useGetMagazineDetail(Number(currentMagazineId))
 
-    // 🌟 매거진 주인이 '나'인지 판별 (실제 백엔드 DTO의 필드명에 맞게 수정해 주세요)
+    // 매거진 주인이 '나'인지 판별
     const isMyMagazine = magazineDetail?.user.id === user?.id
 
     const isAnyPending =
         postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending || postMagazineMutation.isPending
 
-    if (!isLoggedIn || isHiddenPath) return null
+    if (!isLoggedIn || isHiddenPath || !isMyMagazine) return null
 
     const handleSend = (value: string) => {
         if (sectionMatch && isMyMagazine) {
