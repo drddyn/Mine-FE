@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Arrow from '../icon/arrow.svg?react'
+import Cached from '../icon/cached.svg?react'
 interface LLMInputBoxProps {
     placeholder?: string
     onSend?: (value: string) => void
@@ -64,7 +65,11 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
                 disabled={!text.trim() || isPending}
                 className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}`}
             >
-                <Arrow />
+                {isPending ? (
+                    <Cached className="w-4 h-4 text-white animate-spin shrink-0" />
+                ) : (
+                    <Arrow />
+                )}
             </button>
         </div>
     )
