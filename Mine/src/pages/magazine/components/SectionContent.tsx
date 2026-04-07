@@ -11,8 +11,8 @@ import IconWandStars from '../../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../../hooks/useCreateMoodboard'
-import Toast from '../../../components/common/Toast'
 import { useQueryClient } from '@tanstack/react-query'
+import { useToastStore } from '../../../stores/toastStore'
 
 interface SectionContentProps {
     sectionId: number
@@ -29,15 +29,9 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     const content = data?.paragraphs
     const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
-    const [isConfirmLoading, setIsConfirmLoading] = useState(false)
-    const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
+    const { setToast } = useToastStore()
 
-    useEffect(() => {
-        if (!showToast) return
-        const timer = setTimeout(() => setShowToast(false), 3000)
-        return () => clearTimeout(timer)
-    }, [showToast])
     useEffect(() => {
         // 2. 디테일 API 호출이 성공적으로 완료되었다면?
         if (isSuccess) {
@@ -51,16 +45,15 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
     }
 
     const handleConfirm = async () => {
-        if (isConfirmLoading) return
-        setIsConfirmLoading(true)
+        setIsConfirmOpen(false)
+        setToast('moodboard', 'loading')
         try {
             await createMoodboard(Number(magazineId))
-            setIsConfirmOpen(false)
-            setShowToast(true)
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', Number(magazineId)] })
+            setToast('moodboard', 'success')
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
-        } finally {
-            setIsConfirmLoading(false)
+            setToast('moodboard', 'hidden')
         }
     }
 
@@ -122,14 +115,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     description={`AI가 새로운 이미지를 생성하여 현재 무드보드에\n적용합니다.`}
                     onConfirm={handleConfirm}
                     onCancel={() => setIsConfirmOpen(false)}
-                    isLoading={isConfirmLoading}
                 />
-            )}
-
-            {showToast && (
-                <div className="fixed left-1/2 -translate-x-1/2 z-50 top-[calc(50%+208px)]">
-                    <Toast message="무드보드가 변경되었습니다." />
-                </div>
             )}
         </div>
     )

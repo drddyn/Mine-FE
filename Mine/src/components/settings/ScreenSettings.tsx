@@ -4,7 +4,8 @@ import IconWandStars from '../../icon/wand_stars.svg?react'
 import IconAddPhoto from '../../icon/add_photo_alternate.svg?react'
 import useUploadImage from '../../hooks/useUploadImage'
 import usePatchMagazineCover from '../../hooks/usePatchMagazineCover'
-import Toast from '../common/Toast'
+import { useToastStore } from '../../stores/toastStore'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface ScreenSettingsProps {
     onClose?: () => void
@@ -13,28 +14,24 @@ interface ScreenSettingsProps {
 
 export default function ScreenSettings({ onClose, onRequestConfirm }: ScreenSettingsProps) {
     const { magazineId } = useParams<{ magazineId: string }>()
-    const [showToast, setShowToast] = useState(false)
-    const [toastMessage, setToastMessage] = useState('')
     const fileInputRef = useRef<HTMLInputElement>(null)
     const { mutateAsync: uploadImage } = useUploadImage()
     const { mutateAsync: patchCover } = usePatchMagazineCover()
-
-    useEffect(() => {
-        if (!showToast) return
-        const timer = setTimeout(() => setShowToast(false), 3000)
-        return () => clearTimeout(timer)
-    }, [showToast])
+    const { setToast } = useToastStore()
+    const queryClient = useQueryClient()
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
         try {
+            setToast('moodboard', 'loading')
             const { imageUrl } = await uploadImage(file)
             await patchCover({ id: Number(magazineId), coverImageUrl: imageUrl })
-            setToastMessage('무드보드가 변경되었습니다.')
-            setShowToast(true)
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', Number(magazineId)] })
+            setToast('moodboard', 'success')
         } catch (error) {
             console.error('이미지 업로드 실패:', error)
+            setToast('moodboard', 'hidden')
         }
     }
 
@@ -63,12 +60,6 @@ export default function ScreenSettings({ onClose, onRequestConfirm }: ScreenSett
                 </button>
             </div>
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
-
-            {showToast && (
-                <div className="fixed left-1/2 -translate-x-1/2 z-50 top-[calc(50%+208px)]">
-                    <Toast message={toastMessage} />
-                </div>
-            )}
         </>
     )
 }

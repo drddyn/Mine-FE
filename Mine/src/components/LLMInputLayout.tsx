@@ -34,13 +34,16 @@ export default function LLMInputLayout() {
         if (sectionMatch) {
             // 섹션 페이지
             const { magazineId, sectionId } = sectionMatch.params
+            setToast('paragraph', 'loading')
             try {
                 await postAddInSectionPageMutation.mutateAsync({
                     magazineId: Number(magazineId),
                     sectionId: Number(sectionId),
                     message: value,
                 })
+                setToast('paragraph', 'success')
             } catch (error) {
+                setToast('paragraph', 'hidden')
             }
         } else if (magazineMatch && isNumericMagazineId) {
             // 매거진 페이지

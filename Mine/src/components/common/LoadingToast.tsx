@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export type ToastStatus = 'hidden' | 'loading' | 'success'
-export type ToastType = 'moodboard' | 'magazine' | 'section'
+export type ToastType = 'moodboard' | 'magazine' | 'section' | 'paragraph'
 
 const TOAST_MESSAGES: Record<ToastType, { loading: string; success: string }> = {
     moodboard: {
@@ -15,6 +15,10 @@ const TOAST_MESSAGES: Record<ToastType, { loading: string; success: string }> = 
     section: {
         loading: '섹션이 생성되고 있습니다...',
         success: '섹션이 생성되었습니다.',
+    },
+    paragraph: {
+        loading: '문단이 추가되는 중입니다...',
+        success: '문단이 추가되었습니다.',
     },
 }
 

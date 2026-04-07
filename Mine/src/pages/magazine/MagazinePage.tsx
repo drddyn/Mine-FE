@@ -12,6 +12,7 @@ import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
 import { useToastStore } from '../../stores/toastStore'
+import { useQueryClient } from '@tanstack/react-query'
 
 const isValidUrl = (url?: string) => {
     if (!url) return false
@@ -32,6 +33,7 @@ export default function MagazinePage() {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
     const { setToast } = useToastStore()
+    const queryClient = useQueryClient()
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/${magazineId}/${sectionId}`)
@@ -43,6 +45,7 @@ export default function MagazinePage() {
         setToast('moodboard', 'loading')
         try {
             await createMoodboard(Number(magazineId))
+            queryClient.invalidateQueries({ queryKey: ['magazinedetail', Number(magazineId)] })
             setToast('moodboard', 'success')
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
