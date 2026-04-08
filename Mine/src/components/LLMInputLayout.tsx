@@ -5,6 +5,8 @@ import usePostAddSectionInSectionPage from '../hooks/usePostAddSectionInSectionP
 import usePostMagazine from '../hooks/usePostMagazine'
 import { useAuthStore } from '../stores/auth'
 import { useToastStore } from '../stores/toastStore'
+import { useState } from 'react'
+import ConfirmModal from './common/ConfirmModal'
 
 export default function LLMInputLayout() {
     const { isLoggedIn } = useAuthStore()
@@ -24,6 +26,7 @@ export default function LLMInputLayout() {
     const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
 
     const { setToast } = useToastStore()
+    const [isViolationModalOpen, setIsViolationModalOpen] = useState(false)
 
     const isAnyPending =
         postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending || postMagazineMutation.isPending
@@ -44,6 +47,7 @@ export default function LLMInputLayout() {
                 setToast('paragraph', 'success')
             } catch (error) {
                 setToast('paragraph', 'hidden')
+                console.error('Failed to add section in section page:', error)
             }
         } else if (magazineMatch && isNumericMagazineId) {
             // 매거진 페이지
@@ -60,10 +64,17 @@ export default function LLMInputLayout() {
             }
         } else {
             // 그외 페이지
-            postMagazineMutation.mutate({
-                topic: value,
-                user_mood: '',
-            })
+            postMagazineMutation.mutate(
+                {
+                    topic: value,
+                    user_mood: '',
+                },
+                {
+                    onError: () => {
+                        setIsViolationModalOpen(true)
+                    },
+                }
+            )
         }
     }
 
@@ -74,6 +85,16 @@ export default function LLMInputLayout() {
                     <LLMInputBox onSend={handleSend} isPending={isAnyPending} />
                 </div>
             </div>
+
+            {isViolationModalOpen && (
+                <ConfirmModal
+                    title="유해 키워드가 감지되었습니다."
+                    titleColor="text-heartON"
+                    description="3회 이상 감지될 경우 계정이 제한될 수 있습니다."
+                    onConfirm={() => setIsViolationModalOpen(false)}
+                    confirmButtonColor="hover:bg-heartON active:bg-heartON bg-gray-600-op70"
+                />
+            )}
         </>
     )
 }
