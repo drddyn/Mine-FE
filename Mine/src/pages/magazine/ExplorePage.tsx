@@ -1,13 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ExploreGrid from './components/ExploreGrid'
 import useGetMagazineFeed from '../../hooks/useGetMagazineFeed'
 import ExploreSkeleton from '../../components/skeleton/ExploreSkeleton'
 import explorebg from '../../assets/explorebg.jpg'
 import useSidebarStore from '../../stores/sidebar'
+import SearchInput from '../../components/common/SearchInput'
 
 export default function ExplorePage() {
     const { isOpen } = useSidebarStore()
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetMagazineFeed()
+    const [searchValue, setSearchValue] = useState('')
 
     const observerRef = useRef<HTMLDivElement>(null)
 
@@ -31,16 +33,14 @@ export default function ExplorePage() {
 
     return (
         <div
-            className="min-h-screen pt-39.25 pb-10 relative bg-center bg-cover min-w-300"
+            className="h-screen overflow-y-auto pt-39.25 pb-10 relative bg-center bg-cover min-w-300 custom-scrollbar"
             style={{
                 backgroundImage: `url(${explorebg})`,
                 backgroundAttachment: 'fixed',
             }}
         >
-            {/* 어두운 오버레이 */}
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
 
-            {/* 상단 흰색 그라디언트 */}
             <div
                 className="fixed top-0 left-0 w-full pointer-events-none z-10"
                 style={{
@@ -50,7 +50,11 @@ export default function ExplorePage() {
                 }}
             />
 
-            <div className="relative z-20 flex justify-center">
+            <div className="fixed top-8.75 right-4.75 z-30">
+                <SearchInput value={searchValue} onChange={setSearchValue} />
+            </div>
+
+            <div className="relative z-20 flex justify-center ">
                 <div className={`transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}>
                     <ExploreGrid magazines={magazines} />
                     <div ref={observerRef} className="h-10" />
