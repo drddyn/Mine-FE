@@ -33,7 +33,7 @@ export default function ExplorePage() {
 
     return (
         <div
-            className="min-h-screen pt-39.25 pb-10 relative bg-center bg-cover min-w-300"
+            className="h-screen overflow-y-auto pt-39.25 pb-10 relative bg-center bg-cover min-w-300 custom-scrollbar"
             style={{
                 backgroundImage: `url(${explorebg})`,
                 backgroundAttachment: 'fixed',
@@ -54,7 +54,7 @@ export default function ExplorePage() {
                 <SearchInput value={searchValue} onChange={setSearchValue} />
             </div>
 
-            <div className="relative z-20 flex justify-center">
+            <div className="relative z-20 flex justify-center ">
                 <div className={`transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}>
                     <ExploreGrid magazines={magazines} />
                     <div ref={observerRef} className="h-10" />
