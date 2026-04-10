@@ -1,4 +1,5 @@
 import ArrowIcon from '../../../icon/swipe.svg?react'
+import useSidebarStore from '../../../stores/sidebar'
 
 interface Props {
     currentPage: number
@@ -7,16 +8,14 @@ interface Props {
     onPrev: () => void
 }
 
-const HALF_DISTANCE = 600
-
 export default function ArrowPagination({ currentPage, totalPages, onNext, onPrev }: Props) {
+    const { isOpen } = useSidebarStore()
     return (
         <>
             {currentPage > 1 && (
                 <button
                     onClick={onPrev}
-                    className="absolute top-[49%] left-1/2 -translate-y-1/2 z-20"
-                    style={{ transform: `translate(-${HALF_DISTANCE}px, -50%)` }}
+                    className={`fixed top-[50%] left-25 -translate-y-1/2 z-20transition-all duration-300 ${isOpen && 'ml-45'}`}
                 >
                     <ArrowIcon className="cursor-pointer drop-shadow-2xl" />
                 </button>
@@ -25,8 +24,7 @@ export default function ArrowPagination({ currentPage, totalPages, onNext, onPre
             {currentPage < totalPages && (
                 <button
                     onClick={onNext}
-                    className="absolute top-[49%] left-1/2 -translate-y-1/2 z-20"
-                    style={{ transform: `translate(${HALF_DISTANCE - 40}px, -50%)` }}
+                    className="fixed top-[50%] right-15 -translate-y-1/2 z-20 transition-all duration-300"
                 >
                     <ArrowIcon className="rotate-180 cursor-pointer drop-shadow-2xl" />
                 </button>

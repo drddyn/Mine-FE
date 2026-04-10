@@ -5,6 +5,7 @@ import ArrowPagination from './components/ArrowPagination'
 import useGetLikedMagazineList from '../../hooks/useGetLikedMagazineList'
 import SavedMagazineSkeleton from '../../components/skeleton/SavedMagazineSkeleton'
 import savedbg from '../../assets/savedbg.jpg'
+import useSidebarStore from '../../stores/sidebar'
 import SearchInput from '../../components/common/SearchInput'
 import MineLogo from '../../icon/logo_with_title.svg?react'
 import type { Magazine } from '../../types/magazine'
@@ -12,7 +13,7 @@ import type { Magazine } from '../../types/magazine'
 const CARD_WIDTH = 476
 const GAP = 16
 const COLUMNS_PER_VIEW = 2
-const COLUMN_STEP = (CARD_WIDTH + GAP) * COLUMNS_PER_VIEW
+const COLUMN_STEP = ((CARD_WIDTH + GAP) * COLUMNS_PER_VIEW) / 2
 const ITEMS_PER_COLUMN = 2
 const MIN_CARDS = 4
 
@@ -35,6 +36,7 @@ function EmptyCard({ showButton, onButtonClick }: { showButton?: boolean; onButt
 
 export default function SavedMagazinePage() {
     const [columnIndex, setColumnIndex] = useState(0)
+    const { isOpen } = useSidebarStore()
     const [searchValue, setSearchValue] = useState('')
     const navigate = useNavigate()
 
@@ -51,10 +53,7 @@ export default function SavedMagazinePage() {
     const isEmpty = magazines.length === 0
 
     const totalSlots = Math.max(magazines.length, MIN_CARDS)
-    const allItems: (Magazine | null)[] = [
-        ...magazines,
-        ...Array(totalSlots - magazines.length).fill(null),
-    ]
+    const allItems: (Magazine | null)[] = [...magazines, ...Array(totalSlots - magazines.length).fill(null)]
     const columns = Array.from({ length: Math.ceil(allItems.length / ITEMS_PER_COLUMN) }, (_, i) =>
         allItems.slice(i * ITEMS_PER_COLUMN, i * ITEMS_PER_COLUMN + ITEMS_PER_COLUMN)
     )
@@ -115,19 +114,19 @@ export default function SavedMagazinePage() {
 
     return (
         <div
-            className="relative min-h-screen bg-center bg-cover min-w-300"
+            className="relative h-screen bg-center bg-cover w-full"
             style={{
                 backgroundImage: `url(${savedbg})`,
                 backgroundAttachment: 'fixed',
             }}
         >
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
-
             <div className="fixed top-8.75 right-4.75 z-30">
                 <SearchInput value={searchValue} onChange={setSearchValue} />
             </div>
-
-            <div className="relative flex flex-col justify-center w-full h-screen pl-66.5 overflow-hidden">
+            <div
+                className={`relative flex flex-col justify-center h-full overflow-hidden transition-all duration-300 ${isOpen ? 'pl-76.5' : 'pl-66.5'}`}
+            >
                 <div className="relative flex items-center overflow-visible w-full">
                     <div
                         className="flex gap-2 transition-transform duration-500 ease-in-out will-change-transform"

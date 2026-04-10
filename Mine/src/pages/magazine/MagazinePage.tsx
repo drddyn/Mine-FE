@@ -88,14 +88,15 @@ export default function MagazinePage() {
                             />
                         </div>
                     )}
-                    <section className="flex-1 flex h-full w-full justify-center items-center pt-19 pb-40 overflow-hidden">
-                        <div className="flex w-full justify-center px-30">
+                    <section className="flex-1 flex h-full w-full justify-center items-center overflow-hidden">
+                        <div className="flex w-full h-full items-center justify-center pb-12">
                             <GridContainor>
                                 {content?.map((item) => (
                                     <SectionCover
                                         key={item.sectionId}
                                         imageUrl={item.thumbnailUrl}
                                         onclick={() => handleSectionClick(Number(magazineId), item.sectionId)}
+                                        title={item.heading}
                                     />
                                 ))}
                             </GridContainor>
@@ -107,7 +108,7 @@ export default function MagazinePage() {
                     onClick={() => setIsScreenSettingsOpen(true)}
                     className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
                 >
-                    <IconWandStars className="w-6 h-6 **:fill-current" />
+                    <IconWandStars className="w-6 h-6 fill-current" />
                 </button>
             </div>
 
