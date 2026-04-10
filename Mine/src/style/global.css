@@ -89,7 +89,7 @@ body {
     }
 
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #1111114d; /* 스크롤바 핸들 색상 (gray-600 정도) */
+        background: #a9a9a9b3; /* 스크롤바 핸들 색상 (gray-600 정도) */
         border-radius: 10px; /* 핸들을 둥글게 */
     }
 
