@@ -54,7 +54,7 @@ export default function Sidebar() {
                     <SidebarClosedBlock icon={<Sidebar_others />} title="둘러보기" to="explore" />
                 </div>
                 {isProfileLoading ? (
-                    <SkeletonAvatar />
+                    <SkeletonAvatar className="w-7.5 h-7.5 mt-auto" />
                 ) : (
                     <img
                         src={user?.profileImageUrl}

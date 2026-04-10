@@ -13,6 +13,7 @@ import ConfirmModal from '../../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../../hooks/useCreateMoodboard'
 import Toast from '../../../components/common/Toast'
 import { useQueryClient } from '@tanstack/react-query'
+import useUserStore from '../../../stores/user'
 
 interface SectionContentProps {
     sectionId: number
@@ -21,17 +22,20 @@ interface SectionContentProps {
 
 export default function SectionContent({ sectionId, magazineId }: SectionContentProps) {
     const { isOpen } = useSidebarStore()
+    const { user } = useUserStore()
     const magazinedata = useMagazine()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
     const { data, isLoading, isSuccess } = useGetSectionDetail(Number(magazineId), Number(sectionId))
-    const user = magazinedata?.user
+    const maguser = magazinedata?.user
     const content = data?.paragraphs
     const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
     const [isConfirmLoading, setIsConfirmLoading] = useState(false)
     const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
+
+    const isMyMagazine = maguser?.id === user?.id
 
     useEffect(() => {
         if (!showToast) return
@@ -80,12 +84,13 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                     <SectionIndexList sectionId={Number(sectionId)} />
                     <div className="flex flex-col w-245 items-center gap-14 mt-9 mb-22 z-10">
                         <MagazineInfo
-                            nickname={user?.nickname}
-                            profileImage={user?.profileImageUrl}
+                            nickname={maguser?.nickname}
+                            profileImage={maguser?.profileImageUrl}
                             sectionId={Number(sectionId)}
                             magazineId={Number(magazineId)}
                             likeCount={magazinedata?.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
                             isLiked={magazinedata?.isLiked} // 내 좋아요 상태 전달
+                            isMyMagazine={isMyMagazine}
                             mode="section"
                             onClick={handleClick}
                         />
@@ -99,6 +104,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                                 imageUrl={item?.imageUrl}
                                 sectionDir={index % 2 === 0 ? 'rtl' : 'ltr'}
                                 titleDir={index % 2 === 0 ? 'ltr' : 'rtl'}
+                                isMyMagazine={isMyMagazine}
                             />
                         ))}
                     </div>

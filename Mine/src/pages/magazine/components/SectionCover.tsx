@@ -1,15 +1,21 @@
 interface SectionCoverProps {
-    size?: string
     onclick?: () => void
     imageUrl?: string
+    title?: string
 }
 
-export default function SectionCover({ imageUrl, size, onclick }: SectionCoverProps) {
+export default function SectionCover({ imageUrl, onclick, title }: SectionCoverProps) {
     return (
-        <img
-            src={imageUrl}
-            className={`cursor-pointer select-none object-cover w-full h-full ${size}`}
+        <div
+            className="flex justify-end items-end cursor-pointer w-full h-full pb-2 pr-5 bg-cover bg-center"
+            style={{
+                backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
+            }}
             onClick={onclick}
-        />
+        >
+            <span className="text-white text-right leading-normal font-notoserif font-semibold20 break-keep">
+                {title}
+            </span>
+        </div>
     )
 }

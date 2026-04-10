@@ -7,6 +7,7 @@ export default function useGetMagazineFeed() {
         queryKey: ['magazineFeed'],
         queryFn: ({ pageParam }: { pageParam: number | null }) => getMagazineFeed({ cursorId: pageParam }),
         initialPageParam: null,
-        getNextPageParam: (lastPage: ResponseFeed) => lastPage.hasNext ? lastPage.nextCursor : undefined,
+        getNextPageParam: (lastPage: ResponseFeed) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+        staleTime: 1000 * 60 * 5,
     })
 }

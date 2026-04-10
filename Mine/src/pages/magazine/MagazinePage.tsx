@@ -12,6 +12,7 @@ import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
 import Toast from '../../components/common/Toast'
+import useUserStore from '../../stores/user'
 
 const isValidUrl = (url?: string) => {
     if (!url) return false
@@ -25,6 +26,7 @@ const isValidUrl = (url?: string) => {
 
 export default function MagazinePage() {
     const { isOpen } = useSidebarStore()
+    const { user } = useUserStore()
     const { magazineId } = useParams()
     const { data, isPending } = useGetMagazineDetail(Number(magazineId))
     const navigate = useNavigate()
@@ -33,6 +35,8 @@ export default function MagazinePage() {
     const [isConfirmLoading, setIsConfirmLoading] = useState(false)
     const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
+
+    const isMyMagazine = user?.id === data?.user.id
 
     useEffect(() => {
         if (!showToast) return
@@ -80,17 +84,19 @@ export default function MagazinePage() {
                                 mode="magazine"
                                 likeCount={data.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
                                 isLiked={data.isLiked} // 내 좋아요 상태 전달
+                                isMyMagazine={isMyMagazine}
                             />
                         </div>
                     )}
-                    <section className="flex-1 flex h-full w-full justify-center items-center pt-19 pb-40 overflow-hidden">
-                        <div className="flex w-full justify-center px-30">
+                    <section className="flex-1 flex h-full w-full justify-center items-center overflow-hidden">
+                        <div className="flex w-full h-full items-center justify-center pb-12">
                             <GridContainor>
                                 {content?.map((item) => (
                                     <SectionCover
                                         key={item.sectionId}
                                         imageUrl={item.thumbnailUrl}
                                         onclick={() => handleSectionClick(Number(magazineId), item.sectionId)}
+                                        title={item.heading}
                                     />
                                 ))}
                             </GridContainor>
@@ -102,7 +108,7 @@ export default function MagazinePage() {
                     onClick={() => setIsScreenSettingsOpen(true)}
                     className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
                 >
-                    <IconWandStars className="w-6 h-6 **:fill-current" />
+                    <IconWandStars className="w-6 h-6 fill-current" />
                 </button>
             </div>
 

@@ -1,23 +1,23 @@
 import SavedMagazineItem from './SavedMagazineItem'
-import type { Magazine } from '../../../types/magazine' 
+import type { Magazine } from '../../../types/magazine'
 
 interface Props {
-  itemsPerPage: number
-  currentPage: number
-  magazines: Magazine[]
+    itemsPerPage: number
+    currentPage: number
+    magazines: Magazine[]
 }
 
 export default function SavedMagazineGrid({ itemsPerPage, currentPage, magazines }: Props) {
-  const start = (currentPage - 1) * itemsPerPage
-  const end = start + itemsPerPage
+    const start = (currentPage - 1) * itemsPerPage
+    const end = start + itemsPerPage
 
-  const pageItems = magazines.slice(start, end)
+    const pageItems = magazines.slice(start, end)
 
-  return (
-    <div className="grid grid-cols-[476px_476px_476px] gap-4">
-      {pageItems.map((magazine) => (
-        <SavedMagazineItem key={magazine.magazineId} magazine={magazine} />
-      ))}
-    </div>
-  )
+    return (
+        <div className="grid grid-rows-2 gap-4">
+            {pageItems.map((magazine) => (
+                <SavedMagazineItem key={magazine.magazineId} magazine={magazine} />
+            ))}
+        </div>
+    )
 }

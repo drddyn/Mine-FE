@@ -86,7 +86,7 @@ export const deleteParagraph = async ({ magazineId, sectionId, paragraphId }: De
     return res.data
 }
 
-export const getMagazineFeed = async ({ cursorId, limit = 10 }: FeedDto): Promise<ResponseFeed> => {
+export const getMagazineFeed = async ({ cursorId, limit = 15 }: FeedDto): Promise<ResponseFeed> => {
     const res = await axiosInstance.get(`/api/magazines/feed`, {
         params: { cursorId, limit },
     })
@@ -113,7 +113,9 @@ export const postAddSectionInSectionPage = async ({
     sectionId,
     message,
 }: RequestAddSectionInSectionPage): Promise<ResponseAddSectionInSectionPage> => {
-    const res = await axiosInstance.post(`/api/magazines/${magazineId}/sections/${sectionId}/interact`, { message })
+    const res = await axiosInstance.post(`/api/magazines/${magazineId}/sections/${sectionId}/paragraphs/ai`, {
+        message,
+    })
     return res.data
 }
 
