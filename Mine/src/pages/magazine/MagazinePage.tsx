@@ -6,12 +6,11 @@ import useSidebarStore from '../../stores/sidebar'
 import MagazineInfo from './components/MagazineInfo'
 import { MagazineProvider } from './MagazineProvider'
 import MagazineSkeleton from '../../components/skeleton/MagazineSkeleton'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
-import Toast from '../../components/common/Toast'
 import useUserStore from '../../stores/user'
 import { useToastStore } from '../../stores/toastStore'
 
@@ -33,8 +32,6 @@ export default function MagazinePage() {
     const navigate = useNavigate()
     const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
-    const [isConfirmLoading, setIsConfirmLoading] = useState(false)
-    const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
 
     const isMyMagazine = user?.id === data?.user.id
@@ -120,14 +117,8 @@ export default function MagazinePage() {
                     description={`AI가 새로운 이미지를 생성하여 현재 무드보드에\n적용합니다.`}
                     onConfirm={handleConfirm}
                     onCancel={() => setIsConfirmOpen(false)}
-                    isLoading={isConfirmLoading}
+                    isLoading={false}
                 />
-            )}
-
-            {showToast && (
-                <div className="fixed left-1/2 -translate-x-1/2 z-50 top-[calc(50%+208px)]">
-                    <Toast message="무드보드가 변경되었습니다." />
-                </div>
             )}
         </MagazineProvider>
     )

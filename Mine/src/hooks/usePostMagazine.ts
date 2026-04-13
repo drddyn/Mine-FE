@@ -19,7 +19,7 @@ export default function usePostMagazine() {
                 throw error
             }
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
         },
     })

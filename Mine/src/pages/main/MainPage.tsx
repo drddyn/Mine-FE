@@ -17,8 +17,6 @@ export default function MainPage() {
     const { setToast } = useToastStore()
     const navigate = useNavigate()
 
-    if (!isLoggedIn) return <GuestPage />
-
     const handleSend = () => {
         if (!topic.trim()) return
         if (isPending) return
@@ -44,6 +42,8 @@ export default function MainPage() {
             setToast('magazine', 'error')
         }
     }, [postMagazineMutation.isPending, postMagazineMutation.isSuccess, postMagazineMutation.isError, postMagazineMutation.data, navigate, setToast])
+
+    if (!isLoggedIn) return <GuestPage />
 
     return (
         <div
