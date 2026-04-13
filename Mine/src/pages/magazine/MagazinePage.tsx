@@ -54,7 +54,7 @@ export default function MagazinePage() {
             setToast('moodboard', 'success')
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
-            setToast('moodboard', 'hidden')
+            setToast('moodboard', 'error')
         }
     }
 
