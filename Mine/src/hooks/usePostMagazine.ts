@@ -15,7 +15,7 @@ export default function usePostMagazine() {
                 setToast('magazine', 'success')
                 return data
             } catch (error) {
-                setToast('magazine', 'hidden')
+                setToast('magazine', 'error')
                 throw error
             }
         },
