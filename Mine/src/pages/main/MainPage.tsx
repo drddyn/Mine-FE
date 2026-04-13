@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import usePostMagazine from '../../hooks/usePostMagazine'
 import GuestPage from './GuestPage'
 import landingBg from '../../assets/bg1.jpg'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
 import { useAuthStore } from '../../stores/auth'
+import LoadingToast, { type ToastStatus } from '../../components/common/LoadingToast'
 
 export default function MainPage() {
     const postMagazineMutation = usePostMagazine()
@@ -12,6 +14,8 @@ export default function MainPage() {
     const [topic, setTopic] = useState('')
     const [userMood, setUserMood] = useState('')
     const { isLoggedIn } = useAuthStore()
+    const [toastStatus, setToastStatus] = useState<ToastStatus>('hidden')
+    const navigate = useNavigate()
 
     if (!isLoggedIn) return <GuestPage />
 
@@ -20,6 +24,26 @@ export default function MainPage() {
         if (isPending) return
         postMagazineMutation.mutate({ topic, user_mood: userMood })
     }
+
+    useEffect(() => {
+        if (postMagazineMutation.isPending) {
+            setToastStatus('loading')
+        } else if (postMagazineMutation.isSuccess) {
+            setToastStatus('success')
+            
+            // 성공 토스트를 1.5초간 보여준 후 매거진 상세 페이지로 부드럽게 이동
+            setTimeout(() => {
+                // 백엔드 응답(data) 자체가 ID이거나 객체 내부에 있는 경우 모두 대응
+                const responseData = postMagazineMutation.data
+                const newMagazineId = responseData?.magazineId || responseData
+                if (newMagazineId) navigate(`/${newMagazineId}`)
+                else navigate('/explore') 
+            }, 1500)
+            
+        } else if (postMagazineMutation.isError) {
+            setToastStatus('error')
+        }
+    }, [postMagazineMutation.isPending, postMagazineMutation.isSuccess, postMagazineMutation.isError])
 
     return (
         <div
@@ -47,6 +71,12 @@ export default function MainPage() {
             </div>
 
             {isPending && <MakingLoadingPage />}
+
+            <LoadingToast 
+                status={toastStatus} 
+                toastType="magazine" 
+                onClose={() => setToastStatus('hidden')} 
+            />
         </div>
     )
 }

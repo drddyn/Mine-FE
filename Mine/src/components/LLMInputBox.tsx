@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Arrow from '../icon/arrow.svg?react'
+
 interface LLMInputBoxProps {
     placeholder?: string
     onSend?: (value: string) => void

@@ -9,6 +9,7 @@ import useGetMyProfile from '../hooks/useGetMyProfile'
 import useUserStore from '../stores/user'
 import useSidebarStore from '../stores/sidebar'
 import { SkeletonAvatar } from '../components/skeleton/SkeletonBase'
+import GlobalLoadingToast from '../components/common/GlobalLoadingToast'
 
 export default function Sidebar() {
     const { isOpen, toggleSidebar } = useSidebarStore()
@@ -71,6 +72,7 @@ export default function Sidebar() {
             >
                 <SidebarOpen onclick={toggleSidebar} />
             </div>
+            <GlobalLoadingToast />
         </div>
     )
 }

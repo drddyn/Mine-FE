@@ -13,6 +13,7 @@ import ConfirmModal from '../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
 import Toast from '../../components/common/Toast'
 import useUserStore from '../../stores/user'
+import { useToastStore } from '../../stores/toastStore'
 
 const isValidUrl = (url?: string) => {
     if (!url) return false
@@ -38,27 +39,22 @@ export default function MagazinePage() {
 
     const isMyMagazine = user?.id === data?.user.id
 
-    useEffect(() => {
-        if (!showToast) return
-        const timer = setTimeout(() => setShowToast(false), 3000)
-        return () => clearTimeout(timer)
-    }, [showToast])
+    const { setToast } = useToastStore()
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/${magazineId}/${sectionId}`)
     }
 
     const handleConfirm = async () => {
-        if (isConfirmLoading) return
-        setIsConfirmLoading(true)
+        // 확인 즉시 모달을 닫고 'loading' 토스트를 띄웁니다.
+        setIsConfirmOpen(false)
+        setToast('moodboard', 'loading')
         try {
             await createMoodboard(Number(magazineId))
-            setIsConfirmOpen(false)
-            setShowToast(true)
+            setToast('moodboard', 'success')
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
-        } finally {
-            setIsConfirmLoading(false)
+            setToast('moodboard', 'hidden')
         }
     }
 
@@ -84,7 +80,7 @@ export default function MagazinePage() {
                                 mode="magazine"
                                 likeCount={data.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
                                 isLiked={data.isLiked} // 내 좋아요 상태 전달
-                                isMyMagazine={isMyMagazine}
+                               isMyMagazine={isMyMagazine}
                             />
                         </div>
                     )}
