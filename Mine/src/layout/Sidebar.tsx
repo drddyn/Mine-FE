@@ -72,7 +72,6 @@ export default function Sidebar() {
             >
                 <SidebarOpen onclick={toggleSidebar} />
             </div>
-            <GlobalLoadingToast />
         </div>
     )
 }

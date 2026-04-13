@@ -6,7 +6,7 @@ import landingBg from '../../assets/bg1.jpg'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
 import { useAuthStore } from '../../stores/auth'
-import LoadingToast, { type ToastStatus } from '../../components/common/LoadingToast'
+import { useToastStore } from '../../stores/toastStore'
 
 export default function MainPage() {
     const postMagazineMutation = usePostMagazine()
@@ -14,7 +14,7 @@ export default function MainPage() {
     const [topic, setTopic] = useState('')
     const [userMood, setUserMood] = useState('')
     const { isLoggedIn } = useAuthStore()
-    const [toastStatus, setToastStatus] = useState<ToastStatus>('hidden')
+    const { setToast } = useToastStore()
     const navigate = useNavigate()
 
     if (!isLoggedIn) return <GuestPage />
@@ -27,9 +27,9 @@ export default function MainPage() {
 
     useEffect(() => {
         if (postMagazineMutation.isPending) {
-            setToastStatus('loading')
+            setToast('magazine', 'loading')
         } else if (postMagazineMutation.isSuccess) {
-            setToastStatus('success')
+            setToast('magazine', 'success')
             
             // 성공 토스트를 1.5초간 보여준 후 매거진 상세 페이지로 부드럽게 이동
             setTimeout(() => {
@@ -41,9 +41,9 @@ export default function MainPage() {
             }, 1500)
             
         } else if (postMagazineMutation.isError) {
-            setToastStatus('error')
+            setToast('magazine', 'error')
         }
-    }, [postMagazineMutation.isPending, postMagazineMutation.isSuccess, postMagazineMutation.isError])
+    }, [postMagazineMutation.isPending, postMagazineMutation.isSuccess, postMagazineMutation.isError, postMagazineMutation.data, navigate, setToast])
 
     return (
         <div
@@ -71,12 +71,6 @@ export default function MainPage() {
             </div>
 
             {isPending && <MakingLoadingPage />}
-
-            <LoadingToast 
-                status={toastStatus} 
-                toastType="magazine" 
-                onClose={() => setToastStatus('hidden')} 
-            />
         </div>
     )
 }
