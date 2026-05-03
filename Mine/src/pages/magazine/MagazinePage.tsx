@@ -6,13 +6,13 @@ import useSidebarStore from '../../stores/sidebar'
 import MagazineInfo from './components/MagazineInfo'
 import { MagazineProvider } from './MagazineProvider'
 import MagazineSkeleton from '../../components/skeleton/MagazineSkeleton'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import IconWandStars from '../../icon/wand_stars.svg?react'
 import ScreenSettingsModal from '../../components/settings/ScreenSettingsModal'
 import ConfirmModal from '../../components/common/ConfirmModal'
 import useCreateMoodboard from '../../hooks/useCreateMoodboard'
-import Toast from '../../components/common/Toast'
 import useUserStore from '../../stores/user'
+import { useToastStore } from '../../stores/toastStore'
 
 const isValidUrl = (url?: string) => {
     if (!url) return false
@@ -32,33 +32,26 @@ export default function MagazinePage() {
     const navigate = useNavigate()
     const [isScreenSettingsOpen, setIsScreenSettingsOpen] = useState(false)
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
-    const [isConfirmLoading, setIsConfirmLoading] = useState(false)
-    const [showToast, setShowToast] = useState(false)
     const { mutateAsync: createMoodboard } = useCreateMoodboard()
 
     const isMyMagazine = user?.id === data?.user.id
 
-    useEffect(() => {
-        if (!showToast) return
-        const timer = setTimeout(() => setShowToast(false), 3000)
-        return () => clearTimeout(timer)
-    }, [showToast])
+    const { setToast } = useToastStore()
 
     const handleSectionClick = (magazineId: number, sectionId: number) => {
         navigate(`/${magazineId}/${sectionId}`)
     }
 
     const handleConfirm = async () => {
-        if (isConfirmLoading) return
-        setIsConfirmLoading(true)
+        // 확인 즉시 모달을 닫고 'loading' 토스트를 띄웁니다.
+        setIsConfirmOpen(false)
+        setToast('moodboard', 'loading')
         try {
             await createMoodboard(Number(magazineId))
-            setIsConfirmOpen(false)
-            setShowToast(true)
+            setToast('moodboard', 'success')
         } catch (error) {
             console.error('무드보드 생성 실패:', error)
-        } finally {
-            setIsConfirmLoading(false)
+            setToast('moodboard', 'error')
         }
     }
 
@@ -84,7 +77,7 @@ export default function MagazinePage() {
                                 mode="magazine"
                                 likeCount={data.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
                                 isLiked={data.isLiked} // 내 좋아요 상태 전달
-                                isMyMagazine={isMyMagazine}
+                               isMyMagazine={isMyMagazine}
                             />
                         </div>
                     )}
@@ -124,14 +117,8 @@ export default function MagazinePage() {
                     description={`AI가 새로운 이미지를 생성하여 현재 무드보드에\n적용합니다.`}
                     onConfirm={handleConfirm}
                     onCancel={() => setIsConfirmOpen(false)}
-                    isLoading={isConfirmLoading}
+                    isLoading={false}
                 />
-            )}
-
-            {showToast && (
-                <div className="fixed left-1/2 -translate-x-1/2 z-50 top-[calc(50%+208px)]">
-                    <Toast message="무드보드가 변경되었습니다." />
-                </div>
             )}
         </MagazineProvider>
     )
