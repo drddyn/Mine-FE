@@ -17,7 +17,7 @@ export type SignupDto = {
     nickname: string
     interests: string[]
 }
-
+//내 프로필 조회
 export type ResponseProfile = {
     id: number
     username: string

@@ -3,14 +3,6 @@ import type { UserBase } from './user'
 export type PageResponse<T> = {
     totalPages: number
     totalElements: number
-    pageable: {
-        pageNumber: number
-        pageSize: number
-        offset: number
-        sort: SortInfo
-        paged: boolean
-        unpaged: boolean
-    }
     size: number
     content: T[]
     number: number
@@ -33,29 +25,34 @@ export type MyMagazinesDto = {
     sort: string[]
 }
 
+type Moodboard = {
+    imageUrl: string
+    description: string
+    status: 'COMPLETED'
+}
+
 type BaseMagazine = {
-    magazineId: number
     title: string
-    subtitle: string
-    introduction: string
     coverImageUrl: string
     createdAt: string
+    moodboard: Moodboard
 }
 
 //목록 조회를 위한 타입
 export type Magazine = BaseMagazine & {
+    magazineId: number
     username: string
     likeCount: number
     commentCount: number
 }
-
+//내 매거진 리스트 조회 응답 , 내가 찜한 매거진 리스트 응답
 export type ResponseMyMagazine = PageResponse<Magazine>
 
+//매거진 상세 보기 응답
 export type ResponseMagazineDetail = BaseMagazine & {
     user: UserBase
     tags: string[]
-    moodboardImageUrl: string
-    moodboardDescription: string
+    moodboard: Moodboard
     sections: Section[]
     likeCount: number
     isLiked: boolean
@@ -66,14 +63,12 @@ type Paragraph = {
     subtitle: string
     text: string
     imageUrl: string
+    sourceUrl: string
 }
 type Section = {
-    sectionId: number
     heading: string
     thumbnailUrl: string
     paragraphs: Paragraph[]
-    imageUrl: string
-    displayOrder: number
 }
 
 export type RequestDeleteMagazine = {
@@ -99,7 +94,7 @@ type RecentSection = {
     magazineTitle: string
     viewedAt: string
 }
-
+//최근 열람 섹션 응답
 export type ResponseRecentSection = RecentSection[]
 
 export type SectionDetailDto = BaseSection
@@ -109,10 +104,11 @@ type BaseSection = {
     sectionId: number
 }
 export type DeleteSectionDto = BaseSection
-
+//섹션 상세 보기 응답
 export type ResponseGetSectionDetail = {
     heading: string
     paragraphs: Paragraph[]
+    sourceUrl: string
     sectionId: number
     thumbnailUrl: string
     displayOrder: number
