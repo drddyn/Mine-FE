@@ -28,20 +28,26 @@ export default function MainPage() {
             setToast('magazine', 'loading')
         } else if (postMagazineMutation.isSuccess) {
             setToast('magazine', 'success')
-            
+
             // 성공 토스트를 1.5초간 보여준 후 매거진 상세 페이지로 부드럽게 이동
             setTimeout(() => {
                 // 백엔드 응답(data) 자체가 ID이거나 객체 내부에 있는 경우 모두 대응
                 const responseData = postMagazineMutation.data
                 const newMagazineId = responseData?.magazineId || responseData
                 if (newMagazineId) navigate(`/${newMagazineId}`)
-                else navigate('/explore') 
+                else navigate('/explore')
             }, 1500)
-            
         } else if (postMagazineMutation.isError) {
             setToast('magazine', 'error')
         }
-    }, [postMagazineMutation.isPending, postMagazineMutation.isSuccess, postMagazineMutation.isError, postMagazineMutation.data, navigate, setToast])
+    }, [
+        postMagazineMutation.isPending,
+        postMagazineMutation.isSuccess,
+        postMagazineMutation.isError,
+        postMagazineMutation.data,
+        navigate,
+        setToast,
+    ])
 
     if (!isLoggedIn) return <GuestPage />
 
