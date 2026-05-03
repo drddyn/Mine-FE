@@ -63,7 +63,7 @@ export default function SidebarMagazine({ title, id, onclick }: SidebarMagazineP
         }
 
         updateTitleMutation.mutate(
-            { id, title: next, introduction: '' },
+            { id, title: next },
             {
                 onSuccess: () => {
                     cancelEdit()

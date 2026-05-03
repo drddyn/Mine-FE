@@ -54,6 +54,7 @@ export type ResponseMagazineDetail = BaseMagazine & {
     tags: string[]
     moodboard: Moodboard
     sections: Section[]
+    magazineId: number
     likeCount: number
     isLiked: boolean
 }
@@ -69,6 +70,9 @@ type Section = {
     heading: string
     thumbnailUrl: string
     paragraphs: Paragraph[]
+    displayOrder: 0
+    sourceUrl: string
+    sectionId: number
 }
 
 export type RequestDeleteMagazine = {
@@ -83,7 +87,6 @@ export type PostMagazineDto = {
 export type PatchMagazineTitleDto = {
     id: number
     title: string
-    introduction: string
 }
 
 type RecentSection = {

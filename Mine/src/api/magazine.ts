@@ -38,12 +38,8 @@ export const postMagazine = async ({ topic, user_mood }: PostMagazineDto) => {
     return res.data
 }
 
-export const patchMagazineTitle = async ({ id, title, introduction }: PatchMagazineTitleDto) => {
-    const body = {
-        title,
-        introduction,
-    }
-    const res = await axiosInstance.patch(`/api/magazines/${id}`, body)
+export const patchMagazineTitle = async ({ id, title }: PatchMagazineTitleDto) => {
+    const res = await axiosInstance.patch(`/api/magazines/${id}`, { title })
     return res.data
 }
 

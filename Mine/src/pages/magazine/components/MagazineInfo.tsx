@@ -75,7 +75,7 @@ export default function MagazineInfo({
                 return
             }
             updateTitleMutation.mutate(
-                { id: magazinedata?.magazineId ?? 0, title: next, introduction: magazinedata?.introduction ?? '' },
+                { id: magazinedata?.magazineId ?? 0, title: next },
                 { onSuccess: () => cancelEdit() }
             )
         } else {
