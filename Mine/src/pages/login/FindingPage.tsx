@@ -23,8 +23,8 @@ export default function FindingPage() {
             </div>
 
             <div
-                className="absolute z-10 text-white leading-6 font-semibold20"
-                style={{ width: 120, height: 72, top: 68, left: 80, opacity: 1 }}
+                className="absolute z-10 text-gray-100 font-semibold20"
+                style={{ width: 106, height: 84, top: 68, left: 80 }}
             >
                 나만의 매거진
                 <br />
@@ -36,20 +36,20 @@ export default function FindingPage() {
             <div className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-center z-10">
                 <div className="w-110">
                     <div className="text-center mb-10">
-                        <Minelogo className="mx-auto h-12.5 w-35 text-gray-100/50" />
+                        <Minelogo className="mx-auto h-12.5 w-35 text-gray-100/50 opacity-70" />
                     </div>
 
                     <div className="flex w-full mb-10 flex-col">
                         <div className="flex w-full">
                             <button
                                 onClick={() => setTab('id')}
-                                className={`flex-1 text-center font-semibold16 pb-2.5 transition-colors ${tab === 'id' ? 'text-gray-100' : ' text-gray-300'}`}
+                                className={`flex-1 text-center font-semibold16 pb-2.5 transition-colors ${tab === 'id' ? 'text-gray-100' : 'text-gray-300'}`}
                             >
                                 아이디 찾기
                             </button>
                             <button
                                 onClick={() => setTab('password')}
-                                className={`flex-1 text-center font-semibold16 pb-2.5 transition-colors ${tab === 'password' ? 'text-gray-100' : ' text-gray-300'}`}
+                                className={`flex-1 text-center font-semibold16 pb-2.5 transition-colors ${tab === 'password' ? 'text-gray-100' : 'text-gray-300'}`}
                             >
                                 비밀번호 찾기
                             </button>
@@ -63,7 +63,7 @@ export default function FindingPage() {
                             <div className="flex-1 flex justify-center">
                                 <div
                                     className={`h-1 w-55 rounded-r-[15px] transition-colors ${tab === 'password' ? 'bg-gray-100' : 'bg-gray-300'}`}
-                                ></div>
+                                />
                             </div>
                         </div>
                     </div>

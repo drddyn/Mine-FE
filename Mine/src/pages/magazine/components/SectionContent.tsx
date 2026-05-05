@@ -42,13 +42,12 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
         const timer = setTimeout(() => setShowToast(false), 3000)
         return () => clearTimeout(timer)
     }, [showToast])
+
     useEffect(() => {
-        // 2. 디테일 API 호출이 성공적으로 완료되었다면?
         if (isSuccess) {
-            // 3. 서버에 조회 기록이 남았을 테니, 최근 본 섹션 목록을 새로고침합니다!
             queryClient.invalidateQueries({ queryKey: ['recentsections'] })
         }
-    }, [isSuccess, queryClient]) // isSuccess가 true로 바뀔 때 한 번 실행됨
+    }, [isSuccess, queryClient])
 
     const handleClick = (magazineId: number) => {
         navigate(`/${magazineId}`)
@@ -88,8 +87,8 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
                             profileImage={maguser?.profileImageUrl}
                             sectionId={Number(sectionId)}
                             magazineId={Number(magazineId)}
-                            likeCount={magazinedata?.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
-                            isLiked={magazinedata?.isLiked} // 내 좋아요 상태 전달
+                            likeCount={magazinedata?.likeCount}
+                            isLiked={magazinedata?.isLiked}
                             isMyMagazine={isMyMagazine}
                             mode="section"
                             onClick={handleClick}

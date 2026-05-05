@@ -37,7 +37,7 @@ export default function SignupInterests({ interests, onChange }: Props) {
                         [&::-webkit-scrollbar-thumb]:rounded-full
                         [&::-webkit-scrollbar-thumb]:bg-white/30
                         [&::-webkit-scrollbar-track]:bg-transparent">
-          <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-wrap gap-x-2 gap-y-4">
             {categories?.map((item) => (
               <Chip
                 key={item.id}

@@ -10,16 +10,21 @@ export default function LandingPage() {
         navigate('/login', { state: { bgUrl: landingBg } })
     }
 
+    const handleLookaround = () => {
+        navigate('/guest')
+    }
+
     return (
         <div
             className="relative min-h-screen w-screen overflow-hidden bg-center bg-cover"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
+
             <Minelogo className="absolute left-20 top-17 w-21 h-7.5 z-20 text-gray-100/50" />
 
-            <div className="absolute left-20 top-68.75 w-155 h-47.5 z-20">
-                <div className="text-white text-8xl font-bold leading-tight">
+            <div className="absolute left-20 top-59.25 w-105.5 h-84 z-20">
+                <div className="font-bold80 text-white">
                     나만의 매거진
                     <br />
                     아카이빙
@@ -28,12 +33,20 @@ export default function LandingPage() {
                 </div>
             </div>
 
-            <button
-                onClick={handleStart}
-                className="absolute right-30 bottom-17.25 text-white font-semibold24 z-20 cursor-pointer hover:opacity-80 transition"
-            >
-                시작하기
-            </button>
+            <div className="absolute left-309.5 top-164.25 w-20.5 h-21 z-20 flex flex-col gap-4">
+                <button
+                    onClick={handleLookaround}
+                    className="text-white/40 font-semibold24 cursor-pointer hover:text-white transition-colors duration-200"
+                >
+                    둘러보기
+                </button>
+                <button
+                    onClick={handleStart}
+                    className="text-white/40 font-semibold24 cursor-pointer hover:text-white transition-colors duration-200"
+                >
+                    시작하기
+                </button>
+            </div>
         </div>
     )
 }

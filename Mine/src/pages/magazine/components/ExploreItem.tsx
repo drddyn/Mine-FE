@@ -19,7 +19,7 @@ export default function ExploreItem({ magazine }: Props) {
             }}
             onClick={() => navigate(`/${magazine.magazineId}`)}
         >
-            <p className="font-notoserif font-semibold24 leading-none text-white text-right">{magazine.title}</p>
+            <p className="font-notoserif font-semibold20 text-white text-right">{magazine.title}</p>
         </div>
     )
 }

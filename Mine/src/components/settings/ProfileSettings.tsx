@@ -133,10 +133,9 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                     <div className="flex items-center">
                         <span className="w-20 text-gray-200 font-light14 shrink-0">비밀번호</span>
-
                         <div className="flex flex-row gap-2">
                             <span className="font-medium16 text-white">********</span>
-                            <button className="flex justify-center items-center text-gray-100 border border-gray-100 font-medium12 leading-none px-2 py-0.5 rounded-full gap-1 cursor-pointer">
+                            <button className="flex justify-center items-center text-gray-300 border border-gray-300 font-medium12 leading-none px-2 py-0.5 rounded-full gap-1 cursor-pointer">
                                 <TabButton />
                                 변경
                             </button>

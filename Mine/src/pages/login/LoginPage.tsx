@@ -35,7 +35,6 @@ export default function LoginPage() {
             className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
             style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
         >
-            {/* 배경 어둡게 */}
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-y-0 right-0 w-1/2">
                 <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
@@ -43,7 +42,7 @@ export default function LoginPage() {
                 <div className="absolute inset-0 bg-white/5" />
             </div>
 
-            <div className="absolute z-10 text-gray-100 font-semibold20 w-30 h-18 top-17 left-20">
+            <div className="absolute z-10 text-gray-100 font-semibold20 w-26.5 h-21 top-17 left-20">
                 나만의 매거진
                 <br />
                 아카이빙
@@ -53,7 +52,7 @@ export default function LoginPage() {
 
             <div className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-center z-10">
                 <div className="w-105 translate-y-1.5">
-                    <Minelogo className="mx-auto h-17.5 w-35 mb-10 text-gray-100/50 transition-transform" />
+                    <Minelogo className="mx-auto h-12.5 w-35 mb-10 text-gray-100/50 transition-transform" />
                     <form onSubmit={onSubmit} className="flex flex-col items-center gap-4">
                         <div className="relative w-100">
                             <span className="absolute left-7.5 top-1/2 -translate-y-1/2 text-white/80">
@@ -63,9 +62,7 @@ export default function LoginPage() {
                                 value={userId}
                                 onChange={(e) => setUserId(e.target.value)}
                                 placeholder="아이디"
-                                className="w-full h-12 pl-16 pr-4 py-2.75 rounded-[15px]
-                           bg-white/10 border border-black-whiteBoxOutline text-white
-                           placeholder:text-white/60 outline-none focus:border-white/70"
+                                className="w-full h-12 pl-16 pr-4 py-2.75 rounded-[15px] bg-white/10 border border-gray-200 text-white placeholder:text-white/60 outline-none focus:border-white/70"
                             />
                         </div>
 
@@ -78,10 +75,7 @@ export default function LoginPage() {
                                 value={pw}
                                 onChange={(e) => setPw(e.target.value)}
                                 placeholder="비밀번호"
-                                className="w-full h-12 pl-16 pr-11 py-2.75 rounded-[15px]
-                           bg-white/10 border border-black-whiteBoxOutline text-white
-                           placeholder:text-white/60 outline-none focus:border-white/70"
-                            />
+                                className="w-full h-12 pl-16 pr-11 py-2.75 rounded-[15px] bg-white/10 border border-gray-200 text-white placeholder:text-white/60 outline-none focus:border-white/70"/>
                             <button
                                 type="button"
                                 onClick={() => setShowPw((v) => !v)}
@@ -95,7 +89,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => navigate('/login/finding', { state: { bgUrl } })}
-                                className="font-light14 text-gray-100-op70 hover:text-gray-100 transition"
+                                className="font-light14 text-gray-200 hover:text-gray-100 transition"
                             >
                                 아이디/비밀번호 찾기
                             </button>
@@ -104,7 +98,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isPending}
-                            className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-600-op70 px-3.5 transition hover:bg-gray-600 disabled:opacity-50 cursor-pointer"
+                            className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-500-op70 px-3.5 transition hover:bg-gray-500 disabled:opacity-50 cursor-pointer"
                         >
                             {isPending ? '로그인 중...' : '로그인'}
                         </button>
@@ -112,7 +106,7 @@ export default function LoginPage() {
                         <button
                             type="button"
                             onClick={() => navigate('/signup')}
-                            className="w-100 h-12 rounded-2xl text-gray-100 font-medium16 bg-gray-100-op40 hover:bg-gray-300 px-3.5 transition border border-gray-400  cursor-pointer"
+                            className="w-100 h-12 rounded-2xl text-gray-100 font-medium16 bg-gray-100-op40 hover:bg-gray-300 px-3.5 transition border border-gray-400 cursor-pointer"
                         >
                             회원가입
                         </button>
