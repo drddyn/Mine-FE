@@ -45,7 +45,7 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                 <div className="flex flex-col h-full gap-6">
                     <div className="flex ml-5 mr-4 items-center justify-between">
                         <MineLogo className="w-21 h-7.5 text-gray-100/50" />
-                        <SidebarButton className="cursor-pointer text-gray-100/70 w-5 h-[30px]" onClick={onclick} />
+                        <SidebarButton className="cursor-pointer text-gray-100/70 w-5 h-7.5" onClick={onclick} />
                     </div>
                     <div className="flex flex-col">
                         <SidebarBlock icon={<Sidebar_new />} title="새 매거진" to="" />
