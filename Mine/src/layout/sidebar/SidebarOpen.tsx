@@ -36,9 +36,6 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     const handleSectionClick = (magazineId: number, sectionId: number) => navigate(`/${magazineId}/${sectionId}`)
     const handleMagazineClick = (magazineId: number) => navigate(`/${magazineId}`)
 
-    if (isMagError) { alert('목록 불러오기 실패'); return null }
-    if (isSecError) { alert('섹션 불러오기 실패'); return null }
-
     return (
         <>
             <div className="absolute top-0 left-0 h-screen w-60 pt-8 pb-4 bg-gray-500-op70 z-50 transition-transform ease-in-out duration-300">
@@ -57,7 +54,10 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         {isSectionOpen && (
                             <>
                                 {isSecLoading && <SidebarSkeleton />}
-                                {section?.map((section) => (
+                                {isSecError && (
+                                    <div className="px-5 py-2 text-gray-300 font-regular14">섹션을 불러오지 못했습니다.</div>
+                                )}
+                                {!isSecError && section?.map((section) => (
                                     <SidebarSectionList
                                         key={section.sectionId}
                                         title={section.heading}
@@ -74,16 +74,21 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         {isMagazineOpen && (
                             <>
                                 {isMagLoading && <SidebarSkeleton />}
-                                <div className="h-52 overflow-auto custom-scrollbar">
-                                    {magazine?.content?.map((magazine) => (
-                                        <SidebarMagazine
-                                            key={magazine.magazineId}
-                                            id={magazine.magazineId}
-                                            title={magazine.title}
-                                            onclick={() => handleMagazineClick(magazine.magazineId)}
-                                        />
-                                    ))}
-                                </div>
+                                {isMagError && (
+                                    <div className="px-5 py-2 text-gray-300 font-regular14">매거진을 불러오지 못했습니다.</div>
+                                )}
+                                {!isMagError && (
+                                    <div className="h-52 overflow-auto custom-scrollbar">
+                                        {magazine?.content?.map((magazine) => (
+                                            <SidebarMagazine
+                                                key={magazine.magazineId}
+                                                id={magazine.magazineId}
+                                                title={magazine.title}
+                                                onclick={() => handleMagazineClick(magazine.magazineId)}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
                             </>
                         )}
                     </div>
