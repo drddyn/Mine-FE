@@ -54,7 +54,7 @@ export default function ExplorePage() {
         return () => observer.disconnect()
     }, [activeHasNextPage, activeIsFetchingNextPage, activeFetchNextPage])
 
-    if (activeIsLoading) return <ExploreSkeleton />
+    // if (activeIsLoading) return <ExploreSkeleton />
 
     return (
         <div
@@ -64,7 +64,7 @@ export default function ExplorePage() {
                 backgroundAttachment: 'fixed',
             }}
         >
-            <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
+            <div className="fixed inset-0 bg-gray-600-op30 pointer-events-none" />
 
             <div
                 className="fixed top-0 left-0 w-full pointer-events-none z-10"
@@ -81,9 +81,14 @@ export default function ExplorePage() {
 
             <div className="relative z-20 flex justify-center ">
                 <div className={`transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}>
-                    <ExploreGrid magazines={activeMagazines} />
-                    <div ref={observerRef} className="h-10" />
-                    {magazineIsFetchingNextPage && <div className="text-center py-4">로딩중...</div>}
+                    {!activeIsLoading && (
+                        <>
+                            <ExploreGrid magazines={activeMagazines} />
+                            <div ref={observerRef} className="h-10" />
+                            {magazineIsFetchingNextPage && <div className="text-center py-4">로딩중...</div>}
+                        </>
+                    )}
+                    {activeIsLoading && <ExploreSkeleton />}
                 </div>
             </div>
         </div>
