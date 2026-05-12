@@ -169,3 +169,32 @@ export type PatchSectionDto = {
         imageUrl: string
     }[]
 }
+
+export type SearchLikedMagazinePageParams = {
+    keyword: string
+    page?: number
+    size?: number
+}
+
+type Content = {
+    title: string
+    coverImageUrl: string
+    username: string
+    likeCount: number
+    commentCount: number
+    createdAt: string
+    moodboard: Moodboard
+    magazineId: number
+}
+
+export type SearchLikedMagazineResponse = {
+    content: Content[]
+    totalPages: number
+    totalElements: number
+    last: boolean
+    size: number
+    number: number
+    numberOfElements: number
+    first: boolean
+    empty: boolean
+}
