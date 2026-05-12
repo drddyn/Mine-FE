@@ -170,11 +170,15 @@ export type PatchSectionDto = {
     }[]
 }
 
-export type SearchLikedMagazinePageParams = {
+type SearchBase = {
     keyword: string
     page?: number
     size?: number
 }
+
+export type SearchLikedMagazinePageParams = SearchBase
+
+export type SearchMagazineFeed = SearchBase
 
 type Content = {
     title: string
@@ -187,7 +191,7 @@ type Content = {
     magazineId: number
 }
 
-export type SearchLikedMagazineResponse = {
+type SearchResponse = {
     content: Content[]
     totalPages: number
     totalElements: number
@@ -198,3 +202,7 @@ export type SearchLikedMagazineResponse = {
     first: boolean
     empty: boolean
 }
+
+export type SearchLikedMagazineResponse = SearchResponse
+
+export type SearchMagazineFeedResponse = SearchResponse
