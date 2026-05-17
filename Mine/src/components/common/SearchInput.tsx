@@ -9,6 +9,7 @@ interface SearchInputProps {
 
 export default function SearchInput({ value, onChange, placeholder = '검색어를 입력해 주세요.' }: SearchInputProps) {
     const [isOpen, setIsOpen] = useState(false)
+    const [isFocused, setIsFocused] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
@@ -23,26 +24,28 @@ export default function SearchInput({ value, onChange, placeholder = '검색어�
                 <button
                     onClick={() => setIsOpen(true)}
                     aria-label="검색창 열기"
-                    className="text-gray-100 opacity-60 hover:opacity-100 transition-opacity duration-200"
+                    className="text-gray-200 hover:text-gray-100 transition-colors duration-200"
                 >
-                    <Search className="w-4.5 h-4.5 fill-current" />
+                    <Search className="w-6 h-6 fill-current" />
                 </button>
             ) : (
-                <div className="flex items-center gap-4 w-72 h-11 px-4 py-3 rounded-[80px] border border-gray-500 bg-gray-100-op30">
+                <div className={`flex items-center gap-4 w-72 h-11 px-4 py-5 rounded-[80px] border border-gray-500 bg-gray-100-op90 transition-opacity duration-200 ${isFocused ? 'opacity-100' : 'opacity-40'}`}>
                     <button
                         onClick={() => setIsOpen(false)}
                         aria-label="검색창 닫기"
-                        className={`shrink-0 text-gray-100 transition-opacity duration-200 ${value ? 'opacity-100' : 'opacity-60'}`}
+                        className="shrink-0 transition-opacity duration-200"
                     >
-                        <Search className="w-4.5 h-4.5 fill-current" />
+                        <Search className="w-6 h-6 text-gray-600 fill-current" />
                     </button>
                     <input
                         ref={inputRef}
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
                         placeholder={placeholder}
                         aria-label="검색어 입력"
-                        className="flex-1 bg-transparent outline-none font-regular16 text-gray-100 placeholder-gray-100-op40"
+                        className="flex-1 bg-transparent outline-none font-regular16 text-gray-600 placeholder:text-gray-600"
                     />
                 </div>
             )}

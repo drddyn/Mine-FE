@@ -42,12 +42,7 @@ interface LoadingToastProps {
     onClose?: () => void
 }
 
-export default function LoadingToast({
-    status,
-    toastType = 'moodboard',
-    messages,
-    onClose,
-}: LoadingToastProps) {
+export default function LoadingToast({ status, toastType = 'moodboard', messages, onClose }: LoadingToastProps) {
     const [lastStatus, setLastStatus] = useState<ToastStatus>(status)
     const activeMessages = messages || TOAST_MESSAGES[toastType]
 
@@ -57,13 +52,13 @@ export default function LoadingToast({
     }
 
     useEffect(() => {
-    if (status === 'success' || status === 'error') {
-        const timer = setTimeout(() => {
-            if (onClose) onClose();
-        }, 3000);
-        return () => clearTimeout(timer);
-    }
-}, [status, onClose]);
+        if (status === 'success' || status === 'error') {
+            const timer = setTimeout(() => {
+                if (onClose) onClose()
+            }, 3000)
+            return () => clearTimeout(timer)
+        }
+    }, [status, onClose])
 
     // 화면에서 렌더링할 실제 상태값 (hidden 상태로 넘어가는 애니메이션 도중 이전 디자인을 유지하기 위함)
     const displayStatus = status === 'hidden' ? lastStatus : status
@@ -73,19 +68,19 @@ export default function LoadingToast({
         <div
             className={`fixed bottom-4 right-4 z-9999 flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg transition-all duration-300 ease-in-out ${
                 displayStatus === 'error' ? 'bg-[#FF4D4D]' : 'bg-[#1A1A1A]'
-            } ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-            }`}
+            } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
         >
             {/* 3. 인라인 SVG 대신 import한 아이콘 컴포넌트 사용 */}
-            {displayStatus === 'loading' && <Cached className="w-5 h-5 text-white animate-spin shrink-0" />}
-            {displayStatus === 'success' && <Check className="w-5 h-5 text-white shrink-0" />}
-            {displayStatus === 'error' && <X className="w-5 h-5 text-white shrink-0" />}
+            {displayStatus === 'loading' && <Cached className="w-5 h-5 text-gray-100 animate-spin shrink-0" />}
+            {displayStatus === 'success' && <Check className="w-5 h-5 text-gray-100 shrink-0" />}
+            {displayStatus === 'error' && <X className="w-5 h-5 text-gray-100 shrink-0" />}
 
-            <span className="text-sm font-medium text-white">
-                {displayStatus === 'loading' ? activeMessages.loading : 
-                 displayStatus === 'success' ? activeMessages.success : 
-                 activeMessages.error}
+            <span className="text-sm font-medium text-gray-100">
+                {displayStatus === 'loading'
+                    ? activeMessages.loading
+                    : displayStatus === 'success'
+                      ? activeMessages.success
+                      : activeMessages.error}
             </span>
         </div>
     )

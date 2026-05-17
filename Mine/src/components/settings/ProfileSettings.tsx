@@ -83,7 +83,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                 <div className="relative shrink-0 -translate-y-4">
                     <img src={viewData.profileImageUrl} alt="profile" className="w-25 h-25 rounded-full object-cover" />
                     {editMode && (
-                        <label className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow cursor-pointer">
+                        <label className="absolute bottom-0 right-0 bg-gray-100 rounded-full p-1 shadow cursor-pointer">
                             <Camera className="w-4 h-4 fill-main-default" />
                             <input type="file" accept="image/*" hidden onChange={handleImageChange} />
                         </label>
@@ -99,12 +99,12 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, nickname: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border-white outline-none font-medium16 pb-1 bg-transparent text-white"
+                                className="border-b border- outlgray-100ine-none font-medium16 pb-1 bg-transparent text-gray-100"
                             />
                         ) : (
                             <span
                                 onClick={() => editMode && setEditingField('nickname')}
-                                className={`font-medium16 text-white ${editMode ? 'border-b border-white cursor-text' : ''}`}
+                                className={`font-medium16 text-gray-100 ${editMode ? 'border-b border-gray-100 cursor-text' : ''}`}
                             >
                                 {viewData.nickname}
                             </span>
@@ -119,12 +119,12 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, username: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border-white outline-none font-medium16 pb-1 bg-transparent text-white"
+                                className="border-b border-gray-100 outline-none font-medium16 pb-1 bg-transparent text-gray-100"
                             />
                         ) : (
                             <span
                                 onClick={() => editMode && setEditingField('userId')}
-                                className={`font-medium16 text-white ${editMode ? 'border-b border-white cursor-text' : ''}`}
+                                className={`font-medium16 text-gray-100 ${editMode ? 'border-b border-gray-100 cursor-text' : ''}`}
                             >
                                 {viewData.username}
                             </span>
@@ -133,10 +133,9 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                     <div className="flex items-center">
                         <span className="w-20 text-gray-200 font-light14 shrink-0">비밀번호</span>
-
                         <div className="flex flex-row gap-2">
-                            <span className="font-medium16 text-white">********</span>
-                            <button className="flex justify-center items-center text-gray-100 border border-gray-100 font-medium12 leading-none px-2 py-0.5 rounded-full gap-1 cursor-pointer">
+                            <span className="font-medium16 text-gray-100">********</span>
+                            <button className="flex justify-center items-center text-gray-300 border border-gray-300 font-medium12 leading-none px-2 py-0.5 rounded-full gap-1 cursor-pointer">
                                 <TabButton />
                                 변경
                             </button>
@@ -145,7 +144,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
 
                     <div className="flex items-center">
                         <span className="w-20 text-gray-200 font-light14 shrink-0">이메일</span>
-                        <span className="font-medium16 text-white">{user?.email}</span>
+                        <span className="font-medium16 text-gray-100">{user?.email}</span>
                     </div>
 
                     <div className="flex items-center">
@@ -157,7 +156,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                             }`}
                         >
                             <div
-                                className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow transition-all duration-300 ${isPublic ? 'bg-white left-[calc(100%-12px)]' : 'bg-gray-500 -left-1'}`}
+                                className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow transition-all duration-300 ${isPublic ? 'bg-gray-100 left-[calc(100%-12px)]' : 'bg-gray-500 -left-1'}`}
                             />
                         </div>
                     </div>

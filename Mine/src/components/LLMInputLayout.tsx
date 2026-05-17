@@ -21,13 +21,11 @@ export default function LLMInputLayout() {
     const sectionMatch = matchPath('/:magazineId/:sectionId', location.pathname)
     const magazineMatch = matchPath('/:magazineId', location.pathname)
 
-    //magazineId 추출
     const currentMagazineId = sectionMatch?.params.magazineId || magazineMatch?.params.magazineId
     const isNumericMagazineId = currentMagazineId && !isNaN(Number(currentMagazineId))
 
     const { data: magazineDetail } = useGetMagazineDetail(Number(currentMagazineId))
 
-    // 매거진 주인이 '나'인지 판별
     const isMyMagazine = magazineDetail?.user.id === user?.id
 
     const isAnyPending = postAddSectionMutation.isPending || postAddInSectionPageMutation.isPending
@@ -37,11 +35,8 @@ export default function LLMInputLayout() {
         if (!isMyMagazine) return
 
         if (sectionMatch) {
-            // 섹션 페이지 (문단 추가)
             const { magazineId, sectionId } = sectionMatch.params
-            
-            setToast('paragraph', 'loading') // 토스트 시작
-            
+            setToast('paragraph', 'loading')
             postAddInSectionPageMutation.mutate({
                 magazineId: Number(magazineId),
                 sectionId: Number(sectionId),
@@ -51,11 +46,8 @@ export default function LLMInputLayout() {
                 onError: () => setToast('paragraph', 'error')
             })
         } else if (magazineMatch && isNumericMagazineId) {
-            // 매거진 페이지 (섹션 추가)
             const { magazineId } = magazineMatch.params
-            
-            setToast('section', 'loading') // 토스트 시작
-            
+            setToast('section', 'loading')
             postAddSectionMutation.mutate({
                 magazineId: Number(magazineId),
                 message: value,
@@ -67,7 +59,7 @@ export default function LLMInputLayout() {
     }
 
     return (
-        <div className="fixed bottom-8 left-0 w-full flex justify-center z-50 pointer-events-none">
+        <div className="fixed bottom-8 w-full flex justify-center z-50 pointer-events-none">
             <div className="pointer-events-auto">
                 <LLMInputBox onSend={handleSend} isPending={isAnyPending} />
             </div>
