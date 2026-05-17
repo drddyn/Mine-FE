@@ -11,17 +11,14 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
     const [text, setText] = useState('')
     const [isFocused, setIsFocused] = useState(false)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
-
     const [isExpanded, setIsExpanded] = useState(false)
 
     useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.style.height = 'auto'
             const scrollHeight = textareaRef.current.scrollHeight
-
             const expanded = scrollHeight > 30
             setIsExpanded(expanded)
-
             textareaRef.current.style.height = `${Math.min(scrollHeight, 104)}px`
         }
     }, [text])
@@ -42,7 +39,7 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
 
     return (
         <div
-            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-gray-100-op90 border-gray-500 border py-3 px-3 gap-10 ${isFocused ? ' ' : 'opacity-40'} ${isExpanded ? 'rounded-4xl ' : 'rounded-full'}`}
+            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-gray-100-op90 border-gray-500 border py-3 px-3 gap-10 ${isFocused ? ' ' : 'opacity-40'} ${isExpanded ? 'rounded-4xl' : 'rounded-full'}`}
         >
             <textarea
                 ref={textareaRef}
@@ -53,13 +50,12 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
                 onBlur={() => setIsFocused(false)}
                 onKeyDown={handleKeyDown}
                 placeholder="관심있는 주제를 입력해 주세요."
-                className="mb-1 ml-4 w-full min-h-6 resize-none font-regular16 leading-normal text-gray-600 outline-none placeholder-gray-500-op40 overflow-y-auto"
+                className="ml-3 w-full min-h-6 resize-none font-regular16 leading-normal text-gray-600 outline-none placeholder-gray-600-op40 overflow-y-auto"
                 style={{
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
                 }}
             />
-
             <button
                 onClick={handleSend}
                 disabled={!text.trim() || isPending}

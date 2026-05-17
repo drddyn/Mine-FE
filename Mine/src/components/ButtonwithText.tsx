@@ -9,8 +9,8 @@ type ButtonVariant = 'main' | 'white'
 
 export default function ButtonwithText({ title, size, variant = 'main', onclick }: ButtonProps) {
     const VARIANT_CLASS: Record<ButtonVariant, string> = {
-        main: 'bg-main-default text-white hover:bg-main-emphasis',
-        white: 'border border-main-default bg-white text-main-default hover:bg-main-opacity20',
+        main: 'bg-main-default text-gray-100 hover:bg-main-emphasis',
+        white: 'border border-main-default bg-gray-100 text-main-default hover:bg-main-opacity20',
     }
     return (
         <button

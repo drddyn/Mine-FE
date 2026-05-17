@@ -72,7 +72,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                     className="relative w-193 h-65 bg-gray-600-op70 rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex overflow-hidden"
                 >
                     <button onClick={handleClose} className="absolute top-5 right-5 p-1 z-10">
-                        <X className="w-6 h-6 text-white **:stroke-white" />
+                        <X className="w-6 h-6 text-gray-100 **:stroke-gray-100" />
                     </button>
 
                     <div className="w-45 pt-10 pl-10 flex flex-col gap-2 shrink-0">
@@ -81,7 +81,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                                 setActiveTab('profile')
                                 setEditMode(false)
                             }}
-                            className={`text-left transition-all cursor-pointer ${activeTab === 'profile' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
+                            className={`text-left transition-all cursor-pointer ${activeTab === 'profile' ? 'text-[20px] text-gray-100 font-semibold20' : 'text-[16px] text-gray-100/50'}`}
                         >
                             프로필 설정
                         </button>
@@ -90,7 +90,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                                 setActiveTab('interest')
                                 setEditMode(false)
                             }}
-                            className={`text-left transition-all cursor-pointer ${activeTab === 'interest' ? 'text-[20px] text-white font-semibold20' : 'text-[16px] text-white/50'}`}
+                            className={`text-left transition-all cursor-pointer ${activeTab === 'interest' ? 'text-[20px] text-gray-100 font-semibold20' : 'text-[16px] text-gray-100/50'}`}
                         >
                             관심사 설정
                         </button>
@@ -113,10 +113,10 @@ export default function SettingsModal({ onClose }: SettingsProps) {
 
                     {activeTab === 'profile' && (
                         <button
-                            className="absolute left-12 bottom-8 flex gap-1 items-center font-semibold14 text-white/70 hover:text-white cursor-pointer"
+                            className="absolute left-12 bottom-8 flex gap-1 items-center font-semibold14 text-gray-100/70 hover:text-gray-100 cursor-pointer"
                             onClick={handleLogout}
                         >
-                            <Logout className="w-4 h-4 aspect-square text-white/70" />
+                            <Logout className="w-4 h-4 aspect-square text-gray-100/70" />
                             로그아웃
                         </button>
                     )}
@@ -125,7 +125,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         (!editMode ? (
                             <button
                                 onClick={() => setEditMode(true)}
-                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white/70 hover:text-white cursor-pointer"
+                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-gray-100/70 hover:text-gray-100 cursor-pointer"
                             >
                                 <Edit className="w-4 h-4" />
                                 수정
@@ -133,7 +133,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         ) : (
                             <button
                                 onClick={handleSave}
-                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-white cursor-pointer"
+                                className="absolute right-12 bottom-8 flex items-center gap-1 font-semibold16 text-gray-100 cursor-pointer"
                             >
                                 <Edit className="w-4 h-4" />
                                 저장
@@ -143,7 +143,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         <button
                             onClick={handleSave}
                             disabled={selectedInterests.length === 0}
-                            className="absolute right-12 bottom-8 flex font-semibold16 text-white disabled:opacity-40 px-3 py-1 rounded-2xl border border-gray-100 hover:bg-gray-100-op40 cursor-pointer"
+                            className="absolute right-12 bottom-8 flex font-semibold16 text-gray-100 disabled:opacity-40 px-3 py-1 rounded-2xl border border-gray-100 hover:bg-gray-100-op40 cursor-pointer"
                         >
                             저장
                         </button>

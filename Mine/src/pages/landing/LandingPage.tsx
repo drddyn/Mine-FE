@@ -19,7 +19,7 @@ export default function LandingPage() {
             <Minelogo className="absolute left-20 top-17 w-21 h-7.5 z-20 text-gray-100/50" />
 
             <div className="absolute left-20 top-68.75 w-155 h-47.5 z-20">
-                <div className="text-white text-8xl font-bold leading-tight">
+                <div className="text-gray-100 text-8xl font-bold leading-tight">
                     나만의 매거진
                     <br />
                     아카이빙
@@ -30,7 +30,7 @@ export default function LandingPage() {
 
             <button
                 onClick={handleStart}
-                className="absolute right-30 bottom-17.25 text-white font-semibold24 z-20 cursor-pointer hover:opacity-80 transition"
+                className="absolute right-30 bottom-17.25 text-gray-100 font-semibold24 z-20 cursor-pointer hover:opacity-80 transition"
             >
                 시작하기
             </button>
