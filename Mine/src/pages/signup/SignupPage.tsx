@@ -87,7 +87,7 @@ export default function SignupPage() {
                 <div className="absolute inset-0 bg-white/5" />
             </div>
 
-            <div className="absolute z-10 text-gray-100 font-semibold20 w-26.5 h-21 top-17 left-20">
+            <div className="absolute z-10 text-gray-100 font-semibold20 w-30 h-18 top-17 left-20">
                 나만의 매거진
                 <br />
                 아카이빙
@@ -122,7 +122,7 @@ export default function SignupPage() {
                         type="button"
                         onClick={handleNextClick}
                         disabled={isNextDisabled}
-                        className="w-50 h-12 rounded-2xl transition-colors duration-150 text-gray-100 font-medium16 disabled:opacity-50 bg-gray-500-op70 enabled:hover:bg-gray-500 cursor-pointer"
+                        className="w-50 h-12 rounded-2xl transition-colors duration-150 text-gray-100 font-medium16 disabled:opacity-50 bg-gray-600-op70 enabled:hover:bg-gray-600 cursor-pointer"
                     >
                         {nextLabel}
                     </button>

@@ -6,14 +6,12 @@ import { useAuthStore } from '../stores/auth'
 import useUserStore from '../stores/user'
 import { useToastStore } from '../stores/toastStore'
 import useGetMagazineDetail from '../hooks/useGetMagazineDetail'
-import useSidebarStore from '../stores/sidebar'
 
 export default function LLMInputLayout() {
     const { isLoggedIn } = useAuthStore()
     const { user } = useUserStore()
     const location = useLocation()
     const { setToast } = useToastStore()
-    const { isOpen } = useSidebarStore()
     const hiddenPath = ['/login', '/signup', '/landing', '/explore', '/saved', '/']
     const isHiddenPath = hiddenPath.includes(location.pathname)
 
@@ -61,11 +59,7 @@ export default function LLMInputLayout() {
     }
 
     return (
-        <div
-            className={`fixed bottom-8 w-full flex justify-center z-50 pointer-events-none transition-all duration-300 ${
-                isOpen ? 'pl-60' : 'pl-15'
-            }`}
-        >
+        <div className="fixed bottom-8 w-full flex justify-center z-50 pointer-events-none">
             <div className="pointer-events-auto">
                 <LLMInputBox onSend={handleSend} isPending={isAnyPending} />
             </div>

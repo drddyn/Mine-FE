@@ -37,13 +37,9 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
         }
     }
 
-    const isTextValid = Boolean(text.trim())
-
     return (
         <div
-            className={`relative mx-auto flex items-center transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-gray-100-op30 border-gray-500 border py-3 px-3 ${
-                isFocused ? '' : 'opacity-40'
-            } ${isExpanded ? 'rounded-[40px]' : 'rounded-[80px]'}`}
+            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-gray-100-op90 border-gray-500 border py-3 px-3 gap-10 ${isFocused ? ' ' : 'opacity-40'} ${isExpanded ? 'rounded-4xl' : 'rounded-full'}`}
         >
             <textarea
                 ref={textareaRef}
@@ -54,21 +50,18 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
                 onBlur={() => setIsFocused(false)}
                 onKeyDown={handleKeyDown}
                 placeholder="관심있는 주제를 입력해 주세요."
-                className="ml-3 w-full min-h-6 resize-none font-regular16 leading-normal text-gray-100 outline-none placeholder:text-gray-100/80 overflow-y-auto"
+                className="ml-3 w-full min-h-6 resize-none font-regular16 leading-normal text-gray-600 outline-none placeholder-gray-600-op40 overflow-y-auto"
                 style={{
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
                 }}
             />
-
             <button
                 onClick={handleSend}
-                disabled={!isTextValid || isPending}
-                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-all duration-200 ${
-                    !isTextValid ? 'opacity-50' : 'opacity-100'
-                }`}
+                disabled={!text.trim() || isPending}
+                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}`}
             >
-                <Arrow className="w-3 h-3" />
+                <Arrow />
             </button>
         </div>
     )
