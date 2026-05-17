@@ -12,6 +12,8 @@ import type {
     ResponseAddSectionInSectionPage,
     ResponseFeed,
     ResponseRecentSection,
+    SearchLikedMagazinePageParams,
+    SearchMagazineFeed,
     SectionDetailDto,
 } from '../types/magazine'
 import type { MyMagazinesDto, ResponseMyMagazine } from '../types/magazine'
@@ -38,12 +40,8 @@ export const postMagazine = async ({ topic, user_mood }: PostMagazineDto) => {
     return res.data
 }
 
-export const patchMagazineTitle = async ({ id, title, introduction }: PatchMagazineTitleDto) => {
-    const body = {
-        title,
-        introduction,
-    }
-    const res = await axiosInstance.patch(`/api/magazines/${id}`, body)
+export const patchMagazineTitle = async ({ id, title }: PatchMagazineTitleDto) => {
+    const res = await axiosInstance.patch(`/api/magazines/${id}`, { title })
     return res.data
 }
 
@@ -123,6 +121,20 @@ export const patchSection = async ({ magazineId, sectionId, heading, paragraphs 
     const res = await axiosInstance.patch(`/api/magazines/${magazineId}/sections/${sectionId}`, {
         ...(heading !== undefined && { heading }),
         ...(paragraphs !== undefined && { paragraphs }),
+    })
+    return res.data
+}
+
+export const getSearchLikedMagazine = async ({ keyword, page = 0, size = 10 }: SearchLikedMagazinePageParams) => {
+    const res = await axiosInstance.get(`api/magazines/liked/search`, {
+        params: { keyword, page, size },
+    })
+    return res.data
+}
+
+export const getSearchMagazineFeed = async ({ keyword, page = 0, size = 10 }: SearchMagazineFeed) => {
+    const res = await axiosInstance.get(`api/magazines/feed/search`, {
+        params: { keyword, page, size },
     })
     return res.data
 }

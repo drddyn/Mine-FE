@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 import Layout from './Layout'
 import LLMInputLayout from '../components/LLMInputLayout'
+import GlobalLoadingToast from '../components/common/GlobalLoadingToast'
 
 export default function RootLayout() {
     return (
@@ -10,6 +11,7 @@ export default function RootLayout() {
                 <Outlet />
             </Layout>
             <LLMInputLayout />
+            <GlobalLoadingToast />
         </div>
     )
 }

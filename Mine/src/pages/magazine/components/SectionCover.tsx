@@ -13,7 +13,7 @@ export default function SectionCover({ imageUrl, onclick, title }: SectionCoverP
             }}
             onClick={onclick}
         >
-            <span className="text-white text-right leading-normal font-notoserif font-semibold20 break-keep">
+            <span className="text-gray-100 text-right leading-normal font-notoserif font-semibold20 break-keep">
                 {title}
             </span>
         </div>

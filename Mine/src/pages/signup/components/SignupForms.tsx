@@ -22,11 +22,11 @@ export default function SignupForms({ formData, onChange }: SignupFormsProps) {
                         value={formData.id}
                         onChange={onChange}
                         placeholder="abcdef1234"
-                        className="w-full h-12 px-4.5 rounded-[15px]
-                       bg-gray-100-op30 border border-gray-500 text-gray-100
-                       placeholder:text-gray-100/60 outline-none focus:border-gray-100"
+                        className="w-full h-12 px-7 py-5 rounded-[15px]
+                                   bg-gray-100-op30 border border-gray-500 text-gray-100
+                                   placeholder:text-gray-100/60 outline-none focus:border-gray-100"
                     />
-                    <div className="pl-2 mt-2 text-white/45 font-light14">영어, 숫자 포함 6~20자</div>
+                    <div className="pl-2 mt-2 text-gray-100/45 font-light14">영어, 숫자 포함 6~20자</div>
                 </div>
 
                 <div>
@@ -36,9 +36,9 @@ export default function SignupForms({ formData, onChange }: SignupFormsProps) {
                         value={formData.nickname}
                         onChange={onChange}
                         placeholder="홍길동"
-                        className="w-full h-12 px-4.5 rounded-[15px]
-                       bg-gray-100-op30 border border-gray-500 text-gray-100
-                       placeholder:text-gray-100/60 outline-none focus:border-gray-100"
+                        className="w-full h-12 px-7 py-5 rounded-[15px]
+                                   bg-gray-100-op30 border border-gray-500 text-gray-100
+                                   placeholder:text-gray-100/60 outline-none focus:border-gray-100"
                     />
                     <div className="pl-2 mt-2 text-gray-100/45 font-light14">한글 2~6자</div>
                 </div>
@@ -50,9 +50,9 @@ export default function SignupForms({ formData, onChange }: SignupFormsProps) {
                         value={formData.email}
                         onChange={onChange}
                         placeholder="abc123@gmail.com"
-                        className="w-full h-12 px-4.5 rounded-[15px]
-                       bg-gray-100-op30 border border-gray-500 text-gray-100
-                       placeholder:text-gray-100/60 outline-none focus:border-gray-100"
+                        className="w-full h-12 px-7 py-5 rounded-[15px]
+                                   bg-gray-100-op30 border border-gray-500 text-gray-100
+                                   placeholder:text-gray-100/60 outline-none focus:border-gray-100"
                     />
                 </div>
             </div>

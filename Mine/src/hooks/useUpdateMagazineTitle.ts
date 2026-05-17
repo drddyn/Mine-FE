@@ -8,8 +8,7 @@ export default function useUpdateMagazineTitle() {
     const { showToast } = useToastStore()
 
     return useMutation({
-        mutationFn: ({ id, title, introduction }: PatchMagazineTitleDto) =>
-            patchMagazineTitle({ id, title, introduction }),
+        mutationFn: ({ id, title }: PatchMagazineTitleDto) => patchMagazineTitle({ id, title }),
         onMutate: async ({ id, title }) => {
             await queryClient.cancelQueries({ queryKey: ['mymagazines'] })
             await queryClient.cancelQueries({ queryKey: ['magazine', id] })

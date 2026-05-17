@@ -9,6 +9,7 @@ import useSidebarStore from '../../stores/sidebar'
 import SearchInput from '../../components/common/SearchInput'
 import MineLogo from '../../icon/logo_with_title.svg?react'
 import type { Magazine } from '../../types/magazine'
+import { useGetSearchLikedMagazines } from '../../hooks/useGetSearchLikedMagazine'
 
 const CARD_WIDTH = 476
 const GAP = 16
@@ -38,18 +39,30 @@ export default function SavedMagazinePage() {
     const [columnIndex, setColumnIndex] = useState(0)
     const { isOpen } = useSidebarStore()
     const [searchValue, setSearchValue] = useState('')
+    const [isAnimating, setIsAnimating] = useState(true)
     const navigate = useNavigate()
 
-    const { data, isLoading, isError } = useGetLikedMagazineList({
+    const {
+        data: baseData,
+        isLoading: isBaseLoading,
+        isError,
+    } = useGetLikedMagazineList({
         page: 0,
         size: 20,
         sort: ['createdAt,desc'],
     })
 
-    if (isLoading) return <SavedMagazineSkeleton />
+    const { data: searchData, fetchNextPage, hasNextPage } = useGetSearchLikedMagazines(searchValue)
+
+    const baseMagazines = baseData?.content ?? []
+    const searchMagazines = searchData?.pages.flatMap((page) => page.content) ?? []
+
+    const isSearching = searchValue.trim() != ''
+    const magazines = isSearching ? searchMagazines : baseMagazines
+
+    if (isBaseLoading) return <SavedMagazineSkeleton />
     if (isError) return <div>불러오기 실패</div>
 
-    const magazines = data?.content ?? []
     const isEmpty = magazines.length === 0
 
     const totalSlots = Math.max(magazines.length, MIN_CARDS)
@@ -61,6 +74,27 @@ export default function SavedMagazinePage() {
     const TOTAL_COLUMNS = columns.length
     const TOTAL_PAGES = Math.ceil(TOTAL_COLUMNS / COLUMNS_PER_VIEW)
     const firstEmptyIndex = allItems.findIndex((item) => item === null)
+
+    const handleSearchChange = (value: string) => {
+        setIsAnimating(false)
+        setSearchValue(value)
+        setColumnIndex(0)
+    }
+    const handleNextClick = () => {
+        setIsAnimating(true)
+        const nextIndex = Math.min(columnIndex + 1, TOTAL_PAGES - 1)
+        setColumnIndex(nextIndex)
+
+        if (isSearching && hasNextPage) {
+            if (nextIndex >= TOTAL_PAGES - 2) {
+                fetchNextPage()
+            }
+        }
+    }
+    const handlePrevClick = () => {
+        setIsAnimating(true)
+        setColumnIndex((prev) => Math.max(prev - 1, 0))
+    }
 
     if (isEmpty) {
         return (
@@ -74,7 +108,7 @@ export default function SavedMagazinePage() {
                 <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
 
                 <div className="fixed top-8.75 right-4.75 z-30">
-                    <SearchInput value={searchValue} onChange={setSearchValue} />
+                    <SearchInput value={searchValue} onChange={handleSearchChange} />
                 </div>
 
                 <div className="relative flex flex-col justify-center items-center w-full h-screen overflow-hidden">
@@ -122,15 +156,15 @@ export default function SavedMagazinePage() {
         >
             <div className="absolute inset-0 bg-gray-600-op30 pointer-events-none" />
             <div className="fixed top-8.75 right-4.75 z-30">
-                <SearchInput value={searchValue} onChange={setSearchValue} />
+                <SearchInput value={searchValue} onChange={handleSearchChange} />
             </div>
             <div
                 className={`relative flex flex-col justify-center h-full overflow-hidden transition-all duration-300 ${isOpen ? 'pl-76.5' : 'pl-66.5'}`}
             >
                 <div className="relative flex items-center overflow-visible w-full">
                     <div
-                        className="flex gap-2 transition-transform duration-500 ease-in-out will-change-transform"
-                        style={{ transform: `translateX(-${columnIndex * COLUMN_STEP}px)` }}
+                        className={`flex gap-2 will-change-transform ${isAnimating ? 'transition-transform duration-500 ease-in-out' : ''} `}
+                        style={{ transform: isAnimating ? `translateX(-${columnIndex * COLUMN_STEP}px)` : 'none' }}
                     >
                         {columns.map((col, colIdx) => (
                             <div key={colIdx} className="flex flex-col gap-2 shrink-0">
@@ -155,8 +189,8 @@ export default function SavedMagazinePage() {
                 <ArrowPagination
                     currentPage={Math.min(columnIndex + 1, TOTAL_PAGES)}
                     totalPages={TOTAL_PAGES}
-                    onNext={() => setColumnIndex((prev) => Math.min(prev + 1, TOTAL_PAGES - 1))}
-                    onPrev={() => setColumnIndex((prev) => Math.max(prev - 1, 0))}
+                    onNext={handleNextClick}
+                    onPrev={handlePrevClick}
                 />
             </div>
         </div>

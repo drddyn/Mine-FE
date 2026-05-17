@@ -5,6 +5,7 @@ import LoginPage from '../pages/login/LoginPage'
 import FindingPage from '../pages/login/FindingPage'
 import SignupPage from '../pages/signup/SignupPage'
 import LandingPage from '../pages/landing/LandingPage'
+import GuestPage from '../pages/main/GuestPage'
 import ExplorePage from '../pages/magazine/ExplorePage'
 import SavedMagazinePage from '../pages/magazine/SavedMagazinePage'
 import RootLayout from '../layout/RootLayout'
@@ -17,7 +18,30 @@ export const router = createBrowserRouter([
         path: '/',
         element: <RootLayout />,
         children: [
-            { index: true, element: <MainPage /> },
+            {
+                index: true,
+                element: (
+                    <ProtectedRoute>
+                        <MainPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'landing',
+                element: (
+                    <PublicRoute>
+                        <LandingPage />
+                    </PublicRoute>
+                ),
+            },
+            {
+                path: 'guest',
+                element: (
+                    <PublicRoute>
+                        <GuestPage />
+                    </PublicRoute>
+                ),
+            },
             {
                 path: ':magazineId',
                 element: (
@@ -48,14 +72,6 @@ export const router = createBrowserRouter([
                     <ProtectedRoute>
                         <SavedMagazinePage />
                     </ProtectedRoute>
-                ),
-            },
-            {
-                path: 'landing',
-                element: (
-                    <PublicRoute>
-                        <LandingPage />
-                    </PublicRoute>
                 ),
             },
             {

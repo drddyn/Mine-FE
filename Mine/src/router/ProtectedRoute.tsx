@@ -9,7 +9,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
 
     if (!isLoggedIn) {
-        return <Navigate to="/login" replace />
+        return <Navigate to="/landing" replace />
     }
 
     return <>{children}</>

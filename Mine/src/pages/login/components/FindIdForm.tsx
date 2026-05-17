@@ -34,7 +34,7 @@ export default function FindIdForm() {
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-col items-center w-full">
-                <div className="w-100 text-white/80 font-semibold20 mb-2">닉네임</div>
+                <div className="w-100 text-gray-100/80 font-semibold20 mb-2">닉네임</div>
                 <input
                     id="name"
                     value={nickname}
@@ -47,9 +47,8 @@ export default function FindIdForm() {
                 />
             </div>
 
-            {/* 이메일 */}
             <div className="flex flex-col items-center w-full mt-6">
-                <div className="w-100 text-white/80 font-semibold20 mb-2">이메일</div>
+                <div className="w-100 text-gray-100/80 font-semibold20 mb-2">이메일</div>
                 <input
                     id="email"
                     value={email}
@@ -64,20 +63,20 @@ export default function FindIdForm() {
             <div className="flex flex-col items-center gap-4 mt-10 w-full">
                 <button
                     onClick={handleSubmit}
-                    className="w-100 h-12 p-3.5 rounded-2xl bg-gray-500-op70 transition-colors duration-150 text-white font-medium16"
+                    className="w-100 h-12 p-3.5 rounded-2xl bg-gray-500-op70 hover:bg-gray-500 transition-colors duration-150 text-gray-100 font-medium16"
                 >
                     아이디 찾기
                 </button>
                 <button
                     onClick={() => navigate(-1)}
-                    className="w-100 h-12 p-3.5 rounded-2xl border border-gray-400 bg-gray-100-op40 transition-colors duration-150 text-gray-100 font-medium16"
+                    className="w-100 h-12 p-3.5 rounded-2xl border border-gray-400 bg-gray-100-op40 hover:bg-gray-300 transition-colors duration-150 text-gray-100 font-medium16"
                 >
                     이전으로
                 </button>
             </div>
 
             {submitted && (
-                <div className="mt-10 text-center text-white/80 font-semibold16 leading-5.5">
+                <div className="mt-10 text-center text-gray-100/80 font-semibold16 leading-5.5">
                     작성하신 이메일로 아이디가 전송되었습니다.
                     <br />
                     메일함을 확인해주세요.
