@@ -54,8 +54,6 @@ export default function ExplorePage() {
         return () => observer.disconnect()
     }, [activeHasNextPage, activeIsFetchingNextPage, activeFetchNextPage])
 
-    // if (activeIsLoading) return <ExploreSkeleton />
-
     return (
         <div
             className="h-screen overflow-y-auto pt-39.25 pb-10 relative bg-center bg-cover min-w-300 custom-scrollbar"
@@ -85,7 +83,7 @@ export default function ExplorePage() {
                         <>
                             <ExploreGrid magazines={activeMagazines} />
                             <div ref={observerRef} className="h-10" />
-                            {magazineIsFetchingNextPage && <div className="text-center py-4">로딩중...</div>}
+                            {activeIsFetchingNextPage && <div className="text-center py-4">로딩중...</div>}
                         </>
                     )}
                     {activeIsLoading && <ExploreSkeleton />}

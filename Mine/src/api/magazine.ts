@@ -133,7 +133,7 @@ export const getSearchLikedMagazine = async ({ keyword, page = 0, size = 10 }: S
 }
 
 export const getSearchMagazineFeed = async ({ keyword, page = 0, size = 10 }: SearchMagazineFeed) => {
-    const res = await axiosInstance.get(`api/magazines/liked/search`, {
+    const res = await axiosInstance.get(`api/magazines/feed/search`, {
         params: { keyword, page, size },
     })
     return res.data
