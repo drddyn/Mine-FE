@@ -60,7 +60,12 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
             <button
                 onClick={handleSend}
                 disabled={!hasText || isPending}
-                className={`flex shrink-0 px-4 py-2 rounded-full items-center justify-center transition-colors duration-200 font-medium12 text-gray-100 ${isFocused ? 'bg-gray-500' : ''} ${isExpanded ? 'mb-0.5' : ''} ${hasText ? 'bg-gray-500 shadow-[0_4px_8px_0_rgba(0,0,0,0.12),0_16px_32px_0_rgba(0,0,0,0.20)]' : 'bg-gray-500-op40'}`}
+                className={
+                    'flex shrink-0 px-4 py-2 rounded-full items-center justify-center transition-colors duration-200 font-medium12 text-gray-100' +
+                    (isExpanded ? ' mb-0.5' : '') +
+                    (hasText || isFocused ? ' bg-gray-500' : ' bg-gray-500-op40') +
+                    (hasText ? ' shadow-[0_4px_8px_0_rgba(0,0,0,0.12),0_16px_32px_0_rgba(0,0,0,0.20)]' : '')
+                }
             >
                 입력
             </button>
