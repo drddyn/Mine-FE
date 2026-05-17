@@ -84,7 +84,7 @@ export default function SignupPage() {
             <div className="absolute inset-y-0 right-0 w-1/2">
                 <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
                 <div className="absolute inset-0 backdrop-blur-[6px]" />
-                <div className="absolute inset-0 bg-white/5" />
+                <div className="absolute inset-0 bg-gray-100/5" />
             </div>
 
             <div className="absolute z-10 text-gray-100 font-semibold20 w-30 h-18 top-17 left-20">

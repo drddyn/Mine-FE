@@ -19,7 +19,7 @@ export default function InterestSettings({ interests, onChange }: Props) {
         }
     }
 
-    if (isLoading) return <div className="text-white">불러오는 중...</div>
+    if (isLoading) return <div className="text-gray-100">불러오는 중...</div>
 
     return (
         <div className="flex flex-wrap gap-2 overflow-y-auto custom-scrollbar max-w-116.25 max-h-40">
@@ -31,7 +31,7 @@ export default function InterestSettings({ interests, onChange }: Props) {
                         ${
                             interests.includes(item.code)
                                 ? 'bg-gray-100 text-gray-600'
-                                : 'border-white/30 bg-transparent text-gray-100'
+                                : 'border-gray-100/30 bg-transparent text-gray-100'
                         }`}
                 >
                     {item.name}

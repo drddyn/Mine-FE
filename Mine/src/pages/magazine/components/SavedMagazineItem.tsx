@@ -26,9 +26,7 @@ export default function SavedMagazineItem({ magazine }: Props) {
             }}
             onClick={() => navigate(`/${magazine.magazineId}`)}
         >
-            <span className="text-white text-right font-notoserif font-semibold24">
-                {magazine.title}
-            </span>
+            <span className="text-gray-100 text-right font-notoserif font-semibold24">{magazine.title}</span>
         </div>
     )
 }

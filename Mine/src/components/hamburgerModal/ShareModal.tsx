@@ -27,17 +27,17 @@ export default function ShareModal({ onClose }: ShareModalProps) {
     }
 
     const buttons = [
-        { icon: <Link className="w-6 h-6 **:stroke-white" />, label: '링크 복사', onClick: handleCopyLink },
-        { icon: <Twit className="w-6 h-6 **:stroke-white" />, label: '트위터', onClick: () => {} },
-        { icon: <Kakao className="w-6 h-6 **:stroke-white" />, label: '카카오톡', onClick: () => {} },
-        { icon: <Instagram className="w-6 h-6 **:stroke-white" />, label: '인스타그램', onClick: () => {} },
+        { icon: <Link className="w-6 h-6 **:stroke-gray-100" />, label: '링크 복사', onClick: handleCopyLink },
+        { icon: <Twit className="w-6 h-6 **:stroke-gray-100" />, label: '트위터', onClick: () => {} },
+        { icon: <Kakao className="w-6 h-6 **:stroke-gray-100" />, label: '카카오톡', onClick: () => {} },
+        { icon: <Instagram className="w-6 h-6 **:stroke-gray-100" />, label: '인스타그램', onClick: () => {} },
     ]
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
             <div className="relative flex flex-col justify-center px-8 bg-gray-600-op70 rounded-2xl w-120 h-53 gap-6.25">
                 <button onClick={onClose} className="absolute top-8 right-8">
-                    <X className="w-5 h-5 **:stroke-white" />
+                    <X className="w-5 h-5 **:stroke-gray-100" />
                 </button>
 
                 <span className="font-semibold24 text-gray-100">공유</span>

@@ -19,7 +19,7 @@ export default function FindingPage() {
             <div className="absolute inset-y-0 right-0 w-1/2">
                 <div className="absolute inset-0 bg-linear-to-l from-black/10 via-black/5 to-transparent" />
                 <div className="absolute inset-0 backdrop-blur-[6px]" />
-                <div className="absolute inset-0 bg-white/5" />
+                <div className="absolute inset-0 bg-gray-100/5" />
             </div>
 
             <div

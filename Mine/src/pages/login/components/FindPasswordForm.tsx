@@ -43,7 +43,7 @@ export default function FindPasswordForm() {
                     maxLength={20}
                     className="w-100 h-12 py-5 px-7 rounded-[15px]
                                border border-gray-500 text-gray-100
-                               placeholder:text-gray-100/60 outline-none focus:border-white bg-gray-100-op30"
+                               placeholder:text-gray-100/60 outline-none focus:border-gray-100 bg-gray-100-op30"
                 />
             </div>
 
@@ -56,14 +56,14 @@ export default function FindPasswordForm() {
                     placeholder="abc123@gmail.com"
                     className="w-100 h-12 py-5 px-7 rounded-[15px]
                                border border-gray-500 text-gray-100
-                               placeholder:text-gray-100/60 outline-none focus:border-white bg-gray-100-op30"
+                               placeholder:text-gray-100/60 outline-none focus:border-gray-100 bg-gray-100-op30"
                 />
             </div>
 
             <div className="flex flex-col items-center gap-4 mt-10 w-full">
                 <button
                     onClick={handleSubmit}
-                    className="w-100 h-12 p-3.5 rounded-2xl bg-gray-500-op70 transition-colors duration-150 text-white font-medium16 cursor-pointer"
+                    className="w-100 h-12 p-3.5 rounded-2xl bg-gray-500-op70 transition-colors duration-150 text-gray-100 font-medium16 cursor-pointer"
                 >
                     비밀번호 찾기
                 </button>
@@ -76,7 +76,7 @@ export default function FindPasswordForm() {
             </div>
 
             {submitted && (
-                <div className="mt-10 text-center text-white/80 font-semibold16 leading-5.5">
+                <div className="mt-10 text-center text-gray-100/80 font-semibold16 leading-5.5">
                     작성하신 이메일로 비밀번호가 전송되었습니다.
                     <br />
                     메일함을 확인해주세요.
