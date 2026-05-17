@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Arrow from '../icon/arrow.svg?react'
 
 interface LLMInputBoxProps {
     placeholder?: string
@@ -13,13 +12,15 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const [isExpanded, setIsExpanded] = useState(false)
 
+    const hasText = text.trim().length > 0
+
     useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.style.height = 'auto'
             const scrollHeight = textareaRef.current.scrollHeight
             const expanded = scrollHeight > 30
             setIsExpanded(expanded)
-            textareaRef.current.style.height = `${Math.min(scrollHeight, 104)}px`
+            textareaRef.current.style.height = `${Math.min(scrollHeight, 120)}px`
         }
     }, [text])
 
@@ -39,7 +40,7 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
 
     return (
         <div
-            className={`relative mx-auto flex items-end transition-all duration-300 ease-in-out w-192.5 min-h-13.5 bg-gray-100-op90 border-gray-500 border py-3 px-3 gap-10 ${isFocused ? ' ' : 'opacity-40'} ${isExpanded ? 'rounded-4xl' : 'rounded-full'}`}
+            className={`relative flex justify-between transition-all duration-300 ease-in-out rounded-[20px] w-157.5 min-h-13.5  border py-3 pl-7 pr-3 gap-10 ${isExpanded ? 'mb-0.5 items-end' : 'items-center '} ${isFocused ? 'bg-gray-100-op90 border-transparent shadow-[0_16px_32px_0_rgba(0,0,0,0.20)]' : 'bg-gray-200/90 opacity-30 border-gray-500'} `}
         >
             <textarea
                 ref={textareaRef}
@@ -50,7 +51,7 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
                 onBlur={() => setIsFocused(false)}
                 onKeyDown={handleKeyDown}
                 placeholder="관심있는 주제를 입력해 주세요."
-                className="ml-3 w-full min-h-6 resize-none font-regular16 leading-normal text-gray-600 outline-none placeholder-gray-600-op40 overflow-y-auto"
+                className="w-125 min-h-6 resize-none font-regular16 leading-normal text-gray-600 outline-none placeholder-gray-600-op30 overflow-y-auto"
                 style={{
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
@@ -58,10 +59,10 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
             />
             <button
                 onClick={handleSend}
-                disabled={!text.trim() || isPending}
-                className={`flex shrink-0 w-7.5 h-7.5 rounded-full p-1.25 bg-gray-500 items-center justify-center transition-colors duration-200 ${!isExpanded && 'mb-0.5'}`}
+                disabled={!hasText || isPending}
+                className={`flex shrink-0 px-4 py-2 rounded-full items-center justify-center transition-colors duration-200 font-medium12 text-gray-100 ${isFocused ? 'bg-gray-500' : ''} ${isExpanded ? 'mb-0.5' : ''} ${hasText ? 'bg-gray-500 shadow-[0_4px_8px_0_rgba(0,0,0,0.12),0_16px_32px_0_rgba(0,0,0,0.20)]' : 'bg-gray-500-op40'}`}
             >
-                <Arrow />
+                입력
             </button>
         </div>
     )
