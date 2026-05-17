@@ -11,7 +11,7 @@ export const useGetSearchMagazineFeed = (keyword: string) => {
         [string, string],
         number
     >({
-        queryKey: ['searchLikedMagazines', keyword],
+        queryKey: ['searchMagazineFeed', keyword],
 
         queryFn: ({ pageParam }) => getSearchMagazineFeed({ keyword, page: pageParam }),
         initialPageParam: 0,
