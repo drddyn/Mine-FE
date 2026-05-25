@@ -21,7 +21,9 @@ export default function InterestSettings({ interests, onChange }: Props) {
             // 1. 내 관심사(한글) 배열을 돌면서
             const translatedCodes = myInterest.map((koreanName: string) => {
                 // 2. 전체 카테고리에서 한글 이름이 똑같은 객체를 찾습니다.
-                const matchedItem = categories.find((category: any) => category.name === koreanName)
+                const matchedItem = categories.find(
+                    (category: { id: number; code: string; name: string }) => category.name === koreanName
+                )
 
                 // 3. 찾았다면 영어 코드(code)를 반환하고, 혹시 못 찾았으면 일단 그대로 둡니다.
                 return matchedItem ? matchedItem.code : koreanName
