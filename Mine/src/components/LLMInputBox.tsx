@@ -40,7 +40,7 @@ export default function LLMInputBox({ onSend, isPending }: LLMInputBoxProps) {
 
     return (
         <div
-            className={`relative flex justify-between transition-all duration-300 ease-in-out rounded-[20px] w-157.5 min-h-13.5  border py-3 pl-7 pr-3 gap-10 ${isExpanded ? 'mb-0.5 items-end' : 'items-center '} ${isFocused ? 'bg-gray-100-op90 border-transparent shadow-[0_16px_32px_0_rgba(0,0,0,0.20)]' : 'bg-gray-200/90 opacity-30 border-gray-500'} `}
+            className={`relative flex justify-between transition-all duration-300 ease-in-out rounded-[20px] w-157.5 min-h-13.5 py-3 pl-7 pr-3 gap-10 ${isExpanded ? 'mb-0.5 items-end' : 'items-center '} ${isFocused ? 'bg-gray-100-op90 shadow-[0_16px_32px_0_rgba(0,0,0,0.20)]' : 'bg-gray-200/90 opacity-30'} `}
         >
             <textarea
                 ref={textareaRef}

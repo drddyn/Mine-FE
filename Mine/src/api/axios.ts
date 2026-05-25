@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useErrorStore } from '../stores/error'
 
 export const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -23,6 +24,11 @@ axiosInstance.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config
 
+        // 404 에러일 때 실행
+        if (error.response?.status === 404) {
+            useErrorStore.getState().setNotFound(true)
+            return Promise.reject(error)
+        }
         // 401 에러(만료)이고, 이미 재시도한 요청이 아닐 때 실행
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true
