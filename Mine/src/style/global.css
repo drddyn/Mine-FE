@@ -107,6 +107,12 @@ body {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
+    /*NotFoundPage 배경 그래디언트*/
+    .bg-custom-gradient {
+        background:
+            linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%),
+            linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    }
 }
 .skeleton-shimmer {
     position: relative; /* 중요: ::after의 기준점 */

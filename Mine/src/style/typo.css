@@ -41,4 +41,13 @@
     .font-medium36 {
         @apply text-[36px] leading-[140%] tracking-[-0.025em] font-medium;
     }
+    .font-medium20 {
+        @apply text-[20px] leading-[140%] tracking-[-0.025em] font-medium;
+    }
+    .font-medium32 {
+        @apply text-[32px] leading-[140%] tracking-[-0.025em] font-medium;
+    }
+    .font-regular100 {
+        @apply text-[100px] leading-[140%] tracking-[-0.025em] font-normal;
+    }
 }
