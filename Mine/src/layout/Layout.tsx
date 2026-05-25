@@ -6,19 +6,26 @@ import Toast from '../components/common/Toast'
 import { useEffect } from 'react'
 import { useErrorStore } from '../stores/error'
 import NotFoundPage from '../pages/NotFoundPage'
+import { useLocation } from 'react-router-dom'
 
 const TOAST_DURATION = 3000
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const { isLoggedIn } = useAuthStore()
     const { message, hideToast } = useToastStore()
-    const isNotFound = useErrorStore((state) => state.isNotFound)
+    const { isNotFound, setNotFound } = useErrorStore()
+    const location = useLocation()
 
     useEffect(() => {
         if (!message) return
         const timer = setTimeout(() => hideToast(), TOAST_DURATION)
         return () => clearTimeout(timer)
     }, [message, hideToast])
+
+    //페이지 이동 시 상태 초기화
+    useEffect(() => {
+        setNotFound(false)
+    }, [location.pathname, setNotFound]) // 주소(pathname)가 바뀔 때마다 실행됨
 
     return (
         <div className="relative h-screen w-full overflow-hidden">
