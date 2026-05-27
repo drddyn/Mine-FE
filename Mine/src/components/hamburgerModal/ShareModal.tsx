@@ -27,28 +27,45 @@ export default function ShareModal({ onClose }: ShareModalProps) {
     }
 
     const buttons = [
-        { icon: <Link className="w-6 h-6 **:stroke-gray-100" />, label: '링크 복사', onClick: handleCopyLink },
-        { icon: <Twit className="w-6 h-6 **:stroke-gray-100" />, label: '트위터', onClick: () => {} },
-        { icon: <Kakao className="w-6 h-6 **:stroke-gray-100" />, label: '카카오톡', onClick: () => {} },
-        { icon: <Instagram className="w-6 h-6 **:stroke-gray-100" />, label: '인스타그램', onClick: () => {} },
+        {
+            icon: <Link className="w-6 h-6 text-gray-200 group-hover:text-gray-100" />,
+            label: '링크 복사',
+            onClick: handleCopyLink,
+        },
+        {
+            icon: <Twit className="w-6 h-6 text-gray-200 group-hover:text-gray-100" />,
+            label: '트위터',
+            onClick: () => {},
+        },
+        {
+            icon: <Kakao className="w-6 h-6 text-gray-200 group-hover:text-gray-100" />,
+            label: '카카오톡',
+            onClick: () => {},
+        },
+        {
+            icon: <Instagram className="w-6 h-6 text-gray-200 group-hover:text-gray-100" />,
+            label: '인스타그램',
+            onClick: () => {},
+        },
     ]
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-999">
-            <div className="relative flex flex-col justify-center px-8 bg-gray-600-op70 rounded-2xl w-120 h-53 gap-6.25">
-                <button onClick={onClose} className="absolute top-8 right-8">
-                    <X className="w-5 h-5 **:stroke-gray-100" />
-                </button>
+            <div className="relative flex flex-col justify-center bg-gray-modal/95 rounded-2xl py-6 px-8 gap-2">
+                <div className="flex justify-between">
+                    <span className="font-semibold20 text-gray-100">공유</span>
+                    <button onClick={onClose} className="flex items-start cursor-pointer">
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
 
-                <span className="font-semibold24 text-gray-100">공유</span>
-
-                <div className="flex items-center justify-center gap-7">
+                <div className="flex items-center justify-center gap-6 px-8.5">
                     {buttons.map(({ icon, label, onClick }) => (
                         <button key={label} onClick={onClick} className="flex flex-col items-center w-16 gap-2">
-                            <div className="w-14 h-14 flex items-center justify-center rounded-full border border-gray-100 hover:bg-gray-600-op70 transition-colors duration-150">
+                            <div className="group w-15 h-15 flex items-center justify-center rounded-full border border-gray-200 hover:bg-gray-600-op70 hover:border-transparent transition-colors duration-150">
                                 {icon}
                             </div>
-                            <span className="font-medium12 text-gray-100 text-center">{label}</span>
+                            <span className="font-medium12 text-gray-200 text-center">{label}</span>
                         </button>
                     ))}
                 </div>
