@@ -26,7 +26,7 @@ export default function ConfirmModal({
                     <h2 className="font-semibold20 text-gray-100">{title}</h2>
                     {(description || itemName) && (
                         <p
-                            className="font-16 text-gray-100-op70"
+                            className="font-light16 text-gray-100-op70"
                             style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
                         >
                             {description && <span>{description} </span>}

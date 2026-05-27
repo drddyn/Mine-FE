@@ -92,8 +92,17 @@ export const hasBlockedWord = (text: string): boolean => {
     // 텍스트가 비어있으면 통과
     if (!text) return false
 
-    const noSpaceText = text.replace(/\s+/g, '').toLowerCase()
+    const normalizedText = text.toLowerCase()
 
     // 배열을 순회하면서 하나라도 포함(includes)되어 있으면 true를 반환합니다.
-    return BLOCKED_WORDS.some((word) => noSpaceText.includes(word))
+    return BLOCKED_WORDS.some((word) => {
+        // 영어 단어인 경우 단어 경계(\b)를 사용하여 부분 일치로 인한 오탐을 방지합니다.
+        if (/^[a-zA-Z]+$/.test(word)) {
+            const regex = new RegExp(`\\b${word}\\b`, 'i')
+            return regex.test(normalizedText)
+        }
+        // 한국어 및 기타 문자는 공백을 제거한 상태에서 포함 여부를 확인합니다.
+        const noSpaceText = normalizedText.replace(/\\s+/g, '')
+        return noSpaceText.includes(word)
+    })
 }

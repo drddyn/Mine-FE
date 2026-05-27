@@ -23,14 +23,12 @@ export default function MainPage() {
     const handleSend = () => {
         const currentText = topic.trim()
         if (!currentText) return
-        console.log('입력된 단어:', currentText, ' / 금지어인가요?:', hasBlockedWord(currentText))
         if (hasBlockedWord(currentText)) {
             setIsModalOpen(true)
             return // 여기서 함수를 끝내버려서 백엔드로 넘어가지 않게 막습니다!
         }
-        if (!currentText) return
         if (isPending) return
-        postMagazineMutation.mutate({ topic, user_mood: userMood })
+        postMagazineMutation.mutate({ topic: currentText, user_mood: userMood })
     }
 
     useEffect(() => {
