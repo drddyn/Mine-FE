@@ -6,6 +6,7 @@ import UserIcon from '../../icon/user.svg?react'
 import LockIcon from '../../icon/lock.svg?react'
 import EyeIcon from '../../icon/eye.svg?react'
 import usePostAuthorization from '../../hooks/usePostAuthorization'
+import landingBg from '../../assets/bg1.png'
 
 export default function LoginPage() {
     const navigate = useNavigate()
@@ -33,7 +34,7 @@ export default function LoginPage() {
     return (
         <div
             className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
-            style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
+            style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-y-0 right-0 w-1/2">
