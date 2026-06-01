@@ -11,15 +11,18 @@ export default function LandingPageSeventh() {
     }
     return (
         <div
-            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
+            className="relative snap-start h-screen w-full bg-cover overflow-hidden "
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <SidebarForLanding isOpen={false} />
 
             {/* 💡 1. 스크롤 영역 (사이드바 너비만큼 ml 부여) */}
-            <div className="h-screen overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-200 scrollbar-no ml-15">
+            <div className="h-screen overflow-x-hidden transition-all ease-in-out duration-200 scrollbar-no ml-15">
                 {/* 💡 2. 중앙 백지(종이) 영역: flex-col 추가 및 하단 여백(pb-60) 확보 */}
                 <div className="flex flex-col w-275 bg-gray-100 min-h-full pb-60 shadow-2xl relative">
+                    <div className="absolute -right-20 top-22 flex w-29.75 h-8.5 px-2 py-3 justify-center items-center bg-gray-600 font-medium12 text-gray-100">
+                        탭일이삼사오육칠팔구
+                    </div>
                     {/* --- [헤더 영역] --- */}
                     {/* 이미지의 빨간 숫자 반영: pt-9(36px), px-15(60px) */}
                     <div className="flex w-full pt-9 px-15 pb-4 justify-between items-center">
@@ -72,9 +75,9 @@ export default function LandingPageSeventh() {
             </div>
 
             {/* 💡 3. 하단 고정 그라데이션 CTA 영역 (화면 전체 덮기) */}
-            <div className="absolute bottom-0 left-0 w-full h-88.25 bg-linear-to-t from-black/95 via-black/50 to-transparent flex flex-col items-center justify-end pb-16 z-50 pointer-events-none">
+            <div className="absolute bottom-0 left-0 w-full h-88.25 bg-linear-to-t from-black/95 via-black/50 to-transparent flex flex-col items-center justify-end pb-16 z-20 pointer-events-none">
                 <div className="flex items-center gap-2 mb-2">
-                    <span className="text-white text-lg font-light tracking-wide">
+                    <span className="text-gray-100 font-regular20 tracking-wide">
                         나만의 매거진을 만들 준비가 되셨나요?
                     </span>
                 </div>
@@ -86,7 +89,7 @@ export default function LandingPageSeventh() {
 
                 {/* 버튼만 클릭 가능하도록 pointer-events-auto 부여 */}
                 <button
-                    className="pointer-events-auto flex items-center justify-center px-8 py-3 rounded-full border border-gray-400 text-white font-medium16 hover:bg-white hover:text-black transition-colors duration-300"
+                    className="pointer-events-auto flex items-center justify-center px-8 py-3 rounded-full border border-gray-400 text-white font-medium16 hover:bg-gray-100/50 hover:text-black transition-colors duration-300 z-30 cursor-pointer"
                     onClick={handleClick}
                 >
                     지금 바로 시작하기

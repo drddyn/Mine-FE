@@ -1,4 +1,5 @@
 import MineLogo from '../../icon/logo.svg?react'
+import MineLetterLogo from '../../icon/logo_with_title.svg?react'
 import SidebarButton from '../../icon/sidebarButton.svg?react'
 import Sidebar_new from '../../icon/sidebar_new.svg?react'
 import Sidebar_like from '../../icon/sidebar_like.svg?react'
@@ -14,7 +15,7 @@ export default function SidebarForLanding({ isOpen }: { isOpen: boolean }) {
                 <div className="absolute top-0 left-0 h-screen w-60 pt-8 pb-4 bg-gray-500-op70 z-50 transition-transform ease-in-out duration-300">
                     <div className="flex flex-col h-full gap-6">
                         <div className="flex ml-5 mr-4 items-center justify-between">
-                            <MineLogo className="w-21 h-7.5 text-gray-100/50" />
+                            <MineLetterLogo className="w-21 h-7.5 text-gray-100/50" />
                             <SidebarButton className="cursor-pointer text-gray-100/70 w-5 h-7.5" />
                         </div>
                         <div className="flex flex-col">
@@ -49,25 +50,25 @@ export default function SidebarForLanding({ isOpen }: { isOpen: boolean }) {
             ) : (
                 <div className="absolute top-0 left-0 h-screen z-50">
                     <div
-                        className="absolute top-0 left-0 w-15 h-screen flex flex-col justify-between items-center pt-8 pb-4 px-3.75 bg-gray-500-op40 transition-opacity duration-200 ease-in-out 
+                        className="absolute top-0 left-0 w-15 h-screen flex flex-col justify-between items-center pt-8 pb-4 px-3.75 bg-gray-500-op40 
                 "
                     >
                         <div className="flex flex-col items-center gap-6">
-                            <MineLogo className="cursor-pointer hover:text-gray-100 text-gray-100-op40 w-5 h-7.5" />
+                            <MineLogo className="cursor-pointer text-gray-100-op40 w-5 h-7.5" />
                             <div className="flex flex-col">
-                                <div className="flex px-5 py-2  text-gray-100-op40 hover:text-gray-100">
+                                <div className="flex px-5 py-2  text-gray-100-op40">
                                     <Sidebar_new />
                                 </div>
-                                <div className="flex px-5 py-2  text-gray-100-op40 hover:text-gray-100">
+                                <div className="flex px-5 py-2  text-gray-100-op40">
                                     <Sidebar_like />
                                 </div>
-                                <div className="flex px-5 py-2  text-gray-100-op40 hover:text-gray-100">
+                                <div className="flex px-5 py-2  text-gray-100-op40">
                                     <Sidebar_others />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="w-7.5 h-7.5 rounded-full bg-gray-100-op70 object-cover"></div>
+                        <div className="w-7.5 h-7.5 rounded-full bg-gray-100/50 object-cover"></div>
                     </div>
                 </div>
             )}
