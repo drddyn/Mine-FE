@@ -7,20 +7,28 @@ import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
 import { useAuthStore } from '../../stores/auth'
 import { useToastStore } from '../../stores/toastStore'
+import { hasBlockedWord } from '../../utils/blockedWords'
+import HarmfulKeywordModal from '../../components/common/HarmfulKeywordModal'
 
 export default function MainPage() {
     const postMagazineMutation = usePostMagazine()
     const isPending = postMagazineMutation.isPending
     const [topic, setTopic] = useState('')
     const [userMood, setUserMood] = useState('')
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const { isLoggedIn } = useAuthStore()
     const { setToast } = useToastStore()
     const navigate = useNavigate()
 
     const handleSend = () => {
-        if (!topic.trim()) return
+        const currentText = topic.trim()
+        if (!currentText) return
+        if (hasBlockedWord(currentText)) {
+            setIsModalOpen(true)
+            return // 여기서 함수를 끝내버려서 백엔드로 넘어가지 않게 막습니다!
+        }
         if (isPending) return
-        postMagazineMutation.mutate({ topic, user_mood: userMood })
+        postMagazineMutation.mutate({ topic: currentText, user_mood: userMood })
     }
 
     useEffect(() => {
@@ -52,31 +60,38 @@ export default function MainPage() {
     if (!isLoggedIn) return <GuestPage />
 
     return (
-        <div
-            className="flex flex-col items-center justify-center w-full h-full relative z-0 overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: `url(${landingBg})` }}
-        >
-            <div className="absolute inset-0 bg-linear-to-r from-gray-500-op70 via-black/45 to-gray-500-op70 z-0" />
+        <>
             <div
-                className={`relative flex flex-col items-center transition-all duration-700 ease-in-out z-30 ${
-                    isPending ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100'
-                }`}
+                className="flex flex-col items-center justify-center w-full h-full relative z-0 overflow-hidden bg-cover bg-center"
+                style={{ backgroundImage: `url(${landingBg})` }}
             >
-                <span className="text-gray-100 font-notoserif font-medium36">나만의 매거진을 만들어볼까요?</span>
+                <div className="absolute inset-0 bg-linear-to-r from-gray-500-op70 via-black/45 to-gray-500-op70 z-0" />
+                <div
+                    className={`relative flex flex-col items-center transition-all duration-700 ease-in-out z-30 ${
+                        isPending ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100'
+                    }`}
+                >
+                    <span className="text-gray-100 font-notoserif font-medium36">나만의 매거진을 만들어볼까요?</span>
 
-                <div className="w-full mt-10 flex justify-center">
-                    <NewMagazineInput
-                        topic={topic}
-                        userMood={userMood}
-                        onTopicChange={setTopic}
-                        onUserMoodChange={setUserMood}
-                        onSubmit={handleSend}
-                        isPending={isPending}
-                    />
+                    <div className="w-full mt-10 flex justify-center">
+                        <NewMagazineInput
+                            topic={topic}
+                            userMood={userMood}
+                            onTopicChange={setTopic}
+                            onUserMoodChange={setUserMood}
+                            onSubmit={handleSend}
+                            isPending={isPending}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            {isPending && <MakingLoadingPage />}
-        </div>
+                {isPending && <MakingLoadingPage />}
+            </div>
+            {isModalOpen && (
+                <HarmfulKeywordModal
+                    onClose={() => setIsModalOpen(false)} // '예' 버튼 누르면 닫히도록 함수 전달
+                />
+            )}
+        </>
     )
 }
