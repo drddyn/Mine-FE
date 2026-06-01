@@ -6,7 +6,7 @@ import SidebarForLanding from './SidebarForLanding'
 export default function LandingPageForth() {
     return (
         <div
-            className="relative snap-start h-screen w-full bg-start bg-fit overflow-hidden -z-20"
+            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <SidebarForLanding isOpen={true} />

@@ -12,7 +12,7 @@ import landing9 from '../../assets/landing09.jpg'
 export default function LandingPageSixth() {
     return (
         <div
-            className="relative snap-start h-screen w-full bg-start bg-fit overflow-hidden -z-20"
+            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute top-0 left-0 w-full h-88.25 bg-linear-to-b from-black/90 via-black/50 to-transparent pointer-events-none "></div>

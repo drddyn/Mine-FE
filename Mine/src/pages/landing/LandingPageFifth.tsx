@@ -19,7 +19,7 @@ function EmptyCard({ showButton }: { showButton?: boolean }) {
 export default function LandingPageFifth() {
     return (
         <div
-            className="relative snap-start h-screen w-full bg-start bg-fit overflow-hidden -z-20"
+            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="flex mt-32.25 ml-66.5">

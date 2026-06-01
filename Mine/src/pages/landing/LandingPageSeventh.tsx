@@ -2,11 +2,16 @@ import landingBg from '../../assets/bg1.png'
 import SidebarForLanding from './SidebarForLanding'
 import Heart from '../../icon/heart.svg?react'
 import MineLogo from '../../icon/logo_with_title.svg?react'
+import { useNavigate } from 'react-router-dom'
 
 export default function LandingPageSeventh() {
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate(`/login`)
+    }
     return (
         <div
-            className="relative snap-start h-screen w-full bg-cover bg-center overflow-hidden -z-20"
+            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <SidebarForLanding isOpen={false} />
@@ -80,7 +85,10 @@ export default function LandingPageSeventh() {
                 </div>
 
                 {/* 버튼만 클릭 가능하도록 pointer-events-auto 부여 */}
-                <button className="pointer-events-auto flex items-center justify-center px-8 py-3 rounded-full border border-gray-400 text-white font-medium16 hover:bg-white hover:text-black transition-colors duration-300">
+                <button
+                    className="pointer-events-auto flex items-center justify-center px-8 py-3 rounded-full border border-gray-400 text-white font-medium16 hover:bg-white hover:text-black transition-colors duration-300"
+                    onClick={handleClick}
+                >
                     지금 바로 시작하기
                 </button>
             </div>

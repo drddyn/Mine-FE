@@ -3,7 +3,7 @@ import landingBg from '../../assets/bg1.png'
 export default function LandingPageThird() {
     return (
         <div
-            className="relative snap-start h-screen w-full bg-start bg-fit overflow-hidden -z-20"
+            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="flex flex-1 gap-54.5 pl-20 justify-between">

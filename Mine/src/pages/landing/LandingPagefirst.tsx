@@ -10,7 +10,7 @@ export default function LandingPagefirst() {
     }
     return (
         <div
-            className="relative h-screen snap-start w-full bg-start bg-fit overflow-hidden"
+            className="relative h-screen snap-start w-full bg-cover overflow-hidden"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             {/* <div className="absolute inset-0 bg-black/45" /> */}
