@@ -32,7 +32,7 @@ export default function ConfirmModal({
                             {description && <span>{description} </span>}
                             {itemName && (
                                 <>
-                                    <span className="font-light16 text-gray-100">{itemName}</span>
+                                    <span className="font-medium16 text-gray-100">{itemName}</span>
                                     <span>이(가) 삭제됩니다.</span>
                                 </>
                             )}
