@@ -6,6 +6,7 @@ import explorebg from '../../assets/explorebg.jpg'
 import useSidebarStore from '../../stores/sidebar'
 import SearchInput from '../../components/common/SearchInput'
 import { useGetSearchMagazineFeed } from '../../hooks/useGetSearchMagazineFeed'
+import { useNavigate } from 'react-router-dom'
 
 export default function ExplorePage() {
     const { isOpen } = useSidebarStore()
@@ -32,6 +33,7 @@ export default function ExplorePage() {
 
     const defaultMagazines = magazinedata?.pages.flatMap((page) => page.content) ?? []
     const searchMagazines = searchData?.pages.flatMap((page) => page.content) ?? []
+    const isEmpty = searchMagazines.length === 0
 
     const activeMagazines = isSearching ? searchMagazines : defaultMagazines
 
@@ -39,6 +41,8 @@ export default function ExplorePage() {
     const activeIsFetchingNextPage = isSearching ? searchIsFetchingNextPage : magazineIsFetchingNextPage
     const activeFetchNextPage = isSearching ? searchFetchNextPage : magazineFetchNextPage
     const activeIsLoading = isSearching ? searchIsLoading : magazineIsLoading
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -77,7 +81,7 @@ export default function ExplorePage() {
                 <SearchInput value={searchValue} onChange={setSearchValue} />
             </div>
 
-            <div className="relative z-20 flex justify-center ">
+            <div className="relative z-20 flex justify-center">
                 <div className={`transition-all duration-200 ${isOpen ? 'ml-60' : 'ml-15'}`}>
                     {!activeIsLoading && (
                         <>
@@ -87,6 +91,20 @@ export default function ExplorePage() {
                         </>
                     )}
                     {activeIsLoading && <ExploreSkeleton />}
+                    {isEmpty && (
+                        <div className="flex flex-col items-center mt-10">
+                            <div className="font-regular20 text-gray-200">검색 결과가 없어요.</div>
+                            <div className="font-semibold24 text-gray-100 mt-2">
+                                궁금한 주제로 직접 매거진을 만들어 보세요.
+                            </div>
+                            <button
+                                onClick={() => navigate('/')}
+                                className="pointer-events-auto mt-6.5 flex justify-center items-center gap-2.5 h-9 px-10 py-3.5 rounded-[40px] border border-gray-200 font-medium16 text-gray-200 hover:bg-gray-100-op30 transition-colors duration-200"
+                            >
+                                매거진 생성하러 가기
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
