@@ -3,7 +3,7 @@ import landingBg from '../../assets/bg1.png'
 export default function LandingPageSecond() {
     return (
         <div
-            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
+            className="relative snap-start snap-always h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             {/* <div className="absolute inset-0 bg-black/45 -z-10" /> */}

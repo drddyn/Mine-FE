@@ -10,11 +10,9 @@ export default function LandingPagefirst() {
     }
     return (
         <div
-            className="relative h-screen snap-start w-full bg-cover overflow-hidden"
+            className="relative h-screen snap-start snap-always w-full bg-cover overflow-hidden"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
-            {/* <div className="absolute inset-0 bg-black/45" /> */}
-
             <div className="flex flex-col justify-between z-10">
                 <Minelogo className="absolute left-20 top-17 w-21 h-7.5 text-gray-100/50" />
 

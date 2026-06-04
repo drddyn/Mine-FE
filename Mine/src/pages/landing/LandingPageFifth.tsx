@@ -1,6 +1,6 @@
 import landingBg from '../../assets/bg1.png'
 import MineLogo from '../../icon/logo_with_title.svg?react'
-import Landing1 from '../../assets/landing1.jpg'
+import Landing1 from '../../assets/landing1.png'
 
 function EmptyCard({ showButton }: { showButton?: boolean }) {
     return (
@@ -19,12 +19,18 @@ function EmptyCard({ showButton }: { showButton?: boolean }) {
 export default function LandingPageFifth() {
     return (
         <div
-            className="relative snap-start h-screen w-full bg-cover overflow-hidden -z-20"
+            className="relative snap-start snap-always h-screen w-full bg-cover overflow-hidden -z-20"
             style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="flex mt-32.25 ml-66.5">
                 <div className="grid grid-cols-3 shrink-0 grid-rows-2 gap-2 w-358 mx-auto h-136">
-                    <img src={Landing1} className="w-118 h-67" />
+                    <div className="relative w-118 h-67 ">
+                        <img src={Landing1} className="w-full h-full object-cover" />
+                        <div className="absolute bottom-0 w-full h-full bg-linear-to-t from-black/35 via-black/15 to-transparent"></div>
+                        <div className="font-semibold24 font-notoserif absolute bottom-4 right-5 text-gray-100">
+                            OTT와 스트리밍
+                        </div>
+                    </div>
                     <EmptyCard showButton={true} />
                     <EmptyCard showButton={false} />
                     <EmptyCard showButton={false} />
