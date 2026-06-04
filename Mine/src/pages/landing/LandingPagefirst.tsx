@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import Minelogo from '../../icon/logo_with_title.svg?react'
 import landingBg from '../../assets/bg1.png'
 
-export default function LandingPagefirst() {
+export default function LandingPageFirst() {
     const navigate = useNavigate()
 
     const handleStart = () => {

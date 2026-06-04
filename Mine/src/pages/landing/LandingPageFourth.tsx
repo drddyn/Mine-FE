@@ -3,7 +3,7 @@ import LLMForLandingPage from './LLMForLandingPage'
 import SearchForLandingPage from './SearchForLandingPage'
 import SidebarForLanding from './SidebarForLanding'
 
-export default function LandingPageForth() {
+export default function LandingPageFourth() {
     return (
         <div
             className="relative snap-start snap-always h-screen w-full bg-cover overflow-hidden -z-20"

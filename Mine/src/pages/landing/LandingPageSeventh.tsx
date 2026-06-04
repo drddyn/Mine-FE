@@ -76,7 +76,7 @@ export default function LandingPageSeventh() {
                             </div>
                             <div className="flex-1 flex flex-col gap-6 text-right">
                                 <h2 className="font-medium36 font-notoserif text-gray-600">사운드 구성의 핵심 악기</h2>
-                                <p className="font-regular16 text-gray-600 break-all" dir="rtl">
+                                <p className="font-regular16 text-gray-600 break-all">
                                     사운드 구성의 핵심 악기는 이 현상의 질감을 좌우한다. 드럼 머신으로 시작하는 경쾌한
                                     킥과 스네어의 반복은 트랙의 추진력을 주도하고, 오토튠과 피치 시프터는 보컬의 음정을
                                     독특하게 왜곡하여 비정형의 음색을 만든다. 신시사이저는 멜로디의 뼈대를 형성하고,
