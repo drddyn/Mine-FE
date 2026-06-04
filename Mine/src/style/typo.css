@@ -35,6 +35,12 @@
     .font-semibold24 {
         @apply text-[24px] leading-[140%] tracking-[-0.025em] font-semibold;
     }
+    .font-semibold36 {
+        @apply text-[36px] leading-[140%] tracking-[-0.025em] font-semibold;
+    }
+    .font-regular24 {
+        @apply text-[24px] leading-[180%] tracking-[-0.025em] font-normal;
+    }
     .font-bold32 {
         @apply text-[32px] leading-[140%] tracking-[-0.025em] font-bold;
     }
@@ -52,5 +58,14 @@
     }
     .font-regular100 {
         @apply text-[100px] leading-[140%] tracking-[-0.025em] font-normal;
+    }
+    .font-regular40 {
+        @apply text-[40px] leading-[140%] tracking-[-0.025em] font-normal;
+    }
+    .font-semibold40 {
+        @apply text-[40px] leading-[140%] tracking-[-0.025em] font-semibold;
+    }
+    .font-semibold64 {
+        @apply text-[64px] leading-[140%] tracking-[-0.025em] font-semibold;
     }
 }

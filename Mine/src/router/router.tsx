@@ -5,7 +5,6 @@ import LoginPage from '../pages/login/LoginPage'
 import FindingPage from '../pages/login/FindingPage'
 import SignupPage from '../pages/signup/SignupPage'
 import LandingPage from '../pages/landing/LandingPage'
-import GuestPage from '../pages/main/GuestPage'
 import ExplorePage from '../pages/magazine/ExplorePage'
 import SavedMagazinePage from '../pages/magazine/SavedMagazinePage'
 import RootLayout from '../layout/RootLayout'
@@ -31,14 +30,6 @@ export const router = createBrowserRouter([
                 element: (
                     <PublicRoute>
                         <LandingPage />
-                    </PublicRoute>
-                ),
-            },
-            {
-                path: 'guest',
-                element: (
-                    <PublicRoute>
-                        <GuestPage />
                     </PublicRoute>
                 ),
             },

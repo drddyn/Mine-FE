@@ -29,7 +29,11 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
     const handleMagazineToggleOpen = () => setIsMagazineOpen((prev) => !prev)
     const handleSectionToggleOpen = () => setIsSectionOpen((prev) => !prev)
 
-    const { data: magazine, isLoading: isMagLoading, isError: isMagError } = useGetMyMagazineList({ page: 0, size: 100, sort: [] })
+    const {
+        data: magazine,
+        isLoading: isMagLoading,
+        isError: isMagError,
+    } = useGetMyMagazineList({ page: 0, size: 100, sort: [] })
     const { data: section, isLoading: isSecLoading, isError: isSecError } = useGetRecentSection()
     const { user } = useUserStore()
 
@@ -50,22 +54,29 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                         <SidebarBlock icon={<Sidebar_others />} title="둘러보기" to="explore" />
                     </div>
                     <div className="flex flex-col">
-                        <SidebarTitle onClick={handleSectionToggleOpen} title="최근에 열람한 섹션" isOpen={isSectionOpen} />
+                        <SidebarTitle
+                            onClick={handleSectionToggleOpen}
+                            title="최근에 열람한 섹션"
+                            isOpen={isSectionOpen}
+                        />
                         {isSectionOpen && (
                             <>
                                 {isSecLoading && <SidebarSkeleton />}
                                 {isSecError && (
-                                    <div className="px-5 py-2 text-gray-300 font-regular14">섹션을 불러오지 못했습니다.</div>
+                                    <div className="px-5 py-2 text-gray-300 font-regular14">
+                                        섹션을 불러오지 못했습니다.
+                                    </div>
                                 )}
-                                {!isSecError && section?.map((section) => (
-                                    <SidebarSectionList
-                                        key={section.sectionId}
-                                        title={section.heading}
-                                        onclick={() => handleSectionClick(section.magazineId, section.sectionId)}
-                                        magazineId={section.magazineId}
-                                        sectionId={section.sectionId}
-                                    />
-                                ))}
+                                {!isSecError &&
+                                    section?.map((section) => (
+                                        <SidebarSectionList
+                                            key={section.sectionId}
+                                            title={section.heading}
+                                            onclick={() => handleSectionClick(section.magazineId, section.sectionId)}
+                                            magazineId={section.magazineId}
+                                            sectionId={section.sectionId}
+                                        />
+                                    ))}
                             </>
                         )}
                     </div>
@@ -75,7 +86,9 @@ export default function SidebarOpen({ onclick }: SidebarProps) {
                             <>
                                 {isMagLoading && <SidebarSkeleton />}
                                 {isMagError && (
-                                    <div className="px-5 py-2 text-gray-300 font-regular14">매거진을 불러오지 못했습니다.</div>
+                                    <div className="px-5 py-2 text-gray-300 font-regular14">
+                                        매거진을 불러오지 못했습니다.
+                                    </div>
                                 )}
                                 {!isMagError && (
                                     <div className="h-52 overflow-auto custom-scrollbar">
