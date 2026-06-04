@@ -5,6 +5,9 @@
     .font-light14 {
         @apply text-[14px] leading-[140%] tracking-[-0.025em] font-light;
     }
+    .font-light16 {
+        @apply text-[16px] leading-[140%] tracking-[-0.025em] font-light;
+    }
     .font-regular14 {
         @apply text-[14px] leading-[140%] tracking-[-0.025em] font-normal;
     }
