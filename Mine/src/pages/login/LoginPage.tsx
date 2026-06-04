@@ -18,7 +18,7 @@ export default function LoginPage() {
     const [pw, setPw] = useState('')
     const [showPw, setShowPw] = useState(false)
 
-    const { mutate: login, isPending } = usePostAuthorization()
+    const { mutate: login } = usePostAuthorization()
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -101,14 +101,12 @@ export default function LoginPage() {
                             </button>
                         </div>
 
-                        {!isPending && (
-                            <button
-                                type="submit"
-                                className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-600-op70 px-3.5 transition hover:bg-gray-600 cursor-pointer"
-                            >
-                                로그인
-                            </button>
-                        )}
+                        <button
+                            type="submit"
+                            className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-600-op70 px-3.5 transition hover:bg-gray-600 cursor-pointer"
+                        >
+                            로그인
+                        </button>
 
                         <button
                             type="button"
