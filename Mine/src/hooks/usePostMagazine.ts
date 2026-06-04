@@ -8,19 +8,16 @@ export default function usePostMagazine() {
     const { setToast } = useToastStore()
 
     return useMutation({
-        mutationFn: async ({ topic, user_mood }: PostMagazineDto) => {
+        mutationFn: ({ topic, user_mood }: PostMagazineDto) => postMagazine({ topic, user_mood }),
+        onMutate: () => {
             setToast('magazine', 'loading')
-            try {
-                const data = await postMagazine({ topic, user_mood })
-                setToast('magazine', 'success')
-                return data
-            } catch (error) {
-                setToast('magazine', 'error')
-                throw error
-            }
         },
         onSuccess: () => {
+            setToast('magazine', 'success')
             queryClient.invalidateQueries({ queryKey: ['mymagazines'] })
+        },
+        onError: () => {
+            setToast('magazine', 'error')
         },
     })
 }
