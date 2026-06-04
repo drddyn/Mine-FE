@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePostMagazine from '../../hooks/usePostMagazine'
-import GuestPage from './GuestPage'
-import landingBg from '../../assets/bg1.jpg'
+import landingBg from '../../assets/bg1.png'
 import NewMagazineInput from '../../components/NewMagazineInput'
 import MakingLoadingPage from './MakingLoadingPage'
 import { useAuthStore } from '../../stores/auth'
 import { useToastStore } from '../../stores/toastStore'
+import LandingPage from '../landing/LandingPage'
 import { hasBlockedWord } from '../../utils/blockedWords'
 import HarmfulKeywordModal from '../../components/common/HarmfulKeywordModal'
 
@@ -57,7 +57,7 @@ export default function MainPage() {
         setToast,
     ])
 
-    if (!isLoggedIn) return <GuestPage />
+    if (!isLoggedIn) return <LandingPage />
 
     return (
         <>
