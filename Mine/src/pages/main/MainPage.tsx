@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePostMagazine from '../../hooks/usePostMagazine'
 import landingBg from '../../assets/bg1.png'
@@ -18,9 +18,20 @@ export default function MainPage() {
     const { isLoggedIn } = useAuthStore()
     const navigate = useNavigate()
 
+    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    useEffect(() => {
+        return () => {
+            if (timerRef.current) {
+                clearTimeout(timerRef.current) // 화면이 닫히면 타이머 폭파!
+            }
+        }
+    }, [])
+
     const handleSend = () => {
-        if (!topic.trim()) return
-        if (hasBlockedWord(topic.trim())) {
+        const trimmedTopic = topic.trim()
+        if (!trimmedTopic) return
+        if (hasBlockedWord(trimmedTopic)) {
             setIsModalOpen(true)
             return // 여기서 함수를 끝내버려서 백엔드로 넘어가지 않게 막습니다!
         }
@@ -28,17 +39,13 @@ export default function MainPage() {
 
         // 💡 핵심 수정: mutate 함수 두 번째 인자로 옵션 객체를 넘깁니다!
         postMagazineMutation.mutate(
-            { topic, user_mood: userMood },
+            { topic: trimmedTopic, user_mood: userMood },
             {
                 // API 통신이 "딱 한 번" 성공했을 때만 이 코드가 실행됩니다. (useEffect 버그 해결!)
                 onSuccess: (data) => {
-                    // Toast는 usePostMagazine 훅 안에서 이미 띄웠으므로 생략!
-
-                    // 1.5초 뒤에 넘어가는 로직만 여기에 작성합니다.
-                    setTimeout(() => {
+                    timerRef.current = setTimeout(() => {
                         const newMagazineId = data?.magazineId || data
                         if (newMagazineId) navigate(`/${newMagazineId}`)
-                        else navigate('/explore')
                     }, 1500)
                 },
             }
