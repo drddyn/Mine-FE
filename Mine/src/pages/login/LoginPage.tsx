@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Minelogo from '../../icon/logo_with_title.svg?react'
 import UserIcon from '../../icon/user.svg?react'
@@ -10,9 +10,6 @@ import landingBg from '../../assets/bg1.png'
 
 export default function LoginPage() {
     const navigate = useNavigate()
-    const location = useLocation()
-
-    const bgUrl = (location.state as { bgUrl?: string } | null)?.bgUrl ?? sessionStorage.getItem('landingBg') ?? ''
 
     const [userId, setUserId] = useState('')
     const [pw, setPw] = useState('')
@@ -94,7 +91,7 @@ export default function LoginPage() {
                         <div className="w-100 flex justify-end pr-1.5">
                             <button
                                 type="button"
-                                onClick={() => navigate('/login/finding', { state: { bgUrl } })}
+                                onClick={() => navigate('/login/finding')}
                                 className="font-light14 text-gray-200 hover:text-gray-100 transition cursor-pointer"
                             >
                                 아이디/비밀번호 찾기

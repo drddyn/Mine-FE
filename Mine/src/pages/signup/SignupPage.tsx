@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
+import landingBg from '../../assets/bg1.png'
 import Minelogo from '../../icon/logo_with_title.svg?react'
 import SignupChecks from './components/SignupChecks'
 import SignupForms from './components/SignupForms'
@@ -8,10 +8,7 @@ import SignupInterests from './components/SignupInterest'
 import usePostSignup from '../../hooks/usePostSignup'
 
 export default function SignupPage() {
-    const location = useLocation()
     const navigate = useNavigate()
-
-    const bgUrl = (location.state as { bgUrl?: string } | null)?.bgUrl ?? sessionStorage.getItem('landingBg') ?? ''
 
     const [step, setStep] = useState(1)
     const { mutate: signup, isPending } = usePostSignup()
@@ -78,7 +75,7 @@ export default function SignupPage() {
     return (
         <div
             className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
-            style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
+            style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-y-0 right-0 w-1/2">
