@@ -1,19 +1,16 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import landingBg from '../../assets/bg1.png'
 import Minelogo from '../../icon/logo_with_title.svg?react'
 import FindIdForm from './components/FindIdForm'
 import FindPasswordForm from './components/FindPasswordForm'
 
 export default function FindingPage() {
     const [tab, setTab] = useState<'id' | 'password'>('id')
-    const location = useLocation()
-
-    const bgUrl = (location.state as { bgUrl?: string } | null)?.bgUrl ?? sessionStorage.getItem('landingBg') ?? ''
 
     return (
         <div
             className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
-            style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
+            style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-y-0 right-0 w-1/2">
