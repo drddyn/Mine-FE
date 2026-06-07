@@ -102,7 +102,7 @@ export const hasBlockedWord = (text: string): boolean => {
             return regex.test(normalizedText)
         }
         // 한국어 및 기타 문자는 공백을 제거한 상태에서 포함 여부를 확인합니다.
-        const noSpaceText = normalizedText.replace(/\\s+/g, '')
+        const noSpaceText = normalizedText.replace(/\s+/g, '')
         return noSpaceText.includes(word)
     })
 }
