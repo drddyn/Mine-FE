@@ -8,6 +8,7 @@ import landing6 from '../../assets/landing06.jpg'
 import landing7 from '../../assets/landing07.jpg'
 import landing8 from '../../assets/landing08.jpg'
 import landing9 from '../../assets/landing09.jpg'
+import Swipe from '../../icon/swipe.svg?react'
 
 function LandingCard({ src, label }: { src: string; label?: string }) {
     return (
@@ -43,6 +44,9 @@ export default function LandingPageSixth() {
                     <LandingCard src={landing8} />
                     <LandingCard src={landing9} />
                 </div>
+            </div>
+            <div className="absolute left-1/2 translate-y-1/2 bottom-8  animate-bounce">
+                <Swipe className="rotate-270 text-gray-200/20" />
             </div>
         </div>
     )
