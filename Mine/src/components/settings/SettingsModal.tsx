@@ -107,7 +107,10 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                             />
                         )}
                         {activeTab === 'interest' && (
-                            <InterestSettings interests={selectedInterests} onChange={setSelectedInterests} />
+                            <div>
+                                <div className="text-gray-300 absolute bottom-3">최대 3개까지 선택할 수 있어요.</div>
+                                <InterestSettings interests={selectedInterests} onChange={setSelectedInterests} />
+                            </div>
                         )}
                     </div>
 
