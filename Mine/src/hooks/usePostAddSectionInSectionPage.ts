@@ -11,7 +11,7 @@ export default function usePostAddSectionInSectionPage() {
         },
         onError: (error) => {
             console.log('섹션 생성:', error)
-            alert('섹션 생성에 실패했습니다.')
+            // alert('섹션 생성에 실패했습니다.')
         },
     })
 }
