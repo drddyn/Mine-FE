@@ -1,6 +1,7 @@
 import landingBg from '../../assets/bg1.png'
 import MineLogo from '../../icon/logo_with_title.svg?react'
 import Landing1 from '../../assets/landing1.png'
+import Swipe from '../../icon/swipe.svg?react'
 
 function EmptyCard({ showButton }: { showButton?: boolean }) {
     return (
@@ -43,6 +44,9 @@ export default function LandingPageFifth() {
             <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 whitespace-nowrap z-10">
                 <div className="font-regular40 text-gray-100">정해진 방식이 아닌</div>
                 <div className="font-semibold40 text-gray-100">나만의 방식으로 아카이빙.</div>
+            </div>
+            <div className="absolute left-1/2 bottom-8  animate-bounce z-20">
+                <Swipe className="rotate-270 text-gray-200/20" />
             </div>
         </div>
     )

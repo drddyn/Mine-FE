@@ -47,7 +47,7 @@ export default function NewMagazineInput({
                         value={userMood}
                         onChange={(e) => onUserMoodChange(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder="원하는 분위기를 입력해 주세요. ex) 알록달록 아기자기한 분위기"
+                        placeholder="무드보드의 분위기를 입력해 주세요. ex) 알록달록 아기자기한 분위기"
                         className="w-full bg-transparent font-regular16 text-gray-100 outline-none placeholder:text-gray-100/40"
                     />
                 </div>
@@ -60,7 +60,9 @@ export default function NewMagazineInput({
                             : 'bg-gray-500-op40 shadow-none'
                     }`}
                 >
-                    <span className={`whitespace-nowrap font-medium12 ${isTopicValid ? 'text-gray-100' : 'text-gray-100/70'}`}>
+                    <span
+                        className={`whitespace-nowrap font-medium12 ${isTopicValid ? 'text-gray-100' : 'text-gray-100/70'}`}
+                    >
                         입력
                     </span>
                 </button>

@@ -1,4 +1,5 @@
 import landingBg from '../../assets/bg1.png'
+import Swipe from '../../icon/swipe.svg?react'
 
 export default function LandingPageThird() {
     return (
@@ -34,6 +35,9 @@ export default function LandingPageThird() {
                         <br />
                         바란다면.
                     </div>
+                </div>
+                <div className="absolute left-1/2 bottom-8  animate-bounce">
+                    <Swipe className="rotate-270 text-gray-200/20" />
                 </div>
             </div>
         </div>

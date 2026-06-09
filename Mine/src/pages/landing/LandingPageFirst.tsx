@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Minelogo from '../../icon/logo_with_title.svg?react'
 import landingBg from '../../assets/bg1.png'
+import Swipe from '../../icon/swipe.svg?react'
 
 export default function LandingPageFirst() {
     const navigate = useNavigate()
@@ -31,6 +32,9 @@ export default function LandingPageFirst() {
                     >
                         시작하기
                     </button>
+                </div>
+                <div className="absolute left-1/2 bottom-8  animate-bounce">
+                    <Swipe className="rotate-270 text-gray-200/60" />
                 </div>
             </div>
         </div>

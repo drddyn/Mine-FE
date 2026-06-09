@@ -8,10 +8,11 @@ export default function usePostAddSectionInSectionPage() {
         onSuccess: (_, variables) => {
             queryClient.invalidateQueries({ queryKey: ['mymagazines', 'section'] })
             queryClient.invalidateQueries({ queryKey: ['magazinedetail', variables.magazineId] })
+            queryClient.invalidateQueries({ queryKey: ['section', variables.magazineId, variables.sectionId] })
         },
         onError: (error) => {
             console.log('섹션 생성:', error)
-            alert('섹션 생성에 실패했습니다.')
+            // alert('섹션 생성에 실패했습니다.')
         },
     })
 }
