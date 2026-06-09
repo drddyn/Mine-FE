@@ -77,7 +77,7 @@ export default function MagazinePage() {
                                 mode="magazine"
                                 likeCount={data.likeCount} // data(섹션 상세정보)에서 가져온 하트수 전달
                                 isLiked={data.isLiked} // 내 좋아요 상태 전달
-                               isMyMagazine={isMyMagazine}
+                                isMyMagazine={isMyMagazine}
                             />
                         </div>
                     )}
@@ -97,12 +97,14 @@ export default function MagazinePage() {
                     </section>
                 </div>
 
-                <button
-                    onClick={() => setIsScreenSettingsOpen(true)}
-                    className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
-                >
-                    <IconWandStars className="w-6 h-6 fill-current" />
-                </button>
+                {isMyMagazine && (
+                    <button
+                        onClick={() => setIsScreenSettingsOpen(true)}
+                        className="fixed bottom-4 right-4 z-50 transition-all duration-200 text-gray-100-op40 hover:text-gray-100"
+                    >
+                        <IconWandStars className="w-6 h-6 fill-current" />
+                    </button>
+                )}
             </div>
 
             <ScreenSettingsModal
