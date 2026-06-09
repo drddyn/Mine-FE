@@ -70,7 +70,7 @@ type Section = {
     heading: string
     thumbnailUrl: string
     paragraphs: Paragraph[]
-    displayOrder: 0
+    displayOrder: number
     sourceUrl: string
     sectionId: number
 }

@@ -20,19 +20,19 @@ export default function ConfirmModal({
     isLoading = false,
 }: ConfirmModalProps) {
     return (
-        <div className="fixed inset-0 bg-gray-600-op40 z-999 flex items-center justify-center">
-            <div className="relative z-10 w-120 h-53 rounded-2xl bg-gray-600-op70 px-8 py-8 flex flex-col justify-between shadow-[0_4px_8px_rgba(0,0,0,0.12),0_16px_32px_rgba(0,0,0,0.20)]">
-                <div>
-                    <h2 className="mb-3 font-semibold24 text-gray-100">{title}</h2>
+        <div className="fixed inset-0 bg-gray-600/40 z-999 flex items-center justify-center">
+            <div className="relative z-10 px-8 py-6 rounded-2xl bg-gray-modal/95 flex flex-col gap-4 justify-between shadow-[0_4px_8px_rgba(0,0,0,0.12),0_16px_32px_rgba(0,0,0,0.20)]">
+                <div className="min-w-85 flex flex-col gap-2">
+                    <h2 className="font-semibold20 text-gray-100">{title}</h2>
                     {(description || itemName) && (
                         <p
-                            className="font-regular20 text-gray-100-op70 whitespace-pre-line"
+                            className="font-light16 text-gray-100-op70"
                             style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
                         >
                             {description && <span>{description} </span>}
                             {itemName && (
                                 <>
-                                    <span className="font-semibold20 text-gray-100">{itemName}</span>
+                                    <span className="font-medium16 text-gray-100">{itemName}</span>
                                     <span>이(가) 삭제됩니다.</span>
                                 </>
                             )}
@@ -44,13 +44,13 @@ export default function ConfirmModal({
                     <button
                         onClick={onConfirm}
                         disabled={isLoading}
-                        className="flex items-center justify-center w-25 h-12 rounded-lg border border-gray-100-op30 font-medium16 text-gray-100 hover:bg-gray-600-op70 disabled:opacity-50"
+                        className="flex items-center justify-center w-20 h-10 rounded-lg border border-gray-100-op30 font-medium16 text-gray-100 hover:border-transparent hover:bg-gray-600-op70 disabled:opacity-50"
                     >
-                        {isLoading ? '처리 중...' : confirmText}
+                        {confirmText}
                     </button>
                     <button
                         onClick={onCancel}
-                        className="flex items-center justify-center w-25 h-12 rounded-lg border border-gray-100-op30 font-medium16 text-gray-100 hover:bg-gray-600-op70"
+                        className="flex items-center justify-center w-20 h-10 rounded-lg border border-gray-100-op30 font-medium16 text-gray-100 hover:border-transparent hover:bg-gray-600-op70"
                     >
                         {cancelText}
                     </button>

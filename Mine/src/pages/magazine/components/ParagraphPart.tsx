@@ -136,7 +136,7 @@ export default function ParagraphPart({
                         </div>
                     )}
                 </div>
-                <div className="w-full font-regular16 text-black-textMain break-all" dir="ltr">
+                <div className="w-full font-regular16 text-gray-600 break-all" dir="ltr">
                     <ReactMarkDown>{content}</ReactMarkDown>
                 </div>
             </div>

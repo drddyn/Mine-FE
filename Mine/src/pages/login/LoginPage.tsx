@@ -1,17 +1,15 @@
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Minelogo from '../../icon/logo_with_title.svg?react'
 import UserIcon from '../../icon/user.svg?react'
 import LockIcon from '../../icon/lock.svg?react'
 import EyeIcon from '../../icon/eye.svg?react'
 import usePostAuthorization from '../../hooks/usePostAuthorization'
+import landingBg from '../../assets/bg1.png'
 
 export default function LoginPage() {
     const navigate = useNavigate()
-    const location = useLocation()
-
-    const bgUrl = (location.state as { bgUrl?: string } | null)?.bgUrl ?? sessionStorage.getItem('landingBg') ?? ''
 
     const [userId, setUserId] = useState('')
     const [pw, setPw] = useState('')
@@ -33,7 +31,7 @@ export default function LoginPage() {
     return (
         <div
             className="relative w-screen h-screen overflow-hidden bg-center bg-cover"
-            style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : undefined }}
+            style={{ backgroundImage: `url(${landingBg})` }}
         >
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute inset-y-0 right-0 w-1/2">
@@ -93,21 +91,20 @@ export default function LoginPage() {
                         <div className="w-100 flex justify-end pr-1.5">
                             <button
                                 type="button"
-                                onClick={() => navigate('/login/finding', { state: { bgUrl } })}
+                                onClick={() => navigate('/login/finding')}
                                 className="font-light14 text-gray-200 hover:text-gray-100 transition cursor-pointer"
                             >
                                 아이디/비밀번호 찾기
                             </button>
                         </div>
 
-                        {!isPending && (
-                            <button
-                                type="submit"
-                                className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-600-op70 px-3.5 transition hover:bg-gray-600 cursor-pointer"
-                            >
-                                로그인
-                            </button>
-                        )}
+                        <button
+                            type="submit"
+                            disabled={isPending}
+                            className="w-100 h-12 mt-6 rounded-2xl text-gray-100 font-medium16 bg-gray-600-op70 px-3.5 transition hover:bg-gray-600 cursor-pointer"
+                        >
+                            로그인
+                        </button>
 
                         <button
                             type="button"

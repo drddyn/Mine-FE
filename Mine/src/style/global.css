@@ -60,6 +60,7 @@
     --color-gray-500: #505050;
     --color-gray-600: #111111;
     --color-heart: #f95c40;
+    --color-error: #f94c40;
 
     --color-gray-100-op30: #ffffff4d;
     --color-gray-100-op40: #ffffff66;
@@ -73,6 +74,7 @@
 
     --color-gray-600-op30: #1111114d;
     --color-gray-600-op70: #111111b3;
+    --color-gray-modal: #404040;
 }
 html,
 body {
@@ -106,6 +108,12 @@ body {
     .scrollbar-no {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
+    }
+    /*NotFoundPage 배경 그래디언트*/
+    .bg-custom-gradient {
+        background:
+            linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%),
+            linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
     }
 }
 .skeleton-shimmer {

@@ -128,11 +128,12 @@ export default function SavedMagazinePage() {
                                 className="font-regular20 text-gray-200"
                                 style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
                             >
-                                아직 저장한 매거진이 없어요.
+                                {isSearching ? '검색 결과가 없어요.' : '아직 저장한 매거진이 없어요.'}
                             </span>
                             <span className="font-semibold24 text-gray-100 mt-2">
                                 다시 보고 싶은 매거진에 하트를 눌러주세요!
                             </span>
+
                             <button
                                 onClick={() => navigate('/explore')}
                                 className="pointer-events-auto mt-6.5 flex justify-center items-center gap-2.5 h-9 px-10 py-3.5 rounded-[40px] border border-gray-200 font-medium16 text-gray-200 hover:bg-gray-100-op30 transition-colors duration-200"

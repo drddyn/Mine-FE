@@ -79,7 +79,7 @@ export default function SectionContent({ sectionId, magazineId }: SectionContent
             <div
                 className={`justify-center h-full overflow-y-auto overflow-x-hidden transition-all ease-in-out duration-200 scrollbar-no ${isOpen ? 'ml-60' : 'ml-15'}`}
             >
-                <div className="flex justify-center px-15 bg-gray-100 relative min-h-full w-275 mr-32">
+                <div className="flex justify-center px-15 bg-gray-100 pb-20 relative min-h-full w-275 mr-32">
                     <SectionIndexList sectionId={Number(sectionId)} />
                     <div className="flex flex-col w-245 items-center gap-14 mt-9 mb-22 z-10">
                         <MagazineInfo

@@ -5,6 +5,9 @@
     .font-light14 {
         @apply text-[14px] leading-[140%] tracking-[-0.025em] font-light;
     }
+    .font-light16 {
+        @apply text-[16px] leading-[140%] tracking-[-0.025em] font-light;
+    }
     .font-regular14 {
         @apply text-[14px] leading-[140%] tracking-[-0.025em] font-normal;
     }
@@ -32,6 +35,12 @@
     .font-semibold24 {
         @apply text-[24px] leading-[140%] tracking-[-0.025em] font-semibold;
     }
+    .font-semibold36 {
+        @apply text-[36px] leading-[140%] tracking-[-0.025em] font-semibold;
+    }
+    .font-regular24 {
+        @apply text-[24px] leading-[180%] tracking-[-0.025em] font-normal;
+    }
     .font-bold32 {
         @apply text-[32px] leading-[140%] tracking-[-0.025em] font-bold;
     }
@@ -40,5 +49,23 @@
     }
     .font-medium36 {
         @apply text-[36px] leading-[140%] tracking-[-0.025em] font-medium;
+    }
+    .font-medium20 {
+        @apply text-[20px] leading-[140%] tracking-[-0.025em] font-medium;
+    }
+    .font-medium32 {
+        @apply text-[32px] leading-[140%] tracking-[-0.025em] font-medium;
+    }
+    .font-regular100 {
+        @apply text-[100px] leading-[140%] tracking-[-0.025em] font-normal;
+    }
+    .font-regular40 {
+        @apply text-[40px] leading-[140%] tracking-[-0.025em] font-normal;
+    }
+    .font-semibold40 {
+        @apply text-[40px] leading-[140%] tracking-[-0.025em] font-semibold;
+    }
+    .font-semibold64 {
+        @apply text-[64px] leading-[140%] tracking-[-0.025em] font-semibold;
     }
 }

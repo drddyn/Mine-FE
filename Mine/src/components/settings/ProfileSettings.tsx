@@ -99,7 +99,7 @@ export default function ProfileSettings({ editMode, onCancelEdit, onSave, refCan
                                 autoFocus
                                 onChange={(e) => setDraft({ ...draft, nickname: e.target.value })}
                                 onBlur={() => setEditingField(null)}
-                                className="border-b border- outlgray-100ine-none font-medium16 pb-1 bg-transparent text-gray-100"
+                                className="border-b border-gray-100 outline-none font-medium16 pb-1 bg-transparent text-gray-100"
                             />
                         ) : (
                             <span

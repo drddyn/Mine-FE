@@ -1,0 +1,108 @@
+export const BLOCKED_WORDS = [
+    '강간',
+    '성폭행',
+    '성추행',
+    '성희롱',
+    '몰카',
+    '리벤지포르노',
+    '불법촬영',
+    '음란',
+    '포르노',
+    '야동',
+    '섹스',
+    '성매매',
+    '매춘',
+    '노출',
+    '나체',
+    '누드',
+    '자위',
+    '변태',
+    'av',
+    'porn',
+    'porno',
+    'sex',
+    'nude',
+    '자살',
+    '자해',
+    '극단적선택',
+    '목매달',
+    '투신',
+    'suicide',
+    'selfharm',
+    '살인',
+    '살해',
+    '죽여',
+    '죽이는법',
+    '암살',
+    '납치',
+    '협박',
+    '고문',
+    '폭행',
+    '흉기',
+    '칼부림',
+    '테러',
+    '폭탄',
+    '총기',
+    '총살',
+    '방화',
+    '도박',
+    '사기',
+    '해킹',
+    '피싱',
+    '마약',
+    '대마',
+    '필로폰',
+    '코카인',
+    '헤로인',
+    '마약거래',
+    'terror',
+    'bomb',
+    'weapon',
+    'murder',
+    'kill',
+    'drug',
+    'cocaine',
+    'heroin',
+    '혐오',
+    '장애인비하',
+    '인종차별',
+    '성차별',
+    '동성애혐오',
+    '나치',
+    '히틀러',
+    'nazi',
+    'hitler',
+    '씨발',
+    '시발',
+    'ㅅㅂ',
+    '개새끼',
+    '병신',
+    '븅신',
+    '지랄',
+    '좆',
+    '존나',
+    '꺼져',
+    'fuck',
+    'shit',
+    'bitch',
+    'asshole',
+]
+
+export const hasBlockedWord = (text: string): boolean => {
+    // 텍스트가 비어있으면 통과
+    if (!text) return false
+
+    const normalizedText = text.toLowerCase()
+
+    // 배열을 순회하면서 하나라도 포함(includes)되어 있으면 true를 반환합니다.
+    return BLOCKED_WORDS.some((word) => {
+        // 영어 단어인 경우 단어 경계(\b)를 사용하여 부분 일치로 인한 오탐을 방지합니다.
+        if (/^[a-zA-Z]+$/.test(word)) {
+            const regex = new RegExp(`\\b${word}\\b`, 'i')
+            return regex.test(normalizedText)
+        }
+        // 한국어 및 기타 문자는 공백을 제거한 상태에서 포함 여부를 확인합니다.
+        const noSpaceText = normalizedText.replace(/\s+/g, '')
+        return noSpaceText.includes(word)
+    })
+}
