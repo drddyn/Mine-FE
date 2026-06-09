@@ -18,7 +18,7 @@ export default function LandingPageSecond() {
                         <br /> 기록하고 축적하는 경험으로.
                     </div>
                 </div>
-                <div className="absolute left-1/2 translate-y-1/2 bottom-8  animate-bounce">
+                <div className="absolute left-1/2 bottom-8  animate-bounce">
                     <Swipe className="rotate-270 text-gray-200/20" />
                 </div>
             </div>

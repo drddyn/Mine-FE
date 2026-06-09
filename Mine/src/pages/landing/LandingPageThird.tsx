@@ -36,7 +36,7 @@ export default function LandingPageThird() {
                         바란다면.
                     </div>
                 </div>
-                <div className="absolute left-1/2 translate-y-1/2 bottom-8  animate-bounce">
+                <div className="absolute left-1/2 bottom-8  animate-bounce">
                     <Swipe className="rotate-270 text-gray-200/20" />
                 </div>
             </div>

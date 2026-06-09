@@ -96,7 +96,7 @@ export default function SettingsModal({ onClose }: SettingsProps) {
                         </button>
                     </div>
 
-                    <div className="flex-1 py-14 pr-10 overflow-hidden">
+                    <div className="relative flex-1 py-14 pr-10 overflow-hidden">
                         {activeTab === 'profile' && (
                             <ProfileSettings
                                 editMode={editMode}

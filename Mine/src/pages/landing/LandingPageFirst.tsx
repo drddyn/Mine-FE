@@ -33,7 +33,7 @@ export default function LandingPageFirst() {
                         시작하기
                     </button>
                 </div>
-                <div className="absolute left-1/2 translate-y-1/2 bottom-8  animate-bounce">
+                <div className="absolute left-1/2 bottom-8  animate-bounce">
                     <Swipe className="rotate-270 text-gray-200/60" />
                 </div>
             </div>
